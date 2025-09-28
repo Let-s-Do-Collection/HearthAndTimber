@@ -1,0 +1,68 @@
+plugins {
+    id "architectury-plugin" version "3.4.162"
+    id "dev.architectury.loom" version "1.10.437" apply false
+}
+
+subprojects {
+    apply plugin: "dev.architectury.loom"
+
+    loom {
+        silentMojangMappingsLicense()
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+        mappings loom.officialMojangMappings()
+    }
+}
+
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
+
+    archivesBaseName = rootProject.archives_base_name
+    version = rootProject.mod_version
+    group = rootProject.maven_group
+
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = "https://api.modrinth.com/maven"
+                }
+            }
+            filter {
+                includeGroup "maven.modrinth"
+            }
+        }
+        maven {
+            name = "Jared's maven"
+            url = "https://maven.blamejared.com/"
+        }
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = "tsuyumaven"
+                url = "https://maven.tsuyumori.dev/snapshots"
+                credentials(PasswordCredentials)
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+        options.release = 21
+    }
+
+    tasks.register("publishModrinthAll") {
+        dependsOn(":fabric:modrinth", ":neoforge:modrinth")
+    }
+
+    java {
+        withSourcesJar()
+    }
+}

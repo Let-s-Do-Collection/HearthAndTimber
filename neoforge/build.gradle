@@ -1,0 +1,119 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "8.0.0"
+    id "com.modrinth.minotaur" version "2.+"
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+}
+
+architectury {
+    platformSetupLoomIde()
+    neoForge()
+}
+
+loom {
+    accessWidenerPath = project(":common").loom.accessWidenerPath
+    neoForge { }
+}
+
+def jarFileName = 'letsdo-hearth_and_timber-neoforge'
+def changelogText = rootProject.file("CHANGELOG.md").text
+archivesBaseName = jarFileName
+
+repositories { maven { url 'https://jitpack.io' } }
+
+configurations {
+    common
+    shadowCommon
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentNeoForge.extendsFrom common
+}
+
+repositories {
+    maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
+    maven { url "https://maven.shedaniel.me" }
+}
+
+dependencies {
+    neoForge "net.neoforged:neoforge:${rootProject.neoforge_version}"
+    modApi "dev.architectury:architectury-neoforge:${rootProject.architectury_version}"
+
+    common(project(path: ":common", configuration: "namedElements")) { transitive false }
+    shadowCommon(project(path: ":common", configuration: "transformProductionNeoForge")) { transitive false }
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/neoforge.mods.toml') { expand version: project.version }
+}
+
+shadowJar {
+    exclude "fabric.mod.json"
+    exclude "architectury.common.json"
+    configurations = [project.configurations.shadowCommon]
+    archiveClassifier.set("dev-shadow")
+}
+
+remapJar {
+    input.set shadowJar.archiveFile
+    dependsOn shadowJar
+    archiveClassifier.set(null)
+    atAccessWideners.add(loom.accessWidenerPath.get().asFile.getName())
+}
+
+jar { archiveClassifier.set("dev") }
+
+sourcesJar {
+    def commonSources = project(":common").sourcesJar
+    dependsOn commonSources
+    from commonSources.archiveFile.map { zipTree(it) }
+}
+
+components.java {
+    withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) { skip() }
+}
+
+publishing {
+    publications {
+        mavenForge(MavenPublication) {
+            artifactId = rootProject.archives_base_name + "-" + project.name
+            from components.java
+        }
+    }
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "lets-do-hearth_and_timber"
+    versionNumber = rootProject.mod_version
+    versionName = "${rootProject.archives_base_name}-${rootProject.mod_version} [${rootProject.minecraft_version}-neoforge]"
+    versionType = "release"
+    changelog = rootProject.file("CHANGELOG.md").exists() ? rootProject.file("CHANGELOG.md").text : " "
+    gameVersions = [rootProject.minecraft_version]
+    loaders = ["neoforge"]
+    uploadFile = remapJar
+    additionalFiles = [tasks.sourcesJar.archiveFile]
+
+    dependencies {
+        required.project "architectury-api"
+    }
+}
+
+curseforge {
+    apiKey = System.getenv("CURSEFORGE_API_KEY")
+    project {
+        id = "1038103"
+        releaseType = "release"
+        addGameVersion rootProject.minecraft_version
+        addGameVersion "NeoForge"
+        mainArtifact(remapJar) {
+            displayName = "Hearth&Timber - ${rootProject.mod_version} - NEOFORGE - ${rootProject.minecraft_version}"
+            changelog = changelogText
+            changelogType = "markdown"
+        }
+
+        relations {
+            requiredDependency "architectury-api"
+        }
+    }
+}
+

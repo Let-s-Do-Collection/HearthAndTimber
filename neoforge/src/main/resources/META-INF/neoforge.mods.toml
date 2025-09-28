@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "Custom"
+issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
+
+[[mixins]]
+config = "HearthAndTimber-neoforge.mixins.json"
+
+[[mods]]
+modId = "hearth_and_timber"
+version = "${version}"
+displayName = "[Let's Do] Farm & Charm"
+authors = "satisfy"
+description = '''
+Bring warmth and rustic charm to your world with Hearth & Timber! Discover timbered walls, sturdy barn doors, cozy farmhouse furniture, and countryside paths to create the perfect homestead.
+'''
+logoFile = "pack.png"
+
+[[dependencies.hearth_and_timber]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hearth_and_timber]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hearth_and_timber]]
+modId = "architectury"
+type = "required"
+versionRange = "[9.0.8,)"
+ordering = "AFTER"
+side = "BOTH"

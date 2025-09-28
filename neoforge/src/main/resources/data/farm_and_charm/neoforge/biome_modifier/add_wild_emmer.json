@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#hearth_and_timber:spawns_wild_emmer",
+  "features": "hearth_and_timber:wild_emmer_chance",
+  "step": "vegetal_decoration"
+}

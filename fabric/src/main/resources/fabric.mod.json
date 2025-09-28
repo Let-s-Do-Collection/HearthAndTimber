@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "hearth_and_timber",
+  "version": "${version}",
+  "name": "[Let's Do] Hearth & Timber",
+  "description": "Bring warmth and rustic charm to your world with Hearth & Timber! Discover timbered walls, sturdy barn doors, cozy farmhouse furniture, and countryside paths to create the perfect homestead.",
+  "authors": [
+    "satisfy"
+  ],
+  "contact": {
+    "issues": "https://github.com/satisfyu/Let-s-Do-Hub",
+    "sources": "https://github.com/satisfyu/HearthAndTimber"
+  },
+  "license": "custom",
+  "icon": "pack.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.satisfy.hearth_and_timber.fabric.HearthAndTimberFabric"
+    ],
+    "client": [
+      "net.satisfy.hearth_and_timber.fabric.client.HearthAndTimberClientFabric"
+    ]
+  },
+  "mixins": [
+
+  ],
+  "depends": {
+    "fabric-api": "*",
+    "minecraft": ">=1.20",
+    "architectury": ">=9.0.8"
+  },
+  "suggests": {
+    "Farm & Charm": ">=1.0.0"
+  }
+}
