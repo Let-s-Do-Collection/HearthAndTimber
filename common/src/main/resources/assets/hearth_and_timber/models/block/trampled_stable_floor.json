@@ -1,0 +1,7 @@
+{
+  "parent": "block/dirt_path",
+  "textures": {
+    "top": "hearth_and_timber:block/trampled_stable_floor_top",
+    "side": "hearth_and_timber:block/trampled_stable_floor_side"
+  }
+}

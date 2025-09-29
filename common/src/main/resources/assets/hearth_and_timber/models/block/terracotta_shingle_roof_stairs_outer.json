@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/terracotta_shingle_roof",
+    "top": "hearth_and_timber:block/terracotta_shingle_roof",
+    "side": "hearth_and_timber:block/terracotta_shingle_roof"
+  }
+}

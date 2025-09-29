@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/mossy_fieldstone",
+    "top": "hearth_and_timber:block/mossy_fieldstone",
+    "side": "hearth_and_timber:block/mossy_fieldstone"
+  }
+}

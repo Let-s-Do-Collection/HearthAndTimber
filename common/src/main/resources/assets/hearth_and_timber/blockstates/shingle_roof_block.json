@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hearth_and_timber:block/shingle_roof_block",
+        "weight": 1
+      }
+    ]
+  }
+}

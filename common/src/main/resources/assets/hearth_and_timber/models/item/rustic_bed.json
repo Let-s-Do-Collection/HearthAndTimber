@@ -1,0 +1,6 @@
+{
+  "parent": "hearth_and_timber:block/rustic_bed",
+  "textures": {
+    "0": "hearth_and_timber:entity/bed/rustic"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/dirt_path",
+  "textures": {
+    "top": "hearth_and_timber:block/splitstone_path",
+    "side": "hearth_and_timber:block/splitstone_path"
+  }
+}

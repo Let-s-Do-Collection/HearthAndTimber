@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "hearth_and_timber:block/fieldstone"
+  }
+}

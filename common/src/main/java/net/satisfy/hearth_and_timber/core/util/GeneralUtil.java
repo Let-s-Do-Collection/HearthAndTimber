@@ -253,7 +253,7 @@ public class GeneralUtil {
         if (hit.getDirection() == Direction.DOWN) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         BlockPos hitPos = hit.getBlockPos();
         if (!GeneralUtil.isOccupied(world, hitPos) && player.getItemInHand(hand).isEmpty()) {
-            ChairEntity chair = EntityTypeRegistry.CHAIR.get().create(world);
+            ChairEntity chair = EntityTypeRegistry.CHAIR_ENTITY.get().create(world);
             assert chair != null;
             chair.moveTo(hitPos.getX() + 0.5D, hitPos.getY() + 0.25D + extraHeight, hitPos.getZ() + 0.5D, 0, 0);
             if (GeneralUtil.addChairEntity(world, hitPos, chair, player.blockPosition())) {
