@@ -4,6 +4,7 @@
 	"textures": {
 		"1": "hearth_and_timber:block/rustic_wardrobe_top",
 		"3": "hearth_and_timber:block/rustic_wardrobe_front_top_open",
+		"4": "hearth_and_timber:block/framework_bottom",
 		"5": "hearth_and_timber:block/rustic_wardrobe_side_top",
 		"7": "hearth_and_timber:block/rustic_wardrobe_inside_top",
 		"particle": "hearth_and_timber:block/rustic_wardrobe_front_top_open"
@@ -33,6 +34,18 @@
 				"west": {"uv": [0, 0, 16, 16], "texture": "#7"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"}
 			}
+		},
+		{
+			"name": "rail",
+			"from": [0.025, 7, 7],
+			"to": [15.975, 9, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0.025, 7, 7]},
+			"faces": {
+				"north": {"uv": [0, 14, 15.95, 16], "texture": "#4"},
+				"south": {"uv": [0, 14, 15.95, 16], "texture": "#4"},
+				"up": {"uv": [0, 14, 15.95, 16], "texture": "#4"},
+				"down": {"uv": [0, 14, 15.95, 16], "texture": "#4"}
+			}
 		}
 	],
 	"groups": [
@@ -40,7 +53,7 @@
 			"name": "upper_body",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [0, 1]
+			"children": [0, 1, 2]
 		}
 	]
 }
