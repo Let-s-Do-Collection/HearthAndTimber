@@ -1,0 +1,66 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"0": "hearth_and_timber:block/rustic_sink_parts",
+		"particle": "hearth_and_timber:block/rustic_sink_front"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 14],
+			"to": [9, 3, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, 0, 16]},
+			"faces": {
+				"north": {"uv": [12, 0, 14, 3], "texture": "#0"},
+				"east": {"uv": [12, 0, 14, 3], "texture": "#0"},
+				"south": {"uv": [12, 0, 14, 3], "texture": "#0"},
+				"west": {"uv": [12, 0, 14, 3], "texture": "#0"},
+				"up": {"uv": [12, 0, 14, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 1, 11],
+			"to": [9, 3, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, 1, 13]},
+			"faces": {
+				"north": {"uv": [12, 0, 14, 2], "texture": "#0"},
+				"east": {"uv": [12, 0, 15, 2], "texture": "#0"},
+				"west": {"uv": [12, 0, 15, 2], "texture": "#0"},
+				"up": {"uv": [12, 0, 14, 3], "texture": "#0"},
+				"down": {"uv": [12, 0, 14, 3], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 0, 13],
+			"to": [6, 1, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 0, 13]},
+			"faces": {
+				"north": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"east": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"south": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"west": {"uv": [13, 1, 14, 3], "texture": "#0"},
+				"up": {"uv": [12, 0, 14, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [10, 0, 13],
+			"to": [12, 1, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [10, 0, 13]},
+			"faces": {
+				"north": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"east": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"south": {"uv": [12, 2, 14, 3], "texture": "#0"},
+				"west": {"uv": [13, 1, 14, 3], "texture": "#0"},
+				"up": {"uv": [12, 0, 14, 2], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "top",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}

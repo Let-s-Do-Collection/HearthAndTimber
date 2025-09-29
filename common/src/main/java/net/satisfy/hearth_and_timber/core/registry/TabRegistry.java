@@ -50,10 +50,14 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
                 output.accept(ObjectRegistry.RUSTIC_SOFA.get());
                 output.accept(ObjectRegistry.RUSTIC_WARDROBE.get());
+                output.accept(ObjectRegistry.RUSTIC_SINK.get());
                 output.accept(ObjectRegistry.RUSTIC_SMOKER.get());
                 output.accept(ObjectRegistry.RUSTIC_DRESSER.get());
                 output.accept(ObjectRegistry.RUSTIC_CABINET.get());
                 output.accept(ObjectRegistry.RUSTIC_WALL_CABINET.get());
+
+                output.accept(ObjectRegistry.RUSTIC_GLASS_PANE.get());
+                output.accept(ObjectRegistry.RUSTIC_GLASS_BLOCK.get());
 
             })
             .build());

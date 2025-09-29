@@ -1,4 +1,4 @@
-package net.satisfy.meadow.core.block;
+package net.satisfy.hearth_and_timber.core.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;

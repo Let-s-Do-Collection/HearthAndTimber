@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.satisfy.hearth_and_timber.core.block.WardrobeBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.WardrobeBlockEntity;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +25,30 @@ public class WardrobeRenderer implements BlockEntityRenderer<WardrobeBlockEntity
     private final HumanoidArmorLayer<ArmorStand, HumanoidModel<ArmorStand>, HumanoidModel<ArmorStand>> armorLayer;
     private ArmorStand dummy;
 
+    public static float CHEST_TX = -0.2f;
+    public static float CHEST_TY = 1.2f;
+    public static float CHEST_TZ = 0.0f;
+    public static float CHEST_YAW = 90.0f;
+    public static float CHEST_PITCH = 0.0f;
+    public static float CHEST_ROLL = 0.0f;
+    public static float CHEST_SCALE = 1.7f;
+
+    public static float LEGS_TX = 0.2f;
+    public static float LEGS_TY = 1.6f;
+    public static float LEGS_TZ = 0.0f;
+    public static float LEGS_YAW = 90.0f;
+    public static float LEGS_PITCH = 0.0f;
+    public static float LEGS_ROLL = 0.0f;
+    public static float LEGS_SCALE = 1.7f;
+
+    public static float FEET_TX = 0.2f;
+    public static float FEET_TY = 1.4f;
+    public static float FEET_TZ = 0.0f;
+    public static float FEET_YAW = 45.0f;
+    public static float FEET_PITCH = 0.0f;
+    public static float FEET_ROLL = 0.0f;
+    public static float FEET_SCALE = 1.7f;
+    
     public WardrobeRenderer(BlockEntityRendererProvider.Context ctx) {
         this.baseModel = new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER));
         this.armorLayer = new HumanoidArmorLayer<>(
@@ -36,16 +62,13 @@ public class WardrobeRenderer implements BlockEntityRenderer<WardrobeBlockEntity
     @Override
     public void render(WardrobeBlockEntity be, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
         if (be.getLevel() == null) return;
+        if (be.getBlockState().getValue(WardrobeBlock.HALF) == DoubleBlockHalf.UPPER) return;
+
         if (dummy == null || dummy.level() != be.getLevel()) {
             dummy = new ArmorStand(EntityType.ARMOR_STAND, be.getLevel());
             dummy.setNoBasePlate(true);
             dummy.setInvisible(true);
         }
-
-        dummy.setItemSlot(EquipmentSlot.HEAD, be.getItem(WardrobeBlockEntity.SLOT_HEAD));
-        dummy.setItemSlot(EquipmentSlot.CHEST, be.getItem(WardrobeBlockEntity.SLOT_CHEST));
-        dummy.setItemSlot(EquipmentSlot.LEGS, be.getItem(WardrobeBlockEntity.SLOT_LEGS));
-        dummy.setItemSlot(EquipmentSlot.FEET, be.getItem(WardrobeBlockEntity.SLOT_FEET));
 
         poseStack.pushPose();
         poseStack.translate(0.5, 1.6, 0.5);
@@ -54,8 +77,57 @@ public class WardrobeRenderer implements BlockEntityRenderer<WardrobeBlockEntity
             case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
             case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(270));
         }
-        poseStack.scale(0.9f, -0.9f, -0.9f);
-        armorLayer.render(poseStack, buffer, packedLight, dummy, 0, 0, partialTicks, 0, 0, 0);
+
+        renderArmorPiece(poseStack, buffer, packedLight,
+                be.getItem(WardrobeBlockEntity.SLOT_CHEST), EquipmentSlot.CHEST,
+                CHEST_TX, CHEST_TY, CHEST_TZ, CHEST_YAW, CHEST_PITCH, CHEST_ROLL, CHEST_SCALE,
+                partialTicks);
+
+        renderArmorPiece(poseStack, buffer, packedLight,
+                be.getItem(WardrobeBlockEntity.SLOT_LEGS), EquipmentSlot.LEGS,
+                LEGS_TX, LEGS_TY, LEGS_TZ, LEGS_YAW, LEGS_PITCH, LEGS_ROLL, LEGS_SCALE,
+                partialTicks);
+
+        renderArmorPiece(poseStack, buffer, packedLight,
+                be.getItem(WardrobeBlockEntity.SLOT_FEET), EquipmentSlot.FEET,
+                FEET_TX, FEET_TY, FEET_TZ, FEET_YAW, FEET_PITCH, FEET_ROLL, FEET_SCALE,
+                partialTicks);
+
+        poseStack.popPose();
+    }
+
+    private void renderArmorPiece(PoseStack poseStack, MultiBufferSource buffer, int packedLight, ItemStack stack, EquipmentSlot slot, float tx, float ty, float tz, float yaw, float pitch, float roll, float scale, float partialTicks) {
+        if (stack.isEmpty()) return;
+
+        ArmorStand partDummy = new ArmorStand(EntityType.ARMOR_STAND, dummy.level());
+        partDummy.setNoBasePlate(true);
+        partDummy.setInvisible(true);
+        partDummy.setItemSlot(slot, stack);
+
+        poseStack.pushPose();
+        poseStack.translate(tx, ty, tz);
+        poseStack.mulPose(Axis.YP.rotationDegrees(yaw));
+        poseStack.mulPose(Axis.XP.rotationDegrees(pitch));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(roll));
+        poseStack.scale(scale, -scale, -scale);
+
+        if (slot == EquipmentSlot.LEGS) {
+            baseModel.body.visible = false;
+            baseModel.rightLeg.visible = true;
+            baseModel.leftLeg.visible = true;
+        } else if (slot == EquipmentSlot.CHEST) {
+            baseModel.body.visible = true;
+            baseModel.rightArm.visible = true;
+            baseModel.leftArm.visible = true;
+        } else if (slot == EquipmentSlot.FEET) {
+            baseModel.rightLeg.visible = true;
+            baseModel.leftLeg.visible = true;
+        } else {
+            baseModel.setAllVisible(false);
+        }
+
+        armorLayer.render(poseStack, buffer, packedLight, partDummy, 0, 0, partialTicks, 0, 0, 0);
+
         poseStack.popPose();
     }
 

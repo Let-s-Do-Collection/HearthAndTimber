@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
+import net.satisfy.hearth_and_timber.core.block.entity.BathtubBlockEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.CabinetBlockEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.SmokeOvenEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.WardrobeBlockEntity;
@@ -24,6 +25,7 @@ public class EntityTypeRegistry {
     public static final RegistrySupplier<BlockEntityType<CabinetBlockEntity>> CABINET_BLOCK_ENTITY = registerBlockEntity("cabinet", () -> BlockEntityType.Builder.of(CabinetBlockEntity::new, RUSTIC_CABINET.get(), RUSTIC_WALL_CABINET.get(), RUSTIC_DRESSER.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<SmokeOvenEntity>> SMOKER_BLOCK_ENTITY = registerBlockEntity("smoker", () -> BlockEntityType.Builder.of(SmokeOvenEntity::new, RUSTIC_SMOKER.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<WardrobeBlockEntity>> WARDROBE_BLOCK_ENTITY = registerBlockEntity("wardrobe", () -> BlockEntityType.Builder.of(WardrobeBlockEntity::new, RUSTIC_WARDROBE.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<BathtubBlockEntity>> BATHTUB_BLOCK_ENTITY = registerBlockEntity("bathtub", () -> BlockEntityType.Builder.of(BathtubBlockEntity::new, RUSTIC_BATHTUB.get()).build(null));
 
     public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR_ENTITY = registerEntityType("chair", () -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build((HearthAndTimber.identifier("chair")).toString()));
 
