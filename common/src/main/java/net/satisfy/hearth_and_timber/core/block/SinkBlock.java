@@ -52,19 +52,24 @@ public class SinkBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final Map<Direction, VoxelShape> TOP_SHAPES = new HashMap<>();
     public static final Map<Direction, VoxelShape> BOTTOM_SHAPES = new HashMap<>();
+    public final boolean hasLegs;
+    public static final Map<Direction, VoxelShape> BOTTOM_SHAPES_WITH_LEGS = new HashMap<>();
 
     static {
         Supplier<VoxelShape> topShapeSupplier = SinkBlock::makeTopShape;
         Supplier<VoxelShape> bottomShapeSupplier = SinkBlock::makeBottomShape;
+        Supplier<VoxelShape> bottomWithLegsShapeSupplier = SinkBlock::makeBottomWithLegsShape;
 
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             TOP_SHAPES.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, topShapeSupplier.get()));
             BOTTOM_SHAPES.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomShapeSupplier.get()));
+            BOTTOM_SHAPES_WITH_LEGS.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, bottomWithLegsShapeSupplier.get()));
         }
     }
 
-    public SinkBlock(Properties settings) {
+    public SinkBlock(Properties settings, boolean hasLegs) {
         super(settings);
+        this.hasLegs = hasLegs;
         this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(FILLED, false).setValue(FACING, Direction.NORTH));
     }
 
@@ -84,13 +89,24 @@ public class SinkBlock extends Block {
         return shape;
     }
 
+    private static VoxelShape makeBottomWithLegsShape() {
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.join(shape, Shapes.box(0, 0.125, 0.125, 1, 0.75, 1), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0, 0.75, 0, 1, 1, 1), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0, 0, 0.125, 0.1875, 0.125, 0.3125), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0, 0, 0.8125, 0.1875, 0.125, 1), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.8125, 0, 0.8125, 1, 0.125, 1), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.8125, 0, 0.125, 1, 0.125, 0.3125), BooleanOp.OR);
+        return shape;
+    }
+
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
         if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
             return TOP_SHAPES.get(facing);
         } else {
-            return BOTTOM_SHAPES.get(facing);
+            return hasLegs ? BOTTOM_SHAPES_WITH_LEGS.get(facing) : BOTTOM_SHAPES.get(facing);
         }
     }
 

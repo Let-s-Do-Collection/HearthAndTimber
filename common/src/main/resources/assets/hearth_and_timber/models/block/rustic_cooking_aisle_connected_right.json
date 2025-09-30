@@ -1,0 +1,26 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made by Satisfy",
+	"textures": {
+		"0": "hearth_and_timber:block/rustic_smoker_bottom",
+		"1": "hearth_and_timber:block/rustic_cooking_aisle_front",
+		"2": "hearth_and_timber:block/rustic_smoker_side",
+		"3": "hearth_and_timber:block/rustic_dresser_top_connected",
+		"particle": "hearth_and_timber:block/rustic_smoker_bottom"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [16, 0, 0, 16], "texture": "#2"},
+				"east": {"uv": [16, 0, 0, 16], "texture": "#2"},
+				"south": {"uv": [16, 0, 0, 16], "texture": "#1"},
+				"west": {"uv": [16, 0, 0, 16], "texture": "#2"},
+				"up": {"uv": [16, 0, 0, 16], "rotation": 90, "texture": "#3"},
+				"down": {"uv": [0, 16, 16, 0], "texture": "#0"}
+			}
+		}
+	]
+}

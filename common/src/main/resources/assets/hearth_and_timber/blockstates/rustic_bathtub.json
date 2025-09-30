@@ -1,63 +1,33 @@
 {
   "variants": {
-    "part=head,facing=north,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head"
+    "part=head,facing=north": {
+      "model": "hearth_and_timber:block/rustic_bathtub"
     },
-    "part=foot,facing=north,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot"
+    "part=foot,facing=north": {
+      "model": "hearth_and_timber:block/rustic_bathtub"
     },
-    "part=head,facing=east,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head",
+    "part=head,facing=east": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 90
     },
-    "part=foot,facing=east,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot",
+    "part=foot,facing=east": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 90
     },
-    "part=head,facing=south,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head",
+    "part=head,facing=south": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 180
     },
-    "part=foot,facing=south,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot",
+    "part=foot,facing=south": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 180
     },
-    "part=head,facing=west,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head",
+    "part=head,facing=west": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 270
     },
-    "part=foot,facing=west,filled=false": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot",
-      "y": 270
-    },
-    "part=head,facing=north,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head_filled"
-    },
-    "part=foot,facing=north,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot_filled"
-    },
-    "part=head,facing=east,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head_filled",
-      "y": 90
-    },
-    "part=foot,facing=east,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot_filled",
-      "y": 90
-    },
-    "part=head,facing=south,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head_filled",
-      "y": 180
-    },
-    "part=foot,facing=south,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot_filled",
-      "y": 180
-    },
-    "part=head,facing=west,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_head_filled",
-      "y": 270
-    },
-    "part=foot,facing=west,filled=true": {
-      "model": "hearth_and_timber:block/rustic_bathtub_foot_filled",
+    "part=foot,facing=west": {
+      "model": "hearth_and_timber:block/rustic_bathtub",
       "y": 270
     }
   }

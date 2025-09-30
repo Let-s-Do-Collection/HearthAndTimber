@@ -36,7 +36,15 @@
   "block.hearth_and_timber.rustic_bed": "Rustic Bed",
   "block.hearth_and_timber.rustic_dresser": "Rustic Dresser",
   "block.hearth_and_timber.rustic_smoker": "Rustic Smoker",
-  "block.hearth_and_timber.rustic_wardrobe": "Rustic Wardrobe"
+  "block.hearth_and_timber.rustic_wardrobe": "Rustic Wardrobe",
+  "block.hearth_and_timber.rustic_bathtub": "Rustic Bathtub",
+  "block.hearth_and_timber.rustic_glass_block": "Rustic Glass",
+  "block.hearth_and_timber.rustic_glass_pane": "Rustic Glass Pane",
+  "block.hearth_and_timber.rustic_sink": "Rustic Sink",
+  "block.hearth_and_timber.rustic_privy": "Rustic Privy",
+  "block.hearth_and_timber.rustic_washbasin": "Rustic Washbasin",
+  "block.hearth_and_timber.rustic_cooking_aisle": "Rustic Cooking Aisle"
+
 }
 
 
