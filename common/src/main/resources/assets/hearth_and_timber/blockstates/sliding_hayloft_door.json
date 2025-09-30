@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "facing=north,part=bl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=north,part=tl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=north,part=br": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=north,part=tr": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=south,part=bl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=south,part=tl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=south,part=br": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=south,part=tr": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=west,part=bl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=west,part=tl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=west,part=br": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=west,part=tr": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=east,part=bl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=east,part=tl": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=east,part=br": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    },
+    "facing=east,part=tr": {
+      "model": "hearth_and_timber:block/sliding_hayloft_door"
+    }
+  }
+}
