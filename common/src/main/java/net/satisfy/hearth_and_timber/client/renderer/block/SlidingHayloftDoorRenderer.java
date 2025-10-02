@@ -12,10 +12,16 @@ import net.satisfy.hearth_and_timber.HearthAndTimber;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingHayloftDoorModel;
 import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.SlidingHayloftDoorBlockEntity;
-import org.joml.Matrix4f;
 
 public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingHayloftDoorBlockEntity> {
-    private static final ResourceLocation TEXTURE = HearthAndTimber.identifier("textures/entity/sliding_doors/spruce.png");
+    private ResourceLocation textureFor(SlidingHayloftDoorBlockEntity be) {
+        String wood = be.getWood();
+        if (be.isReinforced()) {
+            return HearthAndTimber.identifier("textures/entity/barn_doors/" + wood + "_reinforced.png");
+        }
+        return HearthAndTimber.identifier("textures/entity/barn_doors/" + wood + ".png");
+    }
+
     private final SlidingHayloftDoorModel model;
 
     public SlidingHayloftDoorRenderer(BlockEntityRendererProvider.Context context) {
@@ -23,51 +29,63 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingHa
     }
 
     @Override
-    public void render(SlidingHayloftDoorBlockEntity be, float partialTick, PoseStack ps, MultiBufferSource buffers, int light, int overlay) {
-        if (!(be.getBlockState().getBlock() instanceof SlidingHayloftDoorBlock)) return;
-        if (be.getBlockState().getValue(SlidingHayloftDoorBlock.PART) != SlidingHayloftDoorBlock.Quarter.BL) return;
+    public void render(SlidingHayloftDoorBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        if (!(blockEntity.getBlockState().getBlock() instanceof SlidingHayloftDoorBlock)) return;
+        if (blockEntity.getBlockState().getValue(SlidingHayloftDoorBlock.PART) != SlidingHayloftDoorBlock.Quarter.BL) return;
 
-        ps.pushPose();
-        Direction dir = be.getBlockState().getValue(SlidingHayloftDoorBlock.FACING);
-        SlidingHayloftDoorBlock.HingeSide hinge = be.getBlockState().getValue(SlidingHayloftDoorBlock.HINGE);
+        poseStack.pushPose();
+        Direction facing = blockEntity.getBlockState().getValue(SlidingHayloftDoorBlock.FACING);
+        SlidingHayloftDoorBlock.HingeSide hingeSide = blockEntity.getBlockState().getValue(SlidingHayloftDoorBlock.HINGE);
 
-        switch (hinge) {
+        switch (hingeSide) {
             case LEFT -> {
-                switch (dir) {
-                    case EAST -> ps.translate(1.3125, 1.5, 0.5);
-                    case WEST -> ps.translate(-0.3125, 1.5, 0.5);
-                    case NORTH -> ps.translate(0.5, 1.5, -0.3125);
-                    case SOUTH -> ps.translate(0.5, 1.5, 1.3125);
+                switch (facing) {
+                    case EAST -> poseStack.translate(1.3125, 1.5, 0.5);
+                    case WEST -> poseStack.translate(-0.3125, 1.5, 0.5);
+                    case NORTH -> poseStack.translate(0.5, 1.5, -0.3125);
+                    case SOUTH -> poseStack.translate(0.5, 1.5, 1.3125);
                 }
             }
             case RIGHT -> {
-                switch (dir) {
-                    case EAST -> ps.translate(1.3125, 1.5, 1.5);
-                    case WEST -> ps.translate(-0.3125, 1.5, -0.5);
-                    case NORTH -> ps.translate(1.5, 1.5, -0.3125);
-                    case SOUTH -> ps.translate(-0.5, 1.5, 1.3125);
+                switch (facing) {
+                    case EAST -> poseStack.translate(1.3125, 1.5, 1.5);
+                    case WEST -> poseStack.translate(-0.3125, 1.5, -0.5);
+                    case NORTH -> poseStack.translate(1.5, 1.5, -0.3125);
+                    case SOUTH -> poseStack.translate(-0.5, 1.5, 1.3125);
                 }
             }
         }
 
-        ps.mulPose(Axis.YN.rotationDegrees(dir.toYRot()));
-        ps.mulPose(Axis.XP.rotationDegrees(180));
-
-        float p = be.getSlide();
-        Direction lateral = hinge == SlidingHayloftDoorBlock.HingeSide.RIGHT ? dir.getClockWise() : dir.getCounterClockWise();
-        float dx = 0f;
-        float dz = 0f;
+        float distance = blockEntity.getSlide() * (26f / 16f);
+        Direction lateral = hingeSide == SlidingHayloftDoorBlock.HingeSide.RIGHT ? facing.getClockWise() : facing.getCounterClockWise();
+        double offsetX = 0.0;
+        double offsetZ = 0.0;
         switch (lateral) {
-            case NORTH -> dz = -p;
-            case SOUTH -> dz = p;
-            case WEST -> dx = -p;
-            case EAST -> dx = p;
+            case NORTH -> offsetZ -= distance;
+            case SOUTH -> offsetZ += distance;
+            case WEST  -> offsetX -= distance;
+            case EAST  -> offsetX += distance;
         }
-        Matrix4f m = new Matrix4f().translate(dx, 0f, dz);
-        ps.last().pose().mul(m);
+        double forwardOffset = (1.0 / 16.0) * distance;
+        switch (facing) {
+            case NORTH -> offsetZ -= forwardOffset;
+            case SOUTH -> offsetZ += forwardOffset;
+            case WEST  -> offsetX -= forwardOffset;
+            case EAST  -> offsetX += forwardOffset;
+        }
+        poseStack.translate(offsetX, 0.0, offsetZ);
 
-        var vc = buffers.getBuffer(model.renderType(TEXTURE));
-        model.renderToBuffer(ps, vc, light, OverlayTexture.NO_OVERLAY, -1);
-        ps.popPose();
+        poseStack.mulPose(Axis.YN.rotationDegrees(facing.toYRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+
+        if (hingeSide == SlidingHayloftDoorBlock.HingeSide.RIGHT) {
+            poseStack.translate(1.0, 0.0, 0.0);
+            poseStack.scale(-1.0F, 1.0F, 1.0F);
+        }
+
+        var vertexConsumer = bufferSource.getBuffer(model.renderType(textureFor(blockEntity)));
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, -1);
+        poseStack.popPose();
     }
+
 }
