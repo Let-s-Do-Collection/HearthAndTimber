@@ -49,12 +49,12 @@ public class WardrobeRenderer implements BlockEntityRenderer<WardrobeBlockEntity
     public static float FEET_ROLL = 0.0f;
     public static float FEET_SCALE = 1.7f;
     
-    public WardrobeRenderer(BlockEntityRendererProvider.Context ctx) {
-        this.baseModel = new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER));
+    public WardrobeRenderer(BlockEntityRendererProvider.Context context) {
+        this.baseModel = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER));
         this.armorLayer = new HumanoidArmorLayer<>(
                 this,
-                new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)),
-                new HumanoidModel<>(ctx.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)),
+                new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)),
+                new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)),
                 Minecraft.getInstance().getModelManager()
         );
     }

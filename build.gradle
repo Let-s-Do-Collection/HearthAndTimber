@@ -5,11 +5,7 @@ plugins {
 
 subprojects {
     apply plugin: "dev.architectury.loom"
-
-    loom {
-        silentMojangMappingsLicense()
-    }
-
+    loom { silentMojangMappingsLicense() }
     dependencies {
         minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
         mappings loom.officialMojangMappings()
@@ -26,31 +22,8 @@ allprojects {
     group = rootProject.maven_group
 
     repositories {
-        exclusiveContent {
-            forRepository {
-                maven {
-                    name = "Modrinth"
-                    url = "https://api.modrinth.com/maven"
-                }
-            }
-            filter {
-                includeGroup "maven.modrinth"
-            }
-        }
-        maven {
-            name = "Jared's maven"
-            url = "https://maven.blamejared.com/"
-        }
-    }
-
-    publishing {
-        repositories {
-            maven {
-                name = "tsuyumaven"
-                url = "https://maven.tsuyumori.dev/snapshots"
-                credentials(PasswordCredentials)
-            }
-        }
+        maven { url = "https://api.modrinth.com/maven" }
+        maven { url = "https://maven.blamejared.com/" }
     }
 
     tasks.withType(JavaCompile) {
@@ -58,11 +31,6 @@ allprojects {
         options.release = 21
     }
 
-    tasks.register("publishModrinthAll") {
-        dependsOn(":fabric:modrinth", ":neoforge:modrinth")
-    }
 
-    java {
-        withSourcesJar()
-    }
+    java { withSourcesJar() }
 }

@@ -1,0 +1,9 @@
+{
+  "pack": {
+    "pack_format": 34,
+    "description": "Connected Timber Frames Textures. Requires Fusion."
+  },
+  "fusion": {
+    "overrides_folder": "fusion"
+  }
+}

@@ -25,6 +25,7 @@ public class EntityTypeRegistry {
     public static final RegistrySupplier<BlockEntityType<BathtubBlockEntity>> BATHTUB_BLOCK_ENTITY = registerBlockEntity("bathtub", () -> BlockEntityType.Builder.of(BathtubBlockEntity::new, RUSTIC_BATHTUB.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<PrivyBlockEntity>> PRIVY_BLOCK_ENTITY = registerBlockEntity("privy", () -> BlockEntityType.Builder.of(PrivyBlockEntity::new, RUSTIC_PRIVY.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<SlidingHayloftDoorBlockEntity>> SLIDING_HAYLOFT_DOOR_BLOCK_ENTITY = registerBlockEntity("sliding_hayloft_door", () -> BlockEntityType.Builder.of(SlidingHayloftDoorBlockEntity::new, SLIDING_HAYLOFT_DOOR.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<TimberFrameBlockEntity>> TIMBER_FRAME_BLOCK_ENTITY = registerBlockEntity("timber_frame", () -> BlockEntityType.Builder.of(TimberFrameBlockEntity::new, TIMBER_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_GRID_FRAME.get()).build(null));
 
     public static final RegistrySupplier<EntityType<ChairEntity>> CHAIR_ENTITY = registerEntityType(() -> EntityType.Builder.of(ChairEntity::new, MobCategory.MISC).sized(0.001F, 0.001F).build((HearthAndTimber.identifier("chair")).toString()));
 

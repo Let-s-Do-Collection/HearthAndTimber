@@ -1,0 +1,15 @@
+{
+  "loader": "fusion:model",
+  "type": "connecting",
+  "layout": "full",
+  "parent": "hearth_and_timber:block/timber_frame_connected",
+  "textures": {
+    "0": "hearth_and_timber:block/timber_diagonal_frame",
+    "particle": "hearth_and_timber:block/timber_diagonal_frame"
+  },
+  "connections": [
+    {
+      "type": "is_same_block"
+    }
+  ]
+}

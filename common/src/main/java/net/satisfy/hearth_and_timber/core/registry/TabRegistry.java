@@ -18,6 +18,10 @@ public class TabRegistry {
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.FRAMEWORK.get());
                 output.accept(ObjectRegistry.CATTLEGRID.get());
+                output.accept(ObjectRegistry.TIMBER_FRAME.get());
+                output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
+                output.accept(ObjectRegistry.TIMBER_DIAGONAL_FRAME.get());
+                output.accept(ObjectRegistry.TIMBER_CROSS_FRAME.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_BLOCK.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_STAIRS.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_SLAB.get());

@@ -20,8 +20,8 @@ public class BathtubRenderer implements BlockEntityRenderer<BathtubBlockEntity> 
     private static final ResourceLocation TEXTURE = HearthAndTimber.identifier("textures/entity/bathtub.png");
     private final BathtubModel model;
 
-    public BathtubRenderer(BlockEntityRendererProvider.Context ctx) {
-        this.model = new BathtubModel(ctx.bakeLayer(BathtubModel.LAYER_LOCATION));
+    public BathtubRenderer(BlockEntityRendererProvider.Context context) {
+        this.model = new BathtubModel(context.bakeLayer(BathtubModel.LAYER_LOCATION));
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.satisfy.hearth_and_timber.client.renderer.block.BathtubRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.block.SlidingHayloftDoorRenderer;
+import net.satisfy.hearth_and_timber.client.renderer.block.TimberFrameRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.block.WardrobeRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.entity.ChairRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.model.BathtubModel;
@@ -23,7 +24,7 @@ import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.*;
 public class HearthAndTimberClient {
 
     public static void onInitializeClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), CATTLEGRID.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get());
+        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), CATTLEGRID.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get());
         RenderTypeRegistry.register(RenderType.translucent(), RUSTIC_GLASS_PANE.get(), RUSTIC_GLASS_BLOCK.get());
 
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> {
@@ -55,5 +56,6 @@ public class HearthAndTimberClient {
         BlockEntityRendererRegistry.register(EntityTypeRegistry.SLIDING_HAYLOFT_DOOR_BLOCK_ENTITY.get(), SlidingHayloftDoorRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.BATHTUB_BLOCK_ENTITY.get(), BathtubRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.WARDROBE_BLOCK_ENTITY.get(), WardrobeRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), TimberFrameRenderer::new);
     }
 }
