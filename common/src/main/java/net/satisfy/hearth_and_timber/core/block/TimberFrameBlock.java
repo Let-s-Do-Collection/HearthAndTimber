@@ -2,12 +2,8 @@ package net.satisfy.hearth_and_timber.core.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.satisfy.hearth_and_timber.HearthAndTimber;
 import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import net.satisfy.hearth_and_timber.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +27,6 @@ import java.util.List;
 
 public class TimberFrameBlock extends BaseEntityBlock {
     public static final MapCodec<TimberFrameBlock> CODEC = simpleCodec(TimberFrameBlock::new);
-    private static final TagKey<Block> FILLABLES = TagKey.create(Registries.BLOCK, HearthAndTimber.identifier("timber_frame_fillables"));
 
     public TimberFrameBlock(Properties properties) {
         super(properties);
@@ -81,26 +75,28 @@ public class TimberFrameBlock extends BaseEntityBlock {
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
             }
-            return level.isClientSide ? ItemInteractionResult.CONSUME : ItemInteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
         if (stack.getItem() instanceof BlockItem blockItem) {
             if (level.getBlockEntity(pos) instanceof TimberFrameBlockEntity be) {
                 if (be.getHeldBlock() == null || be.getHeldBlock().isAir()) {
                     BlockState toHold = blockItem.getBlock().defaultBlockState();
                     if (canAccept(level, pos, toHold)) {
-                        if (level.isClientSide) return ItemInteractionResult.CONSUME;
-                        be.setHeldBlock(toHold);
-                        SoundType sound = toHold.getSoundType();
-                        level.playSound(null, pos, sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1F) / 2F, sound.getPitch() * 0.8F);
-                        if (!player.getAbilities().instabuild) stack.shrink(1);
+                        if (!level.isClientSide) {
+                            be.setHeldBlock(toHold);
+                            SoundType sound = toHold.getSoundType();
+                            level.playSound(null, pos, sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1F) / 2F, sound.getPitch() * 0.8F);
+                            if (!player.getAbilities().instabuild) stack.shrink(1);
+                        }
                         return ItemInteractionResult.SUCCESS;
                     }
                 }
-                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
+
 
     private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState state) {
         if (state == null || state.isAir()) return false;

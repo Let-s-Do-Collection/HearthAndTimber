@@ -10,12 +10,14 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.hearth_and_timber.core.registry.ObjectRegistry;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -46,9 +48,13 @@ public class SplitstonePathBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return !this.defaultBlockState().canSurvive(ctx.getLevel(), ctx.getClickedPos())
-                ? Block.pushEntitiesUp(this.defaultBlockState(), base.get().defaultBlockState(), ctx.getLevel(), ctx.getClickedPos())
-                : super.getStateForPlacement(ctx);
+        BlockState self = this.defaultBlockState();
+        if (!self.canSurvive(ctx.getLevel(), ctx.getClickedPos())) {
+            Block b = base != null ? base.get() : null;
+            BlockState replacement = b != null ? b.defaultBlockState() : ObjectRegistry.SPLITSTONE_BLOCK.get().defaultBlockState();
+            return Block.pushEntitiesUp(self, replacement, ctx.getLevel(), ctx.getClickedPos());
+        }
+        return super.getStateForPlacement(ctx);
     }
 
     @Override

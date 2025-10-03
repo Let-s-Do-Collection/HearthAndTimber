@@ -13,8 +13,10 @@ import net.minecraft.world.phys.Vec3;
 import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 
 public class TimberFrameRenderer implements BlockEntityRenderer<TimberFrameBlockEntity> {
+    private final BlockRenderDispatcher brd;
 
     public TimberFrameRenderer(BlockEntityRendererProvider.Context context) {
+        this.brd = context.getBlockRenderDispatcher();
     }
 
     @Override
@@ -23,27 +25,27 @@ public class TimberFrameRenderer implements BlockEntityRenderer<TimberFrameBlock
         BlockState held = be.getHeldBlock();
         if (held == null || held.isAir()) return;
 
-        BlockRenderDispatcher brd = Minecraft.getInstance().getBlockRenderer();
         Vec3 cam = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
         Vec3 center = Vec3.atCenterOf(be.getBlockPos());
-        Vec3 dir = center.subtract(cam);
-
-        float eps = -0.00125F;
-        double ax = Math.abs(dir.x);
-        double ay = Math.abs(dir.y);
-        double az = Math.abs(dir.z);
+        float dist = (float) cam.distanceTo(center);
+        float eps = Math.min(0.02f, 0.002f + Math.max(0f, dist - 8f) * 0.00025f);
+        float shrink = 15.998f / 16f;
 
         poseStack.pushPose();
-        if (ax >= ay && ax >= az) {
-            poseStack.translate(Math.signum(dir.x) * eps, 0F, 0F);
-        } else if (ay >= ax && ay >= az) {
-            poseStack.translate(0F, Math.signum(dir.y) * eps, 0F);
-        } else {
-            poseStack.translate(0F, 0F, Math.signum(dir.z) * eps);
-        }
+        poseStack.translate(0.5, 0.5, 0.5);
+        poseStack.scale(shrink, shrink, shrink);
+        poseStack.translate(-0.5, -0.5, -0.5);
 
-        brd.renderBatched(held, be.getBlockPos(), be.getLevel(), poseStack, buffers.getBuffer(RenderType.cutoutMipped()), false, RandomSource.create(be.getBlockPos().asLong())
-        );
+        Vec3 dir = center.subtract(cam).normalize();
+        poseStack.translate(dir.x * eps, dir.y * eps, dir.z * eps);
+
+        brd.renderBatched(held, be.getBlockPos(), be.getLevel(), poseStack, buffers.getBuffer(RenderType.cutoutMipped()), false, RandomSource.create(be.getBlockPos().asLong()));
         poseStack.popPose();
+    }
+
+
+    @Override
+    public int getViewDistance() {
+        return Minecraft.getInstance().options.renderDistance().get() * 16;
     }
 }
