@@ -11,7 +11,6 @@ public class HearthAndTimber {
     }
 
     public static void init() {
-        MobEffectRegistry.init();
         ObjectRegistry.init();
         EntityTypeRegistry.init();
         TabRegistry.init();

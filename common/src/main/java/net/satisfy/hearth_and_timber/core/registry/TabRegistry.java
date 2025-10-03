@@ -16,12 +16,30 @@ public class TabRegistry {
             .icon(() -> new ItemStack(ObjectRegistry.SHINGLE_ROOF_BLOCK.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
+                output.accept(ObjectRegistry.IRON_DIVIDER.get());
+                output.accept(ObjectRegistry.CHICKEN_FENCE.get());
                 output.accept(ObjectRegistry.FRAMEWORK.get());
                 output.accept(ObjectRegistry.CATTLEGRID.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_DIAGONAL_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_CROSS_FRAME.get());
+                output.accept(ObjectRegistry.WHITE_PLASTER.get());
+                output.accept(ObjectRegistry.LIGHT_GRAY_PLASTER.get());
+                output.accept(ObjectRegistry.GRAY_PLASTER.get());
+                output.accept(ObjectRegistry.BLACK_PLASTER.get());
+                output.accept(ObjectRegistry.BROWN_PLASTER.get());
+                output.accept(ObjectRegistry.RED_PLASTER.get());
+                output.accept(ObjectRegistry.ORANGE_PLASTER.get());
+                output.accept(ObjectRegistry.YELLOW_PLASTER.get());
+                output.accept(ObjectRegistry.LIME_PLASTER.get());
+                output.accept(ObjectRegistry.GREEN_PLASTER.get());
+                output.accept(ObjectRegistry.CYAN_PLASTER.get());
+                output.accept(ObjectRegistry.LIGHT_BLUE_PLASTER.get());
+                output.accept(ObjectRegistry.BLUE_PLASTER.get());
+                output.accept(ObjectRegistry.PURPLE_PLASTER.get());
+                output.accept(ObjectRegistry.MAGENTA_PLASTER.get());
+                output.accept(ObjectRegistry.PINK_PLASTER.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_BLOCK.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_STAIRS.get());
                 output.accept(ObjectRegistry.SHINGLE_ROOF_SLAB.get());
@@ -45,15 +63,21 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_BLOCK_SLAB.get());
                 output.accept(ObjectRegistry.SPLITSTONE_PATH_BLOCK.get());
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_PATH_BLOCK.get());
+                output.accept(ObjectRegistry.THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.THATCH_STAIRS.get());
+                output.accept(ObjectRegistry.THATCH_SLAB.get());
                 output.accept(ObjectRegistry.PACKED_DIRT.get());
                 output.accept(ObjectRegistry.TRAMPLED_PACKED_DIRT.get());
                 output.accept(ObjectRegistry.STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.STRAW_STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.TRAMPLED_STABLE_FLOOR.get());
 
+                output.accept(ObjectRegistry.RUSTIC_TIMBER_FLOOR.get());
 
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
                 output.accept(ObjectRegistry.RUSTIC_SOFA.get());
+                output.accept(ObjectRegistry.RUSTIC_CHAIR.get());
+                output.accept(ObjectRegistry.RUSTIC_TABLE.get());
                 output.accept(ObjectRegistry.RUSTIC_WARDROBE.get());
                 output.accept(ObjectRegistry.RUSTIC_SINK.get());
                 output.accept(ObjectRegistry.RUSTIC_SMOKER.get());

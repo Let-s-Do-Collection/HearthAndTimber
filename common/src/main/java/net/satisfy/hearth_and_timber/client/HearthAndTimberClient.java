@@ -24,7 +24,7 @@ import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.*;
 public class HearthAndTimberClient {
 
     public static void onInitializeClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), CATTLEGRID.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get());
+        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), CATTLEGRID.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), RUSTIC_TABLE.get(), RUSTIC_CHAIR.get(), IRON_DIVIDER.get(), CHICKEN_FENCE.get());
         RenderTypeRegistry.register(RenderType.translucent(), RUSTIC_GLASS_PANE.get(), RUSTIC_GLASS_BLOCK.get());
 
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> {

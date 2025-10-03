@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs"
+    },
+    "facing=south,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs",
+      "y": 180
+    },
+    "facing=west,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs",
+      "y": 270
+    },
+    "facing=east,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs",
+      "y": 90
+    },
+    "facing=north,half=top,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs_top"
+    },
+    "facing=south,half=top,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs_top",
+      "y": 180
+    },
+    "facing=west,half=top,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs_top",
+      "y": 270
+    },
+    "facing=east,half=top,shape=straight": {
+      "model": "hearth_and_timber:block/thatch_stairs_top",
+      "y": 90
+    }
+  }
+}
