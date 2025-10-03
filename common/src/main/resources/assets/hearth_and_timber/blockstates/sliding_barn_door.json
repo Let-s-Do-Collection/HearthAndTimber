@@ -1,0 +1,76 @@
+{
+  "variants": {
+    "facing=north,part=bl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=north,part=ml": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=north,part=tl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=north,part=br": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=north,part=mr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=north,part=tr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=bl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=ml": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=tl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=br": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=mr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=south,part=tr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=bl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=ml": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=tl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=br": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=mr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=west,part=tr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=bl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=ml": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=tl": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=br": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=mr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    },
+    "facing=east,part=tr": {
+      "model": "hearth_and_timber:block/sliding_barn_door"
+    }
+  }
+}

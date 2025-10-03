@@ -15,6 +15,7 @@ import net.satisfy.hearth_and_timber.client.renderer.block.TimberFrameRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.block.WardrobeRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.entity.ChairRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.model.BathtubModel;
+import net.satisfy.hearth_and_timber.client.renderer.model.SlidingBarnDoorModel;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingHayloftDoorModel;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 
@@ -50,10 +51,12 @@ public class HearthAndTimberClient {
     public static void registerEntityModelLayer() {
         EntityModelLayerRegistry.register(BathtubModel.LAYER_LOCATION, BathtubModel::getTexturedModelData);
         EntityModelLayerRegistry.register(SlidingHayloftDoorModel.LAYER_LOCATION, SlidingHayloftDoorModel::getTexturedModelData);
+        EntityModelLayerRegistry.register(SlidingBarnDoorModel.LAYER_LOCATION, SlidingBarnDoorModel::getTexturedModelData);
+
     }
 
     public static void registerBlockEntityRenderer() {
-        BlockEntityRendererRegistry.register(EntityTypeRegistry.SLIDING_HAYLOFT_DOOR_BLOCK_ENTITY.get(), SlidingHayloftDoorRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.SLIDING_DOOR_BLOCK_ENTITY.get(), SlidingHayloftDoorRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.BATHTUB_BLOCK_ENTITY.get(), BathtubRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.WARDROBE_BLOCK_ENTITY.get(), WardrobeRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), TimberFrameRenderer::new);

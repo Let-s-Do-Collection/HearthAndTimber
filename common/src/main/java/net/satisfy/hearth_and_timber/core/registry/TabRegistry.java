@@ -92,6 +92,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.RUSTIC_GLASS_BLOCK.get());
 
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
+                output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
 
             })
             .build());
