@@ -12,17 +12,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingBarnDoorModel;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingHayloftDoorModel;
+import net.satisfy.hearth_and_timber.client.renderer.model.SlidingStableDoorModel;
 import net.satisfy.hearth_and_timber.core.block.SlidingBarnDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
+import net.satisfy.hearth_and_timber.core.block.SlidingStableDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.SlidingDoorBlockEntity;
 
-public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
+public class SlidingDoorRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
     private final SlidingHayloftDoorModel hayloftModel;
     private final SlidingBarnDoorModel barnModel;
+    private final SlidingStableDoorModel stableModel;
 
-    public SlidingHayloftDoorRenderer(BlockEntityRendererProvider.Context context) {
+    public SlidingDoorRenderer(BlockEntityRendererProvider.Context context) {
         this.hayloftModel = new SlidingHayloftDoorModel(context.bakeLayer(SlidingHayloftDoorModel.LAYER_LOCATION));
         this.barnModel = new SlidingBarnDoorModel(context.bakeLayer(SlidingBarnDoorModel.LAYER_LOCATION));
+        this.stableModel = new SlidingStableDoorModel(context.bakeLayer(SlidingStableDoorModel.LAYER_LOCATION));
     }
 
     private static boolean isHayloft(BlockState state) {
@@ -33,38 +37,42 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDo
         return state.getBlock() instanceof SlidingBarnDoorBlock;
     }
 
+    private static boolean isStable(BlockState state) {
+        return state.getBlock() instanceof SlidingStableDoorBlock;
+    }
+
     private static boolean isBottomLeft(BlockState state) {
         if (isHayloft(state)) return state.getValue(SlidingHayloftDoorBlock.PART) == SlidingHayloftDoorBlock.Quarter.BL;
         if (isBarn(state)) return state.getValue(SlidingBarnDoorBlock.PART) == SlidingBarnDoorBlock.Quarter.BL;
+        if (isStable(state)) return state.getValue(SlidingStableDoorBlock.PART) == SlidingStableDoorBlock.Half.BOTTOM;
         return false;
     }
 
     private static Direction getFacing(BlockState state) {
         if (isHayloft(state)) return state.getValue(SlidingHayloftDoorBlock.FACING);
+        if (isStable(state)) return state.getValue(SlidingStableDoorBlock.FACING);
         return state.getValue(SlidingBarnDoorBlock.FACING);
     }
 
     private static boolean isRightHinge(BlockState state) {
         if (isHayloft(state)) return state.getValue(SlidingHayloftDoorBlock.HINGE) == SlidingHayloftDoorBlock.HingeSide.RIGHT;
+        if (isStable(state)) return state.getValue(SlidingStableDoorBlock.HINGE) == SlidingStableDoorBlock.HingeSide.RIGHT;
         return state.getValue(SlidingBarnDoorBlock.HINGE) == SlidingBarnDoorBlock.HingeSide.RIGHT;
     }
 
     private ResourceLocation textureFor(SlidingDoorBlockEntity be) {
         String wood = be.getWood();
-        if (be.isReinforced()) {
-            return HearthAndTimber.identifier("textures/entity/sliding_doors/" + wood + "_reinforced.png");
-        }
+        if (be.isReinforced()) return HearthAndTimber.identifier("textures/entity/sliding_doors/" + wood + "_reinforced.png");
         return HearthAndTimber.identifier("textures/entity/sliding_doors/" + wood + ".png");
     }
 
     @Override
     public void render(SlidingDoorBlockEntity be, float pt, PoseStack poseStack, MultiBufferSource buffers, int packedLight, int packedOverlay) {
         BlockState state = be.getBlockState();
-        if (!isHayloft(state) && !isBarn(state)) return;
+        if (!isHayloft(state) && !isBarn(state) && !isStable(state)) return;
         if (!isBottomLeft(state)) return;
 
         poseStack.pushPose();
-
         Direction facing = getFacing(state);
         boolean right = isRightHinge(state);
 
@@ -87,7 +95,7 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDo
                     }
                 }
             }
-        } else {
+        } else if (isBarn(state)) {
             switch (right ? SlidingBarnDoorBlock.HingeSide.RIGHT : SlidingBarnDoorBlock.HingeSide.LEFT) {
                 case LEFT -> {
                     switch (facing) {
@@ -106,18 +114,40 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDo
                     }
                 }
             }
+        } else {
+            switch (right ? SlidingStableDoorBlock.HingeSide.RIGHT : SlidingStableDoorBlock.HingeSide.LEFT) {
+                case LEFT -> {
+                    switch (facing) {
+                        case EAST -> poseStack.translate(1.3125, 1.5, 0.5);
+                        case WEST -> poseStack.translate(-0.3125, 1.5, 0.5);
+                        case NORTH -> poseStack.translate(0.5, 1.5, -0.3125);
+                        case SOUTH -> poseStack.translate(0.5, 1.5, 1.3125);
+                    }
+                }
+                case RIGHT -> {
+                    switch (facing) {
+                        case EAST -> poseStack.translate(1.3125, 1.5, 1.5);
+                        case WEST -> poseStack.translate(-0.3125, 1.5, -0.5);
+                        case NORTH -> poseStack.translate(1.5, 1.5, -0.3125);
+                        case SOUTH -> poseStack.translate(-0.5, 1.5, 1.3125);
+                    }
+                }
+            }
         }
 
-        float distance = be.getSlide() * (26f / 16f);
+        float max = isStable(state) ? (13f / 16f) : (26f / 16f);
+        float distance = be.getSlide() * max;
         Direction lateral = right ? facing.getClockWise() : facing.getCounterClockWise();
         double offsetX = 0.0;
         double offsetZ = 0.0;
+
         switch (lateral) {
             case NORTH -> offsetZ -= distance;
             case SOUTH -> offsetZ += distance;
             case WEST -> offsetX -= distance;
             case EAST -> offsetX += distance;
         }
+
         double forwardOffset = (1.0 / 16.0) * distance;
         switch (facing) {
             case NORTH -> offsetZ -= forwardOffset;
@@ -125,8 +155,8 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDo
             case WEST -> offsetX -= forwardOffset;
             case EAST -> offsetX += forwardOffset;
         }
-        poseStack.translate(offsetX, 0.0, offsetZ);
 
+        poseStack.translate(offsetX, 0.0, offsetZ);
         poseStack.mulPose(Axis.YN.rotationDegrees(facing.toYRot()));
         poseStack.mulPose(Axis.XP.rotationDegrees(180));
 
@@ -136,11 +166,14 @@ public class SlidingHayloftDoorRenderer implements BlockEntityRenderer<SlidingDo
         }
 
         if (isBarn(state)) {
-            var vc = buffers.getBuffer(hayloftModel.renderType(textureFor(be)));
+            var vc = buffers.getBuffer(barnModel.renderType(textureFor(be)));
             barnModel.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, -1);
-        } else {
+        } else if (isHayloft(state)) {
             var vc = buffers.getBuffer(hayloftModel.renderType(textureFor(be)));
             hayloftModel.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, -1);
+        } else {
+            var vc = buffers.getBuffer(stableModel.renderType(textureFor(be)));
+            stableModel.renderToBuffer(poseStack, vc, packedLight, OverlayTexture.NO_OVERLAY, -1);
         }
 
         poseStack.popPose();

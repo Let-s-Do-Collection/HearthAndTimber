@@ -1,3 +1,18 @@
 {
-
+  "sliding_door_open": {
+    "subtitle": "sound.hearth_and_timber.sliding_door",
+    "sounds": [
+      {
+        "name": "hearth_and_timber:sliding_door_open"
+      }
+    ]
+  },
+  "sliding_door_close": {
+    "subtitle": "sound.hearth_and_timber.sliding_door",
+    "sounds": [
+      {
+        "name": "hearth_and_timber:sliding_door_close"
+      }
+    ]
+  }
 }

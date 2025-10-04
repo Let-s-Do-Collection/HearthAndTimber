@@ -282,7 +282,7 @@ public class SlidingBarnDoorBlock extends BaseEntityBlock {
         BlockState tr = level.getBlockState(trPos);
         if (tr.getBlock() == this) level.setBlock(trPos, tr.setValue(OPEN, open), 3);
         BlockEntity be = level.getBlockEntity(origin);
-        if (be instanceof SlidingDoorBlockEntity d) d.setOpen(open);
+        if (be instanceof SlidingDoorBlockEntity d) d.setOpen(open, true);
     }
 
     private void destroyIfPresent(Level level, BlockPos position, BlockState referenceState) {

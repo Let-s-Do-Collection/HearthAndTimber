@@ -21,7 +21,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,30 +44,30 @@ import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class SlidingHayloftDoorBlock extends BaseEntityBlock {
-    public static final MapCodec<SlidingHayloftDoorBlock> CODEC = simpleCodec(SlidingHayloftDoorBlock::new);
+public class SlidingStableDoorBlock extends BaseEntityBlock {
+    public static final MapCodec<SlidingStableDoorBlock> CODEC = simpleCodec(SlidingStableDoorBlock::new);
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
-    public static final EnumProperty<Quarter> PART = EnumProperty.create("part", Quarter.class);
+    public static final EnumProperty<HingeSide> HINGE = EnumProperty.create("hinge", HingeSide.class);
+    public static final EnumProperty<Half> PART = EnumProperty.create("part", Half.class);
+    public static final BooleanProperty OPEN = BooleanProperty.create("open");
     private static final VoxelShape NORTH_SHAPE = Shapes.box(0.0, 0.0, 0.0, 1.0, 1.0, 3.0 / 16.0);
     private static final VoxelShape SOUTH_SHAPE = Shapes.box(0.0, 0.0, 13.0 / 16.0, 1.0, 1.0, 1.0);
     private static final VoxelShape WEST_SHAPE = Shapes.box(0.0, 0.0, 0.0, 3.0 / 16.0, 1.0, 1.0);
     private static final VoxelShape EAST_SHAPE = Shapes.box(13.0 / 16.0, 0.0, 0.0, 1.0, 1.0, 1.0);
-    public static final EnumProperty<HingeSide> HINGE = EnumProperty.create("hinge", HingeSide.class);
-    public static final BooleanProperty OPEN = BooleanProperty.create("open");
 
-    public SlidingHayloftDoorBlock(Properties properties) {
+    public SlidingStableDoorBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, Quarter.BL).setValue(HINGE, HingeSide.LEFT).setValue(OPEN, false));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HINGE, HingeSide.LEFT).setValue(PART, Half.BOTTOM).setValue(OPEN, false));
     }
 
     @Override
-    public @NotNull MapCodec<SlidingHayloftDoorBlock> codec() {
+    public @NotNull MapCodec<SlidingStableDoorBlock> codec() {
         return CODEC;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, PART, HINGE, OPEN);
+        builder.add(FACING, HINGE, PART, OPEN);
     }
 
     @Override
@@ -79,15 +84,9 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
             case WEST -> hinge = hitZ > 0.5 ? HingeSide.LEFT : HingeSide.RIGHT;
             default -> hinge = hitZ > 0.5 ? HingeSide.RIGHT : HingeSide.LEFT;
         }
-        Direction lateral = lateralDirection(direction, hinge);
-        BlockPos positionTopLeft = origin.above();
-        BlockPos positionBottomRight = origin.relative(lateral);
-        BlockPos positionTopRight = positionBottomRight.above();
         if (!isReplaceable(level, origin)) return null;
-        if (!isReplaceable(level, positionTopLeft)) return null;
-        if (!isReplaceable(level, positionBottomRight)) return null;
-        if (!isReplaceable(level, positionTopRight)) return null;
-        return defaultBlockState().setValue(FACING, direction).setValue(PART, Quarter.BL).setValue(HINGE, hinge).setValue(OPEN, false);
+        if (!isReplaceable(level, origin.above())) return null;
+        return defaultBlockState().setValue(FACING, direction).setValue(HINGE, hinge).setValue(PART, Half.BOTTOM).setValue(OPEN, false);
     }
 
     private boolean isReplaceable(Level level, BlockPos position) {
@@ -99,23 +98,14 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
         Direction direction = state.getValue(FACING);
         HingeSide hinge = state.getValue(HINGE);
         boolean open = state.getValue(OPEN);
-        level.setBlock(position.above(), state.setValue(PART, Quarter.TL).setValue(HINGE, hinge).setValue(OPEN, open), 3);
-        BlockPos positionBottomRight = position.relative(lateralDirection(direction, hinge));
-        level.setBlock(positionBottomRight, state.setValue(PART, Quarter.BR).setValue(HINGE, hinge).setValue(OPEN, open), 3);
-        level.setBlock(positionBottomRight.above(), state.setValue(PART, Quarter.TR).setValue(HINGE, hinge).setValue(OPEN, open), 3);
+        level.setBlock(position.above(), state.setValue(PART, Half.TOP).setValue(HINGE, hinge).setValue(OPEN, open), 3);
     }
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos position, BlockState state, Player player) {
         if (!level.isClientSide) {
             BlockPos origin = resolveOrigin(position, state);
-            Direction direction = state.getValue(FACING);
-            HingeSide hinge = state.getValue(HINGE);
-            Direction lateral = lateralDirection(direction, hinge);
             destroyIfPresent(level, origin.above(), state);
-            BlockPos positionBottomRight = origin.relative(lateral);
-            destroyIfPresent(level, positionBottomRight, state);
-            destroyIfPresent(level, positionBottomRight.above(), state);
             destroyIfPresent(level, origin, state);
         }
         super.playerWillDestroy(level, position, state, player);
@@ -126,13 +116,7 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos position, BlockState newState, boolean isMoving) {
         if (!level.isClientSide && state.getBlock() != newState.getBlock()) {
             BlockPos origin = resolveOrigin(position, state);
-            Direction direction = state.getValue(FACING);
-            HingeSide hinge = state.getValue(HINGE);
-            Direction lateral = lateralDirection(direction, hinge);
             destroyIfPresent(level, origin.above(), state);
-            BlockPos positionBottomRight = origin.relative(lateral);
-            destroyIfPresent(level, positionBottomRight, state);
-            destroyIfPresent(level, positionBottomRight.above(), state);
             destroyIfPresent(level, origin, state);
         }
         super.onRemove(state, level, position, newState, isMoving);
@@ -193,11 +177,9 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if (player.isShiftKeyDown()) return InteractionResult.PASS;
         if (level.isClientSide) return InteractionResult.SUCCESS;
-
         BlockPos origin = resolveOrigin(pos, state);
         BlockPos other = findOppositeOrigin(level, origin, state);
         boolean open = !level.getBlockState(origin).getValue(OPEN);
-
         if (other != null) {
             Direction f1 = state.getValue(FACING);
             HingeSide h1 = state.getValue(HINGE);
@@ -220,99 +202,61 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
     private BlockPos findOppositeOrigin(Level level, BlockPos origin, BlockState state) {
         Direction direction = state.getValue(FACING);
         for (int d = 1; d <= 3; d++) {
-            BlockPos blockPos = origin.relative(direction, d);
-            BlockState blockState = level.getBlockState(blockPos);
-            if (blockState.getBlock() == this && blockState.getValue(FACING) == direction.getOpposite()) {
-                return resolveOrigin(blockPos, blockState);
-            }
-            BlockPos blockPos1 = origin.relative(direction.getOpposite(), d);
-            BlockState blockState1 = level.getBlockState(blockPos1);
-            if (blockState1.getBlock() == this && blockState1.getValue(FACING) == direction.getOpposite()) {
-                return resolveOrigin(blockPos1, blockState1);
-            }
+            BlockPos p = origin.relative(direction, d);
+            BlockState s = level.getBlockState(p);
+            if (s.getBlock() == this && s.getValue(FACING) == direction.getOpposite()) return resolveOrigin(p, s);
+            BlockPos p2 = origin.relative(direction.getOpposite(), d);
+            BlockState s2 = level.getBlockState(p2);
+            if (s2.getBlock() == this && s2.getValue(FACING) == direction.getOpposite()) return resolveOrigin(p2, s2);
         }
         return null;
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-        HingeSide hinge = state.getValue(HINGE);
-        Direction lateral = lateralDirection(facing, hinge);
-        Quarter part = state.getValue(PART);
-
-        if (part == Quarter.TL || part == Quarter.TR) {
-            return level.getBlockState(pos.below()).getBlock() == this;
-        }
-
-        BlockPos origin = resolveOrigin(pos, state);
-        BlockPos blBelow = origin.below();
-        BlockPos brBelow = origin.relative(lateral).below();
-        return Block.canSupportCenter(level, blBelow, Direction.UP) && Block.canSupportCenter(level, brBelow, Direction.UP);
+        Half part = state.getValue(PART);
+        if (part == Half.TOP) return level.getBlockState(pos.below()).getBlock() == this;
+        return Block.canSupportCenter(level, pos.below(), Direction.UP);
     }
 
     private void setOpenFlag(Level level, BlockPos origin, Direction facing, HingeSide hinge, boolean open) {
-        BlockPos tlPos = origin.above();
-        BlockPos brPos = origin.relative(lateralDirection(facing, hinge));
-        BlockPos trPos = brPos.above();
-
+        BlockPos topPos = origin.above();
         BlockState bl = level.getBlockState(origin);
         if (bl.getBlock() == this) level.setBlock(origin, bl.setValue(OPEN, open), 3);
-
-        BlockState tl = level.getBlockState(tlPos);
-        if (tl.getBlock() == this) level.setBlock(tlPos, tl.setValue(OPEN, open), 3);
-
-        BlockState br = level.getBlockState(brPos);
-        if (br.getBlock() == this) level.setBlock(brPos, br.setValue(OPEN, open), 3);
-
-        BlockState tr = level.getBlockState(trPos);
-        if (tr.getBlock() == this) level.setBlock(trPos, tr.setValue(OPEN, open), 3);
-
+        BlockState tl = level.getBlockState(topPos);
+        if (tl.getBlock() == this) level.setBlock(topPos, tl.setValue(OPEN, open), 3);
         BlockEntity be = level.getBlockEntity(origin);
         if (be instanceof SlidingDoorBlockEntity d) d.setOpen(open, true);
     }
 
     private void destroyIfPresent(Level level, BlockPos position, BlockState referenceState) {
         BlockState at = level.getBlockState(position);
-        if (at.getBlock() == this
-                && at.getValue(FACING) == referenceState.getValue(FACING)
-                && at.getValue(HINGE) == referenceState.getValue(HINGE)) {
+        if (at.getBlock() == this && at.getValue(FACING) == referenceState.getValue(FACING) && at.getValue(HINGE) == referenceState.getValue(HINGE)) {
             level.destroyBlock(position, true);
         }
     }
 
     private BlockPos resolveOrigin(BlockPos position, BlockState state) {
-        Direction direction = state.getValue(FACING);
-        HingeSide hinge = state.getValue(HINGE);
-        Direction lateral = lateralDirection(direction, hinge);
-        Quarter part = state.getValue(PART);
-        if (part == Quarter.BL) return position;
-        if (part == Quarter.TL) return position.below();
-        if (part == Quarter.BR) return position.relative(lateral.getOpposite());
-        return position.below().relative(lateral.getOpposite());
+        Half part = state.getValue(PART);
+        if (part == Half.BOTTOM) return position;
+        return position.below();
     }
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos position, CollisionContext context) {
         Direction facing = state.getValue(FACING);
-        Quarter part = state.getValue(PART);
         HingeSide hinge = state.getValue(HINGE);
         boolean open = state.getValue(OPEN);
-
         if (!open) {
             if (facing == Direction.NORTH) return NORTH_SHAPE;
             if (facing == Direction.SOUTH) return SOUTH_SHAPE;
-            if (facing == Direction.WEST)  return WEST_SHAPE;
+            if (facing == Direction.WEST) return WEST_SHAPE;
             return EAST_SHAPE;
         }
-
-        if (part == Quarter.BL || part == Quarter.TL) return Shapes.empty();
-
         Direction lateral = lateralDirection(facing, hinge);
         double t = 3.0 / 16.0;
         double w = 6.0 / 16.0;
         double d = 1.0 / 16.0;
-
         if (facing == Direction.NORTH) {
             if (lateral == Direction.WEST) return Shapes.box(0.0, 0.0, d, w, 1.0, d + t);
             return Shapes.box(1.0 - w, 0.0, d, 1.0, 1.0, d + t);
@@ -343,55 +287,22 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
         };
     }
 
-    public enum Quarter implements StringRepresentable {
-        TL("tl"), TR("tr"), BL("bl"), BR("br");
-        private final String serialized;
-
-        Quarter(String serialized) {
-            this.serialized = serialized;
-        }
-
-        @Override
-        public @NotNull String getSerializedName() {
-            return serialized;
-        }
-
-        @Override
-        public String toString() {
-            return serialized;
-        }
-    }
-
-    @Override
-    public @NotNull BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
     public enum HingeSide implements StringRepresentable {
         LEFT("left"), RIGHT("right");
         private final String name;
-
-        HingeSide(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public @NotNull String getSerializedName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
+        HingeSide(String name) { this.name = name; }
+        @Override public @NotNull String getSerializedName() { return name; }
+        @Override public String toString() { return name; }
     }
 
-    //TODO: Don't forget to add other wood variants (e.g. pale or modded) here :)
+    public enum Half implements StringRepresentable {
+        TOP("top"), BOTTOM("bottom");
+        private final String name;
+        Half(String name) { this.name = name; }
+        @Override public @NotNull String getSerializedName() { return name; }
+        @Override public String toString() { return name; }
+    }
+
     private static String woodKeyFromPlanks(BlockState plankState) {
         if (plankState.is(Blocks.OAK_PLANKS)) return "oak";
         if (plankState.is(Blocks.SPRUCE_PLANKS)) return "spruce";
@@ -432,32 +343,19 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
             if (blockItem == null) return false;
             held = other;
         }
-
         BlockPos origin = resolveOrigin(pos, level.getBlockState(pos));
         BlockEntity be = level.getBlockEntity(origin);
         if (!(be instanceof SlidingDoorBlockEntity door)) return false;
         if (door.isReinforced()) return false;
-
         BlockState plankState = blockItem.getBlock().defaultBlockState();
         String newKey = woodKeyFromPlanks(plankState);
         if (newKey == null) return false;
-
         String oldKey = door.getWood();
         if (newKey.equals(oldKey)) return true;
-
         if (!level.isClientSide) {
             if (level instanceof ServerLevel server) {
                 BlockState oldPlanks = planksFromWoodKey(oldKey);
-
-                BlockState base = level.getBlockState(origin);
-                Direction facing = base.getValue(FACING);
-                HingeSide hinge = base.getValue(HINGE);
-                Direction lateral = lateralDirection(facing, hinge);
-                BlockPos br = origin.relative(lateral);
-                BlockPos tl = origin.above();
-                BlockPos tr = br.above();
-
-                BlockPos[] points = new BlockPos[] { origin, tl, br, tr };
+                BlockPos[] points = new BlockPos[] { origin, origin.above() };
                 for (BlockPos p : points) {
                     double cx = p.getX() + 0.5;
                     double cy = p.getY() + 0.1;
@@ -465,7 +363,6 @@ public class SlidingHayloftDoorBlock extends BaseEntityBlock {
                     server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, oldPlanks), cx, cy, cz, 18, 0.35, 0.25, 0.35, 0.03);
                     server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, plankState), cx, cy, cz, 18, 0.35, 0.25, 0.35, 0.03);
                 }
-
                 server.playSound(null, origin, SoundEvents.WOOD_BREAK, SoundSource.BLOCKS, 1.0f, 0.95f + server.random.nextFloat() * 0.1f);
             }
             door.setWood(newKey);

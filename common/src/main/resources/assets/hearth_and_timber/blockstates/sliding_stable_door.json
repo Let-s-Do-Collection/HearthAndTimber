@@ -1,0 +1,82 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "part": "bottom",
+        "facing": "south"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door"
+      }
+    },
+    {
+      "when": {
+        "part": "bottom",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "part": "bottom",
+        "facing": "east"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "part": "bottom",
+        "facing": "west"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "part": "top",
+        "facing": "south"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door"
+      }
+    },
+    {
+      "when": {
+        "part": "top",
+        "facing": "north"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "part": "top",
+        "facing": "east"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "part": "top",
+        "facing": "west"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/sliding_door",
+        "y": 90
+      }
+    }
+  ]
+}

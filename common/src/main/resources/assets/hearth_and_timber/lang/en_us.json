@@ -72,8 +72,10 @@
   "block.hearth_and_timber.timber_cross_frame": "Timber Cross Frame",
   "block.hearth_and_timber.timber_grid_frame": "Timber Grid Frame",
   "block.hearth_and_timber.timber_diagonal_frame": "Timber Frame",
-  "block.hearth_and_timber.sliding_hayloft_door": "Sliding Hayloft Door"
-
+  "block.hearth_and_timber.sliding_hayloft_door": "Sliding Hayloft Door",
+  "block.hearth_and_timber.sliding_barn_door": "Sliding Barn Door",
+  "block.hearth_and_timber.sliding_stable_door": "Sliding Stable Door",
+  "sound.hearth_and_timber.sliding_door": "Sliding Door creaks"
 }
 
 

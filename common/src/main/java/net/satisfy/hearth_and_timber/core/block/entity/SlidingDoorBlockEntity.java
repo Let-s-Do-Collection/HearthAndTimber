@@ -8,7 +8,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +15,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.satisfy.hearth_and_timber.core.block.SlidingBarnDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
+import net.satisfy.hearth_and_timber.core.block.SlidingStableDoorBlock;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
+import net.satisfy.hearth_and_timber.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class SlidingDoorBlockEntity extends BlockEntity {
@@ -24,11 +25,14 @@ public class SlidingDoorBlockEntity extends BlockEntity {
     private long animStart;
     private boolean animForward;
     private boolean playedOpenSound;
+    private boolean playedCloseSound;
+    private boolean allowInteractionSounds;
     private String wood = "spruce";
     private boolean reinforced;
 
     public SlidingDoorBlockEntity(BlockPos pos, BlockState state) {
         super(EntityTypeRegistry.SLIDING_DOOR_BLOCK_ENTITY.get(), pos, state);
+        allowInteractionSounds = false;
     }
 
     public boolean isReinforced() {
@@ -43,24 +47,42 @@ public class SlidingDoorBlockEntity extends BlockEntity {
         }
     }
 
-    public void setOpen(boolean value) {
+    public void setOpen(boolean value, boolean playSound) {
         long now = System.currentTimeMillis();
         float current = getSlide();
         open = value;
         animForward = value;
         if (animForward) animStart = now - (long) (current * 12000f);
         else animStart = now - (long) ((1f - current) * 12000f);
-        if (animForward) playedOpenSound = false;
+        if (playSound) {
+            allowInteractionSounds = true;
+            if (animForward) { playedOpenSound = false; playedCloseSound = true; }
+            else { playedCloseSound = false; playedOpenSound = true; }
+        } else {
+            allowInteractionSounds = false;
+            playedOpenSound = true;
+            playedCloseSound = true;
+        }
         setChanged();
         if (level != null && !level.isClientSide) level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
     }
 
-    public static void serverTick(Level level, BlockPos position, BlockState state, SlidingDoorBlockEntity blockEntity) {
+    public static void serverTick(Level level, BlockPos position, BlockState state, SlidingDoorBlockEntity be) {
         if (!(level instanceof ServerLevel server)) return;
-        float slide = blockEntity.getSlide();
-        if (blockEntity.animForward && !blockEntity.playedOpenSound) {
-            server.playSound(null, position, SoundEvents.WOODEN_DOOR_OPEN, SoundSource.BLOCKS, 0.9f, 1.0f);
-            blockEntity.playedOpenSound = true;
+        float slide = be.getSlide();
+        if (be.allowInteractionSounds && be.animForward && !be.playedOpenSound) {
+            float progress = be.getSlide();
+            float pitch = 0.8f + progress * 0.6f + server.random.nextFloat() * 0.2f;
+            float volume = 0.6f + progress * 0.8f;
+            server.playSound(null, position, SoundEventRegistry.SLIDING_DOOR_OPEN.get(), SoundSource.BLOCKS, volume, pitch);
+            be.playedOpenSound = true;
+        }
+        if (be.allowInteractionSounds && !be.animForward && !be.playedCloseSound) {
+            float progress = 1f - be.getSlide();
+            float pitch = 0.8f + progress * 0.6f + server.random.nextFloat() * 0.2f;
+            float volume = 0.6f + progress * 0.8f;
+            server.playSound(null, position, SoundEventRegistry.SLIDING_DOOR_CLOSE.get(), SoundSource.BLOCKS, volume, pitch);
+            be.playedCloseSound = true;
         }
         if (slide > 0f && slide < 1f && (server.getGameTime() & 3L) == 0L) {
             float distance = slide * (26f / 16f);
@@ -88,16 +110,17 @@ public class SlidingDoorBlockEntity extends BlockEntity {
             BlockState below = server.getBlockState(position.below());
             server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, below), particleX, particleY, particleZ, 4, 0.02, 0.0, 0.02, 0.0);
         }
-        if (!blockEntity.animForward && slide <= 0f) blockEntity.playedOpenSound = false;
+        if (!be.animForward && slide <= 0f) be.playedOpenSound = false;
+        if (be.animForward && slide >= 1f) be.playedCloseSound = false;
     }
 
     private static Direction getFacing(BlockState state) {
         Block b = state.getBlock();
         if (b instanceof SlidingBarnDoorBlock) return state.getValue(SlidingBarnDoorBlock.FACING);
         if (b instanceof SlidingHayloftDoorBlock) return state.getValue(SlidingHayloftDoorBlock.FACING);
+        if (b instanceof SlidingStableDoorBlock) return state.getValue(SlidingStableDoorBlock.FACING);
         return Direction.NORTH;
     }
-
     private static boolean isRightHinge(BlockState state) {
         Block b = state.getBlock();
         if (b instanceof SlidingBarnDoorBlock) {
@@ -107,6 +130,10 @@ public class SlidingDoorBlockEntity extends BlockEntity {
         if (b instanceof SlidingHayloftDoorBlock) {
             SlidingHayloftDoorBlock.HingeSide h = state.getValue(SlidingHayloftDoorBlock.HINGE);
             return h == SlidingHayloftDoorBlock.HingeSide.RIGHT;
+        }
+        if (b instanceof SlidingStableDoorBlock) {
+            SlidingStableDoorBlock.HingeSide h = state.getValue(SlidingStableDoorBlock.HINGE);
+            return h == SlidingStableDoorBlock.HingeSide.RIGHT;
         }
         return false;
     }
@@ -138,8 +165,10 @@ public class SlidingDoorBlockEntity extends BlockEntity {
         animStart = tag.getLong("animStart");
         animForward = tag.getBoolean("animForward");
         playedOpenSound = tag.getBoolean("playedOpenSound");
+        playedCloseSound = tag.getBoolean("playedCloseSound");
         if (tag.contains("wood")) wood = tag.getString("wood");
         reinforced = tag.getBoolean("reinforced");
+        allowInteractionSounds = false;
     }
 
     @Override
@@ -149,6 +178,7 @@ public class SlidingDoorBlockEntity extends BlockEntity {
         tag.putLong("animStart", animStart);
         tag.putBoolean("animForward", animForward);
         tag.putBoolean("playedOpenSound", playedOpenSound);
+        tag.putBoolean("playedCloseSound", playedCloseSound);
         tag.putString("wood", wood);
         tag.putBoolean("reinforced", reinforced);
     }
