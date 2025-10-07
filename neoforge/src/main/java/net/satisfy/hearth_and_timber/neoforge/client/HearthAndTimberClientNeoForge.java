@@ -17,9 +17,6 @@ import java.util.Map;
 
 @EventBusSubscriber(modid = HearthAndTimber.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class HearthAndTimberClientNeoForge {
-    public static final ResourceLocation FOUNDATION_STRAIGHT = HearthAndTimber.identifier("block/foundation_block");
-    public static final ResourceLocation FOUNDATION_INNER = HearthAndTimber.identifier("block/foundation_block_inner");
-    public static final ResourceLocation FOUNDATION_OUTER = HearthAndTimber.identifier("block/foundation_block_outer");
 
     @SubscribeEvent
     public static void beforeClientSetup(RegisterEvent event) {
@@ -32,21 +29,16 @@ public class HearthAndTimberClientNeoForge {
     }
 
     @SubscribeEvent
-    public static void onModelModify(ModelEvent.ModifyBakingResult event) {
-        System.out.println("[FOUNDATION] ModifyBakingResult fired!");
-        Map<ModelResourceLocation, BakedModel> models = event.getModels();
+    public static void onModelModify(ModelEvent.ModifyBakingResult e) {
+        Map<ModelResourceLocation, BakedModel> models = e.getModels();
+        int replaced = 0;
         for (var entry : models.entrySet()) {
-            ModelResourceLocation id = entry.getKey();
-            ResourceLocation loc = id.id();
-            if (isFoundationModel(loc)) {
-                System.out.println("[FOUNDATION] Replaced model for " + loc);
-                BakedModel original = entry.getValue();
-                models.put(id, new FoundationTexturedModel(original));
+            ResourceLocation loc = entry.getKey().id();
+            if (HearthAndTimber.MOD_ID.equals(loc.getNamespace()) && loc.getPath().contains("foundation_block")) {
+                models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue()));
+                replaced++;
             }
         }
-    }
-
-    private static boolean isFoundationModel(ResourceLocation id) {
-        return id.equals(FOUNDATION_STRAIGHT) || id.equals(FOUNDATION_INNER) || id.equals(FOUNDATION_OUTER);
+        System.out.println("[FOUNDATION] wrapped models: " + replaced);
     }
 }

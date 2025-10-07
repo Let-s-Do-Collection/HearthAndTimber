@@ -1,0 +1,65 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hearth_and_timber:amberstone_bricks_slab"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "hearth_and_timber:amberstone_bricks_slab",
+          "properties": {
+            "type": "double"
+          }
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_count",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hearth_and_timber:amberstone_bricks_slab"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "hearth_and_timber:amberstone_bricks_slab",
+          "properties": {
+            "type": "bottom"
+          }
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "hearth_and_timber:amberstone_bricks_slab"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "hearth_and_timber:amberstone_bricks_slab",
+          "properties": {
+            "type": "top"
+          }
+        }
+      ]
+    }
+  ]
+}

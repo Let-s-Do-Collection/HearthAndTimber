@@ -111,7 +111,14 @@
   "block.hearth_and_timber.layered_fieldstone_slab": "Layered Fieldstone Slab",
   "block.hearth_and_timber.mossy_layered_fieldstone_block": "Mossy Layered Fieldstone",
   "block.hearth_and_timber.mossy_layered_fieldstone_stairs": "Mossy Layered Fieldstone Stairs",
-  "block.hearth_and_timber.mossy_layered_fieldstone_slab": "Mossy Layered Fieldstone Slab"
+  "block.hearth_and_timber.mossy_layered_fieldstone_slab": "Mossy Layered Fieldstone Slab",
+  "block.hearth_and_timber.amberstone_bricks_stairs": "Amberstone Bricks Stairs",
+  "block.hearth_and_timber.amberstone_bricks_slab": "Amberstone Bricks Slab",
+  "block.hearth_and_timber.amberstone_brick_block": "Amberstone Bricks",
+  "block.hearth_and_timber.mossy_amberstone_bricks_stairs": "Mossy Amberstone Bricks Stairs",
+  "block.hearth_and_timber.mossy_amberstone_bricks_slab": "Mossy Amberstone Bricks Slab",
+  "block.hearth_and_timber.mossy_amberstone_brick_block": "Mossy Amberstone Bricks"
+
 }
 
 
