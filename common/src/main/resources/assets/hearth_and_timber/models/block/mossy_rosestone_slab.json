@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "top": "hearth_and_timber:block/mossy_rosestone",
+    "bottom": "hearth_and_timber:block/mossy_rosestone",
+    "side": "hearth_and_timber:block/mossy_rosestone"
+  }
+}

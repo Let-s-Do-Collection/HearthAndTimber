@@ -1,7 +1,22 @@
 {
   "variants": {
-    "": {
-      "model": "hearth_and_timber:block/rustic_timber_floor"
-    }
+    "": [
+      {
+        "model": "hearth_and_timber:block/rustic_timber_floor_1",
+        "weight": 1
+      },
+      {
+        "model": "hearth_and_timber:block/rustic_timber_floor_2",
+        "weight": 1
+      },
+      {
+        "model": "hearth_and_timber:block/rustic_timber_floor_3",
+        "weight": 1
+      },
+      {
+        "model": "hearth_and_timber:block/rustic_timber_floor_4",
+        "weight": 1
+      }
+    ]
   }
 }

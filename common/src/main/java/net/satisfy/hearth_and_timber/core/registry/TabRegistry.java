@@ -20,6 +20,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.CHICKEN_FENCE.get());
                 output.accept(ObjectRegistry.FRAMEWORK.get());
                 output.accept(ObjectRegistry.CATTLEGRID.get());
+                output.accept(ObjectRegistry.TIMBER_FRAME_STAIRS.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_DIAGONAL_FRAME.get());
@@ -55,6 +56,48 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BLOCK.get());
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BLOCK_STAIRS.get());
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.ROSESTONE_BLOCK.get());
+                output.accept(ObjectRegistry.ROSESTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.ROSESTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.WHITESTONE_BLOCK.get());
+                output.accept(ObjectRegistry.WHITESTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.WHITESTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.CINDERSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.CINDERSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.CINDERSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MARLSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MARLSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MARLSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BRICKS_BLOCK.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BRICKS_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BRICKS_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICKS_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICKS_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICKS_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.AMBERSTONE_BLOCK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BLOCK.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BLOCK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BLOCK_SLAB.get());
                 output.accept(ObjectRegistry.SPLITSTONE_BLOCK.get());
                 output.accept(ObjectRegistry.SPLITSTONE_BLOCK_STAIRS.get());
                 output.accept(ObjectRegistry.SPLITSTONE_BLOCK_SLAB.get());
@@ -63,17 +106,17 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_BLOCK_SLAB.get());
                 output.accept(ObjectRegistry.SPLITSTONE_PATH_BLOCK.get());
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_PATH_BLOCK.get());
-                output.accept(ObjectRegistry.THATCH_BLOCK.get());
-                output.accept(ObjectRegistry.THATCH_STAIRS.get());
-                output.accept(ObjectRegistry.THATCH_SLAB.get());
+
+                //output.accept(ObjectRegistry.THATCH_BLOCK.get());
+                //output.accept(ObjectRegistry.THATCH_STAIRS.get());
+                //output.accept(ObjectRegistry.THATCH_SLAB.get());
+
                 output.accept(ObjectRegistry.PACKED_DIRT.get());
                 output.accept(ObjectRegistry.TRAMPLED_PACKED_DIRT.get());
                 output.accept(ObjectRegistry.STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.STRAW_STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.TRAMPLED_STABLE_FLOOR.get());
-
                 output.accept(ObjectRegistry.RUSTIC_TIMBER_FLOOR.get());
-
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
                 output.accept(ObjectRegistry.RUSTIC_SOFA.get());
                 output.accept(ObjectRegistry.RUSTIC_CHAIR.get());
@@ -90,7 +133,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.RUSTIC_BATHTUB.get());
                 output.accept(ObjectRegistry.RUSTIC_GLASS_PANE.get());
                 output.accept(ObjectRegistry.RUSTIC_GLASS_BLOCK.get());
-
+                output.accept(ObjectRegistry.FOUNDATION_BLOCK.get());
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_STABLE_DOOR.get());

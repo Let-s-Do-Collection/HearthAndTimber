@@ -1,5 +1,6 @@
 package net.satisfy.hearth_and_timber.core.registry;
 
+import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
@@ -40,13 +41,62 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PATCHWORK_SHINGLE_ROOF_STAIRS = registerWithItem("patchwork_shingle_roof_stairs", () -> new StairBlock(PATCHWORK_SHINGLE_ROOF_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
     public static final RegistrySupplier<Block> PATCHWORK_SHINGLE_ROOF_SLAB = registerWithItem("patchwork_shingle_roof_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
 
+    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BLOCK = registerWithItem("layered_fieldstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BLOCK_STAIRS = registerWithItem("layered_fieldstone_stairs", () -> new StairBlock(LAYERED_FIELDSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BLOCK_SLAB = registerWithItem("layered_fieldstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BLOCK = registerWithItem("mossy_layered_fieldstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BLOCK_STAIRS = registerWithItem("mossy_layered_fieldstone_stairs", () -> new StairBlock(MOSSY_LAYERED_FIELDSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BLOCK_SLAB = registerWithItem("mossy_layered_fieldstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
     public static final RegistrySupplier<Block> FIELDSTONE_BLOCK = registerWithItem("fieldstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
     public static final RegistrySupplier<Block> FIELDSTONE_BLOCK_STAIRS = registerWithItem("fieldstone_stairs", () -> new StairBlock(FIELDSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
     public static final RegistrySupplier<Block> FIELDSTONE_BLOCK_SLAB = registerWithItem("fieldstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-
     public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BLOCK = registerWithItem("mossy_fieldstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
     public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BLOCK_STAIRS = registerWithItem("mossy_fieldstone_stairs", () -> new StairBlock(MOSSY_FIELDSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
     public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BLOCK_SLAB = registerWithItem("mossy_fieldstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> WHITESTONE_BLOCK = registerWithItem("whitestone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> WHITESTONE_BLOCK_STAIRS = registerWithItem("whitestone_stairs", () -> new StairBlock(WHITESTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> WHITESTONE_BLOCK_SLAB = registerWithItem("whitestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_WHITESTONE_BLOCK = registerWithItem("mossy_whitestone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_WHITESTONE_BLOCK_STAIRS = registerWithItem("mossy_whitestone_stairs", () -> new StairBlock(MOSSY_WHITESTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_WHITESTONE_BLOCK_SLAB = registerWithItem("mossy_whitestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> ROSESTONE_BLOCK = registerWithItem("rosestone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> ROSESTONE_BLOCK_STAIRS = registerWithItem("rosestone_stairs", () -> new StairBlock(ROSESTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> ROSESTONE_BLOCK_SLAB = registerWithItem("rosestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_ROSESTONE_BLOCK = registerWithItem("mossy_rosestone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_ROSESTONE_BLOCK_STAIRS = registerWithItem("mossy_rosestone_stairs", () -> new StairBlock(MOSSY_ROSESTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_ROSESTONE_BLOCK_SLAB = registerWithItem("mossy_rosestone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> AMBERSTONE_BRICKS_BLOCK = registerWithItem("amberstone_bricks_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> AMBERSTONE_BRICKS_BLOCK_STAIRS = registerWithItem("amberstone_bricks_stairs", () -> new StairBlock(AMBERSTONE_BRICKS_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> AMBERSTONE_BRICKS_BLOCK_SLAB = registerWithItem("amberstone_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BRICKS_BLOCK = registerWithItem("mossy_amberstone_bricks_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BRICKS_BLOCK_STAIRS = registerWithItem("mossy_amberstone_bricks_stairs", () -> new StairBlock(MOSSY_AMBERSTONE_BRICKS_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BRICKS_BLOCK_SLAB = registerWithItem("mossy_amberstone_bricks_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> AMBERSTONE_BLOCK = registerWithItem("amberstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> AMBERSTONE_BLOCK_STAIRS = registerWithItem("amberstone_stairs", () -> new StairBlock(AMBERSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> AMBERSTONE_BLOCK_SLAB = registerWithItem("amberstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BLOCK = registerWithItem("mossy_amberstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BLOCK_STAIRS = registerWithItem("mossy_amberstone_stairs", () -> new StairBlock(MOSSY_AMBERSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_AMBERSTONE_BLOCK_SLAB = registerWithItem("mossy_amberstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> MARLSTONE_BLOCK = registerWithItem("marlstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MARLSTONE_BLOCK_STAIRS = registerWithItem("marlstone_stairs", () -> new StairBlock(MARLSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MARLSTONE_BLOCK_SLAB = registerWithItem("marlstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_MARLSTONE_BLOCK = registerWithItem("mossy_marlstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_MARLSTONE_BLOCK_STAIRS = registerWithItem("mossy_marlstone_stairs", () -> new StairBlock(MOSSY_MARLSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_MARLSTONE_BLOCK_SLAB = registerWithItem("mossy_marlstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
+    public static final RegistrySupplier<Block> CINDERSTONE_BLOCK = registerWithItem("cinderstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> CINDERSTONE_BLOCK_STAIRS = registerWithItem("cinderstone_stairs", () -> new StairBlock(CINDERSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> CINDERSTONE_BLOCK_SLAB = registerWithItem("cinderstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+    public static final RegistrySupplier<Block> MOSSY_CINDERSTONE_BLOCK = registerWithItem("mossy_cinderstone_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE)));
+    public static final RegistrySupplier<Block> MOSSY_CINDERSTONE_BLOCK_STAIRS = registerWithItem("mossy_cinderstone_stairs", () -> new StairBlock(MOSSY_CINDERSTONE_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
+    public static final RegistrySupplier<Block> MOSSY_CINDERSTONE_BLOCK_SLAB = registerWithItem("mossy_cinderstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
+
 
     public static final RegistrySupplier<Block> SPLITSTONE_PATH_BLOCK = registerWithItem("splitstone_path_block", () -> new SplitstonePathBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(2.5f, 6.0f).mapColor(MapColor.STONE).speedFactor(1.0625f)));
     public static final RegistrySupplier<Block> SPLITSTONE_BLOCK = registerWithItem("splitstone_block", () -> new SplitstoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE), SPLITSTONE_PATH_BLOCK));
@@ -88,10 +138,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
 
-    public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_CROSS_FRAME = registerWithItem("timber_cross_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_GRID_FRAME = registerWithItem("timber_grid_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_FRAME_STAIRS = registerWithItem("timber_frame_stairs", () -> new StairBlock(TIMBER_FRAME.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_STAIRS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_CROSS_FRAME = registerWithItem("timber_cross_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_GRID_FRAME = registerWithItem("timber_grid_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
 
     public static final RegistrySupplier<Block> BLACK_PLASTER = registerWithItem("black_plaster", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA).mapColor(MapColor.COLOR_BLACK)));
     public static final RegistrySupplier<Block> BLUE_PLASTER = registerWithItem("blue_plaster", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA).mapColor(MapColor.COLOR_BLUE)));
@@ -110,27 +161,26 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> YELLOW_PLASTER = registerWithItem("yellow_plaster", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA).mapColor(MapColor.COLOR_RED)));
     public static final RegistrySupplier<Block> WHITE_PLASTER = registerWithItem("white_plaster", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.WHITE_TERRACOTTA).mapColor(MapColor.COLOR_RED)));
 
-    public static final RegistrySupplier<Block> THATCH_BLOCK = registerWithItem("thatch_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
-    public static final RegistrySupplier<Block> THATCH_STAIRS = registerWithItem("thatch_stairs", () -> new StairBlock(THATCH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
-    public static final RegistrySupplier<Block> THATCH_SLAB = registerWithItem("thatch_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
+    //public static final RegistrySupplier<Block> THATCH_BLOCK = registerWithItem("thatch_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
+    //public static final RegistrySupplier<Block> THATCH_STAIRS = registerWithItem("thatch_stairs", () -> new StairBlock(THATCH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
+    //public static final RegistrySupplier<Block> THATCH_SLAB = registerWithItem("thatch_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
 
     public static final RegistrySupplier<Block> IRON_DIVIDER = registerWithItem("iron_divider", () -> new PenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(5.0f, 6.0f).requiresCorrectToolForDrops().noOcclusion()));
     public static final RegistrySupplier<Block> CHICKEN_FENCE = registerWithItem("chicken_fence", () -> new PenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(1.5f, 3.0f).requiresCorrectToolForDrops().noOcclusion()));
-
-
-    static {
-        ((PackedDirtBlock) PACKED_DIRT.get()).setTrampled(TRAMPLED_PACKED_DIRT);
-        ((TrampledPackedDirtBlock) TRAMPLED_PACKED_DIRT.get()).setBase(PACKED_DIRT);
-        ((StableFloorBlock) STABLE_FLOOR.get()).setTrampled(TRAMPLED_STABLE_FLOOR);
-        ((StableFloorBlock) STABLE_FLOOR.get()).setStraw(STRAW_STABLE_FLOOR);
-        ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setBase(STABLE_FLOOR);
-        ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setStrawItem(() -> Items.WHEAT);
-    }
+    public static final RegistrySupplier<Block> FOUNDATION_BLOCK = registerWithItem("foundation_block", () -> new FoundationBlock(Blocks.STONE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
 
 
     public static void init() {
         ITEMS.register();
         BLOCKS.register();
+        LifecycleEvent.SETUP.register(() -> {
+            ((PackedDirtBlock) PACKED_DIRT.get()).setTrampled(TRAMPLED_PACKED_DIRT);
+            ((TrampledPackedDirtBlock) TRAMPLED_PACKED_DIRT.get()).setBase(PACKED_DIRT);
+            ((StableFloorBlock) STABLE_FLOOR.get()).setTrampled(TRAMPLED_STABLE_FLOOR);
+            ((StableFloorBlock) STABLE_FLOOR.get()).setStraw(STRAW_STABLE_FLOOR);
+            ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setBase(STABLE_FLOOR);
+            ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setStrawItem(() -> Items.WHEAT);
+        });
     }
 
     public static BlockBehaviour.Properties properties(float strength) {
