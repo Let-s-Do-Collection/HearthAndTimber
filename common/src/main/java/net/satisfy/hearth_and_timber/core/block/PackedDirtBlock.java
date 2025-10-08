@@ -1,9 +1,15 @@
 package net.satisfy.hearth_and_timber.core.block;
 
+import java.util.List;
 import java.util.function.Supplier;
+
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -11,9 +17,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -101,5 +105,19 @@ public class PackedDirtBlock extends Block {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.packed_dirt.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.packed_dirt.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

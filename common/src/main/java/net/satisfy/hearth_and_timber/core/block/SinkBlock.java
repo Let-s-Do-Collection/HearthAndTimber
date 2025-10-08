@@ -1,10 +1,13 @@
 package net.satisfy.hearth_and_timber.core.block;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -17,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -42,6 +46,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -264,18 +269,39 @@ public class SinkBlock extends Block {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource randomSource) {
         float chance = randomSource.nextFloat();
-        if (chance < 0.1F) {
+        if (chance < 0.125F) {
             spawnDripParticle(world, pos, state);
         }
     }
 
-    public static void spawnDripParticle(Level level, BlockPos blockPos, BlockState blockState) {
-        Vec3 vec3 = blockState.getOffset(level, blockPos);
-        double d = 0.0625;
-        double e = (double) blockPos.getX() + 0.7 + vec3.x;
-        double f = (double) ((float) (blockPos.getY() + 0.7) - 0.6875F) - d;
-        double g = (double) blockPos.getZ() + 0.5 + vec3.z;
-        ParticleOptions particleOptions = ParticleTypes.DRIPPING_WATER;
-        level.addParticle(particleOptions, e, f, g, 0.0, 0.0, 0.0);
+    public static void spawnDripParticle(Level level, BlockPos pos, BlockState state) {
+        Vec3 o = state.getOffset(level, pos);
+        Direction f = state.getValue(FACING);
+        double x = 0.5;
+        double z = 0.5;
+        switch (f) {
+            case NORTH -> z = 0.70;
+            case SOUTH -> z = 0.30;
+            case WEST  -> x = 0.70;
+            case EAST  -> x = 0.30;
+        }
+        double y = state.getValue(HALF) == DoubleBlockHalf.UPPER ? pos.getY() - 0.02 : pos.getY() + 0.98;
+        double jx = (level.random.nextDouble() - 0.5) * 0.02;
+        double jz = (level.random.nextDouble() - 0.5) * 0.02;
+        level.addParticle(ParticleTypes.DRIPPING_WATER, pos.getX() + x + o.x + jx, y, pos.getZ() + z + o.z + jz, 0.0, 0.0, 0.0);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.sink.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.sink.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

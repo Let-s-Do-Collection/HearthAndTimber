@@ -1,24 +1,21 @@
 package net.satisfy.hearth_and_timber.core.block;
 
 import com.mojang.serialization.MapCodec;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Supplier;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -30,6 +27,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class StableFloorBlock extends Block {
     public static final MapCodec<StableFloorBlock> CODEC = simpleCodec(StableFloorBlock::new);
@@ -62,8 +62,37 @@ public class StableFloorBlock extends Block {
     }
 
     @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState old, boolean moving) {
+        if (!level.isClientSide && !state.getValue(SEALED) && straw != null) {
+            if (hasHayInBox(level, pos) && level.getRandom().nextFloat() < 0.25f) {
+                level.setBlock(pos, straw.get().defaultBlockState(), 3);
+                return;
+            }
+        }
+        super.onPlace(state, level, pos, old, moving);
+    }
+
+    @Override
+    protected @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState other, LevelAccessor level, BlockPos pos, BlockPos fromPos) {
+        if (!state.getValue(SEALED) && straw != null && level instanceof Level lvl && !lvl.isClientSide) {
+            if (hasHayInBox(level, pos) && lvl.getRandom().nextFloat() < 0.25f) {
+                lvl.setBlock(pos, straw.get().defaultBlockState(), 3);
+                return state;
+            }
+        }
+        return super.updateShape(state, dir, other, level, pos, fromPos);
+    }
+
+    @Override
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
         if (!level.isClientSide && entity instanceof LivingEntity && !state.getValue(SEALED)) {
+            if (entity instanceof LivingEntity && !state.getValue(SEALED) && straw != null) {
+                if (hasHayInBox(level, pos) && level.getRandom().nextFloat() < 0.25f) {
+                    level.setBlock(pos, straw.get().defaultBlockState(), 3);
+                    super.stepOn(level, pos, state, entity);
+                    return;
+                }
+            }
             long t = level.getGameTime();
             if (((t + pos.asLong()) & 7L) == 0L) {
                 RandomSource r = level.getRandom();
@@ -80,67 +109,19 @@ public class StableFloorBlock extends Block {
         super.stepOn(level, pos, state, entity);
     }
 
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return super.getStateForPlacement(ctx);
-    }
-
-    @Override
-    protected @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState other, LevelAccessor level, BlockPos pos, BlockPos fromPos) {
-        if (!state.getValue(SEALED) && straw != null && other.is(Blocks.HAY_BLOCK)) {
-            level.scheduleTick(pos, this, 1);
-        }
-        return super.updateShape(state, dir, other, level, pos, fromPos);
-    }
-
-    @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (state.getValue(SEALED) || straw == null) return;
-        tryStrawTransform(level, pos);
-    }
-
-    @Override
-    public boolean isRandomlyTicking(BlockState state) {
-        return !state.getValue(SEALED);
-    }
-
-    @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (straw == null || state.getValue(SEALED)) return;
-        tryStrawTransform(level, pos);
-    }
-
-    private void tryStrawTransform(ServerLevel level, BlockPos pos) {
-        List<BlockPos> hayPositions = new ArrayList<>();
-        for (Direction d : Direction.values()) {
-            BlockPos p = pos.relative(d);
-            if (level.getBlockState(p).is(Blocks.HAY_BLOCK)) hayPositions.add(p);
-        }
-        for (BlockPos hay : hayPositions) {
-            List<BlockPos> strawList = new ArrayList<>();
-            List<BlockPos> candidate = new ArrayList<>();
-            for (int dx = -1; dx <= 1; dx++) {
+    private static boolean hasHayInBox(LevelAccessor level, BlockPos pos) {
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
                 for (int dz = -1; dz <= 1; dz++) {
-                    BlockPos n = hay.offset(dx, 0, dz);
-                    BlockState s = level.getBlockState(n);
-                    if (s.is(straw.get())) strawList.add(n);
-                    else if (s.is(this)) candidate.add(n);
-                }
-            }
-            int quota = 3 - strawList.size();
-            if (quota <= 0) continue;
-            candidate.sort(Comparator.comparingLong(BlockPos::asLong));
-            for (int i = 0; i < Math.min(quota, candidate.size()); i++) {
-                if (candidate.get(i).equals(pos)) {
-                    level.setBlock(pos, straw.get().defaultBlockState(), 3);
-                    return;
+                    if (level.getBlockState(pos.offset(dx, dy, dz)).is(Blocks.HAY_BLOCK)) return true;
                 }
             }
         }
+        return false;
     }
 
     @Override
-    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, net.minecraft.world.entity.player.Player player, InteractionHand hand, BlockHitResult hit) {
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (stack.getItem() instanceof ShovelItem || stack.getItem() instanceof HoeItem) {
             boolean sealed = state.getValue(SEALED);
             if (!level.isClientSide) {
@@ -160,5 +141,21 @@ public class StableFloorBlock extends Block {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.stable_floor.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.packed_dirt.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.packed_dirt.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

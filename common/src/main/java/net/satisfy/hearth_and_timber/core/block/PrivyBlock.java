@@ -2,9 +2,14 @@ package net.satisfy.hearth_and_timber.core.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -16,7 +21,10 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -44,6 +52,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -113,12 +122,33 @@ public class PrivyBlock extends BaseEntityBlock {
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        ItemInteractionResult result = GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, 0.2D);
+        ItemInteractionResult result = GeneralUtil.onUse(level, player, InteractionHand.MAIN_HAND, hit, -0.3);
         return result.consumesAction() ? InteractionResult.sidedSuccess(level.isClientSide) : InteractionResult.PASS;
     }
 
     @Override
-    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof PrivyBlockEntity privy)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (stack.isEmpty()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!stack.has(DataComponents.FOOD)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (stack.is(Items.ROTTEN_FLESH) || stack.is(Items.BONE_MEAL)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        boolean absorbed = false;
+        int tries = stack.getCount();
+        for (int i = 0; i < tries; i++) {
+            ItemStack one = stack.copyWithCount(1);
+            if (privy.absorb(one)) {
+                absorbed = true;
+                if (!player.isCreative()) stack.shrink(1);
+                else break;
+            } else break;
+        }
+        if (absorbed) {
+            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.5F, 1.0F);
+            return ItemInteractionResult.CONSUME;
+        }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
@@ -245,4 +275,18 @@ public class PrivyBlock extends BaseEntityBlock {
             map.put(direction, GeneralUtil.rotateShape(Direction.NORTH, direction, voxelShapeSupplier.get()));
         }
     });
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.privy.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.privy.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+    }
 }

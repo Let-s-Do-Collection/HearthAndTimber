@@ -16,34 +16,42 @@
       "y": 90
     },
     "facing=north,shape=inner_left": {
-      "model": "hearth_and_timber:block/foundation_block_inner"
+      "model": "hearth_and_timber:block/foundation_block_inner",
+      "uvlock": false
     },
     "facing=south,shape=inner_left": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 180
+      "y": 180,
+      "uvlock": false
     },
     "facing=west,shape=inner_left": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 270
+      "y": 270,
+      "uvlock": false
     },
     "facing=east,shape=inner_left": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 90
+      "y": 90,
+      "uvlock": false
     },
     "facing=north,shape=inner_right": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 90
+      "y": 90,
+      "uvlock": false
     },
     "facing=south,shape=inner_right": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 270
+      "y": 270,
+      "uvlock": false
     },
     "facing=west,shape=inner_right": {
-      "model": "hearth_and_timber:block/foundation_block_inner"
+      "model": "hearth_and_timber:block/foundation_block_inner",
+      "uvlock": false
     },
     "facing=east,shape=inner_right": {
       "model": "hearth_and_timber:block/foundation_block_inner",
-      "y": 180
+      "y": 180,
+      "uv_lock": "false"
     },
     "facing=north,shape=outer_left": {
       "model": "hearth_and_timber:block/foundation_block_outer"

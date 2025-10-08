@@ -25,6 +25,7 @@ public class LineConnectingBlock extends Block {
         this.registerDefaultState(((this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(TYPE, GeneralUtil.LineConnectingType.NONE)));
     }
 
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {

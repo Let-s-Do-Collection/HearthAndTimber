@@ -2,16 +2,19 @@ package net.satisfy.hearth_and_timber.core.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,12 +34,13 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.satisfy.hearth_and_timber.core.block.entity.FoundationBlockEntity;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class FoundationBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
     public static final MapCodec<FoundationBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseState), propertiesCodec()).apply(instance, FoundationBlock::new));
@@ -243,6 +247,23 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     }
 
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (stack.getItem() instanceof PickaxeItem) {
+            if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof FoundationBlockEntity fbe) {
+                BlockState mimic = fbe.getMimicState();
+                if (mimic != null && !mimic.isAir()) {
+                    Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
+                    fbe.setMimicState(Blocks.AIR.defaultBlockState());
+                    level.setBlock(pos, state.setValue(APPLIED, false), 3);
+                    if (level instanceof ServerLevel server) {
+                        server.levelEvent(2001, pos, Block.getId(mimic));
+                    }
+                }
+            }
+            return ItemInteractionResult.CONSUME;
+        }
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!(stack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         BlockState mimic = blockItem.getBlock().defaultBlockState();
@@ -259,7 +280,34 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
         return ItemInteractionResult.CONSUME;
     }
 
+    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof FoundationBlockEntity fbe) {
+            BlockState mimic = fbe.getMimicState();
+            if (mimic != null && !mimic.isAir() && !player.isCreative()) {
+                Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
+            }
+        }
+        super.playerWillDestroy(level, pos, state, player);
+        return state;
+    }
+
+
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

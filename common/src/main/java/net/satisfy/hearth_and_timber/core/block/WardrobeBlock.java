@@ -1,8 +1,12 @@
 package net.satisfy.hearth_and_timber.core.block;
 
 import com.mojang.serialization.MapCodec;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -11,7 +15,9 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +38,8 @@ import net.satisfy.hearth_and_timber.core.block.entity.WardrobeBlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class WardrobeBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final MapCodec<WardrobeBlock> CODEC = simpleCodec(WardrobeBlock::new);
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
@@ -39,10 +47,7 @@ public class WardrobeBlock extends HorizontalDirectionalBlock implements EntityB
 
     public WardrobeBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(OPEN, false)
-                .setValue(HALF, DoubleBlockHalf.LOWER));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, false).setValue(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override
@@ -69,6 +74,14 @@ public class WardrobeBlock extends HorizontalDirectionalBlock implements EntityB
 
     @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof WardrobeBlockEntity wardrobe) {
+                for (ItemStack s : wardrobe.getInventory()) {
+                    if (!s.isEmpty()) Block.popResource(level, pos, s.copy());
+                }
+            }
+        }
         DoubleBlockHalf half = state.getValue(HALF);
         BlockPos other = half == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
         BlockState otherState = level.getBlockState(other);
@@ -185,5 +198,19 @@ public class WardrobeBlock extends HorizontalDirectionalBlock implements EntityB
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new WardrobeBlockEntity(pos, state);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.wardrobe.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.wardrobe.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

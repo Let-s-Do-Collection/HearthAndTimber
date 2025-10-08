@@ -51,8 +51,8 @@ public class FoundationTexturedModel implements BakedModel {
             float uA = Float.intBitsToFloat(verts[off + 4]);
             float vA = Float.intBitsToFloat(verts[off + 5]);
 
-            float uNorm = du != 0f ? (uA - su0) / du : 0f;   // 0..1
-            float vNorm = dv != 0f ? (vA - sv0) / dv : 0f;   // 0..1
+            float uNorm = du != 0f ? (uA - su0) / du : 0f;
+            float vNorm = dv != 0f ? (vA - sv0) / dv : 0f;
 
             float u = dst.getU0() + uNorm * duDst;
             float v = dst.getV0() + vNorm * dvDst;

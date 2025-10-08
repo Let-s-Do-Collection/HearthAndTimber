@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hearth_and_timber:block/acacia_beam_top",
+    "side": "hearth_and_timber:block/acacia_beam_side"
+  }
+}

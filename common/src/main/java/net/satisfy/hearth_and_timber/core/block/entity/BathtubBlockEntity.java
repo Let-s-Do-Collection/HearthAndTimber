@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.satisfy.hearth_and_timber.core.block.BathtubBlock;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 import net.satisfy.hearth_and_timber.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
@@ -29,11 +30,21 @@ public class BathtubBlockEntity extends BlockEntity {
         super(EntityTypeRegistry.BATHTUB_BLOCK_ENTITY.get(), pos, state);
     }
 
+    private void setFullFlag(boolean full) {
+        Level l = level;
+        if (l == null) return;
+        BlockState s = l.getBlockState(worldPosition);
+        if (s.hasProperty(BathtubBlock.FULL) && s.getValue(BathtubBlock.FULL) != full) {
+            l.setBlock(worldPosition, s.setValue(BathtubBlock.FULL, full), Block.UPDATE_CLIENTS);
+        }
+    }
+
     public void startFilling(int totalTicks) {
         total = totalTicks;
         progress = 0;
         clientProgress = 0;
         filling = true;
+        setFullFlag(false);
         setChanged();
     }
 
@@ -47,10 +58,12 @@ public class BathtubBlockEntity extends BlockEntity {
         if (be.progress >= be.total) {
             be.progress = be.total;
             be.filling = false;
+            be.setFullFlag(true);
             level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.7f, 1.0f);
             level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
         }
     }
+
 
     public static void clientTick(BathtubBlockEntity be) {
         if (be.clientProgress < be.progress) be.clientProgress++;
@@ -85,6 +98,10 @@ public class BathtubBlockEntity extends BlockEntity {
         progress = tag.getInt("progress");
         filling = tag.getBoolean("filling");
         clientProgress = progress;
+        Level l = level;
+        if (l instanceof ServerLevel) {
+            setFullFlag(total > 0 && progress >= total);
+        }
     }
 
     public boolean canDrainPercent(float percent) {
@@ -98,6 +115,9 @@ public class BathtubBlockEntity extends BlockEntity {
         int amt = Mth.floor(total * percent + 0.5f);
         if (amt <= 0 || progress < amt) return false;
         progress -= amt;
+        if (progress < total) {
+            setFullFlag(false);
+        }
         if (progress == 0) {
             filling = false;
         }

@@ -6,7 +6,8 @@
 		"8": "hearth_and_timber:block/rustic_sofa_back",
 		"9": "hearth_and_timber:block/rustic_sofa_bottom",
 		"10": "hearth_and_timber:block/rustic_sofa_front",
-		"12": "hearth_and_timber:block/rustic_sofa_side"
+		"12": "hearth_and_timber:block/rustic_sofa_side",
+		"particle": "hearth_and_timber:block/rustic_sofa_front"
 	},
 	"elements": [
 		{

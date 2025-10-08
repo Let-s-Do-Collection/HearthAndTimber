@@ -139,6 +139,14 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> STRAW_STABLE_FLOOR = registerWithItem("straw_stable_floor", () -> new StrawStableFloorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.GRASS).strength(0.8f, 1.0f)));
 
     public static final RegistrySupplier<Block> RUSTIC_TIMBER_FLOOR = registerWithItem("rustic_timber_floor", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.WOOD)));
+    public static final RegistrySupplier<Block> OAK_BEAM = registerWithItem("oak_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> SPRUCE_BEAM = registerWithItem("spruce_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> BIRCH_BEAM = registerWithItem("birch_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> JUNGLE_BEAM = registerWithItem("jungle_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> ACACIA_BEAM = registerWithItem("acacia_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> DARK_OAK_BEAM = registerWithItem("dark_oak_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> MANGROVE_BEAM = registerWithItem("mangrove_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> CHERRY_BEAM = registerWithItem("cherry_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_LOG).sound(SoundType.WOOD)));
 
     public static final RegistrySupplier<Block> RUSTIC_BED = registerWithItem("rustic_bed", () -> new BedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAY_BED).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
     public static final RegistrySupplier<Block> RUSTIC_SOFA = registerWithItem("rustic_sofa", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_LIGHT_GRAY)));

@@ -46,6 +46,7 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
@@ -70,9 +71,6 @@ public class GeneralUtil {
     private static final Map<ResourceLocation, Map<BlockPos, Pair<ChairEntity, BlockPos>>> CHAIRS = new HashMap<>();
     private static Method blockStateMethod;
     private static final boolean checked = false;
-
-    public GeneralUtil() {
-    }
 
     public static <T extends Block> RegistrySupplier<T> registerWithItem(DeferredRegister<Block> registerB, Registrar<Block> registrarB, DeferredRegister<Item> registerI, Registrar<Item> registrarI, ResourceLocation name, Supplier<T> block) {
         RegistrySupplier<T> toReturn = registerWithoutItem(registerB, registrarB, name, block);
@@ -251,11 +249,35 @@ public class GeneralUtil {
         if (player.isShiftKeyDown()) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (GeneralUtil.isPlayerSitting(player)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (hit.getDirection() == Direction.DOWN) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
         BlockPos hitPos = hit.getBlockPos();
         if (!GeneralUtil.isOccupied(world, hitPos) && player.getItemInHand(hand).isEmpty()) {
             ChairEntity chair = EntityTypeRegistry.CHAIR_ENTITY.get().create(world);
-            assert chair != null;
+            if (chair == null) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+            BlockState s = world.getBlockState(hitPos);
+            float yaw = 0.0F;
+            for (var p : s.getProperties()) {
+                if (p.getName().equals("facing") && p instanceof DirectionProperty dp) {
+                    yaw = s.getValue(dp).toYRot();
+                    break;
+                }
+            }
+            for (var p : s.getProperties()) {
+                if (p.getName().equals("part")) {
+                    Object v = s.getValue(p);
+                    if (v != null && v.toString().equals("head")) {
+                        yaw += 180.0F;
+                    }
+                    break;
+                }
+            }
+
+            chair.setSeatPos(hitPos);
             chair.moveTo(hitPos.getX() + 0.5D, hitPos.getY() + 0.25D + extraHeight, hitPos.getZ() + 0.5D, 0, 0);
+            chair.setYRot(yaw);
+            chair.yRotO = yaw;
+
             if (GeneralUtil.addChairEntity(world, hitPos, chair, player.blockPosition())) {
                 world.addFreshEntity(chair);
                 player.startRiding(chair);

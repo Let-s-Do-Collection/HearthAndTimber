@@ -31,7 +31,7 @@ public class WardrobeBlockEntity extends BlockEntity {
     }
 
     public void setStack(int slot, ItemStack stack) {
-        this.inventory.set(slot, stack);
+        this.inventory.set(slot, stack.copy());
         this.setChanged();
     }
 

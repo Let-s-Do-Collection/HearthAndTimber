@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "hearth_and_timber:block/oak_beam",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "hearth_and_timber:block/oak_beam"
+    },
+    "axis=z": {
+      "model": "hearth_and_timber:block/oak_beam",
+      "x": 90
+    }
+  }
+}

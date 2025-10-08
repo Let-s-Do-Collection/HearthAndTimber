@@ -8,7 +8,7 @@
 		"5": "hearth_and_timber:block/rustic_sofa_bottom",
 		"6": "hearth_and_timber:block/rustic_sofa_back",
 		"7": "hearth_and_timber:block/rustic_sofa_top",
-		"particle": "hearth_and_timber:block/rustic_sofa_top"
+		"particle": "hearth_and_timber:block/rustic_sofa_front"
 	},
 	"elements": [
 		{
@@ -25,8 +25,8 @@
 			}
 		},
 		{
-			"from": [13, 6, 0.05],
-			"to": [17, 12, 15.9],
+			"from": [13, 6, 0.01],
+			"to": [17, 12, 15.99],
 			"rotation": {"angle": 0, "axis": "y", "origin": [13.22836, 9.85195, 8.09]},
 			"faces": {
 				"north": {"uv": [0, 0, 4, 6], "texture": "#4"},
@@ -38,8 +38,8 @@
 			}
 		},
 		{
-			"from": [-1, 6, 0.05],
-			"to": [3, 12, 15.9],
+			"from": [-1, 6, 0.01],
+			"to": [3, 12, 15.99],
 			"rotation": {"angle": 0, "axis": "y", "origin": [-0.77164, 9.85195, 8.09]},
 			"faces": {
 				"north": {"uv": [4, 0, 0, 6], "texture": "#4"},

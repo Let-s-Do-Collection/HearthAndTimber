@@ -1,9 +1,13 @@
 package net.satisfy.hearth_and_timber.core.block;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,8 +24,10 @@ import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -48,18 +54,19 @@ import net.satisfy.hearth_and_timber.core.util.GeneralUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class BathtubBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
-
+    public static final BooleanProperty FULL = BooleanProperty.create("full");
     private static final VoxelShape HEAD_N = makeHeadShape();
     private static final VoxelShape FOOT_N = makeFootShape();
 
     public BathtubBlock(Properties properties) {
         super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.HEAD));
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(PART, BedPart.HEAD).setValue(FULL, false));
     }
-
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction dir = ctx.getHorizontalDirection();
@@ -128,8 +135,8 @@ public class BathtubBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
-        b.add(FACING, PART);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockState) {
+        blockState.add(FACING, PART, FULL);
     }
 
     @Override
@@ -157,6 +164,7 @@ public class BathtubBlock extends Block implements EntityBlock {
         return out;
     }
 
+    // +++ GEÄNDERT +++
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
@@ -167,6 +175,7 @@ public class BathtubBlock extends Block implements EntityBlock {
         if (!headState.is(this) || headState.getValue(PART) != BedPart.HEAD) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
+        boolean isFullState = headState.getValue(FULL);
         BlockEntity be = level.getBlockEntity(head);
         if (!(be instanceof BathtubBlockEntity tub)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 
@@ -174,13 +183,13 @@ public class BathtubBlock extends Block implements EntityBlock {
         boolean filled = ratio >= 0.999f;
         boolean filling = tub.isFilling();
 
-        if (hit.getBlockPos().equals(head) && hit.getDirection() != Direction.DOWN && stack.isEmpty() && !filled && !filling) {
+        if (hit.getBlockPos().equals(head) && hit.getDirection() != Direction.DOWN && stack.isEmpty() && !filled && !filling && !isFullState) {
             tub.startFilling(45 * 20);
             level.playSound(null, head, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0f, 1.0f);
             return ItemInteractionResult.CONSUME;
         }
 
-        if ((stack.is(Items.WATER_BUCKET) || stack.is(Items.GLASS_BOTTLE)) && !filled && !filling) {
+        if ((stack.is(Items.WATER_BUCKET) || stack.is(Items.GLASS_BOTTLE)) && !filled && !filling && !isFullState) {
             tub.startFilling(45 * 20);
             level.playSound(null, head, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0f, 1.0f);
             if (!player.isCreative()) {
@@ -195,7 +204,7 @@ public class BathtubBlock extends Block implements EntityBlock {
             return ItemInteractionResult.CONSUME;
         }
 
-        if ((stack.is(Items.BUCKET) || stack.is(Items.GLASS_BOTTLE)) && (filled || filling)) {
+        if ((stack.is(Items.BUCKET) || stack.is(Items.GLASS_BOTTLE)) && (filled || filling || isFullState)) {
             float pct = stack.is(Items.BUCKET) ? 0.5f : 0.25f;
             if (tub.canDrainPercent(pct) && tub.drainPercent(pct)) {
                 level.playSound(null, head, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.7f, 1.0f);
@@ -216,8 +225,8 @@ public class BathtubBlock extends Block implements EntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        if (filled && player.getVehicle() == null) {
-            return GeneralUtil.onUse(level, player, hand, hit, 0.2D);
+        if ((filled || isFullState) && player.getVehicle() == null) {
+            return GeneralUtil.onUse(level, player, hand, hit, -0.2);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
@@ -385,4 +394,17 @@ public class BathtubBlock extends Block implements EntityBlock {
         return shape.optimize();
     }
 
+    @Override
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+        int beige = 0xF5DEB3;
+        int gold = 0xFFD700;
+        if (!Screen.hasShiftDown()) {
+            Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
+            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            return;
+        }
+        list.add(Component.translatable("tooltip.hearth_and_timber.sink.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.sink.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+    }
 }
