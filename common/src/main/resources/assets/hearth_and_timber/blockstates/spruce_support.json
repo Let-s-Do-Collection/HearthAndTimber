@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,connected=false": {
+      "model": "hearth_and_timber:block/spruce_support"
+    },
+    "facing=south,connected=false": {
+      "model": "hearth_and_timber:block/spruce_support",
+      "y": 180
+    },
+    "facing=west,connected=false": {
+      "model": "hearth_and_timber:block/spruce_support",
+      "y": 270
+    },
+    "facing=east,connected=false": {
+      "model": "hearth_and_timber:block/spruce_support",
+      "y": 90
+    },
+    "facing=north,connected=true": {
+      "model": "hearth_and_timber:block/spruce_support_connected"
+    },
+    "facing=south,connected=true": {
+      "model": "hearth_and_timber:block/spruce_support_connected",
+      "y": 180
+    },
+    "facing=west,connected=true": {
+      "model": "hearth_and_timber:block/spruce_support_connected",
+      "y": 270
+    },
+    "facing=east,connected=true": {
+      "model": "hearth_and_timber:block/spruce_support_connected",
+      "y": 90
+    }
+  }
+}

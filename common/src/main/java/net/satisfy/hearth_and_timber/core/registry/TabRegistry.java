@@ -16,10 +16,8 @@ public class TabRegistry {
             .icon(() -> new ItemStack(ObjectRegistry.SHINGLE_ROOF_BLOCK.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
-                output.accept(ObjectRegistry.IRON_DIVIDER.get());
-                output.accept(ObjectRegistry.CHICKEN_FENCE.get());
+
                 output.accept(ObjectRegistry.FRAMEWORK.get());
-                output.accept(ObjectRegistry.CATTLEGRID.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME_STAIRS.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
@@ -146,6 +144,15 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.DARK_OAK_BEAM.get());
                 output.accept(ObjectRegistry.MANGROVE_BEAM.get());
                 output.accept(ObjectRegistry.CHERRY_BEAM.get());
+
+                output.accept(ObjectRegistry.OAK_SUPPORT.get());
+                output.accept(ObjectRegistry.SPRUCE_SUPPORT.get());
+                output.accept(ObjectRegistry.BIRCH_SUPPORT.get());
+                output.accept(ObjectRegistry.JUNGLE_SUPPORT.get());
+                output.accept(ObjectRegistry.ACACIA_SUPPORT.get());
+                output.accept(ObjectRegistry.DARK_OAK_SUPPORT.get());
+                output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
+                output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
 
                 output.accept(ObjectRegistry.RUSTIC_TIMBER_FLOOR.get());
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
