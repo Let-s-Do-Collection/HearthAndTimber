@@ -31,14 +31,11 @@ public class HearthAndTimberClientNeoForge {
     @SubscribeEvent
     public static void onModelModify(ModelEvent.ModifyBakingResult e) {
         Map<ModelResourceLocation, BakedModel> models = e.getModels();
-        int replaced = 0;
         for (var entry : models.entrySet()) {
             ResourceLocation loc = entry.getKey().id();
             if (HearthAndTimber.MOD_ID.equals(loc.getNamespace()) && loc.getPath().contains("foundation_block")) {
                 models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue()));
-                replaced++;
             }
         }
-        System.out.println("[FOUNDATION] wrapped models: " + replaced);
     }
 }

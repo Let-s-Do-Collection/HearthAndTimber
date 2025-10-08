@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "top": "hearth_and_timber:block/whitestone",
-    "bottom": "hearth_and_timber:block/whitestone",
-    "side": "hearth_and_timber:block/whitestone"
-  }
-}

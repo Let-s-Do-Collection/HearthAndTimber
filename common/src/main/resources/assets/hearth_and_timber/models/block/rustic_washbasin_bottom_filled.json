@@ -5,7 +5,8 @@
 		"1": "hearth_and_timber:block/rustic_washbasin_side",
 		"2": "hearth_and_timber:block/rustic_washbasin_bottom",
 		"3": "hearth_and_timber:block/rustic_sink_top",
-		"4": "hearth_and_timber:block/fieldstone",
+		"4": "hearth_and_timber:block/fieldstone_bricks",
+		"5": "hearth_and_timber:block/wet_fieldstone",
 		"6": "block/water_still",
 		"particle": "hearth_and_timber:block/rustic_washbasin_bottom"
 	},
@@ -16,10 +17,10 @@
 			"to": [2, 16.1, 13],
 			"rotation": {"angle": 0, "axis": "y", "origin": [14, 14.1, 1]},
 			"faces": {
-				"north": {"uv": [0, 10, 12, 11], "texture": "#6"},
-				"east": {"uv": [0, 10, 10, 11], "texture": "#6"},
-				"south": {"uv": [0, 10, 12, 11], "texture": "#6"},
-				"west": {"uv": [0, 10, 10, 11], "texture": "#6"},
+				"north": {"uv": [0, 10, 12, 11], "texture": "#5"},
+				"east": {"uv": [0, 10, 10, 11], "texture": "#5"},
+				"south": {"uv": [0, 10, 12, 11], "texture": "#5"},
+				"west": {"uv": [0, 10, 10, 11], "texture": "#5"},
 				"down": {"uv": [0, 0, 12, 10], "texture": "#6", "tintindex": 0}
 			}
 		},

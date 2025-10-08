@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_post",
+  "textures": {
+    "wall": "hearth_and_timber:block/layered_fieldstone_bricks"
+  }
+}

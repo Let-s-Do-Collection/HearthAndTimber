@@ -2,8 +2,8 @@
 	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
-		"0": "hearth_and_timber:block/fieldstone",
-		"particle": "hearth_and_timber:block/fieldstone"
+		"0": "hearth_and_timber:block/fieldstone_bricks",
+		"particle": "hearth_and_timber:block/fieldstone_bricks"
 	},
 	"elements": [
 		{
@@ -27,8 +27,8 @@
 				"north": {"uv": [16, 0, 8, 16], "texture": "#0"},
 				"east": {"uv": [16, 0, 8, 16], "texture": "#0"},
 				"south": {"uv": [8, 0, 0, 16], "texture": "#0"},
-				"up": {"uv": [0, 8, 8, 16], "rotation": 270, "texture": "#0"},
-				"down": {"uv": [0, 8, 8, 0], "rotation": 90, "texture": "#0"}
+				"up": {"uv": [0, 8, 8, 16], "rotation": 180, "texture": "#0"},
+				"down": {"uv": [0, 8, 8, 16], "rotation": 180, "texture": "#0"}
 			}
 		}
 	],

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hearth_and_timber:amberstone_bricks_stairs"
+          "name": "hearth_and_timber:amberstone_brick_stairs"
         }
       ],
       "conditions": [

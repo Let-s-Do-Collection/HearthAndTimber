@@ -9,7 +9,7 @@ config = "HearthAndTimber-neoforge.mixins.json"
 [[mods]]
 modId = "hearth_and_timber"
 version = "${version}"
-displayName = "[Let's Do] Farm & Charm"
+displayName = "[Let's Do] Hearth & Timber"
 authors = "satisfy"
 description = '''
 Bring warmth and rustic charm to your world with Hearth & Timber! Discover timbered walls, sturdy barn doors, cozy farmhouse furniture, and countryside paths to create the perfect homestead.

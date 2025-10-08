@@ -2,7 +2,7 @@
 	"format_version": "1.9.0",
 	"credit": "Made by Satisfy",
 	"textures": {
-		"0": "hearth_and_timber:block/fieldstone",
+		"0": "hearth_and_timber:block/fieldstone_bricks",
 		"1": "hearth_and_timber:block/rustic_sink_parts",
 		"2": "hearth_and_timber:block/rustic_privy",
 		"3": "hearth_and_timber:block/rustic_privy_seat",

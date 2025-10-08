@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/fieldstone_bricks",
+    "top": "hearth_and_timber:block/fieldstone_bricks",
+    "side": "hearth_and_timber:block/fieldstone_bricks"
+  }
+}

@@ -18,17 +18,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class FoundationTexturedModel implements BakedModel {
     public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
     private final BakedModel original;
 
-    public FoundationTexturedModel(BakedModel original) { this.original = original; }
+    public FoundationTexturedModel(BakedModel original) {
+        this.original = original;
+    }
 
     private static TextureAtlasSprite targetSprite(@Nullable BlockState mimic, TextureAtlasSprite fallback) {
         if (mimic != null) {
             BakedModel m = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
-            TextureAtlasSprite s = m.getParticleIcon();
-            if (s != null) return s;
+            return m.getParticleIcon();
         }
         return fallback;
     }
@@ -39,7 +41,7 @@ public class FoundationTexturedModel implements BakedModel {
 
         float su0 = src.getU0(), su1 = src.getU1();
         float sv0 = src.getV0(), sv1 = src.getV1();
-        float du  = su1 - su0, dv  = sv1 - sv0;
+        float du = su1 - su0, dv = sv1 - sv0;
 
         float duDst = dst.getU1() - dst.getU0();
         float dvDst = dst.getV1() - dst.getV0();
@@ -69,20 +71,49 @@ public class FoundationTexturedModel implements BakedModel {
         return out;
     }
 
-    @Override public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand) {
+    @Override
+    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand) {
         return original.getQuads(state, side, rand);
     }
 
-    @Override public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType layer) {
+    @Override
+    public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType layer) {
         TextureAtlasSprite dst = targetSprite(data.get(MIMIC), original.getParticleIcon());
         return remapAll(original.getQuads(state, side, rand, data, layer), dst);
     }
 
-    @Override public boolean useAmbientOcclusion() { return original.useAmbientOcclusion(); }
-    @Override public boolean isGui3d() { return original.isGui3d(); }
-    @Override public boolean usesBlockLight() { return original.usesBlockLight(); }
-    @Override public boolean isCustomRenderer() { return original.isCustomRenderer(); }
-    @Override public @NotNull TextureAtlasSprite getParticleIcon() { return original.getParticleIcon(); }
-    @Override public @NotNull ItemOverrides getOverrides() { return original.getOverrides(); }
-    @Override public @NotNull ItemTransforms getTransforms() { return original.getTransforms(); }
+    @Override
+    public boolean useAmbientOcclusion() {
+        return original.useAmbientOcclusion();
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return original.isGui3d();
+    }
+
+    @Override
+    public boolean usesBlockLight() {
+        return original.usesBlockLight();
+    }
+
+    @Override
+    public boolean isCustomRenderer() {
+        return original.isCustomRenderer();
+    }
+
+    @Override
+    public @NotNull TextureAtlasSprite getParticleIcon() {
+        return original.getParticleIcon();
+    }
+
+    @Override
+    public @NotNull ItemOverrides getOverrides() {
+        return original.getOverrides();
+    }
+
+    @Override
+    public @NotNull ItemTransforms getTransforms() {
+        return original.getTransforms();
+    }
 }

@@ -6,7 +6,7 @@
 		"1": "hearth_and_timber:block/rustic_washbasin_side",
 		"2": "hearth_and_timber:block/rustic_washbasin_bottom",
 		"3": "hearth_and_timber:block/rustic_sink_top",
-		"4": "hearth_and_timber:block/fieldstone",
+		"4": "hearth_and_timber:block/fieldstone_bricks",
 		"6": "hearth_and_timber:block/wet_fieldstone",
 		"particle": "hearth_and_timber:block/rustic_washbasin_bottom"
 	},

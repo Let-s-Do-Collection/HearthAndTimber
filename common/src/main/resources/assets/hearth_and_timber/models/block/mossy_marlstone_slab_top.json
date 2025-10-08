@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "top": "hearth_and_timber:block/mossy_marlstone",
-    "bottom": "hearth_and_timber:block/mossy_marlstone",
-    "side": "hearth_and_timber:block/mossy_marlstone"
-  }
-}

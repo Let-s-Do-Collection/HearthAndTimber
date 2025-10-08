@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab_top",
-  "textures": {
-    "bottom": "hearth_and_timber:block/fieldstone",
-    "top": "hearth_and_timber:block/fieldstone",
-    "side": "hearth_and_timber:block/fieldstone"
-  }
-}

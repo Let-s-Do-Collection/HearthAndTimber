@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hearth_and_timber:block/whitestone_brick_slab"
+    },
+    "type=top": {
+      "model": "hearth_and_timber:block/whitestone_brick_slab_top"
+    },
+    "type=double": {
+      "model": "hearth_and_timber:block/whitestone_bricks"
+    }
+  }
+}

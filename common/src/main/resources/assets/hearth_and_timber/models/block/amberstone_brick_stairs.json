@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/amberstone_bricks",
+    "top": "hearth_and_timber:block/amberstone_bricks",
+    "side": "hearth_and_timber:block/amberstone_bricks"
+  }
+}

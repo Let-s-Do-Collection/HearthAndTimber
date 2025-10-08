@@ -10,7 +10,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,7 +50,7 @@ public class SplitstonePathBlock extends Block {
         BlockState self = this.defaultBlockState();
         if (!self.canSurvive(ctx.getLevel(), ctx.getClickedPos())) {
             Block b = base != null ? base.get() : null;
-            BlockState replacement = b != null ? b.defaultBlockState() : ObjectRegistry.SPLITSTONE_BLOCK.get().defaultBlockState();
+            BlockState replacement = b != null ? b.defaultBlockState() : ObjectRegistry.SPLITSTONE.get().defaultBlockState();
             return Block.pushEntitiesUp(self, replacement, ctx.getLevel(), ctx.getClickedPos());
         }
         return super.getStateForPlacement(ctx);

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "top": "hearth_and_timber:block/mossy_cinderstone",
-    "bottom": "hearth_and_timber:block/mossy_cinderstone",
-    "side": "hearth_and_timber:block/mossy_cinderstone"
-  }
-}
