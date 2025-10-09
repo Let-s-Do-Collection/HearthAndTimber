@@ -171,6 +171,45 @@
     {
       "when": {
         "facing": "north",
+        "support": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/cherry_window_casing_bottom_support"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "support": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/cherry_window_casing_bottom_support",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "support": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/cherry_window_casing_bottom_support",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "support": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/cherry_window_casing_bottom_support",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
         "bottom": true,
         "flower_pot": true
       },
