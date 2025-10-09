@@ -153,7 +153,15 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.DARK_OAK_SUPPORT.get());
                 output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
                 output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
-
+                output.accept(ObjectRegistry.OAK_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.SPRUCE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.BIRCH_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.JUNGLE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.ACACIA_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.DARK_OAK_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.MANGROVE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.CHERRY_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.FIREPLACE_CORNICE.get());
                 output.accept(ObjectRegistry.RUSTIC_TIMBER_FLOOR.get());
                 output.accept(ObjectRegistry.RUSTIC_BED.get());
                 output.accept(ObjectRegistry.RUSTIC_SOFA.get());

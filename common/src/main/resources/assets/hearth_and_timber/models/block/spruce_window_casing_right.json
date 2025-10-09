@@ -1,0 +1,21 @@
+{
+	"credit": "Made by Satisfy",
+	"textures": {
+		"texture": "hearth_and_timber:block/spruce_window_casing"
+	},
+	"elements": [
+		{
+			"from": [0.01, 0, 14.01],
+			"to": [1.99, 15.99, 15.99],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1.03, 8, 15]},
+			"faces": {
+				"north": {"uv": [0, 9, 16, 11], "rotation": 90, "texture": "#texture"},
+				"east": {"uv": [16, 11, 0, 9], "rotation": 90, "texture": "#texture"},
+				"south": {"uv": [16, 11, 0, 13], "rotation": 90, "texture": "#texture"},
+				"west": {"uv": [0, 11, 16, 9], "rotation": 90, "texture": "#texture"},
+				"up": {"uv": [10, 6, 12, 8], "texture": "#texture"},
+				"down": {"uv": [0, 9, 16, 11], "rotation": 90, "texture": "#texture"}
+			}
+		}
+	]
+}

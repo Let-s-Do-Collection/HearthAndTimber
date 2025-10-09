@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,connected=false,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support"
+    },
+    "facing=north,connected=true,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support_connected"
+    },
+    "facing=north,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest"
+    },
+    "facing=north,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest"
+    },
+    "facing=south,connected=false,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support",
+      "y": 180
+    },
+    "facing=south,connected=true,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support_connected",
+      "y": 180
+    },
+    "facing=south,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 180
+    },
+    "facing=south,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 180
+    },
+    "facing=west,connected=false,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support",
+      "y": 270
+    },
+    "facing=west,connected=true,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support_connected",
+      "y": 270
+    },
+    "facing=west,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 270
+    },
+    "facing=west,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 270
+    },
+    "facing=east,connected=false,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support",
+      "y": 90
+    },
+    "facing=east,connected=true,rest=true": {
+      "model": "hearth_and_timber:block/jungle_support_connected",
+      "y": 90
+    },
+    "facing=east,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 90
+    },
+    "facing=east,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/jungle_support_no_rest",
+      "y": 90
+    }
+  }
+}

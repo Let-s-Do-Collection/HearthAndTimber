@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -13,6 +14,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -102,7 +105,10 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction direction = state.getValue(FACING);
         int idx = switch (direction) {
-            case EAST -> 1; case SOUTH -> 2; case WEST -> 3; default -> 0;
+            case EAST -> 1;
+            case SOUTH -> 2;
+            case WEST -> 3;
+            default -> 0;
         };
         return switch (state.getValue(SHAPE)) {
             case STRAIGHT -> STRAIGHT_BY_FACING[idx];
@@ -115,7 +121,10 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
 
     private static VoxelShape rotateY(VoxelShape shape, Direction direction) {
         int r = switch (direction) {
-            case EAST -> 1; case SOUTH -> 2; case WEST -> 3; default -> 0;
+            case EAST -> 1;
+            case SOUTH -> 2;
+            case WEST -> 3;
+            default -> 0;
         };
         VoxelShape s = shape;
         for (int i = 0; i < r; i++) s = rotateOnceY(s);
@@ -195,10 +204,14 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
             case LEFT_RIGHT -> {
                 if (direction.getAxis() == Axis.Z) {
                     return switch (shape) {
-                        case INNER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_RIGHT);
-                        case INNER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_LEFT);
-                        case OUTER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_RIGHT);
-                        case OUTER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_LEFT);
+                        case INNER_LEFT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_RIGHT);
+                        case INNER_RIGHT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_LEFT);
+                        case OUTER_LEFT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_RIGHT);
+                        case OUTER_RIGHT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_LEFT);
                         default -> state.rotate(Rotation.CLOCKWISE_180);
                     };
                 }
@@ -207,9 +220,12 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
                 if (direction.getAxis() == Axis.X) {
                     return switch (shape) {
                         case INNER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_LEFT);
-                        case INNER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_RIGHT);
-                        case OUTER_LEFT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_RIGHT);
-                        case OUTER_RIGHT -> state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_LEFT);
+                        case INNER_RIGHT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.INNER_RIGHT);
+                        case OUTER_LEFT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_RIGHT);
+                        case OUTER_RIGHT ->
+                                state.rotate(Rotation.CLOCKWISE_180).setValue(SHAPE, StairsShape.OUTER_LEFT);
                         case STRAIGHT -> state.rotate(Rotation.CLOCKWISE_180);
                     };
                 }
@@ -265,7 +281,8 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
             return ItemInteractionResult.CONSUME;
         }
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!(stack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!(stack.getItem() instanceof BlockItem blockItem))
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         BlockState mimic = blockItem.getBlock().defaultBlockState();
         if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
@@ -280,6 +297,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
         return ItemInteractionResult.CONSUME;
     }
 
+    @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof FoundationBlockEntity fbe) {
@@ -291,7 +309,6 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
         super.playerWillDestroy(level, pos, state, player);
         return state;
     }
-
 
     public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         return InteractionResult.PASS;

@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:block/spruce_support_no_rest",
+  "textures": {
+    "0": "hearth_and_timber:block/dark_oak_window_casing",
+    "particle": "hearth_and_timber:block/dark_oak_window_casing"
+  }
+}

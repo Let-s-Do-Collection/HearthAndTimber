@@ -1,0 +1,172 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_bottom"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_top",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_bottom",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_left",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_right",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_top",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_bottom",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_left",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_right",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_top",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_bottom",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_left",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/oak_window_casing_right",
+        "y": 270,
+        "uvlock": false
+      }
+    }
+  ]
+}

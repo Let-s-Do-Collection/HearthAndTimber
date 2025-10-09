@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:item/spruce_support",
+  "textures": {
+    "0": "hearth_and_timber:block/birch_window_casing",
+    "particle": "hearth_and_timber:block/birch_window_casing"
+  }
+}

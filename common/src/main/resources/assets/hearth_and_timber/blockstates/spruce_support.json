@@ -1,33 +1,63 @@
 {
   "variants": {
-    "facing=north,connected=false": {
+    "facing=north,connected=false,rest=true": {
       "model": "hearth_and_timber:block/spruce_support"
     },
-    "facing=south,connected=false": {
+    "facing=south,connected=false,rest=true": {
       "model": "hearth_and_timber:block/spruce_support",
       "y": 180
     },
-    "facing=west,connected=false": {
+    "facing=west,connected=false,rest=true": {
       "model": "hearth_and_timber:block/spruce_support",
       "y": 270
     },
-    "facing=east,connected=false": {
+    "facing=east,connected=false,rest=true": {
       "model": "hearth_and_timber:block/spruce_support",
       "y": 90
     },
-    "facing=north,connected=true": {
+    "facing=north,connected=true,rest=true": {
       "model": "hearth_and_timber:block/spruce_support_connected"
     },
-    "facing=south,connected=true": {
+    "facing=south,connected=true,rest=true": {
       "model": "hearth_and_timber:block/spruce_support_connected",
       "y": 180
     },
-    "facing=west,connected=true": {
+    "facing=west,connected=true,rest=true": {
       "model": "hearth_and_timber:block/spruce_support_connected",
       "y": 270
     },
-    "facing=east,connected=true": {
+    "facing=east,connected=true,rest=true": {
       "model": "hearth_and_timber:block/spruce_support_connected",
+      "y": 90
+    },
+    "facing=north,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest"
+    },
+    "facing=south,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
+      "y": 180
+    },
+    "facing=west,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
+      "y": 270
+    },
+    "facing=east,connected=false,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
+      "y": 90
+    },
+    "facing=north,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest"
+    },
+    "facing=south,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
+      "y": 180
+    },
+    "facing=west,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
+      "y": 270
+    },
+    "facing=east,connected=true,rest=false": {
+      "model": "hearth_and_timber:block/spruce_support_no_rest",
       "y": 90
     }
   }

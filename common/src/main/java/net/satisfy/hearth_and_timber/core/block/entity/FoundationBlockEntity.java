@@ -11,7 +11,8 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.satisfy.hearth_and_timber.core.block.FoundationBlock;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,18 +27,22 @@ public class FoundationBlockEntity extends BlockEntity {
         return mimicState;
     }
 
-    public void setMimicState(BlockState newMimicState) {
-        if (level == null) return;
-        this.mimicState = newMimicState;
-        setChanged();
-        BlockState current = getBlockState();
-
-        if (!current.getValue(FoundationBlock.APPLIED)) {
-            level.setBlock(worldPosition, current.setValue(FoundationBlock.APPLIED, true), 3);
+    private static BooleanProperty findApplied(BlockState state) {
+        for (Property<?> p : state.getProperties()) {
+            if (p instanceof BooleanProperty bp && p.getName().equals("applied")) return bp;
         }
+        return null;
+    }
 
+    public void setMimicState(BlockState newMimicState) {
+        if (level == null) {
+            mimicState = newMimicState;
+            return;
+        }
+        mimicState = newMimicState;
+        setChanged();
         if (level instanceof ServerLevel server) {
-            server.sendBlockUpdated(worldPosition, current, current, 3);
+            server.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
             server.getChunkSource().chunkMap
                     .getPlayers(server.getChunkAt(worldPosition).getPos(), false)
@@ -54,9 +59,7 @@ public class FoundationBlockEntity extends BlockEntity {
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadAdditional(tag, provider);
-        if (tag.contains("Mimic")) {
-            mimicState = NbtUtils.readBlockState(provider.lookupOrThrow(Registries.BLOCK), tag.getCompound("Mimic"));
-        }
+        if (tag.contains("Mimic")) mimicState = NbtUtils.readBlockState(provider.lookupOrThrow(Registries.BLOCK), tag.getCompound("Mimic"));
     }
 
     @Override

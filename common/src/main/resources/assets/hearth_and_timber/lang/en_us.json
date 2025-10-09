@@ -152,5 +152,22 @@
   "tooltip.hearth_and_timber.wardrobe.info_1": "Use to store Armor.",
   "tooltip.hearth_and_timber.packed_dirt.info_0": "Turns into §f[Trampled Dirt]§r when walked on often.",
   "tooltip.hearth_and_timber.packed_dirt.info_1": "Right-Click with a Shovel or Hoe to stop the transformation.",
-  "tooltip.hearth_and_timber.stable_floor.info_0": "Turns into §f[Straw Stable Floor]§r when Hay Bales are nearby."
+  "tooltip.hearth_and_timber.stable_floor.info_0": "Turns into §f[Straw Stable Floor]§r when Hay Bales are nearby.",
+  "block.hearth_and_timber.oak_window_casing": "Oak Window Casing",
+  "block.hearth_and_timber.mangrove_window_casing": "Mangrove Window Casing",
+  "block.hearth_and_timber.birch_window_casing": "Birch Window Casing",
+  "block.hearth_and_timber.jungle_window_casing": "Jungle Window Casing",
+  "block.hearth_and_timber.dark_oak_window_casing": "Dark Oak Window Casing",
+  "block.hearth_and_timber.acacia_window_casing": "Acacia Window Casing",
+  "block.hearth_and_timber.cherry_window_casing": "Cherry Window Casing",
+  "block.hearth_and_timber.oak_support": "Oak Support",
+  "block.hearth_and_timber.spruce_support": "Spruce Support",
+  "block.hearth_and_timber.birch_support": "Birch Support",
+  "block.hearth_and_timber.jungle_support": "Jungle Support",
+  "block.hearth_and_timber.acacia_support": "Acacia Support",
+  "block.hearth_and_timber.dark_oak_support": "Dark Oak Support",
+  "block.hearth_and_timber.mangrove_support": "Mangrove Support",
+  "block.hearth_and_timber.cherry_support": "Cherry Support",
+  "block.hearth_and_timber.fireplace_cornice": "Fireplace Cornice"
+
 }

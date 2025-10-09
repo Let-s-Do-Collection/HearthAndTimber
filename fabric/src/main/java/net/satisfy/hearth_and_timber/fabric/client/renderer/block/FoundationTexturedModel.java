@@ -15,8 +15,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.satisfy.hearth_and_timber.core.block.FoundationBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.FoundationBlockEntity;
 import org.jetbrains.annotations.NotNull;
@@ -42,70 +44,84 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
         if (EMITTING.get()) return;
         EMITTING.set(true);
 
-        TextureAtlasSprite target = null;
+        if (!hasApplied(state)) {
+            RandomSource r0 = random.get();
+            for (Direction face : Direction.values()) {
+                List<BakedQuad> qs = original.getQuads(state, face, r0);
+                for (BakedQuad q : qs) {
+                    QuadEmitter e = context.getEmitter();
+                    e.fromVanilla(q, null, face);
+                    e.emit();
+                }
+            }
+            {
+                List<BakedQuad> qs = original.getQuads(state, null, r0);
+                for (BakedQuad q : qs) {
+                    QuadEmitter e = context.getEmitter();
+                    e.fromVanilla(q, null, null);
+                    e.emit();
+                }
+            }
+            EMITTING.set(false);
+            return;
+        }
+
+        TextureAtlasSprite target = original.getParticleIcon();
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof FoundationBlockEntity fbe) {
             BlockState mimic = fbe.getMimicState();
-            if (mimic != null && !(mimic.getBlock() instanceof FoundationBlock)) {
+            if (mimic != null && !mimic.isAir() && mimic.getRenderShape() == RenderShape.MODEL && !(mimic.getBlock() instanceof FoundationBlock)) {
                 BakedModel mm = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
                 target = mm.getParticleIcon();
             }
         }
-        if (target == null) target = original.getParticleIcon();
 
         RandomSource r = random.get();
-
         for (Direction face : Direction.values()) {
-            List<BakedQuad> quads = original.getQuads(state, face, r);
-            for (BakedQuad q : quads) {
+            List<BakedQuad> qs = original.getQuads(state, face, r);
+            for (BakedQuad q : qs) {
                 TextureAtlasSprite src = q.getSprite();
                 QuadEmitter e = context.getEmitter();
                 e.fromVanilla(q, null, face);
-
-                float su0 = src.getU0();
-                float su1 = src.getU1();
-                float sv0 = src.getV0();
-                float sv1 = src.getV1();
-                float du = su1 - su0;
-                float dv = sv1 - sv0;
-
+                float su0 = src.getU0(), su1 = src.getU1(), sv0 = src.getV0(), sv1 = src.getV1();
+                float du = su1 - su0, dv = sv1 - sv0;
                 for (int i = 0; i < 4; i++) {
-                    float uAtlas = e.u(i);
-                    float vAtlas = e.v(i);
-                    float uNorm = du != 0f ? (uAtlas - su0) / du : 0f;
-                    float vNorm = dv != 0f ? (vAtlas - sv0) / dv : 0f;
-                    e.uv(i, uNorm, vNorm);
+                    float u = e.u(i), v = e.v(i);
+                    float uN = du != 0f ? (u - su0) / du : 0f;
+                    float vN = dv != 0f ? (v - sv0) / dv : 0f;
+                    e.uv(i, uN, vN);
                 }
-
                 e.spriteBake(0, target, MutableQuadView.BAKE_NORMALIZED);
                 e.emit();
             }
         }
-
         {
-            List<BakedQuad> quads = original.getQuads(state, null, r);
-            for (BakedQuad q : quads) {
+            List<BakedQuad> qs = original.getQuads(state, null, r);
+            for (BakedQuad q : qs) {
                 TextureAtlasSprite src = q.getSprite();
                 QuadEmitter e = context.getEmitter();
                 e.fromVanilla(q, null, null);
-
-                float su0 = src.getU0(), su1 = src.getU1();
-                float sv0 = src.getV0(), sv1 = src.getV1();
+                float su0 = src.getU0(), su1 = src.getU1(), sv0 = src.getV0(), sv1 = src.getV1();
                 float du = su1 - su0, dv = sv1 - sv0;
-
                 for (int i = 0; i < 4; i++) {
-                    float uAtlas = e.u(i), vAtlas = e.v(i);
-                    float uNorm = du != 0f ? (uAtlas - su0) / du : 0f;
-                    float vNorm = dv != 0f ? (vAtlas - sv0) / dv : 0f;
-                    e.uv(i, uNorm, vNorm);
+                    float u = e.u(i), v = e.v(i);
+                    float uN = du != 0f ? (u - su0) / du : 0f;
+                    float vN = dv != 0f ? (v - sv0) / dv : 0f;
+                    e.uv(i, uN, vN);
                 }
-
                 e.spriteBake(0, target, MutableQuadView.BAKE_NORMALIZED);
                 e.emit();
             }
         }
 
         EMITTING.set(false);
+    }
+
+    private static boolean hasApplied(BlockState state) {
+        for (var p : state.getProperties()) {
+            if (p instanceof BooleanProperty bp && p.getName().equals("applied")) return state.getValue(bp);
+        }
+        return false;
     }
 
     public void emitItemQuads(ItemStack stack, Supplier<RandomSource> random, RenderContext context) {

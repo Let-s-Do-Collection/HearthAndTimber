@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:block/spruce_window_casing_left",
+  "textures": {
+    "texture": "hearth_and_timber:block/acacia_window_casing",
+    "particle": "hearth_and_timber:block/acacia_window_casing"
+  }
+}
