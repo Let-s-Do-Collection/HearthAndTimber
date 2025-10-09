@@ -26,7 +26,7 @@ import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.*;
 public class HearthAndTimberClient {
 
     public static void onInitializeClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), RUSTIC_TABLE.get(), RUSTIC_CHAIR.get(), TIMBER_FRAME_STAIRS.get(), RUSTIC_SOFA.get(), SPRUCE_WINDOW_CASING.get(), FIREPLACE_CORNICE.get());
+        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), RUSTIC_WARDROBE.get(), RUSTIC_SINK.get(), RUSTIC_WASHBASIN.get(), RUSTIC_BATHTUB.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), RUSTIC_TABLE.get(), RUSTIC_CHAIR.get(), TIMBER_FRAME_STAIRS.get(), RUSTIC_SOFA.get(), SPRUCE_WINDOW_CASING.get(), FIREPLACE_CORNICE.get(), TIMBER_FOUNDATION.get());
         RenderTypeRegistry.register(RenderType.translucent(), RUSTIC_GLASS_PANE.get(), RUSTIC_GLASS_BLOCK.get());
 
         ColorHandlerRegistry.registerBlockColors((state, world, pos, tintIndex) -> {

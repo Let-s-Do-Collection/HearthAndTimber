@@ -216,7 +216,7 @@ public class ObjectRegistry {
     //public static final RegistrySupplier<Block> THATCH_STAIRS = registerWithItem("thatch_stairs", () -> new StairBlock(THATCH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
     //public static final RegistrySupplier<Block> THATCH_SLAB = registerWithItem("thatch_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
 
-    public static final RegistrySupplier<Block> FOUNDATION_BLOCK = registerWithItem("foundation_block", () -> new FoundationBlock(Blocks.STONE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_STAIRS)));
+    public static final RegistrySupplier<Block> TIMBER_FOUNDATION = registerWithItem("timber_foundation", () -> new FoundationBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
 
 
     public static void init() {

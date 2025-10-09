@@ -29,13 +29,27 @@ public class HearthAndTimberClientNeoForge {
     }
 
     @SubscribeEvent
-    public static void onModelModify(ModelEvent.ModifyBakingResult e) {
+    public static void wrapTimberFoundation(ModelEvent.ModifyBakingResult e) {
         Map<ModelResourceLocation, BakedModel> models = e.getModels();
         for (var entry : models.entrySet()) {
             ResourceLocation loc = entry.getKey().id();
-            if (HearthAndTimber.MOD_ID.equals(loc.getNamespace()) && loc.getPath().contains("foundation_block")) {
-                models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue()));
+            if (!HearthAndTimber.MOD_ID.equals(loc.getNamespace())) continue;
+            if (loc.getPath().contains("timber_foundation")) {
+                models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue(), (q, s) -> true));
             }
         }
     }
+
+    @SubscribeEvent
+    public static void wrapFireplaceCornice(ModelEvent.ModifyBakingResult e) {
+        Map<ModelResourceLocation, BakedModel> models = e.getModels();
+        for (var entry : models.entrySet()) {
+            ResourceLocation loc = entry.getKey().id();
+            if (!HearthAndTimber.MOD_ID.equals(loc.getNamespace())) continue;
+            if (loc.getPath().contains("fireplace_cornice")) {
+                models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue(), (q, s) -> q.getTintIndex() == 1));
+            }
+        }
+    }
+
 }

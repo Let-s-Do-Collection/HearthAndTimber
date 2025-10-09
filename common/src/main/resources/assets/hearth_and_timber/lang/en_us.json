@@ -13,7 +13,7 @@
   "block.hearth_and_timber.cinderstone_brick_stairs": "Cinderstone Brick Stairs",
   "block.hearth_and_timber.cinderstone_brick_wall": "Cinderstone Brick Wall",
   "block.hearth_and_timber.cyan_plaster": "Cyan Plaster",
-  "block.hearth_and_timber.foundation_block": "Foundation Block",
+  "block.hearth_and_timber.timber_foundation": "Timber Foundation",
   "block.hearth_and_timber.fieldstone_bricks": "Fieldstone Bricks",
   "block.hearth_and_timber.fieldstone_brick_slab": "Fieldstone Brick Slab",
   "block.hearth_and_timber.fieldstone_brick_stairs": "Fieldstone Brick Stairs",
@@ -141,7 +141,7 @@
   "block.hearth_and_timber.mangrove_beam": "Mangrove Beam",
   "block.hearth_and_timber.cherry_beam": "Cherry Beam",
   "tooltip.hearth_and_timber.tooltip_information.hold": "Hold %s for more Information",
-  "tooltip.hearth_and_timber.timber_frame.info_0": "Can be filled with any Block.",
+  "tooltip.hearth_and_timber.timber_frame.info_0": "Can be filled with any full Block.",
   "tooltip.hearth_and_timber.timber_frame.info_1": "Right-Click with a Pickaxe to remove the inserted Block.",
   "tooltip.hearth_and_timber.splitstone.info_0": "Can be transformed into a Path Block with a Pickaxe.",
   "tooltip.hearth_and_timber.sink.info_0": "Right-click to fill with Water.",
@@ -168,6 +168,7 @@
   "block.hearth_and_timber.dark_oak_support": "Dark Oak Support",
   "block.hearth_and_timber.mangrove_support": "Mangrove Support",
   "block.hearth_and_timber.cherry_support": "Cherry Support",
-  "block.hearth_and_timber.fireplace_cornice": "Fireplace Cornice"
-
+  "block.hearth_and_timber.fireplace_cornice": "Fireplace Cornice",
+  "tooltip.hearth_and_timber.sliding_door.info_0": "Right-click with a Plank Block to change its Color.",
+  "tooltip.hearth_and_timber.sliding_door.info_1": "Right-click with an Iron Block to reinforce it."
 }

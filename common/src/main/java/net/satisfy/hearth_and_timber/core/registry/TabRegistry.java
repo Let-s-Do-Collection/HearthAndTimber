@@ -18,6 +18,7 @@ public class TabRegistry {
             .displayItems((parameters, output) -> {
 
                 output.accept(ObjectRegistry.FRAMEWORK.get());
+                output.accept(ObjectRegistry.TIMBER_FOUNDATION.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME_STAIRS.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
@@ -179,7 +180,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.RUSTIC_BATHTUB.get());
                 output.accept(ObjectRegistry.RUSTIC_GLASS_PANE.get());
                 output.accept(ObjectRegistry.RUSTIC_GLASS_BLOCK.get());
-                output.accept(ObjectRegistry.FOUNDATION_BLOCK.get());
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_STABLE_DOOR.get());
