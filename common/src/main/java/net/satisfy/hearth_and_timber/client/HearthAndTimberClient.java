@@ -9,10 +9,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
-import net.satisfy.hearth_and_timber.client.renderer.block.BathtubRenderer;
-import net.satisfy.hearth_and_timber.client.renderer.block.SlidingDoorRenderer;
-import net.satisfy.hearth_and_timber.client.renderer.block.TimberFrameRenderer;
-import net.satisfy.hearth_and_timber.client.renderer.block.WardrobeRenderer;
+import net.satisfy.hearth_and_timber.client.renderer.block.*;
 import net.satisfy.hearth_and_timber.client.renderer.entity.ChairRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.model.BathtubModel;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingBarnDoorModel;
@@ -43,7 +40,6 @@ public class HearthAndTimberClient {
         EntityRendererRegistry.register(EntityTypeRegistry.CHAIR_ENTITY, ChairRenderer::new);
     }
 
-
     public static void preInitClient() {
         registerEntityRenderers();
         registerEntityModelLayer();
@@ -61,5 +57,6 @@ public class HearthAndTimberClient {
         BlockEntityRendererRegistry.register(EntityTypeRegistry.BATHTUB_BLOCK_ENTITY.get(), BathtubRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.WARDROBE_BLOCK_ENTITY.get(), WardrobeRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), TimberFrameRenderer::new);
+        BlockEntityRendererRegistry.register(EntityTypeRegistry.WINDOW_CASING_BLOCK_ENTITY.get(), WindowCasingRenderer::new);
     }
 }

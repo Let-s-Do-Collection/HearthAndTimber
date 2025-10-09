@@ -167,6 +167,132 @@
         "y": 270,
         "uvlock": false
       }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "bottom": true,
+        "flower_pot": true
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_0"
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_1"
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_2"
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_3"
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_4"
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_5"
+        }
+      ]
+    },
+    {
+      "when": {
+        "facing": "east",
+        "bottom": true,
+        "flower_pot": true
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_0",
+          "y": 90
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_1",
+          "y": 90
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_2",
+          "y": 90
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_3",
+          "y": 90
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_4",
+          "y": 90
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_5",
+          "y": 90
+        }
+      ]
+    },
+    {
+      "when": {
+        "facing": "south",
+        "bottom": true,
+        "flower_pot": true
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_0",
+          "y": 180
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_1",
+          "y": 180
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_2",
+          "y": 180
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_3",
+          "y": 180
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_4",
+          "y": 180
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_5",
+          "y": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "facing": "west",
+        "bottom": true,
+        "flower_pot": true
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_0",
+          "y": 270
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_1",
+          "y": 270
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_2",
+          "y": 270
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_3",
+          "y": 270
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_4",
+          "y": 270
+        },
+        {
+          "model": "hearth_and_timber:block/window_casing_pot_5",
+          "y": 270
+        }
+      ]
     }
   ]
 }

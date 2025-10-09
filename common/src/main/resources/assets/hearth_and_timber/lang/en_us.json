@@ -169,6 +169,6 @@
   "block.hearth_and_timber.mangrove_support": "Mangrove Support",
   "block.hearth_and_timber.cherry_support": "Cherry Support",
   "block.hearth_and_timber.fireplace_cornice": "Fireplace Cornice",
-  "tooltip.hearth_and_timber.sliding_door.info_0": "Right-click with a Plank Block to change its Color.",
-  "tooltip.hearth_and_timber.sliding_door.info_1": "Right-click with an Iron Block to reinforce it."
+  "tooltip.hearth_and_timber.sliding_door.info_0": "Right-click with any Plank Block to recolor.",
+  "tooltip.hearth_and_timber.sliding_door.info_1": "Right-click with an Iron Block to reinforce."
 }
