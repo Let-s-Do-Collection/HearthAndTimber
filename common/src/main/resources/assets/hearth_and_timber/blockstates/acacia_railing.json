@@ -1,0 +1,229 @@
+{
+  "variants": {
+    "facing=north,shape=straight,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_full"
+    },
+    "facing=south,shape=straight,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_full",
+      "y": 180
+    },
+    "facing=west,shape=straight,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_full",
+      "y": 270
+    },
+    "facing=east,shape=straight,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_full",
+      "y": 90
+    },
+    "facing=north,shape=inner_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full"
+    },
+    "facing=south,shape=inner_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 180
+    },
+    "facing=west,shape=inner_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 270
+    },
+    "facing=east,shape=inner_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 90
+    },
+    "facing=north,shape=inner_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 90
+    },
+    "facing=south,shape=inner_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full"
+    },
+    "facing=east,shape=inner_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_full",
+      "y": 180
+    },
+    "facing=north,shape=outer_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full"
+    },
+    "facing=south,shape=outer_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 270
+    },
+    "facing=east,shape=outer_left,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full"
+    },
+    "facing=east,shape=outer_right,size=full": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_full",
+      "y": 180
+    },
+    "facing=north,shape=straight,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_half"
+    },
+    "facing=south,shape=straight,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_half",
+      "y": 180
+    },
+    "facing=west,shape=straight,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_half",
+      "y": 270
+    },
+    "facing=east,shape=straight,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_half",
+      "y": 90
+    },
+    "facing=north,shape=inner_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half"
+    },
+    "facing=south,shape=inner_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 180
+    },
+    "facing=west,shape=inner_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 270
+    },
+    "facing=east,shape=inner_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 90
+    },
+    "facing=north,shape=inner_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 90
+    },
+    "facing=south,shape=inner_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half"
+    },
+    "facing=east,shape=inner_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_half",
+      "y": 180
+    },
+    "facing=north,shape=outer_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half"
+    },
+    "facing=south,shape=outer_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 270
+    },
+    "facing=east,shape=outer_left,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half"
+    },
+    "facing=east,shape=outer_right,size=half": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_half",
+      "y": 180
+    },
+    "facing=north,shape=straight,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_quarter"
+    },
+    "facing=south,shape=straight,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_quarter",
+      "y": 180
+    },
+    "facing=west,shape=straight,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_quarter",
+      "y": 270
+    },
+    "facing=east,shape=straight,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_quarter",
+      "y": 90
+    },
+    "facing=north,shape=inner_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter"
+    },
+    "facing=south,shape=inner_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 180
+    },
+    "facing=west,shape=inner_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 270
+    },
+    "facing=east,shape=inner_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 90
+    },
+    "facing=north,shape=inner_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 90
+    },
+    "facing=south,shape=inner_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter"
+    },
+    "facing=east,shape=inner_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_inner_quarter",
+      "y": 180
+    },
+    "facing=north,shape=outer_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter"
+    },
+    "facing=south,shape=outer_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 270
+    },
+    "facing=east,shape=outer_left,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter"
+    },
+    "facing=east,shape=outer_right,size=quarter": {
+      "model": "hearth_and_timber:block/acacia_railing_outer_quarter",
+      "y": 180
+    }
+  }
+}

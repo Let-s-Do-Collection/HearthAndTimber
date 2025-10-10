@@ -169,6 +169,16 @@
   "block.hearth_and_timber.mangrove_support": "Mangrove Support",
   "block.hearth_and_timber.cherry_support": "Cherry Support",
   "block.hearth_and_timber.fireplace_cornice": "Fireplace Cornice",
-  "tooltip.hearth_and_timber.sliding_door.info_0": "Right-click with any Plank Block to recolor.",
-  "tooltip.hearth_and_timber.sliding_door.info_1": "Right-click with an Iron Block to reinforce."
+  "tooltip.hearth_and_timber.sliding_door.info_0": "Right-Click with any Plank Block to recolor.",
+  "tooltip.hearth_and_timber.sliding_door.info_1": "Right-Click with an Iron Block to reinforce.",
+  "tooltip.hearth_and_timber.railing.info_0": "Right-click with an Axe to switch between stages.",
+  "block.hearth_and_timber.oak_railing": "Oak Railing",
+  "block.hearth_and_timber.spruce_railing": "Spruce Railing",
+  "block.hearth_and_timber.birch_railing": "Birch Railing",
+  "block.hearth_and_timber.jungle_railing": "Jungle Railing",
+  "block.hearth_and_timber.acacia_railing": "Acacia Railing",
+  "block.hearth_and_timber.dark_oak_railing": "Dark Oak Railing",
+  "block.hearth_and_timber.mangrove_railing": "Mangrove Railing",
+  "block.hearth_and_timber.cherry_railing": "Cherry Railing",
+  "tooltip.hearth_and_timber.window_casing.info_0": "Right-click with a Flower Pot on the bottom front part to place it."
 }

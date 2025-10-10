@@ -145,7 +145,14 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.DARK_OAK_BEAM.get());
                 output.accept(ObjectRegistry.MANGROVE_BEAM.get());
                 output.accept(ObjectRegistry.CHERRY_BEAM.get());
-
+                output.accept(ObjectRegistry.OAK_RAILING.get());
+                output.accept(ObjectRegistry.SPRUCE_RAILING.get());
+                output.accept(ObjectRegistry.BIRCH_RAILING.get());
+                output.accept(ObjectRegistry.JUNGLE_RAILING.get());
+                output.accept(ObjectRegistry.ACACIA_RAILING.get());
+                output.accept(ObjectRegistry.DARK_OAK_RAILING.get());
+                output.accept(ObjectRegistry.MANGROVE_RAILING.get());
+                output.accept(ObjectRegistry.CHERRY_RAILING.get());
                 output.accept(ObjectRegistry.OAK_SUPPORT.get());
                 output.accept(ObjectRegistry.SPRUCE_SUPPORT.get());
                 output.accept(ObjectRegistry.BIRCH_SUPPORT.get());

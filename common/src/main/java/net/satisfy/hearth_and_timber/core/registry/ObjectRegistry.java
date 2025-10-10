@@ -155,6 +155,15 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> MANGROVE_SUPPORT = registerWithItem("mangrove_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final RegistrySupplier<Block> CHERRY_SUPPORT = registerWithItem("cherry_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
 
+    public static final RegistrySupplier<Block> OAK_RAILING = registerWithItem("oak_railing", () -> new RailingBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> SPRUCE_RAILING = registerWithItem("spruce_railing", () -> new RailingBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> BIRCH_RAILING = registerWithItem("birch_railing", () -> new RailingBlock(Blocks.BIRCH_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> JUNGLE_RAILING = registerWithItem("jungle_railing", () -> new RailingBlock(Blocks.JUNGLE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> ACACIA_RAILING = registerWithItem("acacia_railing", () -> new RailingBlock(Blocks.ACACIA_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> DARK_OAK_RAILING = registerWithItem("dark_oak_railing", () -> new RailingBlock(Blocks.DARK_OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> MANGROVE_RAILING = registerWithItem("mangrove_railing", () -> new RailingBlock(Blocks.MANGROVE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> CHERRY_RAILING = registerWithItem("cherry_railing", () -> new RailingBlock(Blocks.CHERRY_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
+
     public static final RegistrySupplier<Block> OAK_WINDOW_CASING = registerWithItem("oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> SPRUCE_WINDOW_CASING = registerWithItem("spruce_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> MANGROVE_WINDOW_CASING = registerWithItem("mangrove_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
@@ -166,24 +175,6 @@ public class ObjectRegistry {
 
     public static final RegistrySupplier<Block> FIREPLACE_CORNICE = registerWithItem("fireplace_cornice", () -> new FireplaceCorniceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
 
-    public static final RegistrySupplier<Block> RUSTIC_TIMBER_FLOOR = registerWithItem("rustic_timber_floor", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.WOOD)));
-
-    public static final RegistrySupplier<Block> RUSTIC_BED = registerWithItem("rustic_bed", () -> new BedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAY_BED).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
-    public static final RegistrySupplier<Block> RUSTIC_SOFA = registerWithItem("rustic_sofa", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_LIGHT_GRAY)));
-    public static final RegistrySupplier<Block> RUSTIC_DRESSER = registerWithItem("rustic_dresser", () -> new DresserBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE));
-    public static final RegistrySupplier<Block> RUSTIC_SINK = registerWithItem("rustic_sink", () -> new SinkBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS), false));
-    public static final RegistrySupplier<Block> RUSTIC_WASHBASIN = registerWithItem("rustic_washbasin", () -> new SinkBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true));
-    public static final RegistrySupplier<Block> RUSTIC_CABINET = registerWithItem("rustic_cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> false));
-    public static final RegistrySupplier<Block> RUSTIC_COOKING_AISLE = registerWithItem("rustic_cooking_aisle", () -> new ConnectibleCabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> false));
-    public static final RegistrySupplier<Block> RUSTIC_WALL_CABINET = registerWithItem("rustic_wall_cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> true));
-    public static final RegistrySupplier<Block> RUSTIC_SMOKER = registerWithItem("rustic_smoker", () -> new SmokeOvenBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER)));
-    public static final RegistrySupplier<Block> RUSTIC_WARDROBE = registerWithItem("rustic_wardrobe", () -> new WardrobeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_WHITE)));
-    public static final RegistrySupplier<Block> RUSTIC_BATHTUB = registerWithItem("rustic_bathtub", () -> new BathtubBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS).noOcclusion().strength(1.5f, 3.0f)));
-    public static final RegistrySupplier<Block> RUSTIC_PRIVY = registerWithItem("rustic_privy", () -> new PrivyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)));
-    public static final RegistrySupplier<Block> RUSTIC_TABLE = registerWithItem("rustic_table", () -> new TableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).pushReaction(PushReaction.IGNORE)));
-    public static final RegistrySupplier<Block> RUSTIC_CHAIR = registerWithItem("rustic_chair", () -> new ChairBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).pushReaction(PushReaction.IGNORE)));
-    public static final RegistrySupplier<Block> RUSTIC_GLASS_PANE = registerWithItem("rustic_glass_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).sound(SoundType.GLASS).noOcclusion()));
-    public static final RegistrySupplier<Block> RUSTIC_GLASS_BLOCK = registerWithItem("rustic_glass_block", () -> new TintedGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
     public static final RegistrySupplier<Block> SLIDING_HAYLOFT_DOOR = registerWithItem("sliding_hayloft_door", () -> new SlidingHayloftDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
@@ -217,6 +208,25 @@ public class ObjectRegistry {
     //public static final RegistrySupplier<Block> THATCH_SLAB = registerWithItem("thatch_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
 
     public static final RegistrySupplier<Block> TIMBER_FOUNDATION = registerWithItem("timber_foundation", () -> new FoundationBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
+
+    // *** unused *** //
+    public static final RegistrySupplier<Block> RUSTIC_TIMBER_FLOOR = registerWithItem("rustic_timber_floor", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.WOOD)));
+    public static final RegistrySupplier<Block> RUSTIC_BED = registerWithItem("rustic_bed", () -> new BedBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRAY_BED).sound(SoundType.WOOD).strength(0.2F).noOcclusion()));
+    public static final RegistrySupplier<Block> RUSTIC_SOFA = registerWithItem("rustic_sofa", () -> new SofaBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.COLOR_LIGHT_GRAY)));
+    public static final RegistrySupplier<Block> RUSTIC_DRESSER = registerWithItem("rustic_dresser", () -> new DresserBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE));
+    public static final RegistrySupplier<Block> RUSTIC_SINK = registerWithItem("rustic_sink", () -> new SinkBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS), false));
+    public static final RegistrySupplier<Block> RUSTIC_WASHBASIN = registerWithItem("rustic_washbasin", () -> new SinkBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), true));
+    public static final RegistrySupplier<Block> RUSTIC_CABINET = registerWithItem("rustic_cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> false));
+    public static final RegistrySupplier<Block> RUSTIC_COOKING_AISLE = registerWithItem("rustic_cooking_aisle", () -> new ConnectibleCabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> false));
+    public static final RegistrySupplier<Block> RUSTIC_WALL_CABINET = registerWithItem("rustic_wall_cabinet", () -> new CabinetBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS), () -> SoundEvents.WOODEN_TRAPDOOR_OPEN, () -> SoundEvents.WOODEN_TRAPDOOR_CLOSE, () -> true));
+    public static final RegistrySupplier<Block> RUSTIC_SMOKER = registerWithItem("rustic_smoker", () -> new SmokeOvenBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SMOKER)));
+    public static final RegistrySupplier<Block> RUSTIC_WARDROBE = registerWithItem("rustic_wardrobe", () -> new WardrobeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_WHITE)));
+    public static final RegistrySupplier<Block> RUSTIC_BATHTUB = registerWithItem("rustic_bathtub", () -> new BathtubBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS).noOcclusion().strength(1.5f, 3.0f)));
+    public static final RegistrySupplier<Block> RUSTIC_PRIVY = registerWithItem("rustic_privy", () -> new PrivyBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+    public static final RegistrySupplier<Block> RUSTIC_TABLE = registerWithItem("rustic_table", () -> new TableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).pushReaction(PushReaction.IGNORE)));
+    public static final RegistrySupplier<Block> RUSTIC_CHAIR = registerWithItem("rustic_chair", () -> new ChairBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).pushReaction(PushReaction.IGNORE)));
+    public static final RegistrySupplier<Block> RUSTIC_GLASS_PANE = registerWithItem("rustic_glass_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).sound(SoundType.GLASS).noOcclusion()));
+    public static final RegistrySupplier<Block> RUSTIC_GLASS_BLOCK = registerWithItem("rustic_glass_block", () -> new TintedGlassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
 
     public static void init() {
