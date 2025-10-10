@@ -145,6 +145,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DARK_OAK_BEAM = registerWithItem("dark_oak_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_LOG).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> MANGROVE_BEAM = registerWithItem("mangrove_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_LOG).sound(SoundType.WOOD)));
     public static final RegistrySupplier<Block> CHERRY_BEAM = registerWithItem("cherry_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_LOG).sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Block> PALE_OAK_BEAM = registerWithItem("pale_oak_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
 
     public static final RegistrySupplier<Block> OAK_SUPPORT = registerWithItem("oak_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
     public static final RegistrySupplier<Block> SPRUCE_SUPPORT = registerWithItem("spruce_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
@@ -154,6 +155,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DARK_OAK_SUPPORT = registerWithItem("dark_oak_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
     public static final RegistrySupplier<Block> MANGROVE_SUPPORT = registerWithItem("mangrove_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final RegistrySupplier<Block> CHERRY_SUPPORT = registerWithItem("cherry_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final RegistrySupplier<Block> PALE_OAK_SUPPORT = registerWithItem("pale_oak_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
 
     public static final RegistrySupplier<Block> OAK_PILLAR = registerWithItem("oak_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
     public static final RegistrySupplier<Block> SPRUCE_PILLAR = registerWithItem("spruce_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)));
@@ -163,6 +165,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DARK_OAK_PILLAR = registerWithItem("dark_oak_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)));
     public static final RegistrySupplier<Block> MANGROVE_PILLAR = registerWithItem("mangrove_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
     public static final RegistrySupplier<Block> CHERRY_PILLAR = registerWithItem("cherry_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
+    public static final RegistrySupplier<Block> PALE_OAK_PILLAR = registerWithItem("pale_oak_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS)));
 
     public static final RegistrySupplier<Block> OAK_RAILING = registerWithItem("oak_railing", () -> new RailingBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> SPRUCE_RAILING = registerWithItem("spruce_railing", () -> new RailingBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -172,6 +175,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DARK_OAK_RAILING = registerWithItem("dark_oak_railing", () -> new RailingBlock(Blocks.DARK_OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> MANGROVE_RAILING = registerWithItem("mangrove_railing", () -> new RailingBlock(Blocks.MANGROVE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> CHERRY_RAILING = registerWithItem("cherry_railing", () -> new RailingBlock(Blocks.CHERRY_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> PALE_OAK_RAILING = registerWithItem("pale_oak_railing", () -> new RailingBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistrySupplier<Block> OAK_WINDOW_CASING = registerWithItem("oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> SPRUCE_WINDOW_CASING = registerWithItem("spruce_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).noOcclusion()));
@@ -181,6 +185,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> DARK_OAK_WINDOW_CASING = registerWithItem("dark_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> ACACIA_WINDOW_CASING = registerWithItem("acacia_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> CHERRY_WINDOW_CASING = registerWithItem("cherry_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> PALE_OAK_WINDOW_CASING = registerWithItem("pale_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistrySupplier<Block> FIREPLACE_CORNICE = registerWithItem("fireplace_cornice", () -> new FireplaceCorniceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS)));
 

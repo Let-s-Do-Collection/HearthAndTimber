@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hearth_and_timber:block/pale_oak_beam_top",
+    "side": "hearth_and_timber:block/pale_oak_beam_side"
+  }
+}

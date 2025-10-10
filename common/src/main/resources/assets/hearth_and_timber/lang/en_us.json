@@ -188,5 +188,10 @@
   "block.hearth_and_timber.acacia_pillar": "Acacia Pillar",
   "block.hearth_and_timber.dark_oak_pillar": "Dark Oak Pillar",
   "block.hearth_and_timber.mangrove_pillar": "Mangrove Pillar",
-  "block.hearth_and_timber.cherry_pillar": "Cherry Pillar"
+  "block.hearth_and_timber.cherry_pillar": "Cherry Pillar",
+  "block.hearth_and_timber.pale_oak_beam": "Pale Oak Beam",
+  "block.hearth_and_timber.pale_oak_pillar": "Pale Oak Pillar",
+  "block.hearth_and_timber.pale_oak_railing": "Pale Oak Railing",
+  "block.hearth_and_timber.pale_oak_support": "Pale Oak Support",
+  "block.hearth_and_timber.pale_oak_window_casing": "Pale Oak Window Casing"
 }
