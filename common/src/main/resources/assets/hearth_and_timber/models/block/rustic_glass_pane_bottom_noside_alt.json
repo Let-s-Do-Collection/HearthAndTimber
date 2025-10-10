@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_noside_alt",
-  "textures": {
-    "pane": "hearth_and_timber:block/rustic_window_bottom"
-  }
-}

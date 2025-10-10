@@ -3,16 +3,13 @@ loaderVersion = "[4,)"
 license = "Custom"
 issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
-[[mixins]]
-config = "HearthAndTimber-neoforge.mixins.json"
-
 [[mods]]
 modId = "hearth_and_timber"
 version = "${version}"
 displayName = "[Let's Do] Hearth & Timber"
 authors = "satisfy"
 description = '''
-Bring warmth and rustic charm to your world with Hearth & Timber! Discover timbered walls, sturdy barn doors, cozy farmhouse furniture, and countryside paths to create the perfect homestead.
+Bring warmth and rustic charm to your world with Hearth & Timber! Discover timbered walls, sturdy barn doors, rustic beams, and countryside paths to create the perfect homestead.
 '''
 logoFile = "pack.png"
 

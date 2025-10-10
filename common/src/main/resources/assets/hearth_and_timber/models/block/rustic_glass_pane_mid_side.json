@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side",
-  "textures": {
-    "pane": "hearth_and_timber:block/rustic_window_middle",
-    "edge": "hearth_and_timber:block/rustic_window_top"
-  }
-}

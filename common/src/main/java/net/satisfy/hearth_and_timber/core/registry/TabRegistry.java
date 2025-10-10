@@ -188,23 +188,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.FIREPLACE_CORNICE.get());
                 output.accept(ObjectRegistry.FRAMEWORK.get());
 
-                output.accept(ObjectRegistry.RUSTIC_TIMBER_FLOOR.get());
-                output.accept(ObjectRegistry.RUSTIC_BED.get());
-                output.accept(ObjectRegistry.RUSTIC_SOFA.get());
-                output.accept(ObjectRegistry.RUSTIC_CHAIR.get());
-                output.accept(ObjectRegistry.RUSTIC_TABLE.get());
-                output.accept(ObjectRegistry.RUSTIC_WARDROBE.get());
-                output.accept(ObjectRegistry.RUSTIC_SINK.get());
-                output.accept(ObjectRegistry.RUSTIC_SMOKER.get());
-                output.accept(ObjectRegistry.RUSTIC_COOKING_AISLE.get());
-                output.accept(ObjectRegistry.RUSTIC_CABINET.get());
-                output.accept(ObjectRegistry.RUSTIC_DRESSER.get());
-                output.accept(ObjectRegistry.RUSTIC_WALL_CABINET.get());
-                output.accept(ObjectRegistry.RUSTIC_PRIVY.get());
-                output.accept(ObjectRegistry.RUSTIC_WASHBASIN.get());
-                output.accept(ObjectRegistry.RUSTIC_BATHTUB.get());
-                output.accept(ObjectRegistry.RUSTIC_GLASS_PANE.get());
-                output.accept(ObjectRegistry.RUSTIC_GLASS_BLOCK.get());
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_STABLE_DOOR.get());
