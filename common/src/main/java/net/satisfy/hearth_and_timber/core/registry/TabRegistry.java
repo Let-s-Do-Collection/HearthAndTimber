@@ -161,6 +161,14 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.DARK_OAK_SUPPORT.get());
                 output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
                 output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
+                output.accept(ObjectRegistry.OAK_PILLAR.get());
+                output.accept(ObjectRegistry.SPRUCE_PILLAR.get());
+                output.accept(ObjectRegistry.BIRCH_PILLAR.get());
+                output.accept(ObjectRegistry.JUNGLE_PILLAR.get());
+                output.accept(ObjectRegistry.ACACIA_PILLAR.get());
+                output.accept(ObjectRegistry.DARK_OAK_PILLAR.get());
+                output.accept(ObjectRegistry.MANGROVE_PILLAR.get());
+                output.accept(ObjectRegistry.CHERRY_PILLAR.get());
                 output.accept(ObjectRegistry.OAK_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.SPRUCE_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.BIRCH_WINDOW_CASING.get());

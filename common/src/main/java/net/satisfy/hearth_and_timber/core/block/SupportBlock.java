@@ -93,20 +93,25 @@ public class SupportBlock extends Block {
         super.onPlace(state, level, pos, oldState, moved);
     }
 
+    private boolean canConnectBehind(BlockState other, Direction facing) {
+        if (other.getBlock() == this && other.hasProperty(FACING) && other.getValue(FACING) == facing) {
+            return true;
+        }
+        return other.getBlock() instanceof PillarBlock;
+    }
+
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
         if (!level.isClientSide) {
             Direction facing = state.getValue(FACING);
-            boolean connect = canConnectBehind(level.getBlockState(pos.relative(facing.getOpposite())), facing);
+            BlockPos behindPos = pos.relative(facing.getOpposite());
+            BlockState behindState = level.getBlockState(behindPos);
+            boolean connect = canConnectBehind(behindState, facing);
             if (state.getValue(CONNECTED) != connect) {
                 level.setBlock(pos, state.setValue(CONNECTED, connect), 3);
             }
         }
         super.neighborChanged(state, level, pos, sourceBlock, sourcePos, notify);
-    }
-
-    private boolean canConnectBehind(BlockState other, Direction facing) {
-        return other.getBlock() == this && other.hasProperty(FACING) && other.getValue(FACING) == facing;
     }
 
     @Override

@@ -180,5 +180,13 @@
   "block.hearth_and_timber.dark_oak_railing": "Dark Oak Railing",
   "block.hearth_and_timber.mangrove_railing": "Mangrove Railing",
   "block.hearth_and_timber.cherry_railing": "Cherry Railing",
-  "tooltip.hearth_and_timber.window_casing.info_0": "Right-click with a Flower Pot on the bottom front part to place it."
+  "tooltip.hearth_and_timber.window_casing.info_0": "Right-click with a Flower Pot on the bottom front part to place it.",
+  "block.hearth_and_timber.oak_pillar": "Oak Pillar",
+  "block.hearth_and_timber.spruce_pillar": "Spruce Pillar",
+  "block.hearth_and_timber.birch_pillar": "Birch Pillar",
+  "block.hearth_and_timber.jungle_pillar": "Jungle Pillar",
+  "block.hearth_and_timber.acacia_pillar": "Acacia Pillar",
+  "block.hearth_and_timber.dark_oak_pillar": "Dark Oak Pillar",
+  "block.hearth_and_timber.mangrove_pillar": "Mangrove Pillar",
+  "block.hearth_and_timber.cherry_pillar": "Cherry Pillar"
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:block/spruce_pillar_west",
+  "textures": {
+    "0": "hearth_and_timber:block/acacia_window_casing",
+    "particle": "hearth_and_timber:block/acacia_window_casing"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_pillar_center"
+      }
+    },
+    {
+      "when": {
+        "north_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_pillar_north"
+      }
+    },
+    {
+      "when": {
+        "south_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_pillar_south"
+      }
+    },
+    {
+      "when": {
+        "west_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_pillar_west"
+      }
+    },
+    {
+      "when": {
+        "east_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_pillar_east"
+      }
+    }
+  ]
+}
