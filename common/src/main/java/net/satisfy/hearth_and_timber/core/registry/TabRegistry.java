@@ -185,7 +185,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.CHERRY_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.PALE_OAK_WINDOW_CASING.get());
 
-                output.accept(ObjectRegistry.FIREPLACE_CORNICE.get());
                 output.accept(ObjectRegistry.FRAMEWORK.get());
 
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());

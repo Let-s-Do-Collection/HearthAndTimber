@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:block/spruce_pillar_extended_top",
+  "textures": {
+    "0": "hearth_and_timber:block/mangrove_window_casing",
+    "particle": "hearth_and_timber:block/mangrove_window_casing"
+  }
+}

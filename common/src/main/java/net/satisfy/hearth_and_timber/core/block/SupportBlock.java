@@ -148,5 +148,4 @@ public class SupportBlock extends Block {
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
-
 }

@@ -39,17 +39,4 @@ public class HearthAndTimberClientNeoForge {
             }
         }
     }
-
-    @SubscribeEvent
-    public static void wrapFireplaceCornice(ModelEvent.ModifyBakingResult e) {
-        Map<ModelResourceLocation, BakedModel> models = e.getModels();
-        for (var entry : models.entrySet()) {
-            ResourceLocation loc = entry.getKey().id();
-            if (!HearthAndTimber.MOD_ID.equals(loc.getNamespace())) continue;
-            if (loc.getPath().contains("fireplace_cornice")) {
-                models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue(), (q, s) -> q.getTintIndex() == 1));
-            }
-        }
-    }
-
 }

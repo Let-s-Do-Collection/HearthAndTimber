@@ -20,7 +20,7 @@ import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.*;
 public class HearthAndTimberClient {
 
     public static void onInitializeClient() {
-        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), TIMBER_FRAME_STAIRS.get(), SPRUCE_WINDOW_CASING.get(), FIREPLACE_CORNICE.get(), TIMBER_FOUNDATION.get());
+        RenderTypeRegistry.register(RenderType.cutout(), FRAMEWORK.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), TIMBER_FRAME_STAIRS.get(), SPRUCE_WINDOW_CASING.get(), TIMBER_FOUNDATION.get());
 
         registerBlockEntityRenderer();
     }

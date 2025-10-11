@@ -36,6 +36,14 @@
       "apply": {
         "model": "hearth_and_timber:block/pale_oak_pillar_east"
       }
+    },
+    {
+      "when": {
+        "extended_top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/pale_oak_pillar_extended_top"
+      }
     }
   ]
 }

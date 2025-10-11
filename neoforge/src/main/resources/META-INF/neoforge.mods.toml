@@ -3,6 +3,9 @@ loaderVersion = "[4,)"
 license = "Custom"
 issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
+[[mixins]]
+config = "HearthAndTimber-neoforge.mixins.json"
+
 [[mods]]
 modId = "hearth_and_timber"
 version = "${version}"

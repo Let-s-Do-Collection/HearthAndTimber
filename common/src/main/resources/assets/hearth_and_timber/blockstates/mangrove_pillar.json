@@ -36,6 +36,14 @@
       "apply": {
         "model": "hearth_and_timber:block/mangrove_pillar_east"
       }
+    },
+    {
+      "when": {
+        "extended_top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_pillar_extended_top"
+      }
     }
   ]
 }

@@ -13,6 +13,18 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import org.jetbrains.annotations.NotNull;
 
 public class PillarBlock extends Block {
@@ -20,6 +32,7 @@ public class PillarBlock extends Block {
     public static final BooleanProperty SOUTH_CONNECTED = BooleanProperty.create("south_connected");
     public static final BooleanProperty WEST_CONNECTED = BooleanProperty.create("west_connected");
     public static final BooleanProperty EAST_CONNECTED = BooleanProperty.create("east_connected");
+    public static final BooleanProperty EXTENDED_TOP = BooleanProperty.create("extended_top");
 
     protected static final VoxelShape SHAPE;
     protected static final VoxelShape CONNECT_N;
@@ -44,12 +57,27 @@ public class PillarBlock extends Block {
                 .setValue(NORTH_CONNECTED, false)
                 .setValue(SOUTH_CONNECTED, false)
                 .setValue(WEST_CONNECTED, false)
-                .setValue(EAST_CONNECTED, false));
+                .setValue(EAST_CONNECTED, false)
+                .setValue(EXTENDED_TOP, false));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
-        b.add(NORTH_CONNECTED, SOUTH_CONNECTED, WEST_CONNECTED, EAST_CONNECTED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> blockStateBuilder) {
+        blockStateBuilder.add(NORTH_CONNECTED, SOUTH_CONNECTED, WEST_CONNECTED, EAST_CONNECTED, EXTENDED_TOP);
+    }
+
+    @Override
+    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!(stack.getItem() instanceof AxeItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!level.isClientSide) {
+            boolean ext = state.getValue(EXTENDED_TOP);
+            if (level instanceof ServerLevel server) {
+                server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 1.02, pos.getZ() + 0.5, 12, 0.2, 0.0, 0.2, 0.08);
+            }
+            level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.setBlock(pos, state.setValue(EXTENDED_TOP, !ext), 3);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
