@@ -39,35 +39,46 @@ import java.util.Map;
 public class SupportBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
+    public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
     public static final BooleanProperty REST = BooleanProperty.create("rest");
 
     private static final Map<Direction, VoxelShape> SHAPE_SINGLE = Util.make(new HashMap<>(), map -> {
         VoxelShape base = Shapes.empty();
         base = Shapes.join(base, Shapes.box(5.0 / 16.0, 0.0, 14.0 / 16.0, 11.0 / 16.0, 10.0 / 16.0, 1.0), BooleanOp.OR);
         base = Shapes.join(base, Shapes.box(5.0 / 16.0, 10.0 / 16.0, 0.0, 11.0 / 16.0, 1.0, 1.0), BooleanOp.OR);
-        for (Direction d : Direction.Plane.HORIZONTAL.stream().toList()) {
-            map.put(d, GeneralUtil.rotateShape(Direction.NORTH, d, base));
+        for (Direction dir : Direction.Plane.HORIZONTAL.stream().toList()) {
+            map.put(dir, GeneralUtil.rotateShape(Direction.NORTH, dir, base));
         }
     });
 
     private static final Map<Direction, VoxelShape> SHAPE_CONNECTED = Util.make(new HashMap<>(), map -> {
         VoxelShape base = Shapes.box(5.0 / 16.0, 10.0 / 16.0, 0.0, 11.0 / 16.0, 1.0, 1.0);
-        for (Direction d : Direction.Plane.HORIZONTAL.stream().toList()) {
-            map.put(d, GeneralUtil.rotateShape(Direction.NORTH, d, base));
+        for (Direction dir : Direction.Plane.HORIZONTAL.stream().toList()) {
+            map.put(dir, GeneralUtil.rotateShape(Direction.NORTH, dir, base));
+        }
+    });
+
+    private static final Map<Direction, VoxelShape> SHAPE_EXTENDED = Util.make(new HashMap<>(), map -> {
+        VoxelShape base = Shapes.box(5.0 / 16.0, 10.0 / 16.0, 10.0 / 16.0, 11.0 / 16.0, 1.0, 1.0);
+        for (Direction dir : Direction.Plane.HORIZONTAL.stream().toList()) {
+            map.put(dir, GeneralUtil.rotateShape(Direction.NORTH, dir, base));
         }
     });
 
     private static final Map<Direction, VoxelShape> SHAPE_NO_REST = Util.make(new HashMap<>(), map -> {
         VoxelShape base = Shapes.box(5.0 / 16.0, 0.0, 14.0 / 16.0, 11.0 / 16.0, 1.0, 1.0);
-        for (Direction d : Direction.Plane.HORIZONTAL.stream().toList()) {
-            map.put(d, GeneralUtil.rotateShape(Direction.NORTH, d, base));
+        for (Direction dir : Direction.Plane.HORIZONTAL.stream().toList()) {
+            map.put(dir, GeneralUtil.rotateShape(Direction.NORTH, dir, base));
         }
     });
 
-
     public SupportBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(CONNECTED, false).setValue(REST, true));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(CONNECTED, false)
+                .setValue(EXTENDED, false)
+                .setValue(REST, true));
     }
 
     @Nullable
@@ -76,47 +87,35 @@ public class SupportBlock extends Block {
         Direction facing = context.getHorizontalDirection().getOpposite();
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
-        boolean connect = canConnectBehind(level.getBlockState(pos.relative(facing.getOpposite())), facing);
-        return this.defaultBlockState().setValue(FACING, facing).setValue(CONNECTED, connect).setValue(REST, true);
+        BlockPos frontPos = pos.relative(facing);
+        BlockPos behindPos = pos.relative(facing.getOpposite());
+        boolean connect = isSameSupportFacing(level.getBlockState(frontPos), facing) || isSameSupportFacing(level.getBlockState(behindPos), facing);
+        return this.defaultBlockState()
+                .setValue(FACING, facing)
+                .setValue(CONNECTED, connect)
+                .setValue(EXTENDED, false)
+                .setValue(REST, true);
     }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
-        if (!level.isClientSide) {
-            Direction facing = state.getValue(FACING);
-            BlockPos behind = pos.relative(facing.getOpposite());
-            BlockState nb = level.getBlockState(behind);
-            if (nb.getBlock() == this && nb.getValue(FACING) == facing && !nb.getValue(CONNECTED)) {
-                level.setBlock(behind, nb.setValue(CONNECTED, true), 3);
-            }
-        }
         super.onPlace(state, level, pos, oldState, moved);
-    }
-
-    private boolean canConnectBehind(BlockState other, Direction facing) {
-        if (other.getBlock() == this && other.hasProperty(FACING) && other.getValue(FACING) == facing) {
-            return true;
-        }
-        return other.getBlock() instanceof PillarBlock;
     }
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        if (!level.isClientSide) {
-            Direction facing = state.getValue(FACING);
-            BlockPos behindPos = pos.relative(facing.getOpposite());
-            BlockState behindState = level.getBlockState(behindPos);
-            boolean connect = canConnectBehind(behindState, facing);
-            if (state.getValue(CONNECTED) != connect) {
-                level.setBlock(pos, state.setValue(CONNECTED, connect), 3);
-            }
-        }
         super.neighborChanged(state, level, pos, sourceBlock, sourcePos, notify);
+    }
+
+    private boolean isSameSupportFacing(BlockState state, Direction facing) {
+        if (state.getBlock() != this) return false;
+        if (!state.hasProperty(FACING)) return false;
+        return state.getValue(FACING) == facing;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, CONNECTED, REST);
+        builder.add(FACING, CONNECTED, EXTENDED, REST);
     }
 
     @Override
@@ -131,20 +130,36 @@ public class SupportBlock extends Block {
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (state.getValue(EXTENDED)) return SHAPE_EXTENDED.get(state.getValue(FACING));
         if (!state.getValue(REST)) return SHAPE_NO_REST.get(state.getValue(FACING));
         return (state.getValue(CONNECTED) ? SHAPE_CONNECTED : SHAPE_SINGLE).get(state.getValue(FACING));
     }
 
+    private boolean isMiddleOfConnectedRun(Level level, BlockPos pos, Direction facing) {
+        BlockState frontState = level.getBlockState(pos.relative(facing));
+        BlockState behindState = level.getBlockState(pos.relative(facing.getOpposite()));
+        boolean frontOk = isSameSupportFacing(frontState, facing) && frontState.getValue(CONNECTED);
+        boolean behindOk = isSameSupportFacing(behindState, facing) && behindState.getValue(CONNECTED);
+        return frontOk && behindOk;
+    }
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (state.getValue(CONNECTED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!(stack.getItem() instanceof AxeItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!level.isClientSide) {
-            boolean rest = state.getValue(REST);
             ((ServerLevel) level).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 1.02, pos.getZ() + 0.5, 12, 0.2, 0.0, 0.2, 0.08);
             level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
-            level.setBlock(pos, state.setValue(REST, !rest), 3);
+            if (state.getValue(CONNECTED)) {
+                Direction facing = state.getValue(FACING);
+                if (isMiddleOfConnectedRun(level, pos, facing)) {
+                    return ItemInteractionResult.sidedSuccess(false);
+                }
+                boolean newExtended = !state.getValue(EXTENDED);
+                level.setBlock(pos, state.setValue(EXTENDED, newExtended), 3);
+            } else {
+                boolean newRest = !state.getValue(REST);
+                level.setBlock(pos, state.setValue(REST, newRest), 3);
+            }
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
