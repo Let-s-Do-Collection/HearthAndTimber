@@ -2,6 +2,7 @@ package net.satisfy.hearth_and_timber.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -177,5 +178,10 @@ public class SlidingDoorRenderer implements BlockEntityRenderer<SlidingDoorBlock
         }
 
         poseStack.popPose();
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(SlidingDoorBlockEntity be) {
+        return true;
     }
 }

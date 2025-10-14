@@ -16,10 +16,10 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
-public class FoundationBlockEntity extends BlockEntity {
+public class TimberFoundationBlockEntity extends BlockEntity {
     private BlockState mimicState;
 
-    public FoundationBlockEntity(BlockPos pos, BlockState state) {
+    public TimberFoundationBlockEntity(BlockPos pos, BlockState state) {
         super(EntityTypeRegistry.FOUNDATION_BLOCK_ENTITY.get(), pos, state);
     }
 

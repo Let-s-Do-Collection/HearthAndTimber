@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/template_glass_pane_post",
+
+  "textures": {
+    "pane": "hearth_and_timber:block/jungle_window_pane_middle",
+    "edge": "hearth_and_timber:block/jungle_window_pane_side"
+  }
+}

@@ -16,12 +16,86 @@ public class TabRegistry {
             .icon(() -> new ItemStack(ObjectRegistry.SHINGLE_ROOF_BLOCK.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
+                output.accept(ObjectRegistry.FRAMEWORK.get());
+                output.accept(ObjectRegistry.TIMBER_BASE_SKIRT.get());
+                output.accept(ObjectRegistry.TIMBER_BASE_TRIM.get());
                 output.accept(ObjectRegistry.TIMBER_FOUNDATION.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME_STAIRS.get());
                 output.accept(ObjectRegistry.TIMBER_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_DIAGONAL_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_CROSS_FRAME.get());
+
+                output.accept(ObjectRegistry.OAK_BEAM.get());
+                output.accept(ObjectRegistry.SPRUCE_BEAM.get());
+                output.accept(ObjectRegistry.BIRCH_BEAM.get());
+                output.accept(ObjectRegistry.JUNGLE_BEAM.get());
+                output.accept(ObjectRegistry.ACACIA_BEAM.get());
+                output.accept(ObjectRegistry.DARK_OAK_BEAM.get());
+                output.accept(ObjectRegistry.MANGROVE_BEAM.get());
+                output.accept(ObjectRegistry.CHERRY_BEAM.get());
+                output.accept(ObjectRegistry.PALE_OAK_BEAM.get());
+
+                output.accept(ObjectRegistry.OAK_RAILING.get());
+                output.accept(ObjectRegistry.SPRUCE_RAILING.get());
+                output.accept(ObjectRegistry.BIRCH_RAILING.get());
+                output.accept(ObjectRegistry.JUNGLE_RAILING.get());
+                output.accept(ObjectRegistry.ACACIA_RAILING.get());
+                output.accept(ObjectRegistry.DARK_OAK_RAILING.get());
+                output.accept(ObjectRegistry.MANGROVE_RAILING.get());
+                output.accept(ObjectRegistry.CHERRY_RAILING.get());
+                output.accept(ObjectRegistry.PALE_OAK_RAILING.get());
+
+                output.accept(ObjectRegistry.OAK_SUPPORT.get());
+                output.accept(ObjectRegistry.SPRUCE_SUPPORT.get());
+                output.accept(ObjectRegistry.BIRCH_SUPPORT.get());
+                output.accept(ObjectRegistry.JUNGLE_SUPPORT.get());
+                output.accept(ObjectRegistry.ACACIA_SUPPORT.get());
+                output.accept(ObjectRegistry.DARK_OAK_SUPPORT.get());
+                output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
+                output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
+                output.accept(ObjectRegistry.PALE_OAK_SUPPORT.get());
+
+                output.accept(ObjectRegistry.OAK_PILLAR.get());
+                output.accept(ObjectRegistry.SPRUCE_PILLAR.get());
+                output.accept(ObjectRegistry.BIRCH_PILLAR.get());
+                output.accept(ObjectRegistry.JUNGLE_PILLAR.get());
+                output.accept(ObjectRegistry.ACACIA_PILLAR.get());
+                output.accept(ObjectRegistry.DARK_OAK_PILLAR.get());
+                output.accept(ObjectRegistry.MANGROVE_PILLAR.get());
+                output.accept(ObjectRegistry.CHERRY_PILLAR.get());
+                output.accept(ObjectRegistry.PALE_OAK_PILLAR.get());
+
+                output.accept(ObjectRegistry.OAK_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.SPRUCE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.BIRCH_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.JUNGLE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.ACACIA_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.DARK_OAK_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.MANGROVE_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.CHERRY_WINDOW_CASING.get());
+                output.accept(ObjectRegistry.PALE_OAK_WINDOW_CASING.get());
+
+                output.accept(ObjectRegistry.OAK_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.SPRUCE_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.BIRCH_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.JUNGLE_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.ACACIA_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.DARK_OAK_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.MANGROVE_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.CHERRY_WINDOW_PANE.get());
+                output.accept(ObjectRegistry.PALE_OAK_WINDOW_PANE.get());
+
+                output.accept(ObjectRegistry.OAK_WINDOW.get());
+                output.accept(ObjectRegistry.SPRUCE_WINDOW.get());
+                output.accept(ObjectRegistry.BIRCH_WINDOW.get());
+                output.accept(ObjectRegistry.JUNGLE_WINDOW.get());
+                output.accept(ObjectRegistry.ACACIA_WINDOW.get());
+                output.accept(ObjectRegistry.DARK_OAK_WINDOW.get());
+                output.accept(ObjectRegistry.MANGROVE_WINDOW.get());
+                output.accept(ObjectRegistry.CHERRY_WINDOW.get());
+                output.accept(ObjectRegistry.PALE_OAK_WINDOW.get());
+
                 output.accept(ObjectRegistry.WHITE_PLASTER.get());
                 output.accept(ObjectRegistry.LIGHT_GRAY_PLASTER.get());
                 output.accept(ObjectRegistry.GRAY_PLASTER.get());
@@ -134,58 +208,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.STRAW_STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.TRAMPLED_STABLE_FLOOR.get());
-
-                output.accept(ObjectRegistry.OAK_BEAM.get());
-                output.accept(ObjectRegistry.SPRUCE_BEAM.get());
-                output.accept(ObjectRegistry.BIRCH_BEAM.get());
-                output.accept(ObjectRegistry.JUNGLE_BEAM.get());
-                output.accept(ObjectRegistry.ACACIA_BEAM.get());
-                output.accept(ObjectRegistry.DARK_OAK_BEAM.get());
-                output.accept(ObjectRegistry.MANGROVE_BEAM.get());
-                output.accept(ObjectRegistry.CHERRY_BEAM.get());
-                output.accept(ObjectRegistry.PALE_OAK_BEAM.get());
-
-                output.accept(ObjectRegistry.OAK_RAILING.get());
-                output.accept(ObjectRegistry.SPRUCE_RAILING.get());
-                output.accept(ObjectRegistry.BIRCH_RAILING.get());
-                output.accept(ObjectRegistry.JUNGLE_RAILING.get());
-                output.accept(ObjectRegistry.ACACIA_RAILING.get());
-                output.accept(ObjectRegistry.DARK_OAK_RAILING.get());
-                output.accept(ObjectRegistry.MANGROVE_RAILING.get());
-                output.accept(ObjectRegistry.CHERRY_RAILING.get());
-                output.accept(ObjectRegistry.PALE_OAK_RAILING.get());
-
-                output.accept(ObjectRegistry.OAK_SUPPORT.get());
-                output.accept(ObjectRegistry.SPRUCE_SUPPORT.get());
-                output.accept(ObjectRegistry.BIRCH_SUPPORT.get());
-                output.accept(ObjectRegistry.JUNGLE_SUPPORT.get());
-                output.accept(ObjectRegistry.ACACIA_SUPPORT.get());
-                output.accept(ObjectRegistry.DARK_OAK_SUPPORT.get());
-                output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
-                output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
-                output.accept(ObjectRegistry.PALE_OAK_SUPPORT.get());
-
-                output.accept(ObjectRegistry.OAK_PILLAR.get());
-                output.accept(ObjectRegistry.SPRUCE_PILLAR.get());
-                output.accept(ObjectRegistry.BIRCH_PILLAR.get());
-                output.accept(ObjectRegistry.JUNGLE_PILLAR.get());
-                output.accept(ObjectRegistry.ACACIA_PILLAR.get());
-                output.accept(ObjectRegistry.DARK_OAK_PILLAR.get());
-                output.accept(ObjectRegistry.MANGROVE_PILLAR.get());
-                output.accept(ObjectRegistry.CHERRY_PILLAR.get());
-                output.accept(ObjectRegistry.PALE_OAK_PILLAR.get());
-
-                output.accept(ObjectRegistry.OAK_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.SPRUCE_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.BIRCH_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.JUNGLE_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.ACACIA_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.DARK_OAK_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.MANGROVE_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.CHERRY_WINDOW_CASING.get());
-                output.accept(ObjectRegistry.PALE_OAK_WINDOW_CASING.get());
-
-                output.accept(ObjectRegistry.FRAMEWORK.get());
 
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());

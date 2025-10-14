@@ -13,12 +13,5 @@ public class HearthAndTimberFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         HearthAndTimber.init();
-
-        Optional<ModContainer> modContainer = FabricLoader.getInstance().getModContainer(HearthAndTimber.MOD_ID);
-        modContainer.ifPresent(container -> ResourceManagerHelper.registerBuiltinResourcePack(
-                HearthAndTimber.identifier("connected_timber"),
-                container,
-                ResourcePackActivationType.ALWAYS_ENABLED
-        ));
     }
 }

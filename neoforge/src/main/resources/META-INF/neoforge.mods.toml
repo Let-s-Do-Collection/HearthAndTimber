@@ -4,7 +4,7 @@ license = "Custom"
 issueTrackerURL = "https://github.com/satisfyu/Let-s-Do-Hub"
 
 [[mixins]]
-config = "HearthAndTimber-neoforge.mixins.json"
+config = "hearthandtimber-neoforge.mixins.json"
 
 [[mods]]
 modId = "hearth_and_timber"

@@ -6,10 +6,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -50,6 +52,7 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
     public static final BooleanProperty FLOWER_POT = BooleanProperty.create("flower_pot");
     public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
+    public static final BooleanProperty BOTTOM_TOGGLE = BooleanProperty.create("bottom_toggle");
 
     private static final VoxelShape POT_N = Block.box(5, 0, 9, 11, 6, 15);
     private static final VoxelShape POT_S = Block.box(5, 0, 1, 11, 6, 7);
@@ -91,7 +94,8 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
                 .setValue(FLOWER_POT, false)
-                .setValue(SUPPORT, true));
+                .setValue(SUPPORT, true)
+                .setValue(BOTTOM_TOGGLE, false));
     }
 
     @Override
@@ -102,7 +106,8 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
                 .setValue(TOP, true)
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
-                .setValue(FLOWER_POT, false);
+                .setValue(FLOWER_POT, false)
+                .setValue(BOTTOM_TOGGLE, false);
         base = updateConnections(base, context.getLevel(), context.getClickedPos());
         base = updateSupportAndBottom(base, context.getLevel(), context.getClickedPos());
         return base;
@@ -149,7 +154,6 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
         boolean south = isConnected(level, pos.south(), facing);
         boolean west = isConnected(level, pos.west(), facing);
         boolean up = isConnected(level, pos.above(), facing);
-
         boolean top;
         boolean left;
         boolean right;
@@ -174,10 +178,12 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
     }
 
     private BlockState updateSupportAndBottom(BlockState state, LevelAccessor level, BlockPos pos) {
+        if (state.getValue(BOTTOM_TOGGLE)) {
+            return state;
+        }
         BlockState below = level.getBlockState(pos.below());
         boolean isSameBelow = below.getBlock() instanceof WindowCasingBlock && below.getValue(FACING) == state.getValue(FACING);
         boolean hasAnyBelow = !below.isAir();
-
         boolean support;
         boolean bottom;
         if (isSameBelow) {
@@ -218,7 +224,7 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, FLOWER_POT, SUPPORT);
+        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, FLOWER_POT, SUPPORT, BOTTOM_TOGGLE);
     }
 
     @Override
@@ -228,6 +234,32 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (stack.getItem() instanceof AxeItem) {
+            if (hit.getDirection() == state.getValue(FACING)) {
+                double y = hit.getLocation().y - pos.getY();
+                if ((state.getValue(BOTTOM) || state.getValue(SUPPORT)) && y < 0.5 && !state.getValue(FLOWER_POT)) {
+                    if (!level.isClientSide) {
+                        BlockState ns = state.setValue(BOTTOM, false).setValue(SUPPORT, false).setValue(BOTTOM_TOGGLE, true);
+                        level.setBlock(pos, ns, Block.UPDATE_CLIENTS);
+                        if (level instanceof ServerLevel s) {
+                            s.levelEvent(2001, pos, Block.getId(state));
+                        }
+                    }
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
+                }
+            }
+            if (!state.getValue(BOTTOM) && !state.getValue(SUPPORT) && hit.getDirection().getAxis().isHorizontal()) {
+                if (!level.isClientSide) {
+                    BlockState ns = state.setValue(BOTTOM, true).setValue(SUPPORT, true).setValue(BOTTOM_TOGGLE, true);
+                    level.setBlock(pos, ns, Block.UPDATE_CLIENTS);
+                    if (level instanceof ServerLevel s) {
+                        s.levelEvent(2001, pos, Block.getId(state));
+                    }
+                }
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            }
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         if (stack.is(Items.FLOWER_POT)) {
             if (state.getValue(FLOWER_POT)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (hit.getDirection() != state.getValue(FACING)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -295,7 +327,7 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
 
     @Override
     public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return getShape(state, level, pos, context);
+        return Shapes.empty();
     }
 
     @Override

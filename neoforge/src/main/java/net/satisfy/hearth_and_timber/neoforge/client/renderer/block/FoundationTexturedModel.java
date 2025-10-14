@@ -31,11 +31,9 @@ public class FoundationTexturedModel implements BakedModel {
     }
 
     private static TextureAtlasSprite targetSprite(@Nullable BlockState mimic, TextureAtlasSprite fallback) {
-        if (mimic != null) {
-            BakedModel m = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
-            return m.getParticleIcon();
-        }
-        return fallback;
+        if (mimic == null || mimic.isAir()) return fallback;
+        BakedModel m = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
+        return m.getParticleIcon();
     }
 
     private static BakedQuad remapQuad(BakedQuad q, TextureAtlasSprite dst) {
@@ -74,9 +72,14 @@ public class FoundationTexturedModel implements BakedModel {
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType layer) {
+        if (state == null || state.isAir()) {
+            return original.getQuads(state, side, rand, data, layer);
+        }
         List<BakedQuad> base = original.getQuads(state, side, rand, data, layer);
         if (!data.has(MIMIC)) return base;
-        TextureAtlasSprite dst = targetSprite(data.get(MIMIC), original.getParticleIcon());
+        BlockState mimic = data.get(MIMIC);
+        if (mimic == null || mimic.isAir()) return base;
+        TextureAtlasSprite dst = targetSprite(mimic, original.getParticleIcon());
         return remapAll(base, dst, filter);
     }
 

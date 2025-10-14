@@ -6,7 +6,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -14,8 +13,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -27,11 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -40,13 +33,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.hearth_and_timber.core.block.entity.FoundationBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFoundationBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class FoundationBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-    public static final MapCodec<FoundationBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseState), propertiesCodec()).apply(instance, FoundationBlock::new));
+public class TimberFoundationBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
+    public static final MapCodec<TimberFoundationBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseState), propertiesCodec()).apply(instance, TimberFoundationBlock::new));
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -87,14 +80,14 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     private final Block base;
     protected final BlockState baseState;
 
-    public FoundationBlock(BlockState baseState, BlockBehaviour.Properties properties) {
+    public TimberFoundationBlock(BlockState baseState, BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SHAPE, StairsShape.STRAIGHT).setValue(WATERLOGGED, false).setValue(APPLIED, false));
         this.base = baseState.getBlock();
         this.baseState = baseState;
     }
 
-    public @NotNull MapCodec<? extends FoundationBlock> codec() {
+    public @NotNull MapCodec<? extends TimberFoundationBlock> codec() {
         return CODEC;
     }
 
@@ -190,7 +183,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     }
 
     public static boolean isFoundation(BlockState state) {
-        return state.getBlock() instanceof FoundationBlock;
+        return state.getBlock() instanceof TimberFoundationBlock;
     }
 
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {
@@ -251,7 +244,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new FoundationBlockEntity(pos, state);
+        return new TimberFoundationBlockEntity(pos, state);
     }
 
     private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState state) {
@@ -267,7 +260,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
             if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof FoundationBlockEntity fbe) {
+            if (be instanceof TimberFoundationBlockEntity fbe) {
                 BlockState mimic = fbe.getMimicState();
                 if (mimic != null && !mimic.isAir()) {
                     Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
@@ -287,7 +280,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
         if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof FoundationBlockEntity fbe) {
+        if (blockEntity instanceof TimberFoundationBlockEntity fbe) {
             fbe.setMimicState(mimic);
             level.setBlock(pos, state.setValue(APPLIED, true), 3);
             if (level instanceof ServerLevel server) {
@@ -300,7 +293,7 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
     @Override
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof FoundationBlockEntity fbe) {
+        if (be instanceof TimberFoundationBlockEntity fbe) {
             BlockState mimic = fbe.getMimicState();
             if (mimic != null && !mimic.isAir() && !player.isCreative()) {
                 Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
@@ -324,6 +317,8 @@ public class FoundationBlock extends Block implements EntityBlock, SimpleWaterlo
             return;
         }
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_full.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         list.add(Component.empty());
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }

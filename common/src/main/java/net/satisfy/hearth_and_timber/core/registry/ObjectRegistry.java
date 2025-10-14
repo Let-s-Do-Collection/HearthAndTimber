@@ -14,7 +14,6 @@ import net.satisfy.hearth_and_timber.HearthAndTimber;
 import net.satisfy.hearth_and_timber.core.block.*;
 import net.satisfy.hearth_and_timber.core.util.GeneralUtil;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ObjectRegistry {
@@ -175,13 +174,33 @@ public class ObjectRegistry {
 
     public static final RegistrySupplier<Block> OAK_WINDOW_CASING = registerWithItem("oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> SPRUCE_WINDOW_CASING = registerWithItem("spruce_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> MANGROVE_WINDOW_CASING = registerWithItem("mangrove_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)));
+    public static final RegistrySupplier<Block> MANGROVE_WINDOW_CASING = registerWithItem("mangrove_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> BIRCH_WINDOW_CASING = registerWithItem("birch_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> JUNGLE_WINDOW_CASING = registerWithItem("jungle_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> DARK_OAK_WINDOW_CASING = registerWithItem("dark_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> ACACIA_WINDOW_CASING = registerWithItem("acacia_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> CHERRY_WINDOW_CASING = registerWithItem("cherry_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> PALE_OAK_WINDOW_CASING = registerWithItem("pale_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+
+    public static final RegistrySupplier<Block> OAK_WINDOW_PANE = registerWithItem("oak_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> SPRUCE_WINDOW_PANE = registerWithItem("spruce_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> BIRCH_WINDOW_PANE = registerWithItem("birch_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> JUNGLE_WINDOW_PANE = registerWithItem("jungle_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> ACACIA_WINDOW_PANE = registerWithItem("acacia_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> DARK_OAK_WINDOW_PANE = registerWithItem("dark_oak_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> MANGROVE_WINDOW_PANE = registerWithItem("mangrove_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> CHERRY_WINDOW_PANE = registerWithItem("cherry_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+    public static final RegistrySupplier<Block> PALE_OAK_WINDOW_PANE = registerWithItem("pale_oak_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
+
+    public static final RegistrySupplier<Block> OAK_WINDOW = registerWithItem("oak_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> SPRUCE_WINDOW = registerWithItem("spruce_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> BIRCH_WINDOW = registerWithItem("birch_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> JUNGLE_WINDOW = registerWithItem("jungle_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> ACACIA_WINDOW = registerWithItem("acacia_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> DARK_OAK_WINDOW = registerWithItem("dark_oak_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> MANGROVE_WINDOW = registerWithItem("mangrove_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> CHERRY_WINDOW = registerWithItem("cherry_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
+    public static final RegistrySupplier<Block> PALE_OAK_WINDOW = registerWithItem("pale_oak_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
 
     public static final RegistrySupplier<Block> SLIDING_HAYLOFT_DOOR = registerWithItem("sliding_hayloft_door", () -> new SlidingHayloftDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
@@ -214,7 +233,9 @@ public class ObjectRegistry {
     //public static final RegistrySupplier<Block> THATCH_STAIRS = registerWithItem("thatch_stairs", () -> new StairBlock(THATCH_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
     //public static final RegistrySupplier<Block> THATCH_SLAB = registerWithItem("thatch_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK).sound(SoundType.GRASS).strength(0.5f, 1.0f).mapColor(MapColor.COLOR_YELLOW)));
 
-    public static final RegistrySupplier<Block> TIMBER_FOUNDATION = registerWithItem("timber_foundation", () -> new FoundationBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_FOUNDATION = registerWithItem("timber_foundation", () -> new TimberFoundationBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_BASE_TRIM = registerWithItem("timber_base_trim", () -> new TimberBaseTrimBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_BASE_SKIRT = registerWithItem("timber_base_skirt", () -> new TimberBaseSkirtBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
 
     public static void init() {
         ITEMS.register();
@@ -237,26 +258,20 @@ public class ObjectRegistry {
         return BlockBehaviour.Properties.of().strength(breakSpeed, explosionResist);
     }
 
-    private static Item.Properties getSettings(Consumer<Item.Properties> consumer) {
-        Item.Properties settings = new Item.Properties();
-        consumer.accept(settings);
-        return settings;
-    }
-
-    static Item.Properties getSettings() {
-        return getSettings(s -> {
-        });
-    }
-
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
         return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(name), block);
     }
 
-    public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
-        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, HearthAndTimber.identifier(path), block);
-    }
+    /*
+ TODO:
+ - Add Quicklime (base material for Plaster)
+ - Corner - More stages: No support, extended
+ - Beam Textures
+ - WindowCasing tooltip axe
+ - Window Casing: Right click with an Axe on the bottom part to "remove" it
 
-    public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
-        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(path), itemSupplier);
-    }
+*/
+
 }
+
+

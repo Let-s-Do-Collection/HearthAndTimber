@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
-import net.satisfy.hearth_and_timber.core.block.entity.FoundationBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFoundationBlockEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.SlidingDoorBlockEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import net.satisfy.hearth_and_timber.core.block.entity.WindowCasingBlockEntity;
@@ -22,7 +22,7 @@ public class EntityTypeRegistry {
 
     public static final RegistrySupplier<BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR_BLOCK_ENTITY = registerBlockEntity("sliding_door", () -> BlockEntityType.Builder.of(SlidingDoorBlockEntity::new, SLIDING_HAYLOFT_DOOR.get(), SLIDING_BARN_DOOR.get(), SLIDING_STABLE_DOOR.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<TimberFrameBlockEntity>> TIMBER_FRAME_BLOCK_ENTITY = registerBlockEntity("timber_frame", () -> BlockEntityType.Builder.of(TimberFrameBlockEntity::new, TIMBER_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_GRID_FRAME.get()).build(null));
-    public static final RegistrySupplier<BlockEntityType<FoundationBlockEntity>> FOUNDATION_BLOCK_ENTITY = registerBlockEntity("foundation", () -> BlockEntityType.Builder.of(FoundationBlockEntity::new, TIMBER_FOUNDATION.get()).build(null));
+    public static final RegistrySupplier<BlockEntityType<TimberFoundationBlockEntity>> FOUNDATION_BLOCK_ENTITY = registerBlockEntity("foundation", () -> BlockEntityType.Builder.of(TimberFoundationBlockEntity::new, TIMBER_FOUNDATION.get(), TIMBER_BASE_TRIM.get(), TIMBER_BASE_SKIRT.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<WindowCasingBlockEntity>> WINDOW_CASING_BLOCK_ENTITY = registerBlockEntity("window_casing", () -> BlockEntityType.Builder.of(WindowCasingBlockEntity::new, ACACIA_WINDOW_CASING.get(), CHERRY_WINDOW_CASING.get(), DARK_OAK_WINDOW_CASING.get(), JUNGLE_WINDOW_CASING.get(), MANGROVE_WINDOW_CASING.get(), OAK_WINDOW_CASING.get(), SPRUCE_WINDOW_CASING.get(), BIRCH_WINDOW_CASING.get(), PALE_OAK_WINDOW_CASING.get()).build(null));
 
 

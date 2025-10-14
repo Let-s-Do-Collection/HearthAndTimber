@@ -29,10 +29,8 @@ public class HearthAndTimberClientFabric implements ClientModInitializer {
     private static boolean isTexturableModel(ResourceLocation id) {
         String p = id.getPath();
         if (p.startsWith("block/timber_foundation")) return true;
-        if (p.startsWith("block/fireplace_cornice_")) {
-            if (p.endsWith("_bottom")) return false;
-            return p.endsWith("_top") || p.endsWith("_left") || p.endsWith("_right");
-        }
+        if (p.startsWith("block/timber_base_skirt")) return true;
+        if (p.startsWith("block/timber_base_trim")) return true;
         return false;
     }
 }

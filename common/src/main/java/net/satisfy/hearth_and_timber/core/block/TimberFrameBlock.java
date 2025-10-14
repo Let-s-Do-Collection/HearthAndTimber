@@ -119,6 +119,8 @@ public class TimberFrameBlock extends BaseEntityBlock {
         }
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_trim.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

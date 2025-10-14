@@ -1,0 +1,170 @@
+{
+  "variants": {
+    "facing=north,shape=straight,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_top"
+    },
+    "facing=south,shape=straight,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_top",
+      "y": 180
+    },
+    "facing=west,shape=straight,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_top",
+      "y": 270
+    },
+    "facing=east,shape=straight,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_top",
+      "y": 90
+    },
+    "facing=north,shape=inner_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "uvlock": false
+    },
+    "facing=south,shape=inner_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 180,
+      "uvlock": false
+    },
+    "facing=west,shape=inner_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 270,
+      "uvlock": false
+    },
+    "facing=east,shape=inner_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 90,
+      "uvlock": false
+    },
+    "facing=north,shape=inner_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 90,
+      "uvlock": false
+    },
+    "facing=south,shape=inner_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 270,
+      "uvlock": false
+    },
+    "facing=west,shape=inner_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "uvlock": false
+    },
+    "facing=east,shape=inner_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner_top",
+      "y": 180,
+      "uv_lock": "false"
+    },
+    "facing=north,shape=outer_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top"
+    },
+    "facing=south,shape=outer_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 270
+    },
+    "facing=east,shape=outer_left,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top"
+    },
+    "facing=east,shape=outer_right,half=top": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer_top",
+      "y": 180
+    },
+    "facing=north,shape=straight,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim"
+    },
+    "facing=south,shape=straight,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim",
+      "y": 180
+    },
+    "facing=west,shape=straight,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim",
+      "y": 270
+    },
+    "facing=east,shape=straight,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim",
+      "y": 90
+    },
+    "facing=north,shape=inner_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "uvlock": false
+    },
+    "facing=south,shape=inner_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 180,
+      "uvlock": false
+    },
+    "facing=west,shape=inner_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 270,
+      "uvlock": false
+    },
+    "facing=east,shape=inner_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 90,
+      "uvlock": false
+    },
+    "facing=north,shape=inner_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 90,
+      "uvlock": false
+    },
+    "facing=south,shape=inner_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 270,
+      "uvlock": false
+    },
+    "facing=west,shape=inner_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "uvlock": false
+    },
+    "facing=east,shape=inner_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_inner",
+      "y": 180,
+      "uv_lock": "false"
+    },
+    "facing=north,shape=outer_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer"
+    },
+    "facing=south,shape=outer_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 270
+    },
+    "facing=east,shape=outer_left,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer"
+    },
+    "facing=east,shape=outer_right,half=bottom": {
+      "model": "hearth_and_timber:block/timber_base_trim_outer",
+      "y": 180
+    }
+  }
+}

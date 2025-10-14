@@ -34,7 +34,10 @@ public class HearthAndTimberClientNeoForge {
         for (var entry : models.entrySet()) {
             ResourceLocation loc = entry.getKey().id();
             if (!HearthAndTimber.MOD_ID.equals(loc.getNamespace())) continue;
-            if (loc.getPath().contains("timber_foundation")) {
+            String p = loc.getPath();
+            if (p.contains("timber_foundation")
+                    || p.contains("base_trim") || p.contains("timber_base_trim")
+                    || p.contains("base_skirt") || p.contains("timber_base_skirt")) {
                 models.put(entry.getKey(), new FoundationTexturedModel(entry.getValue(), (q, s) -> true));
             }
         }
