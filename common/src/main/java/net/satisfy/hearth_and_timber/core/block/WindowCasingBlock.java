@@ -370,5 +370,7 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
             return;
         }
         list.add(Component.translatable("tooltip.hearth_and_timber.window_casing.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.empty());
+        list.add(Component.translatable("tooltip.hearth_and_timber.window_casing.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

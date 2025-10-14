@@ -265,11 +265,7 @@ public class ObjectRegistry {
     /*
  TODO:
  - Add Quicklime (base material for Plaster)
- - Corner - More stages: No support, extended
  - Beam Textures
- - WindowCasing tooltip axe
- - Window Casing: Right click with an Axe on the bottom part to "remove" it
-
 */
 
 }

@@ -180,6 +180,8 @@
   "tooltip.hearth_and_timber.wardrobe.info_0": "Right-click to open or close.",
   "tooltip.hearth_and_timber.wardrobe.info_1": "Use to store Armor.",
   "tooltip.hearth_and_timber.window_casing.info_0": "Right-click with a Flower Pot on the bottom front part to place it.",
+  "tooltip.hearth_and_timber.window_casing.info_1": "Right-click the bottom part with an Axe to toggle it.",
+  "tooltip.hearth_and_timber.support.info_0": "Right-click with an Axe to switch between stages.",
   "block.hearth_and_timber.oak_window_pane": "Oak Glass Pane",
   "block.hearth_and_timber.spruce_window_pane": "Spruce Glass Pane",
   "block.hearth_and_timber.birch_window_pane": "Birch Glass Pane",
