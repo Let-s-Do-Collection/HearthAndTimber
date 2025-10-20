@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
-      "model": "hearth_and_timber:block/timber_cross_frame"
+    "applied=false": {
+      "model": "hearth_and_timber:block/timber_cross_frame_connected"
+    },
+    "applied=true": {
+      "model": "hearth_and_timber:block/timber_cross_frame_connected"
     }
   }
 }

@@ -2,7 +2,7 @@
 	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
-		"0": "hearth_and_timber:block/timber_frame",
+		"0": "hearth_and_timber:block/timber_frame_connected",
 		"particle": "hearth_and_timber:block/timber_frame"
 	},
 	"elements": [
