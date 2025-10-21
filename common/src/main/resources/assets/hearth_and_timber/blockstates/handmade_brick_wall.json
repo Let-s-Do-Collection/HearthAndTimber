@@ -1,0 +1,190 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_post_0"
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_post_1"
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_post_2"
+        }
+      ]
+    },
+    {
+      "when": {
+        "north": "low"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_0",
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_1",
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_2",
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "north": "tall"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_0",
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_1",
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_2",
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "east": "low"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_0",
+          "y": 90,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_1",
+          "y": 90,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_2",
+          "y": 90,
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "east": "tall"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_0",
+          "y": 90,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_1",
+          "y": 90,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_2",
+          "y": 90,
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "south": "low"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_0",
+          "y": 180,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_1",
+          "y": 180,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_2",
+          "y": 180,
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "south": "tall"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_0",
+          "y": 180,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_1",
+          "y": 180,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_2",
+          "y": 180,
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "west": "low"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_0",
+          "y": 270,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_1",
+          "y": 270,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_2",
+          "y": 270,
+          "uvlock": true
+        }
+      ]
+    },
+    {
+      "when": {
+        "west": "tall"
+      },
+      "apply": [
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_0",
+          "y": 270,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_1",
+          "y": 270,
+          "uvlock": true
+        },
+        {
+          "model": "hearth_and_timber:block/handmade_brick_wall_side_tall_2",
+          "y": 270,
+          "uvlock": true
+        }
+      ]
+    }
+  ]
+}

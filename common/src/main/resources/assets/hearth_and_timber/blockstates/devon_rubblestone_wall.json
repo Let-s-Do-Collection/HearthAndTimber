@@ -1,0 +1,17 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hearth_and_timber:block/devon_rubblestone_wall_post"
+      }
+    },
+    {
+      "when": {
+        "up": "true"
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/devon_rubblestone_wall_side"
+      }
+    }
+  ]
+}

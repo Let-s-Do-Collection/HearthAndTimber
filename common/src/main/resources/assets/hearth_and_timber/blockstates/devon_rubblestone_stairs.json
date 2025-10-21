@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=east,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/devon_rubblestone_stairs"
+    },
+    "facing=west,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/devon_rubblestone_stairs",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/devon_rubblestone_stairs",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=straight": {
+      "model": "hearth_and_timber:block/devon_rubblestone_stairs",
+      "y": 270,
+      "uvlock": true
+    }
+  }
+}

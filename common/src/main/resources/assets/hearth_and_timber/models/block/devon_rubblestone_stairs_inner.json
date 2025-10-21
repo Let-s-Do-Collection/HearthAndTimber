@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/devon_rubblestone",
+    "top": "hearth_and_timber:block/devon_rubblestone",
+    "side": "hearth_and_timber:block/devon_rubblestone"
+  }
+}

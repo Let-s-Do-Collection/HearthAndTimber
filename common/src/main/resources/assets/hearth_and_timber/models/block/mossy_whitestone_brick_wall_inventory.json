@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/wall_inventory",
-  "textures": {
-    "wall": "hearth_and_timber:block/mossy_whitestone_bricks"
-  }
-}

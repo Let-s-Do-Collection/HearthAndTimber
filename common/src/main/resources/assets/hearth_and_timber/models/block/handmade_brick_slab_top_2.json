@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "hearth_and_timber:block/handmade_bricks_2",
+    "top": "hearth_and_timber:block/handmade_bricks_2",
+    "side": "hearth_and_timber:block/handmade_bricks_2"
+  }
+}

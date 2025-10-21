@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "hearth_and_timber:mossy_cinderstone_bricks"
+          "name": "hearth_and_timber:mossy_layered_stone_bricks"
         }
       ],
       "conditions": [

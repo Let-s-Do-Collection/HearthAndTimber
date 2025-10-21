@@ -141,33 +141,34 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_SLAB.get());
                 output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_WALL.get());
 
-                output.accept(ObjectRegistry.ROSESTONE_BRICKS.get());
-                output.accept(ObjectRegistry.ROSESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.ROSESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.ROSESTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_ROSESTONE_BRICK_WALL.get());
-
-                output.accept(ObjectRegistry.WHITESTONE_BRICKS.get());
-                output.accept(ObjectRegistry.WHITESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.WHITESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.WHITESTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_WHITESTONE_BRICK_WALL.get());
-
-                output.accept(ObjectRegistry.CINDERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.CINDERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.CINDERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.CINDERSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_CINDERSTONE_BRICK_WALL.get());
-
+                output.accept(ObjectRegistry.LAYERED_STONE_BRICKS.get());
+                output.accept(ObjectRegistry.LAYERED_STONE_BRICK_STAIRS.get());
+                output.accept(ObjectRegistry.LAYERED_STONE_BRICK_SLAB.get());
+                output.accept(ObjectRegistry.LAYERED_STONE_BRICK_WALL.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_STONE_BRICKS.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_STONE_BRICK_STAIRS.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_STONE_BRICK_SLAB.get());
+                output.accept(ObjectRegistry.MOSSY_LAYERED_STONE_BRICK_WALL.get());
+                output.accept(ObjectRegistry.COVERED_RUBBLESTONE.get());
+                output.accept(ObjectRegistry.COVERED_RUBBLESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.COVERED_RUBBLESTONE_SLAB.get());
+                output.accept(ObjectRegistry.COVERED_RUBBLESTONE_WALL.get());
+                output.accept(ObjectRegistry.PLASTERED_RUBBLESTONE.get());
+                output.accept(ObjectRegistry.PLASTERED_RUBBLESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.PLASTERED_RUBBLESTONE_SLAB.get());
+                output.accept(ObjectRegistry.PLASTERED_RUBBLESTONE_WALL.get());
+                output.accept(ObjectRegistry.RUBBLESTONE.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_SLAB.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_WALL.get());
+                output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE.get());
+                output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE_SLAB.get());
+                output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE_WALL.get());
+                output.accept(ObjectRegistry.DEVON_RUBBLESTONE.get());
+                output.accept(ObjectRegistry.DEVON_RUBBLESTONE_STAIRS.get());
+                output.accept(ObjectRegistry.DEVON_RUBBLESTONE_SLAB.get());
+                output.accept(ObjectRegistry.DEVON_RUBBLESTONE_WALL.get());
                 output.accept(ObjectRegistry.MARLSTONE_BRICKS.get());
                 output.accept(ObjectRegistry.MARLSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.MARLSTONE_BRICK_SLAB.get());
@@ -176,25 +177,11 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_SLAB.get());
                 output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_WALL.get());
-
-                output.accept(ObjectRegistry.AMBERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.AMBERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.AMBERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.AMBERSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_AMBERSTONE_BRICK_WALL.get());
-
-                output.accept(ObjectRegistry.LAYERED_AMBERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.LAYERED_AMBERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.LAYERED_AMBERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.LAYERED_AMBERSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_AMBERSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_AMBERSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_AMBERSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_AMBERSTONE_BRICK_WALL.get());
-
+                output.accept(ObjectRegistry.HANDMADE_BRICKS.get());
+                output.accept(ObjectRegistry.HANDMADE_BRICK_STAIRS.get());
+                output.accept(ObjectRegistry.HANDMADE_BRICK_SLAB.get());
+                output.accept(ObjectRegistry.HANDMADE_BRICK_WALL.get());
+            
                 output.accept(ObjectRegistry.SPLITSTONE.get());
                 output.accept(ObjectRegistry.SPLITSTONE_STAIRS.get());
                 output.accept(ObjectRegistry.SPLITSTONE_SLAB.get());

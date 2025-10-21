@@ -15,7 +15,7 @@
     "hearth_and_timber:mossy_layered_amberstone_brick_wall",
     "hearth_and_timber:marlstone_brick_wall",
     "hearth_and_timber:mossy_marlstone_brick_wall",
-    "hearth_and_timber:cinderstone_brick_wall",
-    "hearth_and_timber:mossy_cinderstone_brick_wall"
+    "hearth_and_timber:layered_stone_brick_wall",
+    "hearth_and_timber:mossy_layered_stone_brick_wall"
   ]
 }

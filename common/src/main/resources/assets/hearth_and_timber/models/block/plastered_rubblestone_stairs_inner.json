@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/plastered_rubbletone",
+    "top": "hearth_and_timber:block/plastered_rubbletone",
+    "side": "hearth_and_timber:block/plastered_rubbletone"
+  }
+}
