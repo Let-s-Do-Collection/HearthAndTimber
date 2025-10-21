@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "hearthandtimber-fabric.mixins.json"
+
   ],
   "depends": {
     "fabric-api": "*",

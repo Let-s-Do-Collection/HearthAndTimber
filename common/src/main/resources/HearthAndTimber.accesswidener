@@ -1,9 +1,2 @@
 accessWidener   v2  named
 accessible method net/minecraft/world/entity/decoration/ArmorStand setMarker (Z)V
-accessible field net/minecraft/client/multiplayer/ClientLevel levelRenderer Lnet/minecraft/client/renderer/LevelRenderer;
-accessible method net/minecraft/client/renderer/LevelRenderer setBlockDirty (Lnet/minecraft/core/BlockPos;Z)V
-accessible method net/minecraft/core/Direction getClockWiseZ ()Lnet/minecraft/core/Direction;
-
-# Block overlays
-mutable field net/minecraft/client/renderer/RenderType CHUNK_BUFFER_LAYERS Lcom/google/common/collect/ImmutableList;
-accessible field net/minecraft/client/resources/model/SimpleBakedModel unculledFaces Ljava/util/List;
