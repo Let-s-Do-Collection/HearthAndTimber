@@ -32,6 +32,11 @@ public class WeatheringThatchBlock extends Block implements IWeatheringThatch {
     }
 
     @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return getNextBlock() != null;
+    }
+
+    @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         tickWeathering(state, level, pos, random);
     }

@@ -24,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.phys.BlockHitResult;
 import net.satisfy.hearth_and_timber.core.registry.ObjectRegistry;
 
 public interface IWeatheringThatch {
@@ -65,7 +64,7 @@ public interface IWeatheringThatch {
         }
 
         if (stack.is(Items.WHEAT)) {
-            Block base = ObjectRegistry.THATCH_BLOCK.get();
+            Block base = ObjectRegistry.THATCH.get();
             if (base != null) {
                 BlockState target = copyMatching(state, base.defaultBlockState());
                 if (!level.isClientSide) {
@@ -103,9 +102,9 @@ public interface IWeatheringThatch {
     }
 
     private static Block getPrevious(Block block) {
-        if (block == ObjectRegistry.WEATHERED_THATCH_BLOCK.get()) return ObjectRegistry.THATCH_BLOCK.get();
-        if (block == ObjectRegistry.DRYING_THATCH_BLOCK.get()) return ObjectRegistry.WEATHERED_THATCH_BLOCK.get();
-        if (block == ObjectRegistry.AGED_THATCH_BLOCK.get()) return ObjectRegistry.DRYING_THATCH_BLOCK.get();
+        if (block == ObjectRegistry.WEATHERED_THATCH.get()) return ObjectRegistry.THATCH.get();
+        if (block == ObjectRegistry.DRYING_THATCH.get()) return ObjectRegistry.WEATHERED_THATCH.get();
+        if (block == ObjectRegistry.AGED_THATCH.get()) return ObjectRegistry.DRYING_THATCH.get();
         return null;
     }
 

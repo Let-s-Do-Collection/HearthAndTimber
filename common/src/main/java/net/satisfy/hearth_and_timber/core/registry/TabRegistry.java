@@ -191,16 +191,16 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.SPLITSTONE_PATH.get());
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_PATH.get());
 
-                output.accept(ObjectRegistry.THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.THATCH.get());
                 output.accept(ObjectRegistry.THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.THATCH_SLAB.get());
-                output.accept(ObjectRegistry.WEATHERED_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.WEATHERED_THATCH.get());
                 output.accept(ObjectRegistry.WEATHERED_THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.WEATHERED_THATCH_SLAB.get());
-                output.accept(ObjectRegistry.DRYING_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.DRYING_THATCH.get());
                 output.accept(ObjectRegistry.DRYING_THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.DRYING_THATCH_SLAB.get());
-                output.accept(ObjectRegistry.AGED_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.AGED_THATCH.get());
                 output.accept(ObjectRegistry.AGED_THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.AGED_THATCH_SLAB.get());
 

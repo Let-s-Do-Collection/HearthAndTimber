@@ -7,7 +7,7 @@
       "model":"hearth_and_timber:block/thatch_slab_top"
     },
     "type=double":{
-      "model":"hearth_and_timber:block/thatch_block"
+      "model":"hearth_and_timber:block/thatch"
     }
   }
 }
