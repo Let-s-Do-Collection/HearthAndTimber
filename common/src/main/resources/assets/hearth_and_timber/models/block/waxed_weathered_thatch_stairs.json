@@ -1,0 +1,8 @@
+{
+  "parent":"minecraft:block/stairs",
+  "textures":{
+    "bottom":"hearth_and_timber:block/thatch_weathered_top",
+    "top":"hearth_and_timber:block/thatch_weathered_top",
+    "side":"hearth_and_timber:block/thatch_weathered"
+  }
+}

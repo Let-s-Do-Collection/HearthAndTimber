@@ -2,11 +2,9 @@ package net.satisfy.hearth_and_timber.client;
 
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.rendering.BlockEntityRendererRegistry;
-import dev.architectury.registry.client.rendering.ColorHandlerRegistry;
 import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.satisfy.hearth_and_timber.client.renderer.block.SlidingDoorRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.block.WindowCasingRenderer;

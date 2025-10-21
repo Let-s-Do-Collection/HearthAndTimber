@@ -96,6 +96,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.CHERRY_WINDOW.get());
                 output.accept(ObjectRegistry.PALE_OAK_WINDOW.get());
 
+                output.accept(ObjectRegistry.QUICKLIME.get());
                 output.accept(ObjectRegistry.WHITE_PLASTER.get());
                 output.accept(ObjectRegistry.LIGHT_GRAY_PLASTER.get());
                 output.accept(ObjectRegistry.GRAY_PLASTER.get());
@@ -202,6 +203,19 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_SLAB.get());
                 output.accept(ObjectRegistry.SPLITSTONE_PATH.get());
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_PATH.get());
+
+                output.accept(ObjectRegistry.THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.THATCH_STAIRS.get());
+                output.accept(ObjectRegistry.THATCH_SLAB.get());
+                output.accept(ObjectRegistry.WEATHERED_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.WEATHERED_THATCH_STAIRS.get());
+                output.accept(ObjectRegistry.WEATHERED_THATCH_SLAB.get());
+                output.accept(ObjectRegistry.DRYING_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.DRYING_THATCH_STAIRS.get());
+                output.accept(ObjectRegistry.DRYING_THATCH_SLAB.get());
+                output.accept(ObjectRegistry.AGED_THATCH_BLOCK.get());
+                output.accept(ObjectRegistry.AGED_THATCH_STAIRS.get());
+                output.accept(ObjectRegistry.AGED_THATCH_SLAB.get());
 
                 output.accept(ObjectRegistry.PACKED_DIRT.get());
                 output.accept(ObjectRegistry.TRAMPLED_PACKED_DIRT.get());
