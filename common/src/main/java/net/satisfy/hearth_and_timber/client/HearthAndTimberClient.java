@@ -7,7 +7,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.RenderType;
 import net.satisfy.hearth_and_timber.client.renderer.block.SlidingDoorRenderer;
-import net.satisfy.hearth_and_timber.client.renderer.block.TimberFrameRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.block.WindowCasingRenderer;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingBarnDoorModel;
 import net.satisfy.hearth_and_timber.client.renderer.model.SlidingHayloftDoorModel;
@@ -37,7 +36,6 @@ public class HearthAndTimberClient {
 
     public static void registerBlockEntityRenderer() {
         BlockEntityRendererRegistry.register(EntityTypeRegistry.SLIDING_DOOR_BLOCK_ENTITY.get(), SlidingDoorRenderer::new);
-        BlockEntityRendererRegistry.register(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), TimberFrameRenderer::new);
         BlockEntityRendererRegistry.register(EntityTypeRegistry.WINDOW_CASING_BLOCK_ENTITY.get(), WindowCasingRenderer::new);
     }
 }

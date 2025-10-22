@@ -191,11 +191,11 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
 
-    public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_FRAME_STAIRS = registerWithItem("timber_frame_stairs", () -> new StairBlock(TIMBER_FRAME.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_STAIRS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_CROSS_FRAME = registerWithItem("timber_cross_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_GRID_FRAME = registerWithItem("timber_grid_frame", () -> new TimberFrameBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BAMBOO_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_FRAME_STAIRS = registerWithItem("timber_frame_stairs", () -> new TimberFrameStairsBlock(TIMBER_FRAME.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_CROSS_FRAME = registerWithItem("timber_cross_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_GRID_FRAME = registerWithItem("timber_grid_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistrySupplier<Block> QUICKLIME = registerWithItem("quicklime", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY).mapColor(MapColor.COLOR_GRAY)));
     public static final RegistrySupplier<Block> BLACK_PLASTER = registerWithItem("black_plaster", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BLACK_TERRACOTTA).mapColor(MapColor.COLOR_BLACK)));

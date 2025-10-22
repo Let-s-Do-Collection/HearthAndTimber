@@ -18,19 +18,16 @@ public class HearthAndTimberClientFabric implements ClientModInitializer {
         ModelLoadingPlugin.register(context ->
                 context.modifyModelAfterBake().register((bakedModel, ctx) -> {
                     ResourceLocation id = ctx.resourceId();
-                    if (id != null && isTexturableModel(id)) {
-                        return bakedModel == null ? null : new FoundationTexturedModel(bakedModel);
+                    if (id == null) return bakedModel;
+                    String path = id.getPath();
+                    boolean isFramePlaceholder = path.startsWith("block/timber_frame") || path.startsWith("block/timber_grid_frame") || path.startsWith("block/timber_diagonal_frame") || path.startsWith("block/timber_cross_frame");
+                    boolean isFoundationPart = path.startsWith("block/timber_foundation") || path.startsWith("block/timber_base_skirt") || path.startsWith("block/timber_base_trim");
+                    if (isFoundationPart || isFramePlaceholder) {
+                        return bakedModel == null ? null : new FoundationTexturedModel(bakedModel, isFramePlaceholder);
                     }
                     return bakedModel;
                 })
         );
     }
 
-    private static boolean isTexturableModel(ResourceLocation id) {
-        String p = id.getPath();
-        if (p.startsWith("block/timber_foundation")) return true;
-        if (p.startsWith("block/timber_base_skirt")) return true;
-        if (p.startsWith("block/timber_base_trim")) return true;
-        return false;
-    }
 }
