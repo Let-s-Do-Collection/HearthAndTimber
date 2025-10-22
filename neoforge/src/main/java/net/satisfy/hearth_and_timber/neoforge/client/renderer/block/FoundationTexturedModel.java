@@ -17,51 +17,74 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiPredicate;
 
 @SuppressWarnings("deprecation")
 public class FoundationTexturedModel implements BakedModel {
     public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
     private final BakedModel original;
-    private final BiPredicate<BakedQuad, TextureAtlasSprite> filter;
+    private final boolean onlyPlaceholder;
 
-    public FoundationTexturedModel(BakedModel original, BiPredicate<BakedQuad, TextureAtlasSprite> filter) {
+    public FoundationTexturedModel(BakedModel original, boolean onlyPlaceholder) {
         this.original = original;
-        this.filter = filter;
+        this.onlyPlaceholder = onlyPlaceholder;
+    }
+
+    private static boolean isMissing(TextureAtlasSprite s) {
+        return s == null || s.contents() == null || "missingno".equals(s.contents().name().getPath());
     }
 
     private static TextureAtlasSprite targetSprite(@Nullable BlockState mimic, TextureAtlasSprite fallback) {
         if (mimic == null || mimic.isAir()) return fallback;
-        BakedModel m = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
-        return m.getParticleIcon();
+        BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);
+        TextureAtlasSprite s = model.getParticleIcon();
+        return isMissing(s) ? fallback : s;
     }
 
-    private static BakedQuad remapQuad(BakedQuad q, TextureAtlasSprite dst) {
-        TextureAtlasSprite src = q.getSprite();
-        int[] verts = q.getVertices().clone();
-        float su0 = src.getU0(), su1 = src.getU1();
-        float sv0 = src.getV0(), sv1 = src.getV1();
-        float du = su1 - su0, dv = sv1 - sv0;
+    private static BakedQuad remapQuad(BakedQuad quad, TextureAtlasSprite dst) {
+        TextureAtlasSprite src = quad.getSprite();
+        if (src == dst) return quad;
+        int[] verts = quad.getVertices().clone();
+
+        float su0 = src.getU0();
+        float sv0 = src.getV0();
+        float su1 = src.getU1();
+        float sv1 = src.getV1();
+        float du = su1 - su0;
+        float dv = sv1 - sv0;
+        if (du == 0f || dv == 0f) return quad;
+
         float duDst = dst.getU1() - dst.getU0();
         float dvDst = dst.getV1() - dst.getV0();
+
         for (int i = 0; i < 4; i++) {
             int off = i * 8;
             float uA = Float.intBitsToFloat(verts[off + 4]);
             float vA = Float.intBitsToFloat(verts[off + 5]);
-            float uNorm = du != 0f ? (uA - su0) / du : 0f;
-            float vNorm = dv != 0f ? (vA - sv0) / dv : 0f;
-            float u = dst.getU0() + uNorm * duDst;
-            float v = dst.getV0() + vNorm * dvDst;
+
+            float uRel = (uA - su0) / du;
+            float vRel = (vA - sv0) / dv;
+
+            float u = dst.getU0() + uRel * duDst;
+            float v = dst.getV0() + vRel * dvDst;
+
             verts[off + 4] = Float.floatToRawIntBits(u);
             verts[off + 5] = Float.floatToRawIntBits(v);
         }
-        return new BakedQuad(verts, q.getTintIndex(), q.getDirection(), dst, q.isShade());
+
+        return new BakedQuad(verts, quad.getTintIndex(), quad.getDirection(), dst, quad.isShade());
     }
 
-    private static List<BakedQuad> remapAll(List<BakedQuad> in, TextureAtlasSprite dst, BiPredicate<BakedQuad, TextureAtlasSprite> filter) {
+    private static List<BakedQuad> remapAll(List<BakedQuad> in, TextureAtlasSprite dst, boolean onlyPlaceholder) {
         if (in.isEmpty()) return in;
         List<BakedQuad> out = new ArrayList<>(in.size());
-        for (BakedQuad q : in) out.add(filter.test(q, dst) ? remapQuad(q, dst) : q);
+        for (BakedQuad quad : in) {
+            boolean isPlaceholder = quad.getSprite() != null && quad.getSprite().contents() != null && quad.getSprite().contents().name().getPath().contains("placeholder");
+            if (!onlyPlaceholder || isPlaceholder) {
+                out.add(remapQuad(quad, dst));
+            } else {
+                out.add(quad);
+            }
+        }
         return out;
     }
 
@@ -72,15 +95,14 @@ public class FoundationTexturedModel implements BakedModel {
 
     @Override
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType layer) {
-        if (state == null || state.isAir()) {
-            return original.getQuads(state, side, rand, data, layer);
-        }
         List<BakedQuad> base = original.getQuads(state, side, rand, data, layer);
+        if (base.isEmpty()) return base;
         if (!data.has(MIMIC)) return base;
         BlockState mimic = data.get(MIMIC);
         if (mimic == null || mimic.isAir()) return base;
         TextureAtlasSprite dst = targetSprite(mimic, original.getParticleIcon());
-        return remapAll(base, dst, filter);
+        if (isMissing(dst)) return base;
+        return remapAll(base, dst, onlyPlaceholder);
     }
 
     @Override

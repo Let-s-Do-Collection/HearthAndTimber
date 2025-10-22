@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.satisfy.hearth_and_timber.core.block.entity.TimberFoundationBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, SimpleWaterloggedBlock {
@@ -58,7 +58,7 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new TimberFoundationBlockEntity(pos, state);
+        return new TimberFrameBlockEntity(pos, state);
     }
 
     private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState candidate) {
@@ -73,7 +73,7 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
             if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TimberFoundationBlockEntity foundation) {
+            if (be instanceof TimberFrameBlockEntity foundation) {
                 BlockState mimic = foundation.getMimicState();
                 if (mimic != null && !mimic.isAir()) {
                     Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
@@ -90,7 +90,7 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
         if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFoundationBlockEntity foundation) {
+        if (be instanceof TimberFrameBlockEntity foundation) {
             foundation.setMimicState(mimic);
             level.setBlock(pos, state.setValue(APPLIED, true), 3);
             if (level instanceof ServerLevel server) server.levelEvent(2001, pos, Block.getId(mimic));
@@ -100,7 +100,7 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
 
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFoundationBlockEntity foundation) {
+        if (be instanceof TimberFrameBlockEntity foundation) {
             BlockState mimic = foundation.getMimicState();
             if (mimic != null && !mimic.isAir() && !player.isCreative()) {
                 Block.popResource(level, pos, new ItemStack(mimic.getBlock()));

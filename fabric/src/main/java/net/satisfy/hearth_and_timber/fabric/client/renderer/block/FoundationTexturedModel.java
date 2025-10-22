@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.satisfy.hearth_and_timber.core.block.TimberBaseSkirtBlock;
 import net.satisfy.hearth_and_timber.core.block.TimberBaseTrimBlock;
 import net.satisfy.hearth_and_timber.core.block.TimberFoundationBlock;
-import net.satisfy.hearth_and_timber.core.block.entity.TimberFoundationBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -68,7 +68,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
         }
         var target = original.getParticleIcon();
         var be = level.getBlockEntity(pos);
-        if (be instanceof TimberFoundationBlockEntity fbe) {
+        if (be instanceof TimberFrameBlockEntity fbe) {
             var mimic = fbe.getMimicState();
             if (mimic != null && !mimic.isAir() && mimic.getRenderShape() == RenderShape.MODEL && !(mimic.getBlock() instanceof TimberFoundationBlock) && !(mimic.getBlock() instanceof TimberBaseSkirtBlock) && !(mimic.getBlock() instanceof TimberBaseTrimBlock)) {
                 var mm = Minecraft.getInstance().getBlockRenderer().getBlockModel(mimic);

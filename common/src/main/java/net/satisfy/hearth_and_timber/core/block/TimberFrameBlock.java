@@ -37,7 +37,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.hearth_and_timber.core.block.entity.TimberFoundationBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -102,7 +102,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
     }
 
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new TimberFoundationBlockEntity(pos, state);
+        return new TimberFrameBlockEntity(pos, state);
     }
 
     private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState state) {
@@ -117,7 +117,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
             if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TimberFoundationBlockEntity fbe) {
+            if (be instanceof TimberFrameBlockEntity fbe) {
                 BlockState mimic = fbe.getMimicState();
                 if (mimic != null && !mimic.isAir()) {
                     Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
@@ -136,7 +136,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFoundationBlockEntity fbe) {
+        if (be instanceof TimberFrameBlockEntity fbe) {
             fbe.setMimicState(mimic);
             level.setBlock(pos, state.setValue(APPLIED, true), 3);
             if (level instanceof ServerLevel server) {
@@ -148,7 +148,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
 
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFoundationBlockEntity fbe) {
+        if (be instanceof TimberFrameBlockEntity fbe) {
             BlockState mimic = fbe.getMimicState();
             if (mimic != null && !mimic.isAir() && !player.isCreative()) {
                 Block.popResource(level, pos, new ItemStack(mimic.getBlock()));

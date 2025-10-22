@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "hearth_and_timber:block/timber_diagonal_frame"
+    "left=true": {
+      "model": "hearth_and_timber:block/timber_diagonal_frame",
+      "y": 0
+    },
+    "left=false": {
+      "model": "hearth_and_timber:block/timber_diagonal_frame",
+      "y": 180
     }
   }
 }

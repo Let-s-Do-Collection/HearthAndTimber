@@ -194,7 +194,7 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_FRAME_STAIRS = registerWithItem("timber_frame_stairs", () -> new TimberFrameStairsBlock(TIMBER_FRAME.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_CROSS_FRAME = registerWithItem("timber_cross_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
-    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final RegistrySupplier<Block> TIMBER_DIAGONAL_FRAME = registerWithItem("timber_diagonal_frame", () -> new TimberDiagonalFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_GRID_FRAME = registerWithItem("timber_grid_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
     public static final RegistrySupplier<Block> QUICKLIME = registerWithItem("quicklime", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CLAY).mapColor(MapColor.COLOR_GRAY)));
