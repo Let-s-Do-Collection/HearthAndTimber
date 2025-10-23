@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "B B",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:acacia_window_casing",
+    "count": 3
+  }
+}

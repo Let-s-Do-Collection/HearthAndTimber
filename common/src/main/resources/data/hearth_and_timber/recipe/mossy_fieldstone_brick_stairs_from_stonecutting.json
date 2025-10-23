@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hearth_and_timber:mossy_fieldstone_bricks"
+  },
+  "result": {
+    "id": "hearth_and_timber:mossy_fieldstone_brick_stairs",
+    "count": 1
+  }
+}

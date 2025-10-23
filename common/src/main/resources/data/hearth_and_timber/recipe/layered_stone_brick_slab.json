@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:layered_stone_bricks"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:layered_stone_brick_slab",
+    "count": 6
+  }
+}

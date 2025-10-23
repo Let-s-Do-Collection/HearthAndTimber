@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 150,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "minecraft:calcite"
+  },
+  "result": {
+    "id": "hearth_and_timber:quicklime"
+  }
+}

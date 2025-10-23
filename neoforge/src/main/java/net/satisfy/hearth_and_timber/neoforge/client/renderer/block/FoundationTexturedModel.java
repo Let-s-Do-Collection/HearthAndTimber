@@ -10,6 +10,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.model.IQuadTransformer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,9 @@ public class FoundationTexturedModel implements BakedModel {
     }
 
     private static boolean isMissing(TextureAtlasSprite s) {
-        return s == null || s.contents() == null || "missingno".equals(s.contents().name().getPath());
+        if (s == null) return true;
+        s.contents();
+        return "missingno".equals(s.contents().name().getPath());
     }
 
     private static TextureAtlasSprite targetSprite(@Nullable BlockState mimic, TextureAtlasSprite fallback) {
@@ -43,42 +46,37 @@ public class FoundationTexturedModel implements BakedModel {
     private static BakedQuad remapQuad(BakedQuad quad, TextureAtlasSprite dst) {
         TextureAtlasSprite src = quad.getSprite();
         if (src == dst) return quad;
+
         int[] verts = quad.getVertices().clone();
+        int stride = IQuadTransformer.STRIDE;
+        int uvBase = IQuadTransformer.UV0;
 
-        float su0 = src.getU0();
-        float sv0 = src.getV0();
-        float su1 = src.getU1();
-        float sv1 = src.getV1();
-        float du = su1 - su0;
-        float dv = sv1 - sv0;
-        if (du == 0f || dv == 0f) return quad;
-
-        float duDst = dst.getU1() - dst.getU0();
-        float dvDst = dst.getV1() - dst.getV0();
+        float wScale = dst.contents().width() / (float) src.contents().width();
+        float hScale = dst.contents().height() / (float) src.contents().height();
 
         for (int i = 0; i < 4; i++) {
-            int off = i * 8;
-            float uA = Float.intBitsToFloat(verts[off + 4]);
-            float vA = Float.intBitsToFloat(verts[off + 5]);
+            int off = i * stride + uvBase;
+            float uOrig = Float.intBitsToFloat(verts[off]);
+            float vOrig = Float.intBitsToFloat(verts[off + 1]);
 
-            float uRel = (uA - su0) / du;
-            float vRel = (vA - sv0) / dv;
+            float uRemap = (uOrig - src.getU0()) * wScale + dst.getU0();
+            float vRemap = (vOrig - src.getV0()) * hScale + dst.getV0();
 
-            float u = dst.getU0() + uRel * duDst;
-            float v = dst.getV0() + vRel * dvDst;
-
-            verts[off + 4] = Float.floatToRawIntBits(u);
-            verts[off + 5] = Float.floatToRawIntBits(v);
+            verts[off] = Float.floatToRawIntBits(uRemap);
+            verts[off + 1] = Float.floatToRawIntBits(vRemap);
         }
 
-        return new BakedQuad(verts, quad.getTintIndex(), quad.getDirection(), dst, quad.isShade());
+        return new BakedQuad(verts, quad.getTintIndex(), quad.getDirection(), dst, quad.isShade(), quad.hasAmbientOcclusion()
+        );
     }
 
     private static List<BakedQuad> remapAll(List<BakedQuad> in, TextureAtlasSprite dst, boolean onlyPlaceholder) {
         if (in.isEmpty()) return in;
         List<BakedQuad> out = new ArrayList<>(in.size());
         for (BakedQuad quad : in) {
-            boolean isPlaceholder = quad.getSprite() != null && quad.getSprite().contents() != null && quad.getSprite().contents().name().getPath().contains("placeholder");
+            quad.getSprite();
+            quad.getSprite().contents();
+            boolean isPlaceholder = quad.getSprite().contents().name().getPath().contains("placeholder");
             if (!onlyPlaceholder || isPlaceholder) {
                 out.add(remapQuad(quad, dst));
             } else {

@@ -161,6 +161,10 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.RUBBLESTONE_STAIRS.get());
                 output.accept(ObjectRegistry.RUBBLESTONE_SLAB.get());
                 output.accept(ObjectRegistry.RUBBLESTONE_WALL.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_MASONRY.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_MASONRY_STAIRS.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_MASONRY_SLAB.get());
+                output.accept(ObjectRegistry.RUBBLESTONE_MASONRY_WALL.get());
                 output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE.get());
                 output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE_STAIRS.get());
                 output.accept(ObjectRegistry.GROUTLESS_RUBBLESTONE_SLAB.get());

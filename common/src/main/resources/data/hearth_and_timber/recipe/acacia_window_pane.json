@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wood",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:acacia_window"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:acacia_window_pane",
+    "count": 16
+  }
+}

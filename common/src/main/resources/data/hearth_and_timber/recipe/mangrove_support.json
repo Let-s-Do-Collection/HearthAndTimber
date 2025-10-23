@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wood",
+  "pattern": [
+    "###",
+    "#B ",
+    "#  "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:mangrove_support",
+    "count": 3
+  }
+}

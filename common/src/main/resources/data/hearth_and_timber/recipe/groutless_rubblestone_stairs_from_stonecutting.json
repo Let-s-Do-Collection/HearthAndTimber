@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hearth_and_timber:groutless_rubblestone"
+  },
+  "result": {
+    "id": "hearth_and_timber:groutless_rubblestone_stairs",
+    "count": 1
+  }
+}

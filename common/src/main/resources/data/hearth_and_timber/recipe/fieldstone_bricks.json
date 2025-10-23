@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "Q#",
+    "#Q"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:cobblestone"
+    },
+    "Q": {
+      "item": "hearth_and_timber:quicklime"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:fieldstone_bricks",
+    "count": 4
+  }
+}

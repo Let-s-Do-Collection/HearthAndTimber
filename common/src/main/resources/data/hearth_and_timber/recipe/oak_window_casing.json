@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "B B",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_slab"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:oak_window_casing",
+    "count": 3
+  }
+}

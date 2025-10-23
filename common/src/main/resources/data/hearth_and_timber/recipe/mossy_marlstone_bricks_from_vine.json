@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_stairs",
+  "pattern": [
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:marlstone_bricks"
+    },
+    "B": {
+      "item": "minecraft:vine"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:mossy_marlstone_bricks",
+    "count": 1
+  }
+}

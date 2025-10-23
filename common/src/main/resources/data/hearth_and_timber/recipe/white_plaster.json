@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#B#",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:white_dye"
+    },
+    "#": {
+      "item": "hearth_and_timber:quicklime"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:white_plaster",
+    "count": 8
+  }
+}

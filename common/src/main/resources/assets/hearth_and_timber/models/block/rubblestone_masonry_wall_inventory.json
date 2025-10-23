@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "hearth_and_timber:block/rubblestone_masonry"
+  }
+}
