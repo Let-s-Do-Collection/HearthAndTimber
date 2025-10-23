@@ -8,6 +8,13 @@
     "hearth_and_timber:marlstone_brick_wall",
     "hearth_and_timber:mossy_marlstone_brick_wall",
     "hearth_and_timber:layered_stone_brick_wall",
-    "hearth_and_timber:mossy_layered_stone_brick_wall"
+    "hearth_and_timber:mossy_layered_stone_brick_wall",
+    "hearth_and_timber:rubblestone_wall",
+    "hearth_and_timber:covered_rubblestone_wall",
+    "hearth_and_timber:plastered_rubblestone_wall",
+    "hearth_and_timber:rubblestone_masonry_wall",
+    "hearth_and_timber:devon_rubblestone_wall",
+    "hearth_and_timber:handmade_brick_wall",
+    "hearth_and_timber:groutless_rubblestone_wall"
   ]
 }

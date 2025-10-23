@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_walls",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:rubblestone_masonry"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:rubblestone_masonry_wall",
+    "count": 6
+  }
+}

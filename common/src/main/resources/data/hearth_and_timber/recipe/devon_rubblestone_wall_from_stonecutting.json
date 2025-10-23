@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hearth_and_timber:devon_rubblestone"
+  },
+  "result": {
+    "id": "hearth_and_timber:devon_rubblestone_wall",
+    "count": 1
+  }
+}

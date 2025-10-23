@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:splitstone"
+    },
+    "B": {
+      "item": "minecraft:moss_block"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:mossy_splitstone",
+    "count": 1
+  }
+}

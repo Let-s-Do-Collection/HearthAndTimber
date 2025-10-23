@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_paths",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:mossy_splitstone"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:mossy_splitstone_path",
+    "count": 6
+  }
+}

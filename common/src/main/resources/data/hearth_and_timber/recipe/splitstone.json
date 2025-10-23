@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#",
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:cobbled_deepslate"
+    },
+    "B": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:splitstone",
+    "count": 4
+  }
+}

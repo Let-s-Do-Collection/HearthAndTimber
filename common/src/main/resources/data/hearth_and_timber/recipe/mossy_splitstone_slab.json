@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_slabs",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:mossy_splitstone"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:mossy_splitstone_slab",
+    "count": 6
+  }
+}

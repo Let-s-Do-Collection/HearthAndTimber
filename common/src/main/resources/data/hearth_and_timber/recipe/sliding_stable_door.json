@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##",
+    "II"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:spruce_planks"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:sliding_stable_door",
+    "count": 2
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B#",
+    "#B"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:sandstone"
+    },
+    "B": {
+      "item": "hearth_and_timber:quicklime"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:devon_rubblestone",
+    "count": 4
+  }
+}

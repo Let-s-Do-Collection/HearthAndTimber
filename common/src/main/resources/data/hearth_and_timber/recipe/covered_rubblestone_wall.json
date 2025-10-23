@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "stone_walls",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:covered_rubblestone"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:covered_rubblestone_wall",
+    "count": 6
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:thatch"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:thatch_stairs",
+    "count": 4
+  }
+}

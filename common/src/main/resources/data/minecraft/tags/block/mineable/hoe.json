@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "hearth_and_timber:thatch",
+    "hearth_and_timber:thatch_stairs",
+    "hearth_and_timber:thatch_slab",
+    "hearth_and_timber:weathered_thatch",
+    "hearth_and_timber:weathered_thatch_stairs",
+    "hearth_and_timber:weathered_thatch_slab",
+    "hearth_and_timber:drying_thatch",
+    "hearth_and_timber:drying_thatch_stairs",
+    "hearth_and_timber:drying_thatch_slab",
+    "hearth_and_timber:aged_thatch",
+    "hearth_and_timber:aged_thatch_stairs",
+    "hearth_and_timber:aged_thatch_slab",
+    "hearth_and_timber:waxed_thatch",
+    "hearth_and_timber:waxed_thatch_stairs",
+    "hearth_and_timber:waxed_thatch_slab",
+    "hearth_and_timber:waxed_weathered_thatch",
+    "hearth_and_timber:waxed_weathered_thatch_stairs",
+    "hearth_and_timber:waxed_weathered_thatch_slab",
+    "hearth_and_timber:waxed_drying_thatch",
+    "hearth_and_timber:waxed_drying_thatch_stairs",
+    "hearth_and_timber:waxed_drying_thatch_slab",
+    "hearth_and_timber:waxed_aged_thatch",
+    "hearth_and_timber:waxed_aged_thatch_stairs",
+    "hearth_and_timber:waxed_aged_thatch_slab",
+    "hearth_and_timber:straw_stable_floor"
+  ]
+}

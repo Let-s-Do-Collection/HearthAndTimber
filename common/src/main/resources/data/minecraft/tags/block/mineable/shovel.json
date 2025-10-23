@@ -1,9 +1,7 @@
 {
+  "replace": false,
   "values": [
     "hearth_and_timber:packed_dirt",
-    "hearth_and_timber:trampled_packed_dirt",
-    "hearth_and_timber:stable_floor",
-    "hearth_and_timber:straw_stable_floor",
-    "hearth_and_timber:trampled_stable_floor"
+    "hearth_and_timber:trampled_packed_dirt"
   ]
 }
