@@ -173,14 +173,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.DEVON_RUBBLESTONE_STAIRS.get());
                 output.accept(ObjectRegistry.DEVON_RUBBLESTONE_SLAB.get());
                 output.accept(ObjectRegistry.DEVON_RUBBLESTONE_WALL.get());
-                output.accept(ObjectRegistry.MARLSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MARLSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MARLSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MARLSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_MARLSTONE_BRICK_WALL.get());
                 output.accept(ObjectRegistry.HANDMADE_BRICKS.get());
                 output.accept(ObjectRegistry.HANDMADE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.HANDMADE_BRICK_SLAB.get());
