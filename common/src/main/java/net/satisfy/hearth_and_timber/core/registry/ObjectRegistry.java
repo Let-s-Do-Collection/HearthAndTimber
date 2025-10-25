@@ -163,6 +163,16 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> CHERRY_WINDOW_CASING = registerWithItem("cherry_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> PALE_OAK_WINDOW_CASING = registerWithItem("pale_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
+    public static final RegistrySupplier<Block> LARGE_OAK_PLANKS = registerWithItem("large_oak_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_SPRUCE_PLANKS = registerWithItem("large_spruce_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_BIRCH_PLANKS = registerWithItem("large_birch_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_JUNGLE_PLANKS = registerWithItem("large_jungle_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_ACACIA_PLANKS = registerWithItem("large_acacia_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_DARK_OAK_PLANKS = registerWithItem("large_dark_oak_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_MANGROVE_PLANKS = registerWithItem("large_mangrove_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_CHERRY_PLANKS = registerWithItem("large_cherry_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> LARGE_PALE_OAK_PLANKS = registerWithItem("large_pale_oak_planks", LargeWoodPlanksBlock::new);
+
     public static final RegistrySupplier<Block> OAK_WINDOW_PANE = registerWithItem("oak_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
     public static final RegistrySupplier<Block> SPRUCE_WINDOW_PANE = registerWithItem("spruce_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
     public static final RegistrySupplier<Block> BIRCH_WINDOW_PANE = registerWithItem("birch_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
@@ -182,10 +192,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> MANGROVE_WINDOW = registerWithItem("mangrove_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
     public static final RegistrySupplier<Block> CHERRY_WINDOW = registerWithItem("cherry_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
     public static final RegistrySupplier<Block> PALE_OAK_WINDOW = registerWithItem("pale_oak_window", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)));
-
-    public static final RegistrySupplier<Block> SLIDING_HAYLOFT_DOOR = registerWithItem("sliding_hayloft_door", () -> new SlidingHayloftDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
-    public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
-    public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
 
     public static final RegistrySupplier<Block> TIMBER_FRAME = registerWithItem("timber_frame", () -> new TimberFrameBlock(Blocks.OAK_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_FRAME_STAIRS = registerWithItem("timber_frame_stairs", () -> new TimberFrameStairsBlock(TIMBER_FRAME.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS).noOcclusion()));
@@ -241,6 +247,12 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> TIMBER_BASE_TRIM = registerWithItem("timber_base_trim", () -> new TimberBaseTrimBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_BASE_SKIRT = registerWithItem("timber_base_skirt", () -> new TimberBaseSkirtBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
 
+
+    public static final RegistrySupplier<Block> SLIDING_HAYLOFT_DOOR = registerWithItem("sliding_hayloft_door", () -> new SlidingHayloftDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
+    public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
+    public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
+
+
     public static void init() {
         ITEMS.register();
         BLOCKS.register();
@@ -265,13 +277,6 @@ public class ObjectRegistry {
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
         return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(name), block);
     }
-
-    /*
- TODO:
- - Add Quicklime (base material for Plaster)
- - Beam Textures
-*/
-
 }
 
 

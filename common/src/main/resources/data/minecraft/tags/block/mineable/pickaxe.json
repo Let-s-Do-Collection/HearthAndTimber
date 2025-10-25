@@ -17,14 +17,6 @@
     "hearth_and_timber:mossy_layered_fieldstone_brick_stairs",
     "hearth_and_timber:mossy_layered_fieldstone_brick_slab",
     "hearth_and_timber:mossy_layered_fieldstone_brick_wall",
-    "hearth_and_timber:marlstone_bricks",
-    "hearth_and_timber:marlstone_brick_stairs",
-    "hearth_and_timber:marlstone_brick_slab",
-    "hearth_and_timber:marlstone_brick_wall",
-    "hearth_and_timber:mossy_marlstone_bricks",
-    "hearth_and_timber:mossy_marlstone_brick_stairs",
-    "hearth_and_timber:mossy_marlstone_brick_slab",
-    "hearth_and_timber:mossy_marlstone_brick_wall",
     "hearth_and_timber:layered_stone_bricks",
     "hearth_and_timber:layered_stone_brick_stairs",
     "hearth_and_timber:layered_stone_brick_slab",
@@ -102,6 +94,9 @@
     "hearth_and_timber:purple_plaster",
     "hearth_and_timber:red_plaster",
     "hearth_and_timber:yellow_plaster",
-    "hearth_and_timber:white_plaster"
+    "hearth_and_timber:white_plaster",
+    "hearth_and_timber:sliding_hayloft_door",
+    "hearth_and_timber:sliding_barn_door",
+    "hearth_and_timber:sliding_stable_door"
   ]
 }

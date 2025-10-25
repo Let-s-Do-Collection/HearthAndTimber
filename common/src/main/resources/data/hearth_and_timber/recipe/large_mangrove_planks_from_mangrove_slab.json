@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:mangrove_slab"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:large_mangrove_planks",
+    "count": 2
+  }
+}

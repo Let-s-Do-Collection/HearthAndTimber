@@ -1,0 +1,7 @@
+{
+  "parent": "hearth_and_timber:block/large_spruce_planks_3",
+  "textures": {
+    "particle": "hearth_and_timber:block/large_pale_oak_planks",
+    "planks": "hearth_and_timber:block/large_pale_oak_planks"
+  }
+}

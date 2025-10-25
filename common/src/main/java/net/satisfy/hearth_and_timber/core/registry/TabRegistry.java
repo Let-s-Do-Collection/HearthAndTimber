@@ -13,7 +13,7 @@ public class TabRegistry {
 
     @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> new ItemStack(ObjectRegistry.SHINGLE_ROOF_BLOCK.get()))
+            .icon(() -> new ItemStack(ObjectRegistry.TIMBER_FRAME.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.FRAMEWORK.get());
@@ -25,7 +25,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.TIMBER_GRID_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_DIAGONAL_FRAME.get());
                 output.accept(ObjectRegistry.TIMBER_CROSS_FRAME.get());
-
                 output.accept(ObjectRegistry.OAK_BEAM.get());
                 output.accept(ObjectRegistry.SPRUCE_BEAM.get());
                 output.accept(ObjectRegistry.BIRCH_BEAM.get());
@@ -35,7 +34,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_BEAM.get());
                 output.accept(ObjectRegistry.CHERRY_BEAM.get());
                 output.accept(ObjectRegistry.PALE_OAK_BEAM.get());
-
                 output.accept(ObjectRegistry.OAK_RAILING.get());
                 output.accept(ObjectRegistry.SPRUCE_RAILING.get());
                 output.accept(ObjectRegistry.BIRCH_RAILING.get());
@@ -45,7 +43,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_RAILING.get());
                 output.accept(ObjectRegistry.CHERRY_RAILING.get());
                 output.accept(ObjectRegistry.PALE_OAK_RAILING.get());
-
                 output.accept(ObjectRegistry.OAK_SUPPORT.get());
                 output.accept(ObjectRegistry.SPRUCE_SUPPORT.get());
                 output.accept(ObjectRegistry.BIRCH_SUPPORT.get());
@@ -55,7 +52,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_SUPPORT.get());
                 output.accept(ObjectRegistry.CHERRY_SUPPORT.get());
                 output.accept(ObjectRegistry.PALE_OAK_SUPPORT.get());
-
                 output.accept(ObjectRegistry.OAK_PILLAR.get());
                 output.accept(ObjectRegistry.SPRUCE_PILLAR.get());
                 output.accept(ObjectRegistry.BIRCH_PILLAR.get());
@@ -65,7 +61,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_PILLAR.get());
                 output.accept(ObjectRegistry.CHERRY_PILLAR.get());
                 output.accept(ObjectRegistry.PALE_OAK_PILLAR.get());
-
                 output.accept(ObjectRegistry.OAK_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.SPRUCE_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.BIRCH_WINDOW_CASING.get());
@@ -75,7 +70,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.CHERRY_WINDOW_CASING.get());
                 output.accept(ObjectRegistry.PALE_OAK_WINDOW_CASING.get());
-
                 output.accept(ObjectRegistry.OAK_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.SPRUCE_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.BIRCH_WINDOW_PANE.get());
@@ -85,7 +79,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.CHERRY_WINDOW_PANE.get());
                 output.accept(ObjectRegistry.PALE_OAK_WINDOW_PANE.get());
-
                 output.accept(ObjectRegistry.OAK_WINDOW.get());
                 output.accept(ObjectRegistry.SPRUCE_WINDOW.get());
                 output.accept(ObjectRegistry.BIRCH_WINDOW.get());
@@ -95,7 +88,15 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MANGROVE_WINDOW.get());
                 output.accept(ObjectRegistry.CHERRY_WINDOW.get());
                 output.accept(ObjectRegistry.PALE_OAK_WINDOW.get());
-
+                output.accept(ObjectRegistry.LARGE_OAK_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_SPRUCE_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_BIRCH_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_JUNGLE_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_ACACIA_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_DARK_OAK_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_MANGROVE_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_CHERRY_PLANKS.get());
+                output.accept(ObjectRegistry.LARGE_PALE_OAK_PLANKS.get());
                 output.accept(ObjectRegistry.QUICKLIME.get());
                 output.accept(ObjectRegistry.WHITE_PLASTER.get());
                 output.accept(ObjectRegistry.LIGHT_GRAY_PLASTER.get());
@@ -122,7 +123,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_BLOCK.get());
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_STAIRS.get());
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_SLAB.get());
-
                 output.accept(ObjectRegistry.FIELDSTONE_BRICKS.get());
                 output.accept(ObjectRegistry.FIELDSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.FIELDSTONE_BRICK_SLAB.get());
@@ -131,7 +131,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_SLAB.get());
                 output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_WALL.get());
-
                 output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICKS.get());
                 output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICK_SLAB.get());
@@ -140,7 +139,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_SLAB.get());
                 output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_WALL.get());
-
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICKS.get());
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICK_SLAB.get());
@@ -177,7 +175,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.HANDMADE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.HANDMADE_BRICK_SLAB.get());
                 output.accept(ObjectRegistry.HANDMADE_BRICK_WALL.get());
-            
                 output.accept(ObjectRegistry.SPLITSTONE.get());
                 output.accept(ObjectRegistry.SPLITSTONE_STAIRS.get());
                 output.accept(ObjectRegistry.SPLITSTONE_SLAB.get());
@@ -186,7 +183,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_SLAB.get());
                 output.accept(ObjectRegistry.SPLITSTONE_PATH.get());
                 output.accept(ObjectRegistry.MOSSY_SPLITSTONE_PATH.get());
-
                 output.accept(ObjectRegistry.THATCH.get());
                 output.accept(ObjectRegistry.THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.THATCH_SLAB.get());
@@ -199,13 +195,11 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.AGED_THATCH.get());
                 output.accept(ObjectRegistry.AGED_THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.AGED_THATCH_SLAB.get());
-
                 output.accept(ObjectRegistry.PACKED_DIRT.get());
                 output.accept(ObjectRegistry.TRAMPLED_PACKED_DIRT.get());
                 output.accept(ObjectRegistry.STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.STRAW_STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.TRAMPLED_STABLE_FLOOR.get());
-
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_STABLE_DOOR.get());

@@ -83,6 +83,15 @@
     "hearth_and_timber:dark_oak_window_pane",
     "hearth_and_timber:mangrove_window_pane",
     "hearth_and_timber:cherry_window_pane",
-    "hearth_and_timber:pale_oak_window_pane"
+    "hearth_and_timber:pale_oak_window_pane",
+    "hearth_and_timber:large_oak_planks",
+    "hearth_and_timber:large_spruce_planks",
+    "hearth_and_timber:large_birch_planks",
+    "hearth_and_timber:large_jungle_planks",
+    "hearth_and_timber:large_acacia_planks",
+    "hearth_and_timber:large_dark_oak_planks",
+    "hearth_and_timber:large_mangrove_planks",
+    "hearth_and_timber:large_cherry_planks",
+    "hearth_and_timber:large_pale_oak_planks"
   ]
 }
