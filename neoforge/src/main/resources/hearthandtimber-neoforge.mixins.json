@@ -4,9 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [
-    "FoundationBlockEntityMixin"
+    "FoundationBlockEntityMixin",
+    "LevelRendererMixin",
+    "RenderTypeMixin",
+    "SectionCompilerMixin"
   ],
   "mixins": [
+    "BlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

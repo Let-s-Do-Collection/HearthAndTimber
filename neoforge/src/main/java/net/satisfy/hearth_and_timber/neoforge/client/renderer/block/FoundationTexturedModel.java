@@ -22,6 +22,7 @@ import java.util.List;
 @SuppressWarnings("deprecation")
 public class FoundationTexturedModel implements BakedModel {
     public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
+    private static final ThreadLocal<TextureAtlasSprite> TL_PARTICLE = new ThreadLocal<>();
     private final BakedModel original;
     private final boolean onlyPlaceholder;
 
@@ -123,8 +124,9 @@ public class FoundationTexturedModel implements BakedModel {
         return original.isCustomRenderer();
     }
 
-    @Override
     public @NotNull TextureAtlasSprite getParticleIcon() {
+        var t = TL_PARTICLE.get();
+        if (t != null) return t;
         return original.getParticleIcon();
     }
 

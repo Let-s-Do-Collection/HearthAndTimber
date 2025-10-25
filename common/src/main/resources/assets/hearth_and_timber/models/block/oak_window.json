@@ -1,1 +1,7 @@
-{"parent":"minecraft:block/cube_column","textures":{"end":"minecraft:block/oak_planks","side":"hearth_and_timber:block/oak_window_pane"}}
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "hearth_and_timber:block/large_oak_planks",
+    "side": "hearth_and_timber:block/oak_window_pane"
+  }
+}

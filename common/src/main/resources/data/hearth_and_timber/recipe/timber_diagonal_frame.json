@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " B ",
+    "#  "
+  ],
+  "key": {
+    "B": {
+      "item": "hearth_and_timber:timber_frame"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:timber_diagonal_frame",
+    "count": 2
+  }
+}
