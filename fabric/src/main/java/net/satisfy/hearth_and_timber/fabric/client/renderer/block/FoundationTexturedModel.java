@@ -1,5 +1,6 @@
 package net.satisfy.hearth_and_timber.fabric.client.renderer.block;
 
+import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
 import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView;
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
@@ -43,6 +44,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
 
     @Override
     public void emitBlockQuads(BlockAndTintGetter level, BlockState state, BlockPos pos, Supplier<RandomSource> random, RenderContext context) {
+        RenderMaterial material = context.getEmitter().material();
         if (EMITTING.get()) return;
         EMITTING.set(true);
         if (!hasApplied(state)) {
@@ -59,7 +61,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
                 var qs = original.getQuads(state, null, r0);
                 for (var q : qs) {
                     var e = context.getEmitter();
-                    e.fromVanilla(q, null, null);
+                    e.fromVanilla(q, material, null);
                     e.emit();
                 }
             }
@@ -81,7 +83,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
             for (var q : qs) {
                 var src = q.getSprite();
                 var e = context.getEmitter();
-                e.fromVanilla(q, null, face);
+                e.fromVanilla(q, material, face);
                 if (!onlyPlaceholder || isPlaceholder(src)) {
                     float su0 = src.getU0(), su1 = src.getU1(), sv0 = src.getV0(), sv1 = src.getV1();
                     float du = su1 - su0, dv = sv1 - sv0;
@@ -101,7 +103,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
             for (var q : qs) {
                 var src = q.getSprite();
                 var e = context.getEmitter();
-                e.fromVanilla(q, null, null);
+                e.fromVanilla(q, material, null);
                 if (!onlyPlaceholder || isPlaceholder(src)) {
                     float su0 = src.getU0(), su1 = src.getU1(), sv0 = src.getV0(), sv1 = src.getV1();
                     float du = su1 - su0, dv = sv1 - sv0;

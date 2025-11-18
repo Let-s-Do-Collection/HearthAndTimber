@@ -30,6 +30,13 @@ dependencies {
     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
+    runtimeOnly("org.antlr:antlr4-runtime:4.13.1")
+    runtimeOnly("io.github.douira:glsl-transformer:3.0.0-pre3")
+    runtimeOnly("org.anarres:jcpp:1.4.14")
+
+    modApi("maven.modrinth:iris:1.8.8+1.21.1-fabric")
+    modApi("maven.modrinth:sodium:mc1.21.1-0.6.13-fabric")
+
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 }
