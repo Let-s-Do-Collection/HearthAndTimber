@@ -195,11 +195,6 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.AGED_THATCH.get());
                 output.accept(ObjectRegistry.AGED_THATCH_STAIRS.get());
                 output.accept(ObjectRegistry.AGED_THATCH_SLAB.get());
-                output.accept(ObjectRegistry.PACKED_DIRT.get());
-                output.accept(ObjectRegistry.TRAMPLED_PACKED_DIRT.get());
-                output.accept(ObjectRegistry.STABLE_FLOOR.get());
-                output.accept(ObjectRegistry.STRAW_STABLE_FLOOR.get());
-                output.accept(ObjectRegistry.TRAMPLED_STABLE_FLOOR.get());
                 output.accept(ObjectRegistry.SLIDING_BARN_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get());
                 output.accept(ObjectRegistry.SLIDING_STABLE_DOOR.get());

@@ -74,12 +74,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> MOSSY_SPLITSTONE_STAIRS = registerWithItem("mossy_splitstone_stairs", () -> new StairBlock(MOSSY_SPLITSTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
     public static final RegistrySupplier<Block> MOSSY_SPLITSTONE_SLAB = registerWithItem("mossy_splitstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
 
-    public static final RegistrySupplier<Block> PACKED_DIRT = registerWithItem("packed_dirt", () -> new PackedDirtBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(1.5f, 3.0f).sound(SoundType.PACKED_MUD)));
-    public static final RegistrySupplier<Block> TRAMPLED_PACKED_DIRT = registerWithItem("trampled_packed_dirt", () -> new TrampledPackedDirtBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(1.0f, 3.0f).sound(SoundType.PACKED_MUD)));
-
-    public static final RegistrySupplier<Block> STABLE_FLOOR = registerWithItem("stable_floor", () -> new StableFloorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(1.5f, 3.0f)));
-    public static final RegistrySupplier<Block> TRAMPLED_STABLE_FLOOR = registerWithItem("trampled_stable_floor", () -> new TrampledStableFloorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).sound(SoundType.WOOD).strength(1.2f, 2.5f)));
-    public static final RegistrySupplier<Block> STRAW_STABLE_FLOOR = registerWithItem("straw_stable_floor", () -> new StrawStableFloorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).sound(SoundType.GRASS).strength(0.8f, 1.0f)));
 
     public static final RegistrySupplier<Block> COVERED_RUBBLESTONE = registerWithItem("covered_rubblestone", () -> new RubbleMasonryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS), () -> ObjectRegistry.PLASTERED_RUBBLESTONE.get(), () -> null));
     public static final RegistrySupplier<Block> COVERED_RUBBLESTONE_STAIRS = registerWithItem("covered_rubblestone_stairs", () -> new RubbleMasonryStairs(() -> ObjectRegistry.COVERED_RUBBLESTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_STAIRS), () -> ObjectRegistry.PLASTERED_RUBBLESTONE.get(), () -> null));
@@ -256,14 +250,7 @@ public class ObjectRegistry {
     public static void init() {
         ITEMS.register();
         BLOCKS.register();
-        LifecycleEvent.SETUP.register(() -> {
-            ((PackedDirtBlock) PACKED_DIRT.get()).setTrampled(TRAMPLED_PACKED_DIRT);
-            ((TrampledPackedDirtBlock) TRAMPLED_PACKED_DIRT.get()).setBase(PACKED_DIRT);
-            ((StableFloorBlock) STABLE_FLOOR.get()).setTrampled(TRAMPLED_STABLE_FLOOR);
-            ((StableFloorBlock) STABLE_FLOOR.get()).setStraw(STRAW_STABLE_FLOOR);
-            ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setBase(STABLE_FLOOR);
-            ((StrawStableFloorBlock) STRAW_STABLE_FLOOR.get()).setStrawItem(() -> Items.WHEAT);
-        });
+
     }
 
     public static BlockBehaviour.Properties properties(float strength) {
