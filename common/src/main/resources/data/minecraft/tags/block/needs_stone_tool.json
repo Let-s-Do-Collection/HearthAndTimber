@@ -4,10 +4,7 @@
     "#minecraft:walls",
     "#minecraft:slabs",
     "#minecraft:stairs",
-    "hearth_and_timber:fieldstone_bricks",
-    "hearth_and_timber:rubblestone",
-    "hearth_and_timber:rubblestone_masonry",
-    "hearth_and_timber:devon_rubblestone",
+    "hearth_and_timber:pointed_rubblestone",
     "hearth_and_timber:splitstone",
     "hearth_and_timber:groutless_rubblestone"
   ]

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "bottom": "hearth_and_timber:block/rubblestone_masonry",
-    "top": "hearth_and_timber:block/rubblestone_masonry",
-    "side": "hearth_and_timber:block/rubblestone_masonry"
-  }
-}

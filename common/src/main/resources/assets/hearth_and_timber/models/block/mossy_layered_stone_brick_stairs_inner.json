@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "hearth_and_timber:block/mossy_layered_stone_bricks",
-    "top": "hearth_and_timber:block/mossy_layered_stone_bricks",
-    "side": "hearth_and_timber:block/mossy_layered_stone_bricks"
-  }
-}
