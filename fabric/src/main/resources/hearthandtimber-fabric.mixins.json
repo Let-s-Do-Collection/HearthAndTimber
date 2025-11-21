@@ -1,17 +1,10 @@
 {
   "required": true,
-  "package": "net.satisfy.hearth_and_timber.neoforge.core.mixin",
+  "package": "net.satisfy.hearth_and_timber.fabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "client": [
-    "FoundationBlockEntityMixin",
-    "LevelRendererMixin",
-    "RenderTypeMixin",
-    "SectionCompilerMixin"
-  ],
-  "mixins": [
-    "BlockMixin"
-  ],
+  "client": [],
+  "mixins": [],
   "injectors": {
     "defaultRequire": 1
   }

@@ -10,6 +10,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.model.IQuadTransformer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
@@ -35,6 +36,11 @@ public class FoundationTexturedModel implements BakedModel {
         if (s == null) return true;
         s.contents();
         return "missingno".equals(s.contents().name().getPath());
+    }
+
+    @Override
+    public ChunkRenderTypeSet getRenderTypes(BlockState state, RandomSource rand, ModelData data) {
+        return ChunkRenderTypeSet.of(RenderType.TRANSLUCENT);
     }
 
     private static TextureAtlasSprite targetSprite(@Nullable BlockState mimic, TextureAtlasSprite fallback) {
@@ -81,6 +87,7 @@ public class FoundationTexturedModel implements BakedModel {
             if (!onlyPlaceholder || isPlaceholder) {
                 out.add(remapQuad(quad, dst));
             } else {
+                out.add(remapQuad(quad, dst));
                 out.add(quad);
             }
         }
