@@ -123,22 +123,7 @@ public class TabRegistry {
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_BLOCK.get());
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_STAIRS.get());
                 output.accept(ObjectRegistry.PATCHWORK_SHINGLE_ROOF_SLAB.get());
-                output.accept(ObjectRegistry.FIELDSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.FIELDSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.FIELDSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.FIELDSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_FIELDSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.LAYERED_FIELDSTONE_BRICK_WALL.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICKS.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_STAIRS.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_SLAB.get());
-                output.accept(ObjectRegistry.MOSSY_LAYERED_FIELDSTONE_BRICK_WALL.get());
+
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICKS.get());
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICK_STAIRS.get());
                 output.accept(ObjectRegistry.LAYERED_STONE_BRICK_SLAB.get());

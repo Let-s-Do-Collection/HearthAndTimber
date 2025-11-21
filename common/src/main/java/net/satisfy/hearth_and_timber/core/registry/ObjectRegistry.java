@@ -35,26 +35,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> PATCHWORK_SHINGLE_ROOF_STAIRS = registerWithItem("patchwork_shingle_roof_stairs", () -> new StairBlock(PATCHWORK_SHINGLE_ROOF_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
     public static final RegistrySupplier<Block> PATCHWORK_SHINGLE_ROOF_SLAB = registerWithItem("patchwork_shingle_roof_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
 
-    public static final RegistrySupplier<Block> FIELDSTONE_BRICKS = registerWithItem("fieldstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
-    public static final RegistrySupplier<Block> FIELDSTONE_BRICK_STAIRS = registerWithItem("fieldstone_brick_stairs", () -> new StairBlock(FIELDSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
-    public static final RegistrySupplier<Block> FIELDSTONE_BRICK_SLAB = registerWithItem("fieldstone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-    public static final RegistrySupplier<Block> FIELDSTONE_BRICK_WALL = registerWithItem("fieldstone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_WALL)));
-
-    public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BRICKS = registerWithItem("mossy_fieldstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
-    public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BRICK_STAIRS = registerWithItem("mossy_fieldstone_brick_stairs", () -> new StairBlock(MOSSY_FIELDSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
-    public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BRICK_SLAB = registerWithItem("mossy_fieldstone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-    public static final RegistrySupplier<Block> MOSSY_FIELDSTONE_BRICK_WALL = registerWithItem("mossy_fieldstone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_WALL)));
-
-    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BRICKS = registerWithItem("layered_fieldstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
-    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BRICK_STAIRS = registerWithItem("layered_fieldstone_brick_stairs", () -> new StairBlock(LAYERED_FIELDSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
-    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BRICK_SLAB = registerWithItem("layered_fieldstone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-    public static final RegistrySupplier<Block> LAYERED_FIELDSTONE_BRICK_WALL = registerWithItem("layered_fieldstone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_WALL)));
-
-    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BRICKS = registerWithItem("mossy_layered_fieldstone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
-    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BRICK_STAIRS = registerWithItem("mossy_layered_fieldstone_brick_stairs", () -> new StairBlock(MOSSY_LAYERED_FIELDSTONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
-    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BRICK_SLAB = registerWithItem("mossy_layered_fieldstone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-    public static final RegistrySupplier<Block> MOSSY_LAYERED_FIELDSTONE_BRICK_WALL = registerWithItem("mossy_layered_fieldstone_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_WALL)));
-
     public static final RegistrySupplier<Block> LAYERED_STONE_BRICKS = registerWithItem("layered_stone_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)));
     public static final RegistrySupplier<Block> LAYERED_STONE_BRICK_STAIRS = registerWithItem("layered_stone_brick_stairs", () -> new StairBlock(LAYERED_STONE_BRICKS.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
     public static final RegistrySupplier<Block> LAYERED_STONE_BRICK_SLAB = registerWithItem("layered_stone_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
@@ -73,7 +53,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> MOSSY_SPLITSTONE = registerWithItem("mossy_splitstone", () -> new SplitstoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE).sound(SoundType.DEEPSLATE).strength(3.0f, 6.0f).mapColor(MapColor.STONE), MOSSY_SPLITSTONE_PATH));
     public static final RegistrySupplier<Block> MOSSY_SPLITSTONE_STAIRS = registerWithItem("mossy_splitstone_stairs", () -> new StairBlock(MOSSY_SPLITSTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_STAIRS)));
     public static final RegistrySupplier<Block> MOSSY_SPLITSTONE_SLAB = registerWithItem("mossy_splitstone_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE_SLAB)));
-
 
     public static final RegistrySupplier<Block> COVERED_RUBBLESTONE = registerWithItem("covered_rubblestone", () -> new RubbleMasonryBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICKS), () -> ObjectRegistry.PLASTERED_RUBBLESTONE.get(), () -> null));
     public static final RegistrySupplier<Block> COVERED_RUBBLESTONE_STAIRS = registerWithItem("covered_rubblestone_stairs", () -> new RubbleMasonryStairs(() -> ObjectRegistry.COVERED_RUBBLESTONE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BRICK_STAIRS), () -> ObjectRegistry.PLASTERED_RUBBLESTONE.get(), () -> null));
