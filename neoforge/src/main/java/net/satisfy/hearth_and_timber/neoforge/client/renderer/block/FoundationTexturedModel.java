@@ -15,6 +15,7 @@ import net.neoforged.neoforge.client.model.IQuadTransformer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
 import net.satisfy.hearth_and_timber.core.block.TimberFrameBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberFrameStairsBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,9 +105,16 @@ public class FoundationTexturedModel implements BakedModel {
         List<BakedQuad> base = original.getQuads(state, side, rand, data, layer);
         if (base.isEmpty()) return base;
 
-        if (state != null && state.getBlock() instanceof TimberFrameBlock) {
-            if (!state.getValue(TimberFrameBlock.APPLIED)) {
-                return base;
+        if (state != null) {
+            if (state.getBlock() instanceof TimberFrameBlock) {
+                if (!state.getValue(TimberFrameBlock.APPLIED)) {
+                    return base;
+                }
+            }
+            if (state.getBlock() instanceof TimberFrameStairsBlock) {
+                if (!state.getValue(TimberFrameStairsBlock.APPLIED)) {
+                    return base;
+                }
             }
         }
 
