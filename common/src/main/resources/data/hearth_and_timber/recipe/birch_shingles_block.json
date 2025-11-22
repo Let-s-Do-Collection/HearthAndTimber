@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C#",
+    "#C"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:birch_planks"
+    },
+    "C": {
+      "item": "minecraft:birch_slab"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:birch_shingles_block",
+    "count": 4
+  }
+}

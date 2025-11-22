@@ -1,7 +1,6 @@
 {
 	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
-	"parent": "hearth_and_timber:block/spruce_board_3",
 	"textures": {
 		"particle": "hearth_and_timber:block/spruce_board",
 		"planks": "hearth_and_timber:block/spruce_board"

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "hearth_and_timber:block/shingle_roof",
-    "top": "hearth_and_timber:block/shingle_roof",
-    "side": "hearth_and_timber:block/shingle_roof"
-  }
-}

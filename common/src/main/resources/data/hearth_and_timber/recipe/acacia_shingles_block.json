@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C#",
+    "#C"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:acacia_planks"
+    },
+    "C": {
+      "item": "minecraft:acacia_slab"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:acacia_shingles_block",
+    "count": 4
+  }
+}

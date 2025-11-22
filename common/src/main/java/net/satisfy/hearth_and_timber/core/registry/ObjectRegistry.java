@@ -23,9 +23,36 @@ public class ObjectRegistry {
 
     public static final RegistrySupplier<Block> FRAMEWORK = registerWithItem("framework", FrameworkBlock::new);
 
-    public static final RegistrySupplier<Block> SHINGLE_ROOF_BLOCK = registerWithItem("shingle_roof_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f).mapColor(MapColor.TERRACOTTA_BLACK)));
-    public static final RegistrySupplier<Block> SHINGLE_ROOF_STAIRS = registerWithItem("shingle_roof_stairs", () -> new StairBlock(SHINGLE_ROOF_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
-    public static final RegistrySupplier<Block> SHINGLE_ROOF_SLAB = registerWithItem("shingle_roof_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final RegistrySupplier<Block> OAK_SHINGLES_BLOCK = registerWithItem("oak_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> SPRUCE_SHINGLES_BLOCK = registerWithItem("spruce_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> BIRCH_SHINGLES_BLOCK = registerWithItem("birch_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> JUNGLE_SHINGLES_BLOCK = registerWithItem("jungle_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> ACACIA_SHINGLES_BLOCK = registerWithItem("acacia_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> DARK_OAK_SHINGLES_BLOCK = registerWithItem("dark_oak_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> MANGROVE_SHINGLES_BLOCK = registerWithItem("mangrove_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> CHERRY_SHINGLES_BLOCK = registerWithItem("cherry_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+    public static final RegistrySupplier<Block> PALE_OAK_SHINGLES_BLOCK = registerWithItem("pale_oak_shingles_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+
+    public static final RegistrySupplier<Block> OAK_SHINGLES_STAIRS = registerWithItem("oak_shingles_stairs", () -> new StairBlock(OAK_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
+    public static final RegistrySupplier<Block> SPRUCE_SHINGLES_STAIRS = registerWithItem("spruce_shingles_stairs", () -> new StairBlock(SPRUCE_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS)));
+    public static final RegistrySupplier<Block> BIRCH_SHINGLES_STAIRS = registerWithItem("birch_shingles_stairs", () -> new StairBlock(BIRCH_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_STAIRS)));
+    public static final RegistrySupplier<Block> JUNGLE_SHINGLES_STAIRS = registerWithItem("jungle_shingles_stairs", () -> new StairBlock(JUNGLE_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_STAIRS)));
+    public static final RegistrySupplier<Block> ACACIA_SHINGLES_STAIRS = registerWithItem("acacia_shingles_stairs", () -> new StairBlock(ACACIA_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_STAIRS)));
+    public static final RegistrySupplier<Block> DARK_OAK_SHINGLES_STAIRS = registerWithItem("dark_oak_shingles_stairs", () -> new StairBlock(DARK_OAK_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_STAIRS)));
+    public static final RegistrySupplier<Block> MANGROVE_SHINGLES_STAIRS = registerWithItem("mangrove_shingles_stairs", () -> new StairBlock(MANGROVE_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_STAIRS)));
+    public static final RegistrySupplier<Block> CHERRY_SHINGLES_STAIRS = registerWithItem("cherry_shingles_stairs", () -> new StairBlock(CHERRY_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_STAIRS)));
+    public static final RegistrySupplier<Block> PALE_OAK_SHINGLES_STAIRS = registerWithItem("pale_oak_shingles_stairs", () -> new StairBlock(PALE_OAK_SHINGLES_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
+
+    public static final RegistrySupplier<Block> OAK_SHINGLES_SLAB = registerWithItem("oak_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+    public static final RegistrySupplier<Block> SPRUCE_SHINGLES_SLAB = registerWithItem("spruce_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_SLAB)));
+    public static final RegistrySupplier<Block> BIRCH_SHINGLES_SLAB = registerWithItem("birch_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BIRCH_SLAB)));
+    public static final RegistrySupplier<Block> JUNGLE_SHINGLES_SLAB = registerWithItem("jungle_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.JUNGLE_SLAB)));
+    public static final RegistrySupplier<Block> ACACIA_SHINGLES_SLAB = registerWithItem("acacia_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.ACACIA_SLAB)));
+    public static final RegistrySupplier<Block> DARK_OAK_SHINGLES_SLAB = registerWithItem("dark_oak_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DARK_OAK_SLAB)));
+    public static final RegistrySupplier<Block> MANGROVE_SHINGLES_SLAB = registerWithItem("mangrove_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.MANGROVE_SLAB)));
+    public static final RegistrySupplier<Block> CHERRY_SHINGLES_SLAB = registerWithItem("cherry_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_SLAB)));
+    public static final RegistrySupplier<Block> PALE_OAK_SHINGLES_SLAB = registerWithItem("pale_oak_shingles_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));
+
     public static final RegistrySupplier<Block> TERRACOTTA_SHINGLE_ROOF_BLOCK = registerWithItem("terracotta_shingle_roof_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f).mapColor(MapColor.TERRACOTTA_RED)));
     public static final RegistrySupplier<Block> TERRACOTTA_SHINGLE_ROOF_STAIRS = registerWithItem("terracotta_shingle_roof_stairs", () -> new StairBlock(TERRACOTTA_SHINGLE_ROOF_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_STAIRS)));
     public static final RegistrySupplier<Block> TERRACOTTA_SHINGLE_ROOF_SLAB = registerWithItem("terracotta_shingle_roof_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SLAB)));

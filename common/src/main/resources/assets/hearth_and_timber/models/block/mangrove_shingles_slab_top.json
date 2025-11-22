@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "hearth_and_timber:block/mangrove_shingles",
+    "top": "hearth_and_timber:block/mangrove_shingles",
+    "side": "hearth_and_timber:block/mangrove_shingles"
+  }
+}

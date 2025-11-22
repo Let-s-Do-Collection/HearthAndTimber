@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hearth_and_timber:block/cherry_shingles_block",
+        "weight": 1
+      }
+    ]
+  }
+}
