@@ -84,10 +84,10 @@ public class PillarBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockPos p = ctx.getClickedPos();
         BlockGetter level = ctx.getLevel();
-        boolean n = isSupport(level.getBlockState(p.relative(Direction.NORTH)));
-        boolean s = isSupport(level.getBlockState(p.relative(Direction.SOUTH)));
-        boolean w = isSupport(level.getBlockState(p.relative(Direction.WEST)));
-        boolean e = isSupport(level.getBlockState(p.relative(Direction.EAST)));
+        boolean n = isSupport(level.getBlockState(p.relative(Direction.NORTH)), Direction.NORTH);
+        boolean s = isSupport(level.getBlockState(p.relative(Direction.SOUTH)), Direction.SOUTH);
+        boolean w = isSupport(level.getBlockState(p.relative(Direction.WEST)), Direction.WEST);
+        boolean e = isSupport(level.getBlockState(p.relative(Direction.EAST)), Direction.EAST);
         return this.defaultBlockState()
                 .setValue(NORTH_CONNECTED, n)
                 .setValue(SOUTH_CONNECTED, s)
@@ -97,15 +97,23 @@ public class PillarBlock extends Block {
 
     @Override
     protected @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState adj, LevelAccessor level, BlockPos pos, BlockPos pos2) {
-        if (dir == Direction.NORTH) return state.setValue(NORTH_CONNECTED, isSupport(adj));
-        if (dir == Direction.SOUTH) return state.setValue(SOUTH_CONNECTED, isSupport(adj));
-        if (dir == Direction.WEST) return state.setValue(WEST_CONNECTED, isSupport(adj));
-        if (dir == Direction.EAST) return state.setValue(EAST_CONNECTED, isSupport(adj));
+        if (dir == Direction.NORTH) return state.setValue(NORTH_CONNECTED, isSupport(adj, Direction.NORTH));
+        if (dir == Direction.SOUTH) return state.setValue(SOUTH_CONNECTED, isSupport(adj, Direction.SOUTH));
+        if (dir == Direction.WEST) return state.setValue(WEST_CONNECTED, isSupport(adj, Direction.WEST));
+        if (dir == Direction.EAST) return state.setValue(EAST_CONNECTED, isSupport(adj, Direction.EAST));
         return state;
     }
 
-    private static boolean isSupport(BlockState s) {
-        return s.getBlock() instanceof SupportBlock;
+    private static boolean isSupport(BlockState state, Direction fromPillarDirection) {
+        if (!(state.getBlock() instanceof SupportBlock)) return false;
+        if (!state.hasProperty(SupportBlock.FACING)) return false;
+        if (!state.hasProperty(SupportBlock.CONNECTED)) return false;
+
+        Direction supportFacing = state.getValue(SupportBlock.FACING);
+        boolean supportConnected = state.getValue(SupportBlock.CONNECTED);
+
+        if (!supportConnected) return false;
+        return supportFacing == fromPillarDirection.getOpposite();
     }
 
     @Override

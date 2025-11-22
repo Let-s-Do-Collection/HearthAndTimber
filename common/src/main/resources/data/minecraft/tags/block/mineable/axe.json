@@ -119,6 +119,9 @@
     "hearth_and_timber:dark_oak_board",
     "hearth_and_timber:mangrove_board",
     "hearth_and_timber:cherry_board",
-    "hearth_and_timber:pale_oak_board"
+    "hearth_and_timber:pale_oak_board",
+    "hearth_and_timber:sliding_hayloft_door",
+    "hearth_and_timber:sliding_barn_door",
+    "hearth_and_timber:sliding_stable_door"
   ]
 }

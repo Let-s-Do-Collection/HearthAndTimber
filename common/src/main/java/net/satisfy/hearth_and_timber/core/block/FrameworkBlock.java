@@ -35,127 +35,166 @@ public class FrameworkBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty BOTTOM = BlockStateProperties.BOTTOM;
     public static final EnumProperty<Stage> STAGE = EnumProperty.create("stage", Stage.class);
 
-    private static final VoxelShape SHAPE_TOP_CAP = Block.box(0, 14, 0, 16, 16, 16);
-    private static final VoxelShape SHAPE_OUTLINE_FULL = Shapes.block();
-    private static final VoxelShape SHAPE_OUTLINE_HANGING = Block.box(0, 8, 0, 16, 16, 16);
-    private static final VoxelShape SHAPE_BELOW_BLOCK = Shapes.block().move(0, -1, 0);
+    private static final VoxelShape TOP_CAP_SHAPE = Block.box(0, 14, 0, 16, 16, 16);
+    private static final VoxelShape OUTLINE_FULL_SHAPE = Shapes.block();
+    private static final VoxelShape OUTLINE_HANGING_SHAPE = Block.box(0, 8, 0, 16, 16, 16);
+    private static final VoxelShape BELOW_BLOCK_SHAPE = Shapes.block().move(0, -1, 0);
 
     public FrameworkBlock() {
-        super(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(0.5F).noOcclusion().sound(SoundType.WOOD));
-        registerDefaultState(stateDefinition.any().setValue(DISTANCE, 7).setValue(WATERLOGGED, false).setValue(BOTTOM, false).setValue(STAGE, Stage.TOP));
+        super(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.WOOD)
+                .strength(0.5F)
+                .noOcclusion()
+                .sound(SoundType.WOOD));
+        registerDefaultState(stateDefinition.any()
+                .setValue(DISTANCE, 7)
+                .setValue(WATERLOGGED, false)
+                .setValue(BOTTOM, false)
+                .setValue(STAGE, Stage.TOP));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> b) {
-        b.add(DISTANCE, WATERLOGGED, BOTTOM, STAGE);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(DISTANCE, WATERLOGGED, BOTTOM, STAGE);
     }
 
     @Override
-    public boolean canBeReplaced(BlockState s, BlockPlaceContext ctx) {
-        return false;
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        return context.getItemInHand().is(asItem());
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        BlockPos p = ctx.getClickedPos();
-        LevelAccessor l = ctx.getLevel();
-        int d = getDistance(l, p);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos clickedPos = context.getClickedPos();
+        LevelAccessor level = context.getLevel();
+        int distance = getDistance(level, clickedPos);
+        boolean isWaterlogged = level.getFluidState(clickedPos).getType() == Fluids.WATER;
+        boolean isBottom = isBottom(level, clickedPos, distance);
+        Stage stage = resolveStage(level, clickedPos);
         return defaultBlockState()
-                .setValue(WATERLOGGED, l.getFluidState(p).getType() == Fluids.WATER)
-                .setValue(DISTANCE, d)
-                .setValue(BOTTOM, isBottom(l, p, d))
-                .setValue(STAGE, resolveStage(l, p));
+                .setValue(WATERLOGGED, isWaterlogged)
+                .setValue(DISTANCE, distance)
+                .setValue(BOTTOM, isBottom)
+                .setValue(STAGE, stage);
     }
 
     @Override
-    protected void onPlace(BlockState s, net.minecraft.world.level.Level l, BlockPos p, BlockState old, boolean moved) {
-        if (!l.isClientSide) l.scheduleTick(p, this, 1);
-    }
-
-    @Override
-    protected BlockState updateShape(BlockState s, Direction dir, BlockState ns, LevelAccessor l, BlockPos p, BlockPos np) {
-        if (s.getValue(WATERLOGGED)) l.scheduleTick(p, Fluids.WATER, Fluids.WATER.getTickDelay(l));
-        if (!l.isClientSide()) l.scheduleTick(p, this, 1);
-        return s.setValue(STAGE, resolveStage(l, p));
-    }
-
-    @Override
-    protected void tick(BlockState s, ServerLevel l, BlockPos p, RandomSource r) {
-        int d = getDistance(l, p);
-        BlockState u = s.setValue(DISTANCE, d).setValue(BOTTOM, isBottom(l, p, d)).setValue(STAGE, resolveStage(l, p));
-        if (u.getValue(DISTANCE) == 7) {
-            if (s.getValue(DISTANCE) == 7) {
-                FallingBlockEntity.fall(l, p, u);
-            } else {
-                l.destroyBlock(p, true);
-            }
-        } else if (u != s) {
-            l.setBlock(p, u, 3);
+    protected void onPlace(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (!level.isClientSide) {
+            level.scheduleTick(pos, this, 1);
         }
     }
 
     @Override
-    protected boolean canSurvive(BlockState s, LevelReader l, BlockPos p) {
-        return getDistance(l, p) < 7;
+    protected @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        if (!level.isClientSide()) {
+            level.scheduleTick(pos, this, 1);
+        }
+        return state.setValue(STAGE, resolveStage(level, pos));
     }
 
     @Override
-    public VoxelShape getShape(BlockState s, BlockGetter g, BlockPos p, CollisionContext c) {
-        if (s.getValue(STAGE) == Stage.HANGING) return SHAPE_OUTLINE_HANGING;
-        return SHAPE_OUTLINE_FULL;
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource randomSource) {
+        int distance = getDistance(level, pos);
+        boolean isBottom = isBottom(level, pos, distance);
+        Stage stage = resolveStage(level, pos);
+        BlockState updatedState = state
+                .setValue(DISTANCE, distance)
+                .setValue(BOTTOM, isBottom)
+                .setValue(STAGE, stage);
+
+        if (updatedState.getValue(DISTANCE) == 7) {
+            if (state.getValue(DISTANCE) == 7) {
+                FallingBlockEntity.fall(level, pos, updatedState);
+            } else {
+                level.destroyBlock(pos, true);
+            }
+        } else if (updatedState != state) {
+            level.setBlock(pos, updatedState, 3);
+        }
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState s, BlockGetter g, BlockPos p, CollisionContext c) {
-        if (c.isAbove(Shapes.block(), p, true) && !c.isDescending()) return SHAPE_TOP_CAP;
-        if (s.getValue(DISTANCE) != 0 && s.getValue(BOTTOM) && c.isAbove(SHAPE_BELOW_BLOCK, p, true))
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        return getDistance(level, pos) < 7;
+    }
+
+    @Override
+    public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (state.getValue(STAGE) == Stage.HANGING) {
+            return OUTLINE_HANGING_SHAPE;
+        }
+        return OUTLINE_FULL_SHAPE;
+    }
+
+    @Override
+    public @NotNull VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (context.isAbove(Shapes.block(), pos, true) && !context.isDescending()) {
+            return TOP_CAP_SHAPE;
+        }
+        if (state.getValue(DISTANCE) != 0 && state.getValue(BOTTOM) && context.isAbove(BELOW_BLOCK_SHAPE, pos, true)) {
             return Block.box(0, 0, 0, 16, 2, 16);
+        }
         return Shapes.empty();
     }
 
     @Override
-    public VoxelShape getInteractionShape(BlockState s, BlockGetter g, BlockPos p) {
+    public @NotNull VoxelShape getInteractionShape(BlockState state, BlockGetter level, BlockPos pos) {
         return Shapes.block();
     }
 
     @Override
-    public VoxelShape getBlockSupportShape(BlockState s, BlockGetter g, BlockPos p) {
-        return Shapes.block();
+    public @NotNull FluidState getFluidState(BlockState state) {
+        if (state.getValue(WATERLOGGED)) {
+            return Fluids.WATER.getSource(false);
+        }
+        return super.getFluidState(state);
     }
 
-    @Override
-    public FluidState getFluidState(BlockState s) {
-        return s.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(s);
+    private boolean isBottom(BlockGetter level, BlockPos pos, int distance) {
+        if (distance <= 0) {
+            return false;
+        }
+        BlockState belowState = level.getBlockState(pos.below());
+        return !(belowState.getBlock() instanceof FrameworkBlock);
     }
 
-    private boolean isBottom(BlockGetter g, BlockPos p, int d) {
-        return d > 0 && !(g.getBlockState(p.below()).getBlock() instanceof FrameworkBlock);
-    }
+    public static int getDistance(BlockGetter level, BlockPos pos) {
+        BlockPos.MutableBlockPos belowPos = pos.mutable().move(Direction.DOWN);
+        BlockState belowState = level.getBlockState(belowPos);
+        int distance = 7;
 
-    public static int getDistance(BlockGetter g, BlockPos p) {
-        BlockPos.MutableBlockPos m = p.mutable().move(Direction.DOWN);
-        BlockState b = g.getBlockState(m);
-        int d = 7;
-        if (b.getBlock() instanceof FrameworkBlock) {
-            d = b.getValue(DISTANCE);
-        } else if (b.isFaceSturdy(g, m, Direction.UP)) {
+        if (belowState.getBlock() instanceof FrameworkBlock) {
+            distance = belowState.getValue(DISTANCE);
+        } else if (belowState.isFaceSturdy(level, belowPos, Direction.UP)) {
             return 0;
         }
-        for (Direction dir : Plane.HORIZONTAL) {
-            BlockState s = g.getBlockState(m.setWithOffset(p, dir));
-            if (s.getBlock() instanceof FrameworkBlock) {
-                d = Math.min(d, s.getValue(DISTANCE) + 1);
-                if (d == 1) break;
+
+        for (Direction horizontalDirection : Plane.HORIZONTAL) {
+            BlockState neighborState = level.getBlockState(belowPos.setWithOffset(pos, horizontalDirection));
+            if (neighborState.getBlock() instanceof FrameworkBlock) {
+                distance = Math.min(distance, neighborState.getValue(DISTANCE) + 1);
+                if (distance == 1) {
+                    break;
+                }
             }
         }
-        return d;
+
+        return distance;
     }
 
-    private Stage resolveStage(LevelAccessor l, BlockPos p) {
-        boolean hasAbove = l.getBlockState(p.above()).getBlock() instanceof FrameworkBlock;
-        boolean airBelow = l.isEmptyBlock(p.below());
-        if (hasAbove) return Stage.SUPPORT;
-        if (airBelow) return Stage.HANGING;
+    private Stage resolveStage(LevelAccessor level, BlockPos pos) {
+        boolean hasFrameworkAbove = level.getBlockState(pos.above()).getBlock() instanceof FrameworkBlock;
+        boolean hasAirBelow = level.isEmptyBlock(pos.below());
+        if (hasFrameworkAbove) {
+            return Stage.SUPPORT;
+        }
+        if (hasAirBelow) {
+            return Stage.HANGING;
+        }
         return Stage.TOP;
     }
 
@@ -164,15 +203,15 @@ public class FrameworkBlock extends Block implements SimpleWaterloggedBlock {
         TOP("top"),
         HANGING("hanging");
 
-        private final String n;
+        private final String serializedName;
 
-        Stage(String n) {
-            this.n = n;
+        Stage(String serializedName) {
+            this.serializedName = serializedName;
         }
 
         @Override
         public @NotNull String getSerializedName() {
-            return n;
+            return serializedName;
         }
     }
 }

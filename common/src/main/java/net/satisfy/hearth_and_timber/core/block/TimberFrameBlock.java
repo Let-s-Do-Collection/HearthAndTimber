@@ -64,7 +64,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         return true;
     }
 
-    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.block();
     }
 

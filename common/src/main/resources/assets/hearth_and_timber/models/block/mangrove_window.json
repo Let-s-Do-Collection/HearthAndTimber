@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "hearth_and_timber:block/large_mangrove_planks",
+    "end": "hearth_and_timber:block/mangrove_board",
     "side": "hearth_and_timber:block/mangrove_window_pane"
   }
 }

@@ -302,7 +302,7 @@ public class RailingBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public static boolean isCompatibleStair(BlockState state) {
-        return state.getBlock() instanceof RailingBlock || state.getBlock() instanceof StairBlock;
+        return state.getBlock() instanceof RailingBlock;
     }
 
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "hearth_and_timber:block/large_acacia_planks",
+    "end": "hearth_and_timber:block/acacia_board",
     "side": "hearth_and_timber:block/acacia_window_pane"
   }
 }

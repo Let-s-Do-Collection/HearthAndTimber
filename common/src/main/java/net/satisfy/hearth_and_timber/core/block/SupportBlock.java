@@ -22,6 +22,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -91,33 +92,44 @@ public class SupportBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        Direction facing = context.getHorizontalDirection().getOpposite();
-        BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
-        BlockPos frontPos = pos.relative(facing);
-        BlockPos behindPos = pos.relative(facing.getOpposite());
-        boolean connect = isSameSupportFacing(level.getBlockState(frontPos), facing) || isSameSupportFacing(level.getBlockState(behindPos), facing);
+        BlockPos pos = context.getClickedPos();
+
+        Direction defaultFacing = context.getHorizontalDirection().getOpposite();
+        Direction clickedFace = context.getClickedFace();
+        BlockPos attachedPos = pos.relative(clickedFace.getOpposite());
+        BlockState attached = level.getBlockState(attachedPos);
+
+        boolean horizontal = clickedFace.getAxis().isHorizontal();
+        if (!horizontal) {
+            return null;
+        }
+
+        boolean attachesToPillar = attached.getBlock() instanceof PillarBlock;
+        boolean attachesToSupport = attached.getBlock() instanceof SupportBlock;
+
+        Direction facing;
+        if (attachesToPillar) {
+            facing = clickedFace.getOpposite();
+        } else if (attachesToSupport && attached.hasProperty(FACING)) {
+            facing = attached.getValue(FACING);
+        } else {
+            facing = defaultFacing;
+        }
+
+        boolean connected = false;
+        if (attachesToPillar) {
+            connected = true;
+        } else if (attachesToSupport && attached.hasProperty(FACING)) {
+            Direction otherFacing = attached.getValue(FACING);
+            connected = otherFacing == facing;
+        }
+
         return this.defaultBlockState()
                 .setValue(FACING, facing)
-                .setValue(CONNECTED, connect)
+                .setValue(CONNECTED, connected)
                 .setValue(EXTENDED, false)
                 .setValue(REST, true);
-    }
-
-    @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moved) {
-        super.onPlace(state, level, pos, oldState, moved);
-    }
-
-    @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify) {
-        super.neighborChanged(state, level, pos, sourceBlock, sourcePos, notify);
-    }
-
-    private boolean isSameSupportFacing(BlockState state, Direction facing) {
-        if (state.getBlock() != this) return false;
-        if (!state.hasProperty(FACING)) return false;
-        return state.getValue(FACING) == facing;
     }
 
     @Override
@@ -142,11 +154,17 @@ public class SupportBlock extends Block {
         return (state.getValue(CONNECTED) ? SHAPE_CONNECTED : SHAPE_SINGLE).get(state.getValue(FACING));
     }
 
+    private boolean isSameSupportFacing(BlockState state, Direction facing) {
+        if (state.getBlock() != this) return false;
+        if (!state.hasProperty(FACING)) return false;
+        return state.getValue(FACING) == facing;
+    }
+
     private boolean isMiddleOfConnectedRun(Level level, BlockPos pos, Direction facing) {
         BlockState frontState = level.getBlockState(pos.relative(facing));
         BlockState behindState = level.getBlockState(pos.relative(facing.getOpposite()));
-        boolean frontOk = isSameSupportFacing(frontState, facing) && frontState.getValue(CONNECTED);
-        boolean behindOk = isSameSupportFacing(behindState, facing) && behindState.getValue(CONNECTED);
+        boolean frontOk = isSameSupportFacing(frontState, facing) && frontState.hasProperty(CONNECTED) && frontState.getValue(CONNECTED);
+        boolean behindOk = isSameSupportFacing(behindState, facing) && behindState.hasProperty(CONNECTED) && behindState.getValue(CONNECTED);
         return frontOk && behindOk;
     }
 
@@ -154,7 +172,9 @@ public class SupportBlock extends Block {
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!(stack.getItem() instanceof AxeItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!level.isClientSide) {
-            ((ServerLevel) level).sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 1.02, pos.getZ() + 0.5, 12, 0.2, 0.0, 0.2, 0.08);
+            if (level instanceof ServerLevel server) {
+                server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 1.02, pos.getZ() + 0.5, 12, 0.2, 0.0, 0.2, 0.08);
+            }
             level.playSound(null, pos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0F, 1.0F);
             if (state.getValue(CONNECTED)) {
                 Direction facing = state.getValue(FACING);
@@ -172,6 +192,61 @@ public class SupportBlock extends Block {
     }
 
     @Override
+    public @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState adj, LevelAccessor level, BlockPos pos, BlockPos pos2) {
+        if (level instanceof Level lvl && !lvl.isClientSide) {
+            if (!isStillSupported(state, lvl, pos)) {
+                lvl.destroyBlock(pos, true);
+            }
+        }
+        return super.updateShape(state, dir, adj, level, pos, pos2);
+    }
+
+    private boolean isAnchor(Level level, BlockPos pos, Direction facing) {
+        BlockPos anchorPos = pos.relative(facing);
+        BlockState anchorState = level.getBlockState(anchorPos);
+
+        if (anchorState.isAir()) return false;
+
+        if (anchorState.getBlock() instanceof SupportBlock) {
+            if (!anchorState.hasProperty(EXTENDED)) return false;
+            return !anchorState.getValue(EXTENDED);
+        }
+
+        return true;
+    }
+
+    private boolean isStillSupported(BlockState state, Level level, BlockPos pos) {
+        Direction facing = state.getValue(FACING);
+
+        if (isAnchor(level, pos, facing)) {
+            return true;
+        }
+
+        Direction[] directions = new Direction[]{facing, facing.getOpposite()};
+
+        for (Direction walk : directions) {
+            BlockPos currentPos = pos;
+            for (int i = 0; i < 64; i++) {
+                currentPos = currentPos.relative(walk);
+                BlockState other = level.getBlockState(currentPos);
+
+                if (!(other.getBlock() instanceof SupportBlock)) {
+                    break;
+                }
+                if (!other.hasProperty(FACING) || other.getValue(FACING) != facing) {
+                    break;
+                }
+
+                if (isAnchor(level, currentPos, facing)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
     public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
         int beige = 0xF5DEB3;
         int gold = 0xFFD700;
@@ -181,5 +256,5 @@ public class SupportBlock extends Block {
             return;
         }
         list.add(Component.translatable("tooltip.hearth_and_timber.support.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-     }
+    }
 }

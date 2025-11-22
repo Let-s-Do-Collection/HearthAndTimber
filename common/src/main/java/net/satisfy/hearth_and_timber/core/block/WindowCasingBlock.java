@@ -7,25 +7,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -38,26 +34,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.satisfy.hearth_and_timber.core.block.entity.WindowCasingBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
+public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
-    public static final BooleanProperty FLOWER_POT = BooleanProperty.create("flower_pot");
-    public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
     public static final BooleanProperty BOTTOM_TOGGLE = BooleanProperty.create("bottom_toggle");
-
-    private static final VoxelShape POT_N = Block.box(5, 0, 9, 11, 6, 15);
-    private static final VoxelShape POT_S = Block.box(5, 0, 1, 11, 6, 7);
-    private static final VoxelShape POT_E = Block.box(1, 0, 5, 7, 6, 11);
-    private static final VoxelShape POT_W = Block.box(9, 0, 5, 15, 6, 11);
 
     private static final VoxelShape NORTH_PLANE = Block.box(0, 0, 14, 16, 16, 16);
     private static final VoxelShape SOUTH_PLANE = Block.box(0, 0, 0, 16, 16, 2);
@@ -93,53 +81,28 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
                 .setValue(BOTTOM, true)
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
-                .setValue(FLOWER_POT, false)
-                .setValue(SUPPORT, true)
                 .setValue(BOTTOM_TOGGLE, false));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState base = defaultBlockState()
+        BlockState state = defaultBlockState()
                 .setValue(FACING, context.getHorizontalDirection().getOpposite())
                 .setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER)
                 .setValue(TOP, true)
+                .setValue(BOTTOM, true)
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
-                .setValue(FLOWER_POT, false)
                 .setValue(BOTTOM_TOGGLE, false);
-        base = updateConnections(base, context.getLevel(), context.getClickedPos());
-        base = updateSupportAndBottom(base, context.getLevel(), context.getClickedPos());
-        return base;
+        return updateConnections(state, context.getLevel(), context.getClickedPos());
     }
 
     @Override
-    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        BlockState blockState = state;
-        if (direction == Direction.DOWN) {
-            if (blockState.getValue(FLOWER_POT) && !neighborState.isAir()) {
-                if (level instanceof Level level1 && !level1.isClientSide) {
-                    BlockEntity blockEntity = level1.getBlockEntity(currentPos);
-                    if (blockEntity instanceof WindowCasingBlockEntity wc) {
-                        ItemStack flower = wc.getFlower();
-                        if (!flower.isEmpty()) {
-                            popResource(level1, currentPos, flower);
-                            wc.setFlower(ItemStack.EMPTY);
-                            wc.setChanged();
-                        }
-                    }
-                    popResource(level1, currentPos, new ItemStack(Items.FLOWER_POT));
-                }
-                blockState = blockState.setValue(FLOWER_POT, false);
-            }
-            blockState = updateSupportAndBottom(blockState, level, currentPos);
-        } else {
-            blockState = updateConnections(blockState, level, currentPos);
-        }
-        return blockState;
+        return updateConnections(state, level, pos);
     }
 
     private boolean isConnected(LevelAccessor level, BlockPos pos, Direction facing) {
@@ -147,16 +110,29 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
         return other.getBlock() instanceof WindowCasingBlock && other.getValue(FACING) == facing;
     }
 
+    private boolean hasSameBelow(LevelAccessor level, BlockPos pos, Direction facing) {
+        BlockState below = level.getBlockState(pos.below());
+        return below.getBlock() instanceof WindowCasingBlock && below.getValue(FACING) == facing;
+    }
+
     private BlockState updateConnections(BlockState state, LevelAccessor level, BlockPos pos) {
         Direction facing = state.getValue(FACING);
+
         boolean north = isConnected(level, pos.north(), facing);
         boolean east = isConnected(level, pos.east(), facing);
         boolean south = isConnected(level, pos.south(), facing);
         boolean west = isConnected(level, pos.west(), facing);
         boolean up = isConnected(level, pos.above(), facing);
+
+        boolean bottom = state.getValue(BOTTOM);
+        if (!state.getValue(BOTTOM_TOGGLE)) {
+            bottom = !hasSameBelow(level, pos, facing);
+        }
+
         boolean top;
         boolean left;
         boolean right;
+
         if (facing == Direction.NORTH) {
             top = !up;
             left = !east;
@@ -174,154 +150,76 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
             left = !north;
             right = !south;
         }
-        return state.setValue(TOP, top).setValue(LEFT, left).setValue(RIGHT, right);
-    }
 
-    private BlockState updateSupportAndBottom(BlockState state, LevelAccessor level, BlockPos pos) {
-        if (state.getValue(BOTTOM_TOGGLE)) {
-            return state;
-        }
-        BlockState below = level.getBlockState(pos.below());
-        boolean isSameBelow = below.getBlock() instanceof WindowCasingBlock && below.getValue(FACING) == state.getValue(FACING);
-        boolean hasAnyBelow = !below.isAir();
-        boolean support;
-        boolean bottom;
-        if (isSameBelow) {
-            support = false;
-            bottom = false;
-        } else if (hasAnyBelow) {
-            support = true;
-            bottom = false;
-        } else {
-            support = false;
-            bottom = true;
-        }
-        return state.setValue(SUPPORT, support).setValue(BOTTOM, bottom);
-    }
-
-    @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            if (state.getValue(FLOWER_POT)) {
-                if (!level.isClientSide) {
-                    BlockEntity be = level.getBlockEntity(pos);
-                    if (be instanceof WindowCasingBlockEntity wc) {
-                        ItemStack flower = wc.getFlower();
-                        if (!flower.isEmpty()) {
-                            popResource(level, pos, flower);
-                            wc.setFlower(ItemStack.EMPTY);
-                            wc.setChanged();
-                        }
-                    }
-                    popResource(level, pos, new ItemStack(Items.FLOWER_POT));
-                }
-            }
-            super.onRemove(state, level, pos, newState, isMoving);
-        } else {
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, FLOWER_POT, SUPPORT, BOTTOM_TOGGLE);
-    }
-
-    @Override
-    public @NotNull FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        return state
+                .setValue(TOP, top)
+                .setValue(LEFT, left)
+                .setValue(RIGHT, right)
+                .setValue(BOTTOM, bottom);
     }
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof AxeItem) {
-            if (hit.getDirection() == state.getValue(FACING)) {
-                double y = hit.getLocation().y - pos.getY();
-                if ((state.getValue(BOTTOM) || state.getValue(SUPPORT)) && y < 0.5 && !state.getValue(FLOWER_POT)) {
-                    if (!level.isClientSide) {
-                        BlockState ns = state.setValue(BOTTOM, false).setValue(SUPPORT, false).setValue(BOTTOM_TOGGLE, true);
-                        level.setBlock(pos, ns, Block.UPDATE_CLIENTS);
-                        if (level instanceof ServerLevel s) {
-                            s.levelEvent(2001, pos, Block.getId(state));
-                        }
-                    }
-                    return ItemInteractionResult.sidedSuccess(level.isClientSide);
-                }
-            }
-            if (!state.getValue(BOTTOM) && !state.getValue(SUPPORT) && hit.getDirection().getAxis().isHorizontal()) {
-                if (!level.isClientSide) {
-                    BlockState ns = state.setValue(BOTTOM, true).setValue(SUPPORT, true).setValue(BOTTOM_TOGGLE, true);
-                    level.setBlock(pos, ns, Block.UPDATE_CLIENTS);
-                    if (level instanceof ServerLevel s) {
-                        s.levelEvent(2001, pos, Block.getId(state));
-                    }
-                }
-                return ItemInteractionResult.sidedSuccess(level.isClientSide);
-            }
+        if (!(stack.getItem() instanceof AxeItem)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        if (stack.is(Items.FLOWER_POT)) {
-            if (state.getValue(FLOWER_POT)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            if (hit.getDirection() != state.getValue(FACING)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            if (!state.getValue(BOTTOM)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            double y = hit.getLocation().y - pos.getY();
-            if (y >= 0.5) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-            if (!level.isClientSide) {
-                level.setBlock(pos, state.setValue(FLOWER_POT, true), Block.UPDATE_CLIENTS);
-                if (!player.getAbilities().instabuild) stack.shrink(1);
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+
+        if (hit.getDirection() != state.getValue(FACING)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        if (state.getValue(FLOWER_POT) && stack.is(ItemTags.SMALL_FLOWERS)) {
-            if (!level.isClientSide) {
-                BlockEntity be = level.getBlockEntity(pos);
-                if (be instanceof WindowCasingBlockEntity wc && wc.getFlower().isEmpty()) {
-                    ItemStack copy = stack.copy();
-                    copy.setCount(1);
-                    wc.setFlower(copy);
-                    wc.setChanged();
-                    level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
-                    if (!player.getAbilities().instabuild) stack.shrink(1);
-                }
-            }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+
+        double hitY = hit.getLocation().y - pos.getY();
+        if (hitY >= 0.5) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+        boolean newBottom = !state.getValue(BOTTOM);
+
+        BlockState newState = state
+                .setValue(BOTTOM, newBottom)
+                .setValue(BOTTOM_TOGGLE, true);
+
+        if (!level.isClientSide) {
+            level.setBlock(pos, newState, Block.UPDATE_CLIENTS);
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.levelEvent(2001, pos, Block.getId(state));
+            }
+        }
+
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
         VoxelShape shape = Shapes.empty();
+
         if (facing == Direction.NORTH) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, NORTH_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, NORTH_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, NORTH_TOP);
-            if (state.getValue(BOTTOM) || state.getValue(SUPPORT)) shape = Shapes.or(shape, NORTH_BOTTOM);
-            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_N);
+            if (state.getValue(BOTTOM)) shape = Shapes.or(shape, NORTH_BOTTOM);
             if (shape.isEmpty()) shape = NORTH_PLANE;
         } else if (facing == Direction.SOUTH) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, SOUTH_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, SOUTH_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, SOUTH_TOP);
-            if (state.getValue(BOTTOM) || state.getValue(SUPPORT)) shape = Shapes.or(shape, SOUTH_BOTTOM);
-            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_S);
+            if (state.getValue(BOTTOM)) shape = Shapes.or(shape, SOUTH_BOTTOM);
             if (shape.isEmpty()) shape = SOUTH_PLANE;
         } else if (facing == Direction.EAST) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, EAST_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, EAST_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, EAST_TOP);
-            if (state.getValue(BOTTOM) || state.getValue(SUPPORT)) shape = Shapes.or(shape, EAST_BOTTOM);
-            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_E);
+            if (state.getValue(BOTTOM)) shape = Shapes.or(shape, EAST_BOTTOM);
             if (shape.isEmpty()) shape = EAST_PLANE;
         } else if (facing == Direction.WEST) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, WEST_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, WEST_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, WEST_TOP);
-            if (state.getValue(BOTTOM) || state.getValue(SUPPORT)) shape = Shapes.or(shape, WEST_BOTTOM);
-            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_W);
+            if (state.getValue(BOTTOM)) shape = Shapes.or(shape, WEST_BOTTOM);
             if (shape.isEmpty()) shape = WEST_PLANE;
         }
+
         return shape;
     }
 
@@ -346,18 +244,13 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, 
     }
 
     @Override
-    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-        BlockPos above = context.getClickedPos().above();
-        BlockState aboveState = context.getLevel().getBlockState(above);
-        if (aboveState.getBlock() instanceof WindowCasingBlock && aboveState.getValue(FLOWER_POT)) {
-            return false;
-        }
-        return super.canBeReplaced(state, context);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, BOTTOM_TOGGLE);
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new WindowCasingBlockEntity(pos, state);
+    public @NotNull FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
