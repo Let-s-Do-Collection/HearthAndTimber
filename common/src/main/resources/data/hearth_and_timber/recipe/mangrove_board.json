@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_slab"
+    }
+  ],
+  "result": {
+    "id": "hearth_and_timber:mangrove_board",
+    "count": 2
+  }
+}

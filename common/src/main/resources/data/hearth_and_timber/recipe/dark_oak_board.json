@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_oak_slab"
+    }
+  ],
+  "result": {
+    "id": "hearth_and_timber:dark_oak_board",
+    "count": 2
+  }
+}

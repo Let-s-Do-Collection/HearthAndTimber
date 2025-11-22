@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:pale_oak_slab"
+    }
+  ],
+  "result": {
+    "id": "hearth_and_timber:pale_oak_board",
+    "count": 2
+  }
+}

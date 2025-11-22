@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_slab"
+    }
+  ],
+  "result": {
+    "id": "hearth_and_timber:acacia_board",
+    "count": 2
+  }
+}

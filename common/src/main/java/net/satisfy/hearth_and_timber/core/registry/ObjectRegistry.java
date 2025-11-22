@@ -1,12 +1,10 @@
 package net.satisfy.hearth_and_timber.core.registry;
 
-import dev.architectury.event.events.common.LifecycleEvent;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -111,15 +109,15 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> CHERRY_WINDOW_CASING = registerWithItem("cherry_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CHERRY_PLANKS).noOcclusion()));
     public static final RegistrySupplier<Block> PALE_OAK_WINDOW_CASING = registerWithItem("pale_oak_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).noOcclusion()));
 
-    public static final RegistrySupplier<Block> LARGE_OAK_PLANKS = registerWithItem("large_oak_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_SPRUCE_PLANKS = registerWithItem("large_spruce_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_BIRCH_PLANKS = registerWithItem("large_birch_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_JUNGLE_PLANKS = registerWithItem("large_jungle_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_ACACIA_PLANKS = registerWithItem("large_acacia_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_DARK_OAK_PLANKS = registerWithItem("large_dark_oak_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_MANGROVE_PLANKS = registerWithItem("large_mangrove_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_CHERRY_PLANKS = registerWithItem("large_cherry_planks", LargeWoodPlanksBlock::new);
-    public static final RegistrySupplier<Block> LARGE_PALE_OAK_PLANKS = registerWithItem("large_pale_oak_planks", LargeWoodPlanksBlock::new);
+    public static final RegistrySupplier<Block> OAK_BOARD = registerWithItem("oak_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> SPRUCE_BOARD = registerWithItem("spruce_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> BIRCH_BOARD = registerWithItem("birch_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> JUNGLE_BOARD = registerWithItem("jungle_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> ACACIA_BOARD = registerWithItem("acacia_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> DARK_OAK_BOARD = registerWithItem("dark_oak_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> MANGROVE_BOARD = registerWithItem("mangrove_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> CHERRY_BOARD = registerWithItem("cherry_board", WoodenBoardBlock::new);
+    public static final RegistrySupplier<Block> PALE_OAK_BOARD = registerWithItem("pale_oak_board", WoodenBoardBlock::new);
 
     public static final RegistrySupplier<Block> OAK_WINDOW_PANE = registerWithItem("oak_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));
     public static final RegistrySupplier<Block> SPRUCE_WINDOW_PANE = registerWithItem("spruce_window_pane", () -> new WindowBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS_PANE).sound(SoundType.GLASS)));

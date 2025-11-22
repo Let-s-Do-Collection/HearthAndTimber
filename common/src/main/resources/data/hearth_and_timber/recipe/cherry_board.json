@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_slab"
+    }
+  ],
+  "result": {
+    "id": "hearth_and_timber:cherry_board",
+    "count": 2
+  }
+}
