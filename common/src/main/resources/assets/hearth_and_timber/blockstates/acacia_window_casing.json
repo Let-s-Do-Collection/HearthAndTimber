@@ -1,103 +1,156 @@
 {
   "multipart": [
     {
-      "when": { "facing": "north", "top": true },
-      "apply": { "model": "hearth_and_timber:block/acacia_window_casing_top" }
+      "when": {
+        "facing": "north",
+        "top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_window_casing_top"
+      }
     },
     {
-      "when": { "facing": "north", "bottom": true },
-      "apply": { "model": "hearth_and_timber:block/acacia_window_casing_bottom" }
+      "when": {
+        "facing": "north",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_window_casing_bottom"
+      }
     },
     {
-      "when": { "facing": "north", "left": true },
-      "apply": { "model": "hearth_and_timber:block/acacia_window_casing_left" }
+      "when": {
+        "facing": "north",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_window_casing_left"
+      }
     },
     {
-      "when": { "facing": "north", "right": true },
-      "apply": { "model": "hearth_and_timber:block/acacia_window_casing_right" }
+      "when": {
+        "facing": "north",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/acacia_window_casing_right"
+      }
     },
-
     {
-      "when": { "facing": "east", "top": true },
+      "when": {
+        "facing": "east",
+        "top": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_top",
         "y": 90
       }
     },
     {
-      "when": { "facing": "east", "bottom": true },
+      "when": {
+        "facing": "east",
+        "bottom": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_bottom",
         "y": 90
       }
     },
     {
-      "when": { "facing": "east", "left": true },
+      "when": {
+        "facing": "east",
+        "left": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_left",
         "y": 90
       }
     },
     {
-      "when": { "facing": "east", "right": true },
+      "when": {
+        "facing": "east",
+        "right": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_right",
         "y": 90
       }
     },
-
     {
-      "when": { "facing": "south", "top": true },
+      "when": {
+        "facing": "south",
+        "top": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_top",
         "y": 180
       }
     },
     {
-      "when": { "facing": "south", "bottom": true },
+      "when": {
+        "facing": "south",
+        "bottom": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_bottom",
         "y": 180
       }
     },
     {
-      "when": { "facing": "south", "left": true },
+      "when": {
+        "facing": "south",
+        "left": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_left",
         "y": 180
       }
     },
     {
-      "when": { "facing": "south", "right": true },
+      "when": {
+        "facing": "south",
+        "right": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_right",
         "y": 180
       }
     },
-
     {
-      "when": { "facing": "west", "top": true },
+      "when": {
+        "facing": "west",
+        "top": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_top",
         "y": 270
       }
     },
     {
-      "when": { "facing": "west", "bottom": true },
+      "when": {
+        "facing": "west",
+        "bottom": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_bottom",
         "y": 270
       }
     },
     {
-      "when": { "facing": "west", "left": true },
+      "when": {
+        "facing": "west",
+        "left": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_left",
         "y": 270
       }
     },
     {
-      "when": { "facing": "west", "right": true },
+      "when": {
+        "facing": "west",
+        "right": true
+      },
       "apply": {
         "model": "hearth_and_timber:block/acacia_window_casing_right",
         "y": 270

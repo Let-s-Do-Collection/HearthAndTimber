@@ -43,8 +43,7 @@
       },
       "apply": {
         "model": "hearth_and_timber:block/mangrove_window_casing_top",
-        "y": 90,
-        "uvlock": false
+        "y": 90
       }
     },
     {
@@ -54,8 +53,7 @@
       },
       "apply": {
         "model": "hearth_and_timber:block/mangrove_window_casing_bottom",
-        "y": 90,
-        "uvlock": false
+        "y": 90
       }
     },
     {
@@ -65,8 +63,7 @@
       },
       "apply": {
         "model": "hearth_and_timber:block/mangrove_window_casing_left",
-        "y": 90,
-        "uvlock": false
+        "y": 90
       }
     },
     {
@@ -76,262 +73,88 @@
       },
       "apply": {
         "model": "hearth_and_timber:block/mangrove_window_casing_right",
-        "y": 90,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "south",
-        "top": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_top",
-        "y": 180,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "south",
-        "bottom": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom",
-        "y": 180,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "south",
-        "left": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_left",
-        "y": 180,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "south",
-        "right": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_right",
-        "y": 180,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "top": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_top",
-        "y": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "bottom": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom",
-        "y": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "left": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_left",
-        "y": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "right": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_right",
-        "y": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "facing": "north",
-        "support": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom_support"
-      }
-    },
-    {
-      "when": {
-        "facing": "east",
-        "support": true
-      },
-      "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom_support",
         "y": 90
       }
     },
     {
       "when": {
         "facing": "south",
-        "support": true
+        "top": true
       },
       "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom_support",
+        "model": "hearth_and_timber:block/mangrove_window_casing_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "bottom": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_bottom",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "left": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_right",
         "y": 180
       }
     },
     {
       "when": {
         "facing": "west",
-        "support": true
+        "top": true
       },
       "apply": {
-        "model": "hearth_and_timber:block/mangrove_window_casing_bottom_support",
+        "model": "hearth_and_timber:block/mangrove_window_casing_top",
         "y": 270
       }
     },
     {
       "when": {
-        "facing": "north",
-        "bottom": true,
-        "flower_pot": true
+        "facing": "west",
+        "bottom": true
       },
-      "apply": [
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_0"
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_1"
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_2"
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_3"
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_4"
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_5"
-        }
-      ]
-    },
-    {
-      "when": {
-        "facing": "east",
-        "bottom": true,
-        "flower_pot": true
-      },
-      "apply": [
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_0",
-          "y": 90
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_1",
-          "y": 90
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_2",
-          "y": 90
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_3",
-          "y": 90
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_4",
-          "y": 90
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_5",
-          "y": 90
-        }
-      ]
-    },
-    {
-      "when": {
-        "facing": "south",
-        "bottom": true,
-        "flower_pot": true
-      },
-      "apply": [
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_0",
-          "y": 180
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_1",
-          "y": 180
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_2",
-          "y": 180
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_3",
-          "y": 180
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_4",
-          "y": 180
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_5",
-          "y": 180
-        }
-      ]
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_bottom",
+        "y": 270
+      }
     },
     {
       "when": {
         "facing": "west",
-        "bottom": true,
-        "flower_pot": true
+        "left": true
       },
-      "apply": [
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_0",
-          "y": 270
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_1",
-          "y": 270
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_2",
-          "y": 270
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_3",
-          "y": 270
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_4",
-          "y": 270
-        },
-        {
-          "model": "hearth_and_timber:block/window_casing_pot_5",
-          "y": 270
-        }
-      ]
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "right": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/mangrove_window_casing_right",
+        "y": 270
+      }
     }
   ]
 }

@@ -26,11 +26,19 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -81,22 +89,12 @@ public class RailingBlock extends Block implements SimpleWaterloggedBlock {
 
         for (int f = 0; f < 4; f++) {
             FULL_SHAPES[f] = buildRotated(full, f);
-            int r = rotFromSouth(f);
-            INNER_LEFT_SHAPES[f] = buildRotated(inner, r);
-            INNER_RIGHT_SHAPES[f] = buildRotated(inner, (r + 1) & 3);
-            OUTER_LEFT_SHAPES[f] = buildRotated(outer, r);
-            OUTER_RIGHT_SHAPES[f] = buildRotated(outer, r);
+            int baseRot = rotFromSouth(f);
+            INNER_LEFT_SHAPES[f] = buildRotated(inner, baseRot);
+            INNER_RIGHT_SHAPES[f] = buildRotated(inner, (baseRot + 1) & 3);
+            OUTER_LEFT_SHAPES[f] = buildRotated(outer, baseRot);
+            OUTER_RIGHT_SHAPES[f] = buildRotated(outer, (baseRot + 1) & 3);
         }
-
-        int s = Direction.SOUTH.get2DDataValue();
-        int n = Direction.NORTH.get2DDataValue();
-        int w = Direction.WEST.get2DDataValue();
-        int e = Direction.EAST.get2DDataValue();
-        OUTER_LEFT_SHAPES[e] = buildRotated(outer, (rotFromSouth(e) + 2) & 3);
-        OUTER_RIGHT_SHAPES[w] = buildRotated(outer, (rotFromSouth(w) + 1) & 3);
-        OUTER_RIGHT_SHAPES[n] = buildRotated(outer, (rotFromSouth(n) + 1) & 3);
-        OUTER_RIGHT_SHAPES[e] = buildRotated(outer, (rotFromSouth(e) + 1) & 3);
-        OUTER_RIGHT_SHAPES[s] = buildRotated(outer, (rotFromSouth(s) + 1) & 3);
     }
 
     private static int rotFromSouth(int facingIndex) {
@@ -356,7 +354,6 @@ public class RailingBlock extends Block implements SimpleWaterloggedBlock {
     protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
-
 
     public enum Size implements StringRepresentable {
         FULL, HALF, QUARTER;
