@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": [
+      {
+        "item": "hearth_and_timber:mangrove_shingles"
+      }
+    ]
+  },
+  "result": {
+    "id": "hearth_and_timber:mangrove_shingle_stairs",
+    "count": 4
+  }
+}

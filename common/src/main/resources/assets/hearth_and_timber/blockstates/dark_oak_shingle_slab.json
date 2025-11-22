@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hearth_and_timber:block/dark_oak_shingle_slab"
+    },
+    "type=top": {
+      "model": "hearth_and_timber:block/dark_oak_shingle_slab_top"
+    },
+    "type=double": {
+      "model": "hearth_and_timber:block/dark_oak_shingles"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX"
+  ],
+  "key": {
+    "X": [
+      {
+        "item": "hearth_and_timber:oak_shingles"
+      }
+    ]
+  },
+  "result": {
+    "id": "hearth_and_timber:oak_shingle_slab",
+    "count": 6
+  }
+}

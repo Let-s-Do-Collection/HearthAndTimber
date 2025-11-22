@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": [
+      {
+        "item": "minecraft:cherry_planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "hearth_and_timber:cherry_shingles",
+    "count": 4
+  }
+}
