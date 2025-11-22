@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "hearth_and_timber:oak_shingles",
+    "hearth_and_timber:spruce_shingles",
+    "hearth_and_timber:birch_shingles",
+    "hearth_and_timber:jungle_shingles",
+    "hearth_and_timber:acacia_shingles",
+    "hearth_and_timber:dark_oak_shingles",
+    "hearth_and_timber:mangrove_shingles",
+    "hearth_and_timber:cherry_shingles",
+    "hearth_and_timber:pale_oak_shingles"
+  ]
+}

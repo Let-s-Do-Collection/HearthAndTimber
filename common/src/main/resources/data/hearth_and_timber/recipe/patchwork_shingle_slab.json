@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "hearth_and_timber:patchwork_shingles"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:patchwork_shingle_slab",
+    "count": 6
+  }
+}

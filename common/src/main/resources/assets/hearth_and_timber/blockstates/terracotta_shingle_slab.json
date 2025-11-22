@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "hearth_and_timber:block/terracotta_shingle_slab"
+    },
+    "type=double": {
+      "model": "hearth_and_timber:block/terracotta_shingle_slab_double"
+    },
+    "type=top": {
+      "model": "hearth_and_timber:block/terracotta_shingle_slab_top"
+    }
+  }
+}

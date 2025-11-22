@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WT",
+    "TW"
+  ],
+  "key": {
+    "W": {
+      "tag": "hearth_and_timber:wooden_shingles"
+    },
+    "T": {
+      "item": "hearth_and_timber:terracotta_shingles"
+    }
+  },
+  "result": {
+    "id": "hearth_and_timber:patchwork_shingles",
+    "count": 4
+  }
+}

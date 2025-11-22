@@ -1,8 +1,0 @@
-{
-  "parent": "block/slab_top",
-  "textures": {
-    "bottom": "hearth_and_timber:block/patchwork_shingle_roof",
-    "top": "hearth_and_timber:block/patchwork_shingle_roof",
-    "side": "hearth_and_timber:block/patchwork_shingle_roof"
-  }
-}

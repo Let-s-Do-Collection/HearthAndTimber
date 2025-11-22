@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "hearth_and_timber:block/terracotta_shingles",
+        "weight": 1
+      }
+    ]
+  }
+}

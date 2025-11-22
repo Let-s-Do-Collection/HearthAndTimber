@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "hearth_and_timber:patchwork_shingles"
+  },
+  "result": {
+    "id": "hearth_and_timber:patchwork_shingle_stairs",
+    "count": 1
+  }
+}
