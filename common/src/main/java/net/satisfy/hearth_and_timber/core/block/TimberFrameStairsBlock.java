@@ -10,7 +10,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -42,95 +46,109 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
         this.registerDefaultState(this.defaultBlockState().setValue(APPLIED, false));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(APPLIED);
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
+        super.createBlockStateDefinition(stateBuilder);
+        stateBuilder.add(APPLIED);
     }
 
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        BlockState placed = super.getStateForPlacement(context);
-        return placed == null ? null : placed.setValue(APPLIED, false);
+        BlockState placedState = super.getStateForPlacement(context);
+        return placedState == null ? null : placedState.setValue(APPLIED, false);
     }
 
-    protected @NotNull BlockState updateShape(BlockState state, net.minecraft.core.Direction dir, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        return super.updateShape(state, dir, neighbor, level, pos, neighborPos);
+    @Override
+    protected @NotNull BlockState updateShape(BlockState state, net.minecraft.core.Direction direction, BlockState neighborState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
+        }
+        return super.updateShape(state, direction, neighborState, levelAccessor, blockPos, neighborPos);
     }
 
+    @Override
     public @NotNull RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new TimberFrameBlockEntity(pos, state);
+    @Override
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState state) {
+        return new TimberFrameBlockEntity(blockPos, state);
     }
 
-    private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState candidate) {
-        if (candidate == null || candidate.isAir()) return false;
-        if (candidate.getBlock() instanceof EntityBlock) return false;
-        if (candidate.getRenderShape() != RenderShape.MODEL) return false;
-        return Block.isShapeFullBlock(candidate.getShape(level, pos));
+    private static boolean canAccept(BlockGetter blockGetter, BlockPos blockPos, BlockState candidateState) {
+        if (candidateState == null || candidateState.isAir()) return false;
+        if (candidateState.getBlock() instanceof EntityBlock) return false;
+        if (candidateState.getRenderShape() != RenderShape.MODEL) return false;
+        return Block.isShapeFullBlock(candidateState.getShape(blockGetter, blockPos));
     }
 
-    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof PickaxeItem) {
+    @Override
+    public @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
+        if (itemStack.getItem() instanceof PickaxeItem) {
             if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TimberFrameBlockEntity foundation) {
-                BlockState mimic = foundation.getMimicState();
-                if (mimic != null && !mimic.isAir()) {
-                    Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
-                    foundation.setMimicState(null);
-                    level.setBlock(pos, state.setValue(APPLIED, false), 3);
-                    if (level instanceof ServerLevel server) server.levelEvent(2001, pos, Block.getId(mimic));
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+                BlockState mimicState = timberFrameBlockEntity.getMimicState();
+                if (mimicState != null && !mimicState.isAir()) {
+                    Block.popResource(level, blockPos, new ItemStack(mimicState.getBlock()));
+                    timberFrameBlockEntity.setMimicState(null);
+                    level.setBlock(blockPos, state.setValue(APPLIED, false), 3);
+                    if (level instanceof ServerLevel serverLevel) {
+                        serverLevel.levelEvent(2001, blockPos, Block.getId(mimicState));
+                    }
                 }
             }
             return ItemInteractionResult.CONSUME;
         }
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!(stack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        BlockState mimic = blockItem.getBlock().defaultBlockState();
-        if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!(itemStack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        BlockState mimicState = blockItem.getBlock().defaultBlockState();
+        if (!canAccept(level, blockPos, mimicState)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFrameBlockEntity foundation) {
-            foundation.setMimicState(mimic);
-            level.setBlock(pos, state.setValue(APPLIED, true), 3);
-            if (level instanceof ServerLevel server) server.levelEvent(2001, pos, Block.getId(mimic));
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+            timberFrameBlockEntity.setMimicState(mimicState);
+            level.setBlock(blockPos, state.setValue(APPLIED, true), 3);
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.levelEvent(2001, blockPos, Block.getId(mimicState));
+            }
         }
         return ItemInteractionResult.CONSUME;
     }
 
-    public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFrameBlockEntity foundation) {
-            BlockState mimic = foundation.getMimicState();
-            if (mimic != null && !mimic.isAir() && !player.isCreative()) {
-                Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
+    @Override
+    public @NotNull BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState state, Player player) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+            BlockState mimicState = timberFrameBlockEntity.getMimicState();
+            if (mimicState != null && !mimicState.isAir() && !player.isCreative()) {
+                Block.popResource(level, blockPos, new ItemStack(mimicState.getBlock()));
             }
         }
-        super.playerWillDestroy(level, pos, state, player);
+        super.playerWillDestroy(level, blockPos, state, player);
         return state;
     }
 
-    public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+    @Override
+    public @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos blockPos, Player player, BlockHitResult hitResult) {
         return InteractionResult.PASS;
     }
 
     @Override
-    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> list, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack itemStack, Item.TooltipContext tooltipContext, List<Component> components, TooltipFlag tooltipFlag) {
         int beige = 0xF5DEB3;
         int gold = 0xFFD700;
         if (!Screen.hasShiftDown()) {
             Component key = Component.literal("[SHIFT]").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(gold)));
-            list.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+            components.add(Component.translatable("tooltip.hearth_and_timber.tooltip_information.hold", key).withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
             return;
         }
-        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-        list.add(Component.empty());
-        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_full.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
-        list.add(Component.empty());
-        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        components.add(Component.empty());
+        components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_full.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        components.add(Component.empty());
+        components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }
 }

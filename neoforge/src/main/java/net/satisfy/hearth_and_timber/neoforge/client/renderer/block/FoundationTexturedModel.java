@@ -14,6 +14,7 @@ import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.model.IQuadTransformer;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
+import net.satisfy.hearth_and_timber.core.block.TimberFrameBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,8 +74,7 @@ public class FoundationTexturedModel implements BakedModel {
             verts[off + 1] = Float.floatToRawIntBits(vRemap);
         }
 
-        return new BakedQuad(verts, quad.getTintIndex(), quad.getDirection(), dst, quad.isShade(), quad.hasAmbientOcclusion()
-        );
+        return new BakedQuad(verts, quad.getTintIndex(), quad.getDirection(), dst, quad.isShade(), quad.hasAmbientOcclusion());
     }
 
     private static List<BakedQuad> remapAll(List<BakedQuad> in, TextureAtlasSprite dst, boolean onlyPlaceholder) {
@@ -103,6 +103,13 @@ public class FoundationTexturedModel implements BakedModel {
     public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData data, @Nullable RenderType layer) {
         List<BakedQuad> base = original.getQuads(state, side, rand, data, layer);
         if (base.isEmpty()) return base;
+
+        if (state != null && state.getBlock() instanceof TimberFrameBlock) {
+            if (!state.getValue(TimberFrameBlock.APPLIED)) {
+                return base;
+            }
+        }
+
         if (!data.has(MIMIC)) return base;
         BlockState mimic = data.get(MIMIC);
         if (mimic == null || mimic.isAir()) return base;
@@ -132,7 +139,7 @@ public class FoundationTexturedModel implements BakedModel {
     }
 
     public @NotNull TextureAtlasSprite getParticleIcon() {
-        var t = TL_PARTICLE.get();
+        TextureAtlasSprite t = TL_PARTICLE.get();
         if (t != null) return t;
         return original.getParticleIcon();
     }

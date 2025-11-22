@@ -11,27 +11,18 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class TimberFrameBlockEntity extends BlockEntity {
     private BlockState mimicState;
 
-    public TimberFrameBlockEntity(BlockPos pos, BlockState state) {
-        super(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), pos, state);
+    public TimberFrameBlockEntity(BlockPos blockPos, BlockState state) {
+        super(EntityTypeRegistry.TIMBER_FRAME_BLOCK_ENTITY.get(), blockPos, state);
     }
 
     public BlockState getMimicState() {
         return mimicState;
-    }
-
-    private static BooleanProperty findApplied(BlockState state) {
-        for (Property<?> p : state.getProperties()) {
-            if (p instanceof BooleanProperty bp && p.getName().equals("applied")) return bp;
-        }
-        return null;
     }
 
     public void setMimicState(BlockState newMimicState) {
@@ -41,31 +32,39 @@ public class TimberFrameBlockEntity extends BlockEntity {
         }
         mimicState = newMimicState;
         setChanged();
-        if (level instanceof ServerLevel server) {
-            server.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             ClientboundBlockEntityDataPacket packet = ClientboundBlockEntityDataPacket.create(this);
-            server.getChunkSource().chunkMap
-                    .getPlayers(server.getChunkAt(worldPosition).getPos(), false)
-                    .forEach(p -> p.connection.send(packet));
+            serverLevel.getChunkSource().chunkMap
+                    .getPlayers(serverLevel.getChunkAt(worldPosition).getPos(), false)
+                    .forEach(player -> player.connection.send(packet));
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        super.saveAdditional(tag, provider);
-        if (mimicState != null) tag.put("Mimic", NbtUtils.writeBlockState(mimicState));
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag, provider);
+        if (mimicState != null) {
+            compoundTag.put("Mimic", NbtUtils.writeBlockState(mimicState));
+        }
     }
 
     @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
-        super.loadAdditional(tag, provider);
-        if (tag.contains("Mimic")) mimicState = NbtUtils.readBlockState(provider.lookupOrThrow(Registries.BLOCK), tag.getCompound("Mimic"));
+    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag, provider);
+        if (compoundTag.contains("Mimic")) {
+            mimicState = NbtUtils.readBlockState(provider.lookupOrThrow(Registries.BLOCK), compoundTag.getCompound("Mimic"));
+        } else {
+            mimicState = null;
+        }
     }
 
     @Override
     public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider provider) {
         CompoundTag tag = super.getUpdateTag(provider);
-        if (mimicState != null) tag.put("Mimic", NbtUtils.writeBlockState(mimicState));
+        if (mimicState != null) {
+            tag.put("Mimic", NbtUtils.writeBlockState(mimicState));
+        }
         return tag;
     }
 

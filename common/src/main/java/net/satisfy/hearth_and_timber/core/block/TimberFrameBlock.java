@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-    public static final MapCodec<TimberFrameBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseState), propertiesCodec()).apply(instance, TimberFrameBlock::new));
+    public static final MapCodec<TimberFrameBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BlockState.CODEC.fieldOf("base_state").forGetter(block -> block.baseState), propertiesCodec()).apply(instance, TimberFrameBlock::new));
     public static final BooleanProperty WATERLOGGED = BooleanProperty.create("waterlogged");
     public static final BooleanProperty APPLIED = BooleanProperty.create("applied");
     private final Block base;
@@ -64,7 +64,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         return true;
     }
 
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return Shapes.block();
     }
 
@@ -78,11 +78,11 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         return this.defaultBlockState().setValue(WATERLOGGED, fluid.getType() == Fluids.WATER).setValue(APPLIED, false);
     }
 
-    protected @NotNull BlockState updateShape(BlockState state, net.minecraft.core.Direction dir, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+    protected @NotNull BlockState updateShape(BlockState state, net.minecraft.core.Direction direction, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.updateShape(state, dir, neighbor, level, pos, neighborPos);
+        return super.updateShape(state, direction, neighbor, level, pos, neighborPos);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -105,51 +105,56 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         return new TimberFrameBlockEntity(pos, state);
     }
 
-    private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState state) {
-        if (state == null || state.isAir()) return false;
-        if (state.getBlock() instanceof EntityBlock) return false;
-        if (state.getRenderShape() != RenderShape.MODEL) return false;
-        return Block.isShapeFullBlock(state.getShape(level, pos));
+    private static boolean canAccept(BlockGetter level, BlockPos pos, BlockState candidate) {
+        if (candidate == null || candidate.isAir()) return false;
+        if (candidate.getBlock() instanceof EntityBlock) return false;
+        if (candidate.getRenderShape() != RenderShape.MODEL) return false;
+        return Block.isShapeFullBlock(candidate.getShape(level, pos));
     }
 
-    public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (stack.getItem() instanceof PickaxeItem) {
+    @Override
+    public @NotNull ItemInteractionResult useItemOn(ItemStack itemStack, BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult hitResult) {
+        if (itemStack.getItem() instanceof PickaxeItem) {
             if (!state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TimberFrameBlockEntity fbe) {
-                BlockState mimic = fbe.getMimicState();
-                if (mimic != null && !mimic.isAir()) {
-                    Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
-                    fbe.setMimicState(this.baseState);
-                    level.setBlock(pos, state.setValue(APPLIED, false), 3);
-                    if (level instanceof ServerLevel server) {
-                        server.levelEvent(2001, pos, Block.getId(mimic));
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+            if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+                BlockState mimicState = timberFrameBlockEntity.getMimicState();
+                if (mimicState != null && !mimicState.isAir()) {
+                    Block.popResource(level, blockPos, new ItemStack(mimicState.getBlock()));
+                    timberFrameBlockEntity.setMimicState(null);
+                    BlockState newState = state.setValue(APPLIED, false);
+                    level.setBlock(blockPos, newState, 3);
+                    level.sendBlockUpdated(blockPos, state, newState, Block.UPDATE_ALL);
+                    if (level instanceof ServerLevel serverLevel) {
+                        serverLevel.levelEvent(2001, blockPos, Block.getId(mimicState));
                     }
                 }
             }
             return ItemInteractionResult.CONSUME;
         }
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!(stack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        BlockState mimic = blockItem.getBlock().defaultBlockState();
-        if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!(itemStack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        BlockState mimicState = blockItem.getBlock().defaultBlockState();
+        if (!canAccept(level, blockPos, mimicState)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFrameBlockEntity fbe) {
-            fbe.setMimicState(mimic);
-            level.setBlock(pos, state.setValue(APPLIED, true), 3);
-            if (level instanceof ServerLevel server) {
-                server.levelEvent(2001, pos, Block.getId(mimic));
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+            timberFrameBlockEntity.setMimicState(mimicState);
+            BlockState newState = state.setValue(APPLIED, true);
+            level.setBlock(blockPos, newState, 3);
+            level.sendBlockUpdated(blockPos, state, newState, Block.UPDATE_ALL);
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.levelEvent(2001, blockPos, Block.getId(mimicState));
             }
         }
         return ItemInteractionResult.CONSUME;
     }
 
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof TimberFrameBlockEntity fbe) {
-            BlockState mimic = fbe.getMimicState();
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
+            BlockState mimic = timberFrameBlockEntity.getMimicState();
             if (mimic != null && !mimic.isAir() && !player.isCreative()) {
                 Block.popResource(level, pos, new ItemStack(mimic.getBlock()));
             }
