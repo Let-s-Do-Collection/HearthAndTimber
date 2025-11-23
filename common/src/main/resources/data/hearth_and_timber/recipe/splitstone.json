@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:cobbled_deepslate"
+      "item": "minecraft:gravel"
     },
     "B": {
-      "item": "minecraft:cobblestone"
+      "item": "hearth_and_timber:groutless_rubblestone"
     }
   },
   "result": {

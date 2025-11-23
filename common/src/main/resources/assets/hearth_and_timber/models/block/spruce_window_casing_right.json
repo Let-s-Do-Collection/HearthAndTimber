@@ -1,12 +1,13 @@
 {
+	"format_version": "1.21.6",
 	"credit": "Made by Satisfy",
 	"textures": {
 		"texture": "hearth_and_timber:block/spruce_window_casing"
 	},
 	"elements": [
 		{
-			"from": [0.01, 0, 14.01],
-			"to": [1.99, 15.99, 15.99],
+			"from": [0.01, 0, 14],
+			"to": [1.99, 15.99, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [1.03, 8, 15]},
 			"faces": {
 				"north": {"uv": [0, 9, 16, 11], "rotation": 90, "texture": "#texture"},

@@ -1,13 +1,10 @@
 {
   "variants": {
-    "stage=top": {
-      "model": "hearth_and_timber:block/framework_top"
+    "bottom=false": {
+      "model": "hearth_and_timber:block/framework_stable"
     },
-    "stage=support": {
-      "model": "hearth_and_timber:block/framework_support"
-    },
-    "stage=hanging": {
-      "model": "hearth_and_timber:block/framework_hanging"
+    "bottom=true": {
+      "model": "hearth_and_timber:block/framework_unstable"
     }
   }
 }

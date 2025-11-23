@@ -16,7 +16,7 @@ public class TabRegistry {
             .icon(() -> new ItemStack(ObjectRegistry.TIMBER_FRAME.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
-                output.accept(ObjectRegistry.FRAMEWORK.get());
+                output.accept(ObjectRegistry.FRAMEWORK_ITEM.get());
                 output.accept(ObjectRegistry.TIMBER_BASE_SKIRT.get());
                 output.accept(ObjectRegistry.TIMBER_BASE_TRIM.get());
                 output.accept(ObjectRegistry.TIMBER_FOUNDATION.get());

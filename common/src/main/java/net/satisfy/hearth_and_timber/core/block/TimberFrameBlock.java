@@ -178,7 +178,7 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
         }
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         list.add(Component.empty());
-        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_full.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_trim.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         list.add(Component.empty());
         list.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }

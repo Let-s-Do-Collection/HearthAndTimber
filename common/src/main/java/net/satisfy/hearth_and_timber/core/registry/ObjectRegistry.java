@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
 import net.satisfy.hearth_and_timber.core.block.*;
+import net.satisfy.hearth_and_timber.core.item.FrameworkBlockItem;
 import net.satisfy.hearth_and_timber.core.util.GeneralUtil;
 
 import java.util.function.Supplier;
@@ -21,7 +22,9 @@ public class ObjectRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.BLOCK);
     public static final Registrar<Block> BLOCK_REGISTRAR = BLOCKS.getRegistrar();
 
-    public static final RegistrySupplier<Block> FRAMEWORK = registerWithItem("framework", FrameworkBlock::new);
+    public static final RegistrySupplier<Block> FRAMEWORK = registerWithoutItem("framework", () -> new ScaffoldingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SCAFFOLDING).sound(SoundType.SCAFFOLDING)));
+    public static final RegistrySupplier<Block> FRAMEWORK_EXTENSION = registerWithoutItem("framework_extension", () -> new FrameworkExtensionBlock(BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().sound(SoundType.WOOD)));
+    public static final RegistrySupplier<Item> FRAMEWORK_ITEM = registerItem("framework", () -> new FrameworkBlockItem(FRAMEWORK.get(), FRAMEWORK_EXTENSION, new Item.Properties()));
 
     public static final RegistrySupplier<Block> OAK_SHINGLES = registerWithItem("oak_shingles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
     public static final RegistrySupplier<Block> SPRUCE_SHINGLES = registerWithItem("spruce_shingles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
@@ -220,7 +223,6 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> TIMBER_BASE_TRIM = registerWithItem("timber_base_trim", () -> new TimberBaseTrimBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
     public static final RegistrySupplier<Block> TIMBER_BASE_SKIRT = registerWithItem("timber_base_skirt", () -> new TimberBaseSkirtBlock(Blocks.SPRUCE_PLANKS.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.SPRUCE_STAIRS).noOcclusion()));
 
-
     public static final RegistrySupplier<Block> SLIDING_HAYLOFT_DOOR = registerWithItem("sliding_hayloft_door", () -> new SlidingHayloftDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
@@ -229,7 +231,6 @@ public class ObjectRegistry {
     public static void init() {
         ITEMS.register();
         BLOCKS.register();
-
     }
 
     public static BlockBehaviour.Properties properties(float strength) {
@@ -242,6 +243,14 @@ public class ObjectRegistry {
 
     public static <T extends Block> RegistrySupplier<T> registerWithItem(String name, Supplier<T> block) {
         return GeneralUtil.registerWithItem(BLOCKS, BLOCK_REGISTRAR, ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(name), block);
+    }
+
+    public static <T extends Block> RegistrySupplier<T> registerWithoutItem(String path, Supplier<T> block) {
+        return GeneralUtil.registerWithoutItem(BLOCKS, BLOCK_REGISTRAR, HearthAndTimber.identifier(path), block);
+    }
+
+    public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
+        return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(path), itemSupplier);
     }
 }
 

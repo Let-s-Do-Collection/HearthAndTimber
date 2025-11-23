@@ -147,7 +147,7 @@ public class TimberFrameStairsBlock extends StairBlock implements EntityBlock, S
         }
         components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         components.add(Component.empty());
-        components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_full.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
+        components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame_trim.info_0").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
         components.add(Component.empty());
         components.add(Component.translatable("tooltip.hearth_and_timber.timber_frame.info_1").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(beige))));
     }

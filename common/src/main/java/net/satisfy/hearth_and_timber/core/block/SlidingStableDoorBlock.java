@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -109,11 +110,26 @@ public class SlidingStableDoorBlock extends BaseEntityBlock {
     public @NotNull BlockState playerWillDestroy(Level level, BlockPos position, BlockState state, Player player) {
         if (!level.isClientSide) {
             BlockPos origin = resolveOrigin(position, state);
+            if (!player.isCreative()) {
+                popResource(level, origin, new ItemStack(asItem()));
+            }
+            Direction direction = state.getValue(FACING);
+            HingeSide hinge = state.getValue(HINGE);
+            Direction lateral = lateralDirection(direction, hinge);
+            destroyIfPresent(level, origin.above(2), state);
             destroyIfPresent(level, origin.above(), state);
+            BlockPos right = origin.relative(lateral);
+            destroyIfPresent(level, right.above(2), state);
+            destroyIfPresent(level, right.above(), state);
+            destroyIfPresent(level, right, state);
             destroyIfPresent(level, origin, state);
         }
-        super.playerWillDestroy(level, position, state, player);
         return state;
+    }
+
+    @Override
+    public @NotNull List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
+        return List.of();
     }
 
     @Override
@@ -143,7 +159,7 @@ public class SlidingStableDoorBlock extends BaseEntityBlock {
             if (door.isReinforced() && stack.getItem() instanceof PickaxeItem) {
                 if (!level.isClientSide) {
                     door.setReinforced(false);
-                    popResource(level, origin, new ItemStack(Blocks.IRON_BLOCK));
+                    popResource(level, origin, new ItemStack(Items.IRON_INGOT));
                     if (level instanceof ServerLevel server) {
                         double x = origin.getX() + 0.5;
                         double y = origin.getY() + 0.5;
@@ -154,7 +170,7 @@ public class SlidingStableDoorBlock extends BaseEntityBlock {
                 }
                 return level.isClientSide ? ItemInteractionResult.SUCCESS : ItemInteractionResult.CONSUME;
             }
-            if (stack.is(Blocks.IRON_BLOCK.asItem())) {
+            if (stack.is(Items.IRON_INGOT)) {
                 if (!level.isClientSide) {
                     if (!door.isReinforced()) {
                         door.setReinforced(true);
@@ -235,8 +251,10 @@ public class SlidingStableDoorBlock extends BaseEntityBlock {
 
     private void destroyIfPresent(Level level, BlockPos position, BlockState referenceState) {
         BlockState at = level.getBlockState(position);
-        if (at.getBlock() == this && at.getValue(FACING) == referenceState.getValue(FACING) && at.getValue(HINGE) == referenceState.getValue(HINGE)) {
-            level.destroyBlock(position, true);
+        if (at.getBlock() == this
+                && at.getValue(FACING) == referenceState.getValue(FACING)
+                && at.getValue(HINGE) == referenceState.getValue(HINGE)) {
+            level.destroyBlock(position, false);
         }
     }
 

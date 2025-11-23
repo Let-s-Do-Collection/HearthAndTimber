@@ -208,8 +208,8 @@ public class SupportBlock extends Block {
         if (anchorState.isAir()) return false;
 
         if (anchorState.getBlock() instanceof SupportBlock) {
-            if (!anchorState.hasProperty(EXTENDED)) return false;
-            return !anchorState.getValue(EXTENDED);
+            if (!anchorState.hasProperty(FACING)) return false;
+            return anchorState.getValue(FACING) == facing;
         }
 
         return true;

@@ -138,7 +138,7 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
         else context.fallbackConsumer().accept(null);
     }
 
-    public @NotNull List<BakedQuad> getQuads(BlockState state, Direction side, RandomSource random) {
+    public @NotNull List<BakedQuad> getQuads(BlockState state, Direction side, @NotNull RandomSource random) {
         return original.getQuads(state, side, random);
     }
 

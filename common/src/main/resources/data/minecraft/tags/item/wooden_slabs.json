@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "hearth_and_timber:oak_shingle_slab",
+    "hearth_and_timber:spruce_shingle_slab",
+    "hearth_and_timber:dark_oak_shingle_slab",
+    "hearth_and_timber:pale_oak_shingle_slab",
+    "hearth_and_timber:cherry_shingle_slab",
+    "hearth_and_timber:jungle_shingle_slab",
+    "hearth_and_timber:mangrove_shingle_slab",
+    "hearth_and_timber:acacia_shingle_slab",
+    "hearth_and_timber:birch_shingle_slab"
+  ]
+}

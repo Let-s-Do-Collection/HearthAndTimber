@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "end": "hearth_and_timber:block/dark_oak_board",
+    "end": "hearth_and_timber:block/dark_oak_window_top",
     "side": "hearth_and_timber:block/dark_oak_window_pane"
   }
 }

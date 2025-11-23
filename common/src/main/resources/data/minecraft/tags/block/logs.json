@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "hearth_and_timber:oak_beam",
+    "hearth_and_timber:spruce_beam",
+    "hearth_and_timber:dark_oak_beam",
+    "hearth_and_timber:pale_oak_beam",
+    "hearth_and_timber:cherry_beam",
+    "hearth_and_timber:jungle_beam",
+    "hearth_and_timber:mangrove_beam",
+    "hearth_and_timber:acacia_beam",
+    "hearth_and_timber:birch_beam"
+  ]
+}

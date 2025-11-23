@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "hearth_and_timber:ore_groutless_rubblestone",
+  "step": "underground_ores"
+}
