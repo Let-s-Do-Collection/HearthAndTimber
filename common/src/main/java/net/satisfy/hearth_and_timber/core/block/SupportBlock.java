@@ -109,23 +109,23 @@ public class SupportBlock extends Block {
         BlockState attached = level.getBlockState(attachedPos);
 
         boolean attachesToPillar = attached.getBlock() instanceof PillarBlock;
-        boolean attachesToSupport = attached.getBlock() instanceof SupportBlock;
+        boolean attachesToSupport = attached.getBlock() instanceof SupportBlock
+                && attached.hasProperty(FACING);
 
-        Direction facing;
+        Direction facing = defaultFacing;
+
         if (attachesToPillar) {
             facing = clickedFace.getOpposite();
-        } else if (attachesToSupport && attached.hasProperty(FACING)) {
+        } else if (attachesToSupport) {
             facing = attached.getValue(FACING);
-        } else {
-            facing = defaultFacing;
         }
 
         boolean connected = false;
+
         if (attachesToPillar) {
             connected = true;
-        } else if (attachesToSupport && attached.hasProperty(FACING)) {
-            Direction otherFacing = attached.getValue(FACING);
-            connected = otherFacing == facing;
+        } else if (attachesToSupport) {
+            connected = attached.getValue(FACING) == facing;
         }
 
         return this.defaultBlockState()
