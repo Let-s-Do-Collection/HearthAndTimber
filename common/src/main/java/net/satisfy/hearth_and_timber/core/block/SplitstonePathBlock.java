@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public class SplitstonePathBlock extends Block {
     public static final MapCodec<SplitstonePathBlock> CODEC = simpleCodec(SplitstonePathBlock::new);
     private static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 15.0, 16.0);
-    private Supplier<Block> base;
+    private Supplier<Block> base = () -> ObjectRegistry.SPLITSTONE.get();
 
     public SplitstonePathBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -49,8 +49,11 @@ public class SplitstonePathBlock extends Block {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState self = this.defaultBlockState();
         if (!self.canSurvive(ctx.getLevel(), ctx.getClickedPos())) {
-            Block b = base != null ? base.get() : null;
-            BlockState replacement = b != null ? b.defaultBlockState() : ObjectRegistry.SPLITSTONE.get().defaultBlockState();
+            Block block = base != null ? base.get() : null;
+            if (block == null) {
+                block = ObjectRegistry.SPLITSTONE.get();
+            }
+            BlockState replacement = block.defaultBlockState();
             return Block.pushEntitiesUp(self, replacement, ctx.getLevel(), ctx.getClickedPos());
         }
         return super.getStateForPlacement(ctx);
@@ -66,7 +69,13 @@ public class SplitstonePathBlock extends Block {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        level.setBlockAndUpdate(pos, base.get().defaultBlockState());
+        Block block = base != null ? base.get() : null;
+        if (block == null) {
+            block = ObjectRegistry.SPLITSTONE.get();
+        }
+        if (block != null) {
+            level.setBlockAndUpdate(pos, block.defaultBlockState());
+        }
     }
 
     @Override

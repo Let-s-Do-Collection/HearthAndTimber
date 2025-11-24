@@ -22,7 +22,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -97,13 +96,17 @@ public class SupportBlock extends Block {
 
         Direction defaultFacing = context.getHorizontalDirection().getOpposite();
         Direction clickedFace = context.getClickedFace();
+
+        if (!clickedFace.getAxis().isHorizontal()) {
+            return this.defaultBlockState()
+                    .setValue(FACING, defaultFacing)
+                    .setValue(CONNECTED, false)
+                    .setValue(EXTENDED, false)
+                    .setValue(REST, true);
+        }
+
         BlockPos attachedPos = pos.relative(clickedFace.getOpposite());
         BlockState attached = level.getBlockState(attachedPos);
-
-        boolean horizontal = clickedFace.getAxis().isHorizontal();
-        if (!horizontal) {
-            return null;
-        }
 
         boolean attachesToPillar = attached.getBlock() instanceof PillarBlock;
         boolean attachesToSupport = attached.getBlock() instanceof SupportBlock;
@@ -189,61 +192,6 @@ public class SupportBlock extends Block {
             }
         }
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
-    }
-
-    @Override
-    public @NotNull BlockState updateShape(BlockState state, Direction dir, BlockState adj, LevelAccessor level, BlockPos pos, BlockPos pos2) {
-        if (level instanceof Level lvl && !lvl.isClientSide) {
-            if (!isStillSupported(state, lvl, pos)) {
-                lvl.destroyBlock(pos, true);
-            }
-        }
-        return super.updateShape(state, dir, adj, level, pos, pos2);
-    }
-
-    private boolean isAnchor(Level level, BlockPos pos, Direction facing) {
-        BlockPos anchorPos = pos.relative(facing);
-        BlockState anchorState = level.getBlockState(anchorPos);
-
-        if (anchorState.isAir()) return false;
-
-        if (anchorState.getBlock() instanceof SupportBlock) {
-            if (!anchorState.hasProperty(FACING)) return false;
-            return anchorState.getValue(FACING) == facing;
-        }
-
-        return true;
-    }
-
-    private boolean isStillSupported(BlockState state, Level level, BlockPos pos) {
-        Direction facing = state.getValue(FACING);
-
-        if (isAnchor(level, pos, facing)) {
-            return true;
-        }
-
-        Direction[] directions = new Direction[]{facing, facing.getOpposite()};
-
-        for (Direction walk : directions) {
-            BlockPos currentPos = pos;
-            for (int i = 0; i < 64; i++) {
-                currentPos = currentPos.relative(walk);
-                BlockState other = level.getBlockState(currentPos);
-
-                if (!(other.getBlock() instanceof SupportBlock)) {
-                    break;
-                }
-                if (!other.hasProperty(FACING) || other.getValue(FACING) != facing) {
-                    break;
-                }
-
-                if (isAnchor(level, currentPos, facing)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.satisfy.hearth_and_timber.neoforge.client.renderer.block.FoundationTe
 
 import java.util.Map;
 
-@EventBusSubscriber(modid = HearthAndTimber.MOD_ID)
+@EventBusSubscriber(modid = HearthAndTimber.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class HearthAndTimberClientNeoForge {
 
     @SubscribeEvent
