@@ -3,20 +3,16 @@ package net.satisfy.hearth_and_timber.fabric.client.renderer.block;
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
 import net.fabricmc.fabric.api.renderer.v1.mesh.MutableQuadView;
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;
-import net.fabricmc.fabric.api.renderer.v1.model.ModelHelper;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.RenderShape;
@@ -27,11 +23,8 @@ import net.satisfy.hearth_and_timber.core.block.TimberBaseTrimBlock;
 import net.satisfy.hearth_and_timber.core.block.TimberFoundationBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation, removal")
@@ -47,12 +40,6 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
 
     public boolean isVanillaAdapter() {
         return false;
-    }
-
-    private static boolean isMissing(TextureAtlasSprite s) {
-        if (s == null) return true;
-        s.contents();
-        return "missingno".equals(s.contents().name().getPath());
     }
 
     @Override
@@ -111,13 +98,6 @@ public class FoundationTexturedModel implements BakedModel, FabricBakedModel {
             }
         }
         EMITTING.set(false);
-    }
-
-    private static boolean hasApplied(BlockState state) {
-        for (var p : state.getProperties()) {
-            if (p instanceof BooleanProperty bp && p.getName().equals("applied")) return state.getValue(bp);
-        }
-        return false;
     }
 
     private static boolean isPlaceholder(TextureAtlasSprite sprite) {
