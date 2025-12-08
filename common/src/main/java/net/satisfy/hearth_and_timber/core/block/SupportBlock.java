@@ -48,6 +48,7 @@ public class SupportBlock extends Block {
     public static final BooleanProperty CONNECTED = BooleanProperty.create("connected");
     public static final BooleanProperty EXTENDED = BooleanProperty.create("extended");
     public static final BooleanProperty REST = BooleanProperty.create("rest");
+    public static final BooleanProperty REINFORCED = BooleanProperty.create("reinforced");
 
     private static final Map<Direction, VoxelShape> SHAPE_SINGLE = Util.make(new HashMap<>(), map -> {
         VoxelShape base = Shapes.empty();
@@ -79,13 +80,25 @@ public class SupportBlock extends Block {
         }
     });
 
+    private static final Map<Direction, VoxelShape> SHAPE_REINFORCED = Util.make(new HashMap<>(), map -> {
+        VoxelShape base = Shapes.empty();
+        base = Shapes.join(base, Shapes.box(0.3125, 0.0, 0.875, 0.6875, 1.0, 1.0), BooleanOp.OR);
+        base = Shapes.join(base, Shapes.box(0.3125, 0.625, 0.0, 0.6875, 1.0, 0.875), BooleanOp.OR);
+        base = Shapes.join(base, Shapes.box(0.0, 0.75, 0.0, 0.3125, 1.0, 1.0), BooleanOp.OR);
+        base = Shapes.join(base, Shapes.box(0.6875, 0.75, 0.0, 1.0, 1.0, 1.0), BooleanOp.OR);
+        for (Direction dir : Direction.Plane.HORIZONTAL.stream().toList()) {
+            map.put(dir, GeneralUtil.rotateShape(Direction.NORTH, dir, base));
+        }
+    });
+
     public SupportBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(CONNECTED, false)
                 .setValue(EXTENDED, false)
-                .setValue(REST, true));
+                .setValue(REST, true)
+                .setValue(REINFORCED, false));
     }
 
     @Nullable
@@ -102,7 +115,8 @@ public class SupportBlock extends Block {
                     .setValue(FACING, defaultFacing)
                     .setValue(CONNECTED, false)
                     .setValue(EXTENDED, false)
-                    .setValue(REST, true);
+                    .setValue(REST, true)
+                    .setValue(REINFORCED, false);
         }
 
         BlockPos attachedPos = pos.relative(clickedFace.getOpposite());
@@ -132,12 +146,13 @@ public class SupportBlock extends Block {
                 .setValue(FACING, facing)
                 .setValue(CONNECTED, connected)
                 .setValue(EXTENDED, false)
-                .setValue(REST, true);
+                .setValue(REST, true)
+                .setValue(REINFORCED, false);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, CONNECTED, EXTENDED, REST);
+        builder.add(FACING, CONNECTED, EXTENDED, REST, REINFORCED);
     }
 
     @Override
@@ -152,14 +167,26 @@ public class SupportBlock extends Block {
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (state.getValue(EXTENDED)) return SHAPE_EXTENDED.get(state.getValue(FACING));
-        if (!state.getValue(REST)) return SHAPE_NO_REST.get(state.getValue(FACING));
-        return (state.getValue(CONNECTED) ? SHAPE_CONNECTED : SHAPE_SINGLE).get(state.getValue(FACING));
+        Direction facing = state.getValue(FACING);
+        if (state.getValue(EXTENDED)) {
+            return SHAPE_EXTENDED.get(facing);
+        }
+        if (!state.getValue(REST)) {
+            return SHAPE_NO_REST.get(facing);
+        }
+        if (state.getValue(REINFORCED)) {
+            return SHAPE_REINFORCED.get(facing);
+        }
+        return (state.getValue(CONNECTED) ? SHAPE_CONNECTED : SHAPE_SINGLE).get(facing);
     }
 
     private boolean isSameSupportFacing(BlockState state, Direction facing) {
-        if (state.getBlock() != this) return false;
-        if (!state.hasProperty(FACING)) return false;
+        if (state.getBlock() != this) {
+            return false;
+        }
+        if (!state.hasProperty(FACING)) {
+            return false;
+        }
         return state.getValue(FACING) == facing;
     }
 
@@ -173,7 +200,25 @@ public class SupportBlock extends Block {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!(stack.getItem() instanceof AxeItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        Item item = stack.getItem();
+
+        if (Block.byItem(item) instanceof WoodenBoardBlock) {
+            if (state.getValue(EXTENDED)) {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (!level.isClientSide) {
+                boolean wasReinforced = state.getValue(REINFORCED);
+                boolean newReinforced = !wasReinforced;
+                level.setBlock(pos, state.setValue(REINFORCED, newReinforced), 3);
+                level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
+        if (!(item instanceof AxeItem)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+
         if (!level.isClientSide) {
             if (level instanceof ServerLevel server) {
                 server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + 0.5, pos.getY() + 1.02, pos.getZ() + 0.5, 12, 0.2, 0.0, 0.2, 0.08);

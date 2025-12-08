@@ -27,7 +27,9 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -40,10 +42,14 @@ import java.util.List;
 public class WoodenBoardBlock extends Block {
     public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 0, 3);
     public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public WoodenBoardBlock() {
         super(BlockBehaviour.Properties.of().strength(2.0F, 3.0F).sound(SoundType.WOOD));
-        registerDefaultState(defaultBlockState().setValue(LAYERS, 0).setValue(TOP, false));
+        registerDefaultState(defaultBlockState()
+                .setValue(LAYERS, 0)
+                .setValue(TOP, false)
+                .setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -65,7 +71,7 @@ public class WoodenBoardBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LAYERS, TOP);
+        builder.add(LAYERS, TOP, FACING);
     }
 
     @Override
@@ -74,7 +80,11 @@ public class WoodenBoardBlock extends Block {
         Direction face = context.getClickedFace();
         double localY = context.getClickLocation().y - blockPos.getY();
         boolean isTop = face == Direction.DOWN || (face != Direction.UP && localY > 0.5D);
-        return defaultBlockState().setValue(LAYERS, 0).setValue(TOP, isTop);
+        Direction facing = context.getHorizontalDirection();
+        return defaultBlockState()
+                .setValue(LAYERS, 0)
+                .setValue(TOP, isTop)
+                .setValue(FACING, facing);
     }
 
     @Override
@@ -107,7 +117,10 @@ public class WoodenBoardBlock extends Block {
                 BlockPos targetPos = isTop ? pos.below() : pos.above();
                 BlockState targetState = level.getBlockState(targetPos);
                 if (targetState.canBeReplaced() || targetState.isAir()) {
-                    level.setBlock(targetPos, defaultBlockState().setValue(LAYERS, 0).setValue(TOP, isTop), Block.UPDATE_ALL);
+                    level.setBlock(targetPos, defaultBlockState()
+                            .setValue(LAYERS, 0)
+                            .setValue(TOP, isTop)
+                            .setValue(FACING, state.getValue(FACING)), Block.UPDATE_ALL);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }

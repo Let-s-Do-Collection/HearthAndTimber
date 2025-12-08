@@ -1,122 +1,137 @@
 {
   "variants": {
-    "facing=north,connected=false,rest=true,extended=false": {
+    "reinforced=true,facing=north": {
+      "model": "hearth_and_timber:block/pale_oak_support_reinforced"
+    },
+    "reinforced=true,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_support_reinforced",
+      "y": 180
+    },
+    "reinforced=true,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_support_reinforced",
+      "y": 270
+    },
+    "reinforced=true,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_support_reinforced",
+      "y": 90
+    },
+    "reinforced=false,facing=north,connected=false,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support"
     },
-    "facing=north,connected=true,rest=true,extended=false": {
+    "reinforced=false,facing=north,connected=true,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_connected"
     },
-    "facing=north,connected=false,rest=false,extended=false": {
+    "reinforced=false,facing=north,connected=false,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest"
     },
-    "facing=north,connected=true,rest=false,extended=false": {
+    "reinforced=false,facing=north,connected=true,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest"
     },
-    "facing=north,connected=false,rest=true,extended=true": {
+    "reinforced=false,facing=north,connected=false,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended"
     },
-    "facing=north,connected=true,rest=true,extended=true": {
+    "reinforced=false,facing=north,connected=true,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended"
     },
-    "facing=north,connected=false,rest=false,extended=true": {
+    "reinforced=false,facing=north,connected=false,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended"
     },
-    "facing=north,connected=true,rest=false,extended=true": {
+    "reinforced=false,facing=north,connected=true,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended"
     },
-    "facing=south,connected=false,rest=true,extended=false": {
+    "reinforced=false,facing=south,connected=false,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support",
       "y": 180
     },
-    "facing=south,connected=true,rest=true,extended=false": {
+    "reinforced=false,facing=south,connected=true,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_connected",
       "y": 180
     },
-    "facing=south,connected=false,rest=false,extended=false": {
+    "reinforced=false,facing=south,connected=false,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 180
     },
-    "facing=south,connected=true,rest=false,extended=false": {
+    "reinforced=false,facing=south,connected=true,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 180
     },
-    "facing=south,connected=false,rest=true,extended=true": {
+    "reinforced=false,facing=south,connected=false,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 180
     },
-    "facing=south,connected=true,rest=true,extended=true": {
+    "reinforced=false,facing=south,connected=true,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 180
     },
-    "facing=south,connected=false,rest=false,extended=true": {
+    "reinforced=false,facing=south,connected=false,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 180
     },
-    "facing=south,connected=true,rest=false,extended=true": {
+    "reinforced=false,facing=south,connected=true,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 180
     },
-    "facing=west,connected=false,rest=true,extended=false": {
+    "reinforced=false,facing=west,connected=false,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support",
       "y": 270
     },
-    "facing=west,connected=true,rest=true,extended=false": {
+    "reinforced=false,facing=west,connected=true,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_connected",
       "y": 270
     },
-    "facing=west,connected=false,rest=false,extended=false": {
+    "reinforced=false,facing=west,connected=false,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 270
     },
-    "facing=west,connected=true,rest=false,extended=false": {
+    "reinforced=false,facing=west,connected=true,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 270
     },
-    "facing=west,connected=false,rest=true,extended=true": {
+    "reinforced=false,facing=west,connected=false,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 270
     },
-    "facing=west,connected=true,rest=true,extended=true": {
+    "reinforced=false,facing=west,connected=true,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 270
     },
-    "facing=west,connected=false,rest=false,extended=true": {
+    "reinforced=false,facing=west,connected=false,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 270
     },
-    "facing=west,connected=true,rest=false,extended=true": {
+    "reinforced=false,facing=west,connected=true,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 270
     },
-    "facing=east,connected=false,rest=true,extended=false": {
+    "reinforced=false,facing=east,connected=false,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support",
       "y": 90
     },
-    "facing=east,connected=true,rest=true,extended=false": {
+    "reinforced=false,facing=east,connected=true,rest=true,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_connected",
       "y": 90
     },
-    "facing=east,connected=false,rest=false,extended=false": {
+    "reinforced=false,facing=east,connected=false,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 90
     },
-    "facing=east,connected=true,rest=false,extended=false": {
+    "reinforced=false,facing=east,connected=true,rest=false,extended=false": {
       "model": "hearth_and_timber:block/pale_oak_support_no_rest",
       "y": 90
     },
-    "facing=east,connected=false,rest=true,extended=true": {
+    "reinforced=false,facing=east,connected=false,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 90
     },
-    "facing=east,connected=true,rest=true,extended=true": {
+    "reinforced=false,facing=east,connected=true,rest=true,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 90
     },
-    "facing=east,connected=false,rest=false,extended=true": {
+    "reinforced=false,facing=east,connected=false,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 90
     },
-    "facing=east,connected=true,rest=false,extended=true": {
+    "reinforced=false,facing=east,connected=true,rest=false,extended=true": {
       "model": "hearth_and_timber:block/pale_oak_support_extended",
       "y": 90
     }

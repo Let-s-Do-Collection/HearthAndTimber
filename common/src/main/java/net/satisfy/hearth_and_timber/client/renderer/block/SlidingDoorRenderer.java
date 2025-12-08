@@ -2,7 +2,6 @@ package net.satisfy.hearth_and_timber.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -19,10 +18,14 @@ import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.SlidingStableDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.entity.SlidingDoorBlockEntity;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 public class SlidingDoorRenderer implements BlockEntityRenderer<SlidingDoorBlockEntity> {
     private final SlidingHayloftDoorModel hayloftModel;
     private final SlidingBarnDoorModel barnModel;
     private final SlidingStableDoorModel stableModel;
+    private final Map<SlidingDoorBlockEntity, Float> slideCache = new WeakHashMap<>();
 
     public SlidingDoorRenderer(BlockEntityRendererProvider.Context context) {
         this.hayloftModel = new SlidingHayloftDoorModel(context.bakeLayer(SlidingHayloftDoorModel.LAYER_LOCATION));
@@ -137,7 +140,12 @@ public class SlidingDoorRenderer implements BlockEntityRenderer<SlidingDoorBlock
         }
 
         float max = isStable(state) ? (13f / 16f) : (26f / 16f);
-        float distance = be.getSlide() * max;
+        float rawSlide = be.getSlide();
+        float previous = slideCache.getOrDefault(be, rawSlide);
+        float smoothed = previous + (rawSlide - previous) * 0.35F;
+        slideCache.put(be, smoothed);
+
+        float distance = smoothed * max;
         Direction lateral = right ? facing.getClockWise() : facing.getCounterClockWise();
         double offsetX = 0.0;
         double offsetZ = 0.0;

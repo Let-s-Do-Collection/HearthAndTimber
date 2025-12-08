@@ -1,28 +1,124 @@
 {
   "variants": {
-    "layers=0,top=false": {
+    "layers=0,top=false,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_0"
     },
-    "layers=0,top=true": {
+    "layers=0,top=false,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_0",
+      "y": 90
+    },
+    "layers=0,top=false,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_0",
+      "y": 180
+    },
+    "layers=0,top=false,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_0",
+      "y": 270
+    },
+    "layers=0,top=true,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_top_0"
     },
-    "layers=1,top=false": {
+    "layers=0,top=true,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_0",
+      "y": 90
+    },
+    "layers=0,top=true,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_0",
+      "y": 180
+    },
+    "layers=0,top=true,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_0",
+      "y": 270
+    },
+    "layers=1,top=false,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_1"
     },
-    "layers=1,top=true": {
+    "layers=1,top=false,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_1",
+      "y": 90
+    },
+    "layers=1,top=false,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_1",
+      "y": 180
+    },
+    "layers=1,top=false,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_1",
+      "y": 270
+    },
+    "layers=1,top=true,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_top_1"
     },
-    "layers=2,top=false": {
+    "layers=1,top=true,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_1",
+      "y": 90
+    },
+    "layers=1,top=true,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_1",
+      "y": 180
+    },
+    "layers=1,top=true,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_1",
+      "y": 270
+    },
+    "layers=2,top=false,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_2"
     },
-    "layers=2,top=true": {
+    "layers=2,top=false,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_2",
+      "y": 90
+    },
+    "layers=2,top=false,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_2",
+      "y": 180
+    },
+    "layers=2,top=false,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_2",
+      "y": 270
+    },
+    "layers=2,top=true,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_top_2"
     },
-    "layers=3,top=false": {
+    "layers=2,top=true,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_2",
+      "y": 90
+    },
+    "layers=2,top=true,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_2",
+      "y": 180
+    },
+    "layers=2,top=true,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_2",
+      "y": 270
+    },
+    "layers=3,top=false,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_3"
     },
-    "layers=3,top=true": {
+    "layers=3,top=false,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_3",
+      "y": 90
+    },
+    "layers=3,top=false,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_3",
+      "y": 180
+    },
+    "layers=3,top=false,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_3",
+      "y": 270
+    },
+    "layers=3,top=true,facing=north": {
       "model": "hearth_and_timber:block/pale_oak_board_top_3"
+    },
+    "layers=3,top=true,facing=east": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_3",
+      "y": 90
+    },
+    "layers=3,top=true,facing=south": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_3",
+      "y": 180
+    },
+    "layers=3,top=true,facing=west": {
+      "model": "hearth_and_timber:block/pale_oak_board_top_3",
+      "y": 270
     }
   }
 }

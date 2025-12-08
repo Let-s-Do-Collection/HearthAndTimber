@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -17,7 +18,6 @@ import net.satisfy.hearth_and_timber.core.block.SlidingBarnDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
 import net.satisfy.hearth_and_timber.core.block.SlidingStableDoorBlock;
 import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
-import net.satisfy.hearth_and_timber.core.registry.SoundEventRegistry;
 import org.jetbrains.annotations.NotNull;
 
 public class SlidingDoorBlockEntity extends BlockEntity {
@@ -70,20 +70,21 @@ public class SlidingDoorBlockEntity extends BlockEntity {
     public static void serverTick(Level level, BlockPos position, BlockState state, SlidingDoorBlockEntity be) {
         if (!(level instanceof ServerLevel server)) return;
         float slide = be.getSlide();
+
         if (be.allowInteractionSounds && be.animForward && !be.playedOpenSound) {
-            float progress = be.getSlide();
-            float pitch = 0.8f + progress * 0.6f + server.random.nextFloat() * 0.2f;
-            float volume = 0.6f + progress * 0.8f;
-            server.playSound(null, position, SoundEventRegistry.SLIDING_DOOR_OPEN.get(), SoundSource.BLOCKS, volume, pitch);
+            float pitch = 1.2f + server.random.nextFloat() * 0.6f;
+            float volume = 0.5f + server.random.nextFloat() * 0.3f;
+            server.playSound(null, position, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, volume, pitch);
             be.playedOpenSound = true;
         }
+
         if (be.allowInteractionSounds && !be.animForward && !be.playedCloseSound) {
-            float progress = 1f - be.getSlide();
-            float pitch = 0.8f + progress * 0.6f + server.random.nextFloat() * 0.2f;
-            float volume = 0.6f + progress * 0.8f;
-            server.playSound(null, position, SoundEventRegistry.SLIDING_DOOR_CLOSE.get(), SoundSource.BLOCKS, volume, pitch);
+            float pitch = 0.9f + server.random.nextFloat() * 0.5f;
+            float volume = 0.5f + server.random.nextFloat() * 0.3f;
+            server.playSound(null, position, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, volume, pitch);
             be.playedCloseSound = true;
         }
+
         if (slide > 0f && slide < 1f && (server.getGameTime() & 3L) == 0L) {
             float distance = slide * (26f / 16f);
             Direction facing = getFacing(state);
@@ -110,6 +111,7 @@ public class SlidingDoorBlockEntity extends BlockEntity {
             BlockState below = server.getBlockState(position.below());
             server.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, below), particleX, particleY, particleZ, 4, 0.02, 0.0, 0.02, 0.0);
         }
+
         if (!be.animForward && slide <= 0f) be.playedOpenSound = false;
         if (be.animForward && slide >= 1f) be.playedCloseSound = false;
     }

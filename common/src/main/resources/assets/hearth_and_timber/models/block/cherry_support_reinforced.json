@@ -1,0 +1,8 @@
+{
+	"parent": "hearth_and_timber:block/spruce_support_reinforced",
+	"textures": {
+		"0": "hearth_and_timber:block/cherry_window_casing",
+		"1": "hearth_and_timber:block/cherry_board",
+		"particle": "hearth_and_timber:block/cherry_window_casing"
+	}
+}
