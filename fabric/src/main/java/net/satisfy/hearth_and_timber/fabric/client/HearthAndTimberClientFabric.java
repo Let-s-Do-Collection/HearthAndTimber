@@ -15,18 +15,37 @@ public class HearthAndTimberClientFabric implements ClientModInitializer {
     }
 
     private static void registerFoundationModelHandler() {
-        ModelLoadingPlugin.register(context -> context.modifyModelAfterBake().register(((bakedModel, ctx) -> {
+        ModelLoadingPlugin.register(context -> context.modifyModelAfterBake().register((bakedModel, ctx) -> {
             ResourceLocation id = ctx.resourceId();
-            if (id == null) return bakedModel;
+            if (id == null) {
+                return bakedModel;
+            }
+
             String path = id.getPath();
-            boolean isFoundationPart = path.startsWith("block/timber_foundation") || path.startsWith("block/timber_base_skirt") || path.startsWith("block/timber_base_trim");
-            boolean isFramePlaceholder = path.matches("(?:block|item)/(?:timber_frame|timber_grid_frame|timber_diagonal_frame|timber_cross_frame|placeholder)");
-            if ((isFoundationPart || isFramePlaceholder)) {
+
+            boolean isFoundationPart =
+                    path.startsWith("block/timber_foundation")
+                            || path.startsWith("block/timber_base_skirt")
+                            || path.startsWith("block/timber_base_trim");
+
+            boolean isFramePlaceholder =
+                    path.startsWith("block/timber_frame")
+                            || path.startsWith("block/timber_grid_frame")
+                            || path.startsWith("block/timber_diagonal_frame")
+                            || path.startsWith("block/timber_cross_frame")
+                            || path.startsWith("block/timber_stairs")
+                            || path.equals("item/timber_frame")
+                            || path.equals("item/timber_grid_frame")
+                            || path.equals("item/timber_diagonal_frame")
+                            || path.equals("item/timber_cross_frame")
+                            || path.equals("item/timber_stairs");
+
+            if (isFoundationPart || isFramePlaceholder) {
                 return bakedModel == null ? null : new FoundationTexturedModel(bakedModel, isFramePlaceholder);
             }
-            return bakedModel;
-        })));
 
+            return bakedModel;
+        }));
     }
 
 }

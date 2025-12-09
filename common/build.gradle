@@ -13,6 +13,8 @@ repositories {
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
+    modCompileOnly "curse.maven:every-compat-628539:7272772"
+    modCompileOnly "curse.maven:selene-499980:7297859"
 }
 
 publishing {

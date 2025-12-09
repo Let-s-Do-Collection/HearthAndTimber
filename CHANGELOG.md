@@ -1,5 +1,7 @@
 [1.0.1]
 
+**Now also available for Fabric!**
+
 **Changed**
 * Shingle Block Recipe so it wont clash with the Crafting Table Recipe anymore
 * Slightly improved SlidingDoor Animations in a ServerEnvironment
@@ -7,7 +9,7 @@
 * Adjusted Acacia Window Texture
 
 **Added**
-* A 'reinforced' property to all Supportblocks – you can toggle it by right-clicking while holding any BoardBlock
+* A 'reinforced' property to all SupportBlocks – you can toggle it by right-clicking while holding any BoardBlock
 * Facing Property to all BoardBlocks
 
 **Fixed**
