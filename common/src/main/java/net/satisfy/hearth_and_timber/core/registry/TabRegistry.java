@@ -13,7 +13,7 @@ public class TabRegistry {
 
     @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> new ItemStack(ObjectRegistry.TIMBER_FRAME.get()))
+            .icon(() -> new ItemStack(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.FRAMEWORK_ITEM.get());

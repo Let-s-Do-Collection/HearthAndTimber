@@ -133,17 +133,23 @@ public class TimberFrameBlock extends Block implements EntityBlock, SimpleWaterl
             }
             return ItemInteractionResult.CONSUME;
         }
+
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (!(itemStack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
         BlockState mimicState = blockItem.getBlock().defaultBlockState();
         if (!canAccept(level, blockPos, mimicState)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof TimberFrameBlockEntity timberFrameBlockEntity) {
             timberFrameBlockEntity.setMimicState(mimicState);
             BlockState newState = state.setValue(APPLIED, true);
             level.setBlock(blockPos, newState, 3);
             level.sendBlockUpdated(blockPos, state, newState, Block.UPDATE_ALL);
+            if (!player.isCreative()) {
+                itemStack.shrink(1);
+            }
             if (level instanceof ServerLevel serverLevel) {
                 serverLevel.levelEvent(2001, blockPos, Block.getId(mimicState));
             }

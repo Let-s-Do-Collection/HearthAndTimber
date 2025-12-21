@@ -1,3 +1,13 @@
+[1.0.2]
+
+**Changed**
+* Slightly re-shaded all Timber Blocks
+
+**Fixed**
+* Blocks inserted into Timber Frames not being consumed
+
+*** 
+
 [1.0.1]
 
 **Now also available for Fabric!**

@@ -274,8 +274,7 @@ public class TimberFoundationBlock extends Block implements EntityBlock, SimpleW
             return ItemInteractionResult.CONSUME;
         }
         if (state.getValue(APPLIED)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        if (!(stack.getItem() instanceof BlockItem blockItem))
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!(stack.getItem() instanceof BlockItem blockItem)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         BlockState mimic = blockItem.getBlock().defaultBlockState();
         if (!canAccept(level, pos, mimic)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         if (level.isClientSide) return ItemInteractionResult.SUCCESS;
@@ -283,6 +282,9 @@ public class TimberFoundationBlock extends Block implements EntityBlock, SimpleW
         if (blockEntity instanceof TimberFrameBlockEntity fbe) {
             fbe.setMimicState(mimic);
             level.setBlock(pos, state.setValue(APPLIED, true), 3);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
             if (level instanceof ServerLevel server) {
                 server.levelEvent(2001, pos, Block.getId(mimic));
             }
