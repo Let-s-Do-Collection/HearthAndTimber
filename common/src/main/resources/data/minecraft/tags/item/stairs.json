@@ -1,11 +1,81 @@
 {
   "replace": false,
   "values": [
-    "hearth_and_timber:splitstone_stairs",
-    "hearth_and_timber:mossy_splitstone_stairs",
-    "hearth_and_timber:pointed_rubblestone_stairs",
-    "hearth_and_timber:covered_rubblestone_stairs",
-    "hearth_and_timber:plastered_rubblestone_stairs",
-    "hearth_and_timber:groutless_rubblestone_stairs"
+    {
+      "id": "hearth_and_timber:splitstone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:mossy_splitstone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pointed_rubblestone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:covered_rubblestone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:plastered_rubblestone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:groutless_rubblestone_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_shingle_stairs",
+      "required": false
+    }
   ]
 }

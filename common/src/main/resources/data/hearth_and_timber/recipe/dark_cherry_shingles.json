@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PPP"
+  ],
+  "key": {
+    "P": [
+      {
+        "item": "vinery:dark_cherry_planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "hearth_and_timber:dark_cherry_shingles",
+    "count": 4
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "vinery"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "vinery"
+      ]
+    }
+  ]
+}

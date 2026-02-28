@@ -1,14 +1,89 @@
 {
   "replace": false,
   "values": [
-    "hearth_and_timber:oak_beam",
-    "hearth_and_timber:spruce_beam",
-    "hearth_and_timber:dark_oak_beam",
-    "hearth_and_timber:pale_oak_beam",
-    "hearth_and_timber:cherry_beam",
-    "hearth_and_timber:jungle_beam",
-    "hearth_and_timber:mangrove_beam",
-    "hearth_and_timber:acacia_beam",
-    "hearth_and_timber:birch_beam"
+    {
+      "id": "hearth_and_timber:oak_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:spruce_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_oak_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pale_oak_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cherry_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:jungle_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:mangrove_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:acacia_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:birch_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_beam",
+      "required": false
+    }
   ]
 }

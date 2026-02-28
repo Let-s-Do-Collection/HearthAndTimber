@@ -116,6 +116,470 @@
     "hearth_and_timber:dark_oak_board",
     "hearth_and_timber:mangrove_board",
     "hearth_and_timber:cherry_board",
-    "hearth_and_timber:pale_oak_board"
+    "hearth_and_timber:pale_oak_board",
+    {
+      "id": "hearth_and_timber:palm_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:palm_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:dark_cherry_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:aspen_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_shingle_stairs",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_beam",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_board",
+      "required": false
+    }
   ]
 }

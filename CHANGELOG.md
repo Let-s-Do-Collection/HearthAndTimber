@@ -1,3 +1,15 @@
+[1.0.3]
+
+**Changed**
+* Removed woodgood compat
+* Refactored registry initialization to static class pattern
+
+**Added**
+* Dynamic Compat Layer for other Let's Do wood types
+* Shingles, Stairs, Slabs, Beams, Supports, Pillars, Railings, Boards and Window Casings for other Let's Do Mods
+
+***
+
 [1.0.2]
 
 **Changed**
