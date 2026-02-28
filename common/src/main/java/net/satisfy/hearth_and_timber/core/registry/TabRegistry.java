@@ -1,17 +1,22 @@
 package net.satisfy.hearth_and_timber.core.registry;
 
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
 
+import java.util.Map;
+
+@SuppressWarnings("unused")
 public class TabRegistry {
+
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
-    @SuppressWarnings("unused")
     public static final RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .icon(() -> new ItemStack(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
@@ -189,7 +194,107 @@ public class TabRegistry {
             })
             .build());
 
-    public static void init() {
+    public static RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_COMPAT_LAYER_TAB;
+
+    static {
+        boolean beachpartyLoaded = Platform.isModLoaded("beachparty");
+        boolean meadowLoaded = Platform.isModLoaded("meadow");
+        boolean vineryLoaded = Platform.isModLoaded("vinery");
+        boolean bloomingNatureLoaded = Platform.isModLoaded("bloomingnature");
+
+        if (beachpartyLoaded || meadowLoaded || vineryLoaded || bloomingNatureLoaded) {
+            HEARTH_AND_TIMBER_COMPAT_LAYER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber_compat", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 1)
+                    .icon(() -> buildCompatIcon(beachpartyLoaded, meadowLoaded, vineryLoaded, bloomingNatureLoaded))
+                    .title(Component.translatable("creativetab.hearth_and_timber.compat"))
+                    .displayItems((parameters, output) -> {
+                        String[] beachpartyWoodTypeOrder = {
+                                "palm"
+                        };
+                        String[] meadowWoodTypeOrder = {
+                                "pine"
+                        };
+                        String[] vineryWoodTypeOrder = {
+                                "dark_cherry"
+                        };
+                        String[] bloomingNatureWoodTypeOrder = {
+                                "aspen", "larch", "baobab", "cypress", "ebony", "chestnut", "fan_palm", "fir", "swamp_oak", "swamp_cypress"
+                        };
+                        String[] compatWoodTypeOrder = buildCompatWoodTypeOrder(beachpartyLoaded, meadowLoaded, vineryLoaded, bloomingNatureLoaded, beachpartyWoodTypeOrder, meadowWoodTypeOrder, vineryWoodTypeOrder, bloomingNatureWoodTypeOrder);
+
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SHINGLES, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SHINGLE_STAIRS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SHINGLE_SLAB, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_BEAMS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SUPPORTS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_PILLARS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_RAILINGS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_WINDOW_CASINGS, woodType, output);
+                        for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_BOARDS, woodType, output);
+                    })
+                    .build());
+        }
+
         CREATIVE_MODE_TABS.register();
+    }
+
+    private static String[] buildCompatWoodTypeOrder(boolean beachpartyLoaded, boolean meadowLoaded, boolean vineryLoaded, boolean bloomingNatureLoaded, String[] beachpartyWoodTypeOrder, String[] meadowWoodTypeOrder, String[] vineryWoodTypeOrder, String[] bloomingNatureWoodTypeOrder) {
+        String[] result = new String[0];
+
+        if (beachpartyLoaded) result = concat(result, beachpartyWoodTypeOrder);
+        if (meadowLoaded) result = concat(result, meadowWoodTypeOrder);
+        if (vineryLoaded) result = concat(result, vineryWoodTypeOrder);
+        if (bloomingNatureLoaded) result = concat(result, bloomingNatureWoodTypeOrder);
+
+        return result;
+    }
+
+    private static String[] concat(String[] first, String[] second) {
+        String[] result = new String[first.length + second.length];
+        System.arraycopy(first, 0, result, 0, first.length);
+        System.arraycopy(second, 0, result, first.length, second.length);
+        return result;
+    }
+
+    private static ItemStack buildCompatIcon(boolean beachpartyLoaded, boolean meadowLoaded, boolean vineryLoaded, boolean bloomingNatureLoaded) {
+        if (beachpartyLoaded) {
+            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("palm");
+            if (supplier != null) {
+                Object value = supplier.get();
+                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
+            }
+        }
+        if (meadowLoaded) {
+            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("pine");
+            if (supplier != null) {
+                Object value = supplier.get();
+                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
+            }
+        }
+        if (vineryLoaded) {
+            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("dark_cherry");
+            if (supplier != null) {
+                Object value = supplier.get();
+                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
+            }
+        }
+        if (bloomingNatureLoaded) {
+            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("aspen");
+            if (supplier != null) {
+                Object value = supplier.get();
+                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
+            }
+        }
+        return new ItemStack(ObjectRegistry.OAK_SHINGLES.get());
+    }
+
+    private static void acceptIfPresent(Map<String, ? extends RegistrySupplier<?>> registrySuppliers, String key, CreativeModeTab.Output out) {
+        RegistrySupplier<?> supplier = registrySuppliers.get(key);
+        if (supplier != null) {
+            supplier.ifPresent(value -> {
+                if (value instanceof ItemLike itemLike) {
+                    out.accept(new ItemStack(itemLike));
+                }
+            });
+        }
     }
 }

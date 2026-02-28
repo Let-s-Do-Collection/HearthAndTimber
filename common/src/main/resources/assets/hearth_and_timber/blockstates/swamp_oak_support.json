@@ -1,0 +1,139 @@
+{
+  "variants": {
+    "reinforced=true,facing=north": {
+      "model": "hearth_and_timber:block/swamp_oak_support_reinforced"
+    },
+    "reinforced=true,facing=south": {
+      "model": "hearth_and_timber:block/swamp_oak_support_reinforced",
+      "y": 180
+    },
+    "reinforced=true,facing=west": {
+      "model": "hearth_and_timber:block/swamp_oak_support_reinforced",
+      "y": 270
+    },
+    "reinforced=true,facing=east": {
+      "model": "hearth_and_timber:block/swamp_oak_support_reinforced",
+      "y": 90
+    },
+    "reinforced=false,facing=north,connected=false,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support"
+    },
+    "reinforced=false,facing=north,connected=true,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_connected"
+    },
+    "reinforced=false,facing=north,connected=false,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest"
+    },
+    "reinforced=false,facing=north,connected=true,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest"
+    },
+    "reinforced=false,facing=north,connected=false,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended"
+    },
+    "reinforced=false,facing=north,connected=true,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended"
+    },
+    "reinforced=false,facing=north,connected=false,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended"
+    },
+    "reinforced=false,facing=north,connected=true,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended"
+    },
+    "reinforced=false,facing=south,connected=false,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=true,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_connected",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=false,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=true,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=false,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=true,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=false,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 180
+    },
+    "reinforced=false,facing=south,connected=true,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 180
+    },
+    "reinforced=false,facing=west,connected=false,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=true,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_connected",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=false,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=true,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=false,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=true,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=false,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 270
+    },
+    "reinforced=false,facing=west,connected=true,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 270
+    },
+    "reinforced=false,facing=east,connected=false,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=true,rest=true,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_connected",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=false,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=true,rest=false,extended=false": {
+      "model": "hearth_and_timber:block/swamp_oak_support_no_rest",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=false,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=true,rest=true,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=false,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 90
+    },
+    "reinforced=false,facing=east,connected=true,rest=false,extended=true": {
+      "model": "hearth_and_timber:block/swamp_oak_support_extended",
+      "y": 90
+    }
+  }
+}

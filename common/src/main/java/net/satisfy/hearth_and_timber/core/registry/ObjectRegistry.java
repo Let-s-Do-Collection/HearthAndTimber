@@ -1,22 +1,56 @@
 package net.satisfy.hearth_and_timber.core.registry;
 
+import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.ScaffoldingBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
-import net.satisfy.hearth_and_timber.core.block.*;
+import net.satisfy.hearth_and_timber.core.block.FrameworkExtensionBlock;
+import net.satisfy.hearth_and_timber.core.block.PillarBlock;
+import net.satisfy.hearth_and_timber.core.block.RailingBlock;
+import net.satisfy.hearth_and_timber.core.block.RubbleMasonryBlock;
+import net.satisfy.hearth_and_timber.core.block.RubbleMasonrySlab;
+import net.satisfy.hearth_and_timber.core.block.RubbleMasonryStairs;
+import net.satisfy.hearth_and_timber.core.block.RubbleMasonryWall;
+import net.satisfy.hearth_and_timber.core.block.SlidingBarnDoorBlock;
+import net.satisfy.hearth_and_timber.core.block.SlidingHayloftDoorBlock;
+import net.satisfy.hearth_and_timber.core.block.SlidingStableDoorBlock;
+import net.satisfy.hearth_and_timber.core.block.SplitstoneBlock;
+import net.satisfy.hearth_and_timber.core.block.SplitstonePathBlock;
+import net.satisfy.hearth_and_timber.core.block.SupportBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberBaseSkirtBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberBaseTrimBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberDiagonalFrameBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberFoundationBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberFrameBlock;
+import net.satisfy.hearth_and_timber.core.block.TimberFrameStairsBlock;
+import net.satisfy.hearth_and_timber.core.block.WeatheringThatchBlock;
+import net.satisfy.hearth_and_timber.core.block.WeatheringThatchSlab;
+import net.satisfy.hearth_and_timber.core.block.WeatheringThatchStairs;
+import net.satisfy.hearth_and_timber.core.block.WindowBlock;
+import net.satisfy.hearth_and_timber.core.block.WindowCasingBlock;
+import net.satisfy.hearth_and_timber.core.block.WoodenBoardBlock;
 import net.satisfy.hearth_and_timber.core.item.FrameworkBlockItem;
 import net.satisfy.hearth_and_timber.core.util.GeneralUtil;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
-public class ObjectRegistry {
-
+public final class ObjectRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.ITEM);
     public static final Registrar<Item> ITEM_REGISTRAR = ITEMS.getRegistrar();
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.BLOCK);
@@ -230,10 +264,72 @@ public class ObjectRegistry {
     public static final RegistrySupplier<Block> SLIDING_BARN_DOOR = registerWithItem("sliding_barn_door", () -> new SlidingBarnDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
     public static final RegistrySupplier<Block> SLIDING_STABLE_DOOR = registerWithItem("sliding_stable_door", () -> new SlidingStableDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).sound(SoundType.WOOD).strength(2.0f, 3.0f).noOcclusion()));
 
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_SHINGLES = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_SHINGLE_STAIRS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_SHINGLE_SLAB = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_BEAMS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_SUPPORTS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_PILLARS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_RAILINGS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_WINDOW_CASINGS = new HashMap<>();
+    public static final Map<String, RegistrySupplier<Block>> COMPAT_BOARDS = new HashMap<>();
 
-    public static void init() {
+    private static final CompatWood[] compatWoods;
+
+    static {
+        CompatWood[] resolvedCompatWoods = new CompatWood[]{
+                new CompatWood("beachparty", "palm", true),
+                new CompatWood("meadow", "pine", false),
+                new CompatWood("vinery", "dark_cherry", true)
+        };
+
+        if (Platform.isModLoaded("bloomingnature")) {
+            resolvedCompatWoods = concat(resolvedCompatWoods, new CompatWood[]{
+                    new CompatWood("bloomingnature", "aspen", true),
+                    new CompatWood("bloomingnature", "larch", true),
+                    new CompatWood("bloomingnature", "baobab", true),
+                    new CompatWood("bloomingnature", "cypress", true),
+                    new CompatWood("bloomingnature", "ebony", true),
+                    new CompatWood("bloomingnature", "chestnut", true),
+                    new CompatWood("bloomingnature", "fan_palm", true),
+                    new CompatWood("bloomingnature", "fir", true),
+                    new CompatWood("bloomingnature", "swamp_oak", true),
+                    new CompatWood("bloomingnature", "swamp_cypress", true)
+            });
+        }
+
+        compatWoods = resolvedCompatWoods;
+
+        for (CompatWood compatWood : compatWoods) {
+            if (!Platform.isModLoaded(compatWood.namespace)) {
+                continue;
+            }
+
+            Block plankBlock = getOptionalBlock(compatWood.namespace, compatWood.woodName + "_planks", Blocks.OAK_PLANKS);
+            Block logBlock = getOptionalBlock(compatWood.namespace, compatWood.woodName + "_log", Blocks.OAK_LOG);
+
+            RegistrySupplier<Block> shingles = registerWithItem(compatWood.woodName + "_shingles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(plankBlock).sound(SoundType.WOOD).strength(2.0f, 3.0f)));
+            COMPAT_SHINGLES.put(compatWood.woodName, shingles);
+
+            COMPAT_SHINGLE_STAIRS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_shingle_stairs", () -> new StairBlock(shingles.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(plankBlock))));
+            COMPAT_SHINGLE_SLAB.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_shingle_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(plankBlock))));
+
+            if (compatWood.includeBeam) {
+                COMPAT_BEAMS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_beam", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(logBlock).sound(SoundType.WOOD))));
+            }
+
+            COMPAT_SUPPORTS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_support", () -> new SupportBlock(BlockBehaviour.Properties.ofFullCopy(plankBlock))));
+            COMPAT_PILLARS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_pillar", () -> new PillarBlock(BlockBehaviour.Properties.ofFullCopy(plankBlock))));
+            COMPAT_RAILINGS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_railing", () -> new RailingBlock(plankBlock.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(plankBlock).noOcclusion())));
+            COMPAT_WINDOW_CASINGS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_window_casing", () -> new WindowCasingBlock(BlockBehaviour.Properties.ofFullCopy(plankBlock).noOcclusion())));
+            COMPAT_BOARDS.put(compatWood.woodName, registerWithItem(compatWood.woodName + "_board", WoodenBoardBlock::new));
+        }
+
         ITEMS.register();
         BLOCKS.register();
+    }
+
+    public static void init() {
     }
 
     public static BlockBehaviour.Properties properties(float strength) {
@@ -255,6 +351,23 @@ public class ObjectRegistry {
     public static <T extends Item> RegistrySupplier<T> registerItem(String path, Supplier<T> itemSupplier) {
         return GeneralUtil.registerItem(ITEMS, ITEM_REGISTRAR, HearthAndTimber.identifier(path), itemSupplier);
     }
+
+    private static CompatWood[] concat(CompatWood[] first, CompatWood[] second) {
+        CompatWood[] result = new CompatWood[first.length + second.length];
+        System.arraycopy(first, 0, result, 0, first.length);
+        System.arraycopy(second, 0, result, first.length, second.length);
+        return result;
+    }
+
+    private static Block getOptionalBlock(String namespace, String path, Block fallback) {
+        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(namespace, path);
+        Block resolvedBlock = BuiltInRegistries.BLOCK.get(resourceLocation);
+        if (resolvedBlock != Blocks.AIR) {
+            return resolvedBlock;
+        }
+        return fallback;
+    }
+
+    private record CompatWood(String namespace, String woodName, boolean includeBeam) {
+    }
 }
-
-

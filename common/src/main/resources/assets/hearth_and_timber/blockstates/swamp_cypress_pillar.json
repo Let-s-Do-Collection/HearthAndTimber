@@ -1,0 +1,49 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_center"
+      }
+    },
+    {
+      "when": {
+        "north_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_north"
+      }
+    },
+    {
+      "when": {
+        "south_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_south"
+      }
+    },
+    {
+      "when": {
+        "west_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_west"
+      }
+    },
+    {
+      "when": {
+        "east_connected": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_east"
+      }
+    },
+    {
+      "when": {
+        "extended_top": true
+      },
+      "apply": {
+        "model": "hearth_and_timber:block/swamp_cypress_pillar_extended_top"
+      }
+    }
+  ]
+}

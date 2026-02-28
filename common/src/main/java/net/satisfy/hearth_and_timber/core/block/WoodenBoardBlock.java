@@ -51,6 +51,7 @@ public class WoodenBoardBlock extends Block {
                 .setValue(TOP, false)
                 .setValue(FACING, Direction.NORTH));
     }
+    
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

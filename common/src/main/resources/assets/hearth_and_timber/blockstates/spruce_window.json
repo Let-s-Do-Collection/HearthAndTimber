@@ -1,1 +1,7 @@
-{"variants":{"":{"model":"hearth_and_timber:block/spruce_window"}}}
+{
+  "variants": {
+    "": {
+      "model": "hearth_and_timber:block/spruce_window"
+    }
+  }
+}

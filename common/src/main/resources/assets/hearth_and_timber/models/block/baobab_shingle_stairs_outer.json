@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "hearth_and_timber:block/baobab_shingles",
+    "top": "hearth_and_timber:block/baobab_shingles",
+    "side": "hearth_and_timber:block/baobab_shingles"
+  }
+}

@@ -1,10 +1,10 @@
 package net.satisfy.hearth_and_timber;
 
-import dev.architectury.platform.Platform;
+import com.google.common.reflect.Reflection;
 import net.minecraft.resources.ResourceLocation;
-import net.satisfy.hearth_and_timber.core.registry.*;
-
-import java.lang.reflect.Method;
+import net.satisfy.hearth_and_timber.core.registry.EntityTypeRegistry;
+import net.satisfy.hearth_and_timber.core.registry.ObjectRegistry;
+import net.satisfy.hearth_and_timber.core.registry.TabRegistry;
 
 public class HearthAndTimber {
     public static final String MOD_ID = "hearth_and_timber";
@@ -14,17 +14,10 @@ public class HearthAndTimber {
     }
 
     public static void init() {
-        ObjectRegistry.init();
-        EntityTypeRegistry.init();
-        TabRegistry.init();
-        SoundEventRegistry.init();
-
-        if (Platform.isModLoaded("everycomp")) {
-            try {
-                Class<?> compatInitClass = Class.forName("net.satisfy.hearth_and_timber.core.compat.everycomp.HearthAndTimberEveryCompatInit");
-                Method initMethod = compatInitClass.getMethod("init");
-                initMethod.invoke(null);
-            } catch (ReflectiveOperationException ignored) {}
-        }
+        Reflection.initialize(
+                ObjectRegistry.class,
+                EntityTypeRegistry.class,
+                TabRegistry.class
+        );
     }
 }

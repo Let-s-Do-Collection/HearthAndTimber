@@ -4,27 +4,37 @@ import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.Registrar;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
-import net.satisfy.hearth_and_timber.core.block.entity.*;
+import net.satisfy.hearth_and_timber.core.block.entity.SlidingDoorBlockEntity;
+import net.satisfy.hearth_and_timber.core.block.entity.TimberFrameBlockEntity;
 
 import java.util.function.Supplier;
 
-import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.*;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.SLIDING_BARN_DOOR;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.SLIDING_HAYLOFT_DOOR;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.SLIDING_STABLE_DOOR;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_BASE_SKIRT;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_BASE_TRIM;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_CROSS_FRAME;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_DIAGONAL_FRAME;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_FOUNDATION;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_FRAME;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_FRAME_STAIRS;
+import static net.satisfy.hearth_and_timber.core.registry.ObjectRegistry.TIMBER_GRID_FRAME;
 
-public class EntityTypeRegistry {
-    private static final Registrar<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.BLOCK_ENTITY_TYPE).getRegistrar();
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.ENTITY_TYPE);
+public final class EntityTypeRegistry {
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.BLOCK_ENTITY_TYPE);
+    private static final Registrar<BlockEntityType<?>> BLOCK_ENTITY_TYPE_REGISTRAR = BLOCK_ENTITY_TYPES.getRegistrar();
 
     public static final RegistrySupplier<BlockEntityType<SlidingDoorBlockEntity>> SLIDING_DOOR_BLOCK_ENTITY = registerBlockEntity("sliding_door", () -> BlockEntityType.Builder.of(SlidingDoorBlockEntity::new, SLIDING_HAYLOFT_DOOR.get(), SLIDING_BARN_DOOR.get(), SLIDING_STABLE_DOOR.get()).build(null));
     public static final RegistrySupplier<BlockEntityType<TimberFrameBlockEntity>> TIMBER_FRAME_BLOCK_ENTITY = registerBlockEntity("timber_frame", () -> BlockEntityType.Builder.of(TimberFrameBlockEntity::new, TIMBER_FOUNDATION.get(), TIMBER_BASE_TRIM.get(), TIMBER_BASE_SKIRT.get(), TIMBER_FRAME.get(), TIMBER_GRID_FRAME.get(), TIMBER_CROSS_FRAME.get(), TIMBER_DIAGONAL_FRAME.get(), TIMBER_FRAME_STAIRS.get()).build(null));
 
-    private static <T extends BlockEntityType<?>> RegistrySupplier<T> registerBlockEntity(final String path, final Supplier<T> type) {
-        return BLOCK_ENTITY_TYPES.register(HearthAndTimber.identifier(path), type);
+    private static <T extends BlockEntityType<?>> RegistrySupplier<T> registerBlockEntity(String path, Supplier<T> type) {
+        return BLOCK_ENTITY_TYPE_REGISTRAR.register(HearthAndTimber.identifier(path), type);
     }
 
-    public static void init() {
-        ENTITY_TYPES.register();
+    static {
+        BLOCK_ENTITY_TYPES.register();
     }
 }
