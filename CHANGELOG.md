@@ -1,5 +1,8 @@
 [1.0.3]
 
+**Fixed** 
+* Groutless Rubblestone not spawning on Fabric 
+
 **Changed**
 * Removed woodgood compat
 * Refactored registry initialization to static class pattern

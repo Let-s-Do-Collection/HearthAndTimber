@@ -88,6 +88,10 @@
     {
       "id": "hearth_and_timber:swamp_cypress_shingle_stairs",
       "required": false
+    },
+    {
+      "id": "alpinewhispers:arolla_pine_shingle_stairs",
+      "required": false
     }
   ]
 }

@@ -84,6 +84,10 @@
     {
       "id": "hearth_and_timber:swamp_cypress_beam",
       "required": false
+    },
+    {
+      "id": "alpinewhispers:arolla_pine_beam",
+      "required": false
     }
   ]
 }

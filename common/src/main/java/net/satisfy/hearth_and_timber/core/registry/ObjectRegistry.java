@@ -280,7 +280,8 @@ public final class ObjectRegistry {
         CompatWood[] resolvedCompatWoods = new CompatWood[]{
                 new CompatWood("beachparty", "palm", true),
                 new CompatWood("meadow", "pine", false),
-                new CompatWood("vinery", "dark_cherry", true)
+                new CompatWood("vinery", "dark_cherry", true),
+                new CompatWood("alpinewhispers", "arolla_pine", true)
         };
 
         if (Platform.isModLoaded("bloomingnature")) {
@@ -327,9 +328,6 @@ public final class ObjectRegistry {
 
         ITEMS.register();
         BLOCKS.register();
-    }
-
-    public static void init() {
     }
 
     public static BlockBehaviour.Properties properties(float strength) {

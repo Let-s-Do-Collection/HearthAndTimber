@@ -9,6 +9,54 @@
     "hearth_and_timber:dark_oak_shingles",
     "hearth_and_timber:mangrove_shingles",
     "hearth_and_timber:cherry_shingles",
-    "hearth_and_timber:pale_oak_shingles"
+    "hearth_and_timber:pale_oak_shingles",
+    {
+      "id": "hearth_and_timber:aspen_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:larch_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:baobab_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:cypress_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:ebony_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:chestnut_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fan_palm_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:fir_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_oak_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:swamp_cypress_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:pine_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_shingles",
+      "required": false
+    }
   ]
 }

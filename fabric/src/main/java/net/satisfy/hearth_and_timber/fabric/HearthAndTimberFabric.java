@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.satisfy.hearth_and_timber.HearthAndTimber;
+import net.satisfy.hearth_and_timber.fabric.core.HearthAndTimberFabricWorldgen;
 
 import java.util.Optional;
 
@@ -13,5 +14,6 @@ public class HearthAndTimberFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         HearthAndTimber.init();
+        HearthAndTimberFabricWorldgen.init();
     }
 }

@@ -18,7 +18,7 @@ public class TabRegistry {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(HearthAndTimber.MOD_ID, Registries.CREATIVE_MODE_TAB);
 
     public static final RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-            .icon(() -> new ItemStack(ObjectRegistry.SLIDING_HAYLOFT_DOOR.get()))
+            .icon(() -> new ItemStack(ObjectRegistry.SLIDING_BARN_DOOR.get()))
             .title(Component.translatable("creativetab.hearth_and_timber.tab"))
             .displayItems((parameters, output) -> {
                 output.accept(ObjectRegistry.FRAMEWORK_ITEM.get());
@@ -197,16 +197,20 @@ public class TabRegistry {
     public static RegistrySupplier<CreativeModeTab> HEARTH_AND_TIMBER_COMPAT_LAYER_TAB;
 
     static {
+        boolean alpinewhispersLoaded = Platform.isModLoaded("alpinewhispers");
         boolean beachpartyLoaded = Platform.isModLoaded("beachparty");
         boolean meadowLoaded = Platform.isModLoaded("meadow");
         boolean vineryLoaded = Platform.isModLoaded("vinery");
         boolean bloomingNatureLoaded = Platform.isModLoaded("bloomingnature");
 
-        if (beachpartyLoaded || meadowLoaded || vineryLoaded || bloomingNatureLoaded) {
+        if (alpinewhispersLoaded || beachpartyLoaded || meadowLoaded || vineryLoaded || bloomingNatureLoaded) {
             HEARTH_AND_TIMBER_COMPAT_LAYER_TAB = CREATIVE_MODE_TABS.register("hearth_and_timber_compat", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 1)
-                    .icon(() -> buildCompatIcon(beachpartyLoaded, meadowLoaded, vineryLoaded, bloomingNatureLoaded))
+                    .icon(() -> new ItemStack(ObjectRegistry.SLIDING_STABLE_DOOR.get()))
                     .title(Component.translatable("creativetab.hearth_and_timber.compat"))
                     .displayItems((parameters, output) -> {
+                        String[] alpinewhispersWoodTypeOrder = {
+                                "arolla_pine"
+                        };
                         String[] beachpartyWoodTypeOrder = {
                                 "palm"
                         };
@@ -219,7 +223,19 @@ public class TabRegistry {
                         String[] bloomingNatureWoodTypeOrder = {
                                 "aspen", "larch", "baobab", "cypress", "ebony", "chestnut", "fan_palm", "fir", "swamp_oak", "swamp_cypress"
                         };
-                        String[] compatWoodTypeOrder = buildCompatWoodTypeOrder(beachpartyLoaded, meadowLoaded, vineryLoaded, bloomingNatureLoaded, beachpartyWoodTypeOrder, meadowWoodTypeOrder, vineryWoodTypeOrder, bloomingNatureWoodTypeOrder);
+
+                        String[] compatWoodTypeOrder = buildCompatWoodTypeOrder(
+                                alpinewhispersLoaded,
+                                beachpartyLoaded,
+                                meadowLoaded,
+                                vineryLoaded,
+                                bloomingNatureLoaded,
+                                alpinewhispersWoodTypeOrder,
+                                beachpartyWoodTypeOrder,
+                                meadowWoodTypeOrder,
+                                vineryWoodTypeOrder,
+                                bloomingNatureWoodTypeOrder
+                        );
 
                         for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SHINGLES, woodType, output);
                         for (String woodType : compatWoodTypeOrder) acceptIfPresent(ObjectRegistry.COMPAT_SHINGLE_STAIRS, woodType, output);
@@ -237,9 +253,10 @@ public class TabRegistry {
         CREATIVE_MODE_TABS.register();
     }
 
-    private static String[] buildCompatWoodTypeOrder(boolean beachpartyLoaded, boolean meadowLoaded, boolean vineryLoaded, boolean bloomingNatureLoaded, String[] beachpartyWoodTypeOrder, String[] meadowWoodTypeOrder, String[] vineryWoodTypeOrder, String[] bloomingNatureWoodTypeOrder) {
+    private static String[] buildCompatWoodTypeOrder(boolean alpinewhispersLoaded, boolean beachpartyLoaded, boolean meadowLoaded, boolean vineryLoaded, boolean bloomingNatureLoaded, String[] alpinewhispersWoodTypeOrder, String[] beachpartyWoodTypeOrder, String[] meadowWoodTypeOrder, String[] vineryWoodTypeOrder, String[] bloomingNatureWoodTypeOrder) {
         String[] result = new String[0];
 
+        if (alpinewhispersLoaded) result = concat(result, alpinewhispersWoodTypeOrder);
         if (beachpartyLoaded) result = concat(result, beachpartyWoodTypeOrder);
         if (meadowLoaded) result = concat(result, meadowWoodTypeOrder);
         if (vineryLoaded) result = concat(result, vineryWoodTypeOrder);
@@ -255,44 +272,12 @@ public class TabRegistry {
         return result;
     }
 
-    private static ItemStack buildCompatIcon(boolean beachpartyLoaded, boolean meadowLoaded, boolean vineryLoaded, boolean bloomingNatureLoaded) {
-        if (beachpartyLoaded) {
-            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("palm");
-            if (supplier != null) {
-                Object value = supplier.get();
-                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
-            }
-        }
-        if (meadowLoaded) {
-            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("pine");
-            if (supplier != null) {
-                Object value = supplier.get();
-                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
-            }
-        }
-        if (vineryLoaded) {
-            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("dark_cherry");
-            if (supplier != null) {
-                Object value = supplier.get();
-                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
-            }
-        }
-        if (bloomingNatureLoaded) {
-            RegistrySupplier<?> supplier = ObjectRegistry.COMPAT_SHINGLES.get("aspen");
-            if (supplier != null) {
-                Object value = supplier.get();
-                if (value instanceof ItemLike itemLike) return new ItemStack(itemLike);
-            }
-        }
-        return new ItemStack(ObjectRegistry.OAK_SHINGLES.get());
-    }
-
-    private static void acceptIfPresent(Map<String, ? extends RegistrySupplier<?>> registrySuppliers, String key, CreativeModeTab.Output out) {
+    private static void acceptIfPresent(Map<String, ? extends RegistrySupplier<?>> registrySuppliers, String key, CreativeModeTab.Output output) {
         RegistrySupplier<?> supplier = registrySuppliers.get(key);
         if (supplier != null) {
             supplier.ifPresent(value -> {
                 if (value instanceof ItemLike itemLike) {
-                    out.accept(new ItemStack(itemLike));
+                    output.accept(new ItemStack(itemLike));
                 }
             });
         }

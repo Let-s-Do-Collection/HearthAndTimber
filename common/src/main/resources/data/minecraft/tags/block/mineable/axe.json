@@ -580,6 +580,38 @@
     {
       "id": "hearth_and_timber:swamp_cypress_board",
       "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_support",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_pillar",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_railing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_window_casing",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_board",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_shingles",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_shingle_slab",
+      "required": false
+    },
+    {
+      "id": "hearth_and_timber:arolla_pine_shingle_stairs",
+      "required": false
     }
   ]
 }

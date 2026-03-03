@@ -1,81 +1,11 @@
 {
   "replace": false,
   "values": [
-    {
-      "id": "hearth_and_timber:pointed_rubblestone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:covered_rubblestone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:plastered_rubblestone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:splitstone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:mossy_splitstone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:groutless_rubblestone_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:palm_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:pine_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:dark_cherry_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:aspen_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:larch_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:baobab_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:cypress_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:ebony_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:chestnut_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:fan_palm_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:fir_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:swamp_oak_shingle_slab",
-      "required": false
-    },
-    {
-      "id": "hearth_and_timber:swamp_cypress_shingle_slab",
-      "required": false
-    }
+    "hearth_and_timber:pointed_rubblestone_slab",
+    "hearth_and_timber:covered_rubblestone_slab",
+    "hearth_and_timber:plastered_rubblestone_slab",
+    "hearth_and_timber:splitstone_slab",
+    "hearth_and_timber:mossy_splitstone_slab",
+    "hearth_and_timber:groutless_rubblestone_slab"
   ]
 }
