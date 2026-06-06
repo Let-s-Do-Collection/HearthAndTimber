@@ -9,6 +9,11 @@
       {
         "item": "minecraft:oak_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:oak_slab"
+      }
     ]
   },
   "result": {

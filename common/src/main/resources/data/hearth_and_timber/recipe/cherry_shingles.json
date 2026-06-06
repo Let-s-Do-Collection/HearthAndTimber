@@ -9,6 +9,11 @@
       {
         "item": "minecraft:cherry_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:cherry_slab"
+      }
     ]
   },
   "result": {

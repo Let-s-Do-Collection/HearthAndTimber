@@ -9,6 +9,11 @@
       {
         "item": "alpinewhispers:arolla_pine_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "alpinewhispers:arolla_pine_slab"
+      }
     ]
   },
   "result": {

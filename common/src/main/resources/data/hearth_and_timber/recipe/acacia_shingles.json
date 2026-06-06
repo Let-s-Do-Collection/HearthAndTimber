@@ -9,6 +9,11 @@
       {
         "item": "minecraft:acacia_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:acacia_slab"
+      }
     ]
   },
   "result": {

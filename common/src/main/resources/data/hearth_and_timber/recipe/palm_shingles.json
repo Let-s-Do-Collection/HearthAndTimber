@@ -9,6 +9,11 @@
       {
         "item": "beachparty:palm_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:palm_slab"
+      }
     ]
   },
   "result": {

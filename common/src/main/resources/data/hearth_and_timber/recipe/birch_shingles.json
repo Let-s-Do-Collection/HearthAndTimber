@@ -9,6 +9,11 @@
       {
         "item": "minecraft:birch_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:birch_slab"
+      }
     ]
   },
   "result": {

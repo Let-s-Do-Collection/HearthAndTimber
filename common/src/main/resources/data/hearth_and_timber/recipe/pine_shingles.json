@@ -9,6 +9,11 @@
       {
         "item": "meadow:pine_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "meadow:pine_slab"
+      }
     ]
   },
   "result": {

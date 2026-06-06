@@ -9,6 +9,11 @@
       {
         "item": "bloomingnature:larch_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "bloomingnature:larch_slab"
+      }
     ]
   },
   "result": {

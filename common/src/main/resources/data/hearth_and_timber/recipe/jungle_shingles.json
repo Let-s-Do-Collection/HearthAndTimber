@@ -9,6 +9,11 @@
       {
         "item": "minecraft:jungle_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "minecraft:jungle_slab"
+      }
     ]
   },
   "result": {

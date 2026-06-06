@@ -9,6 +9,11 @@
       {
         "item": "bloomingnature:swamp_oak_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "bloomingnature:swamp_oak_slab"
+      }
     ]
   },
   "result": {
