@@ -1,13 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PPP",
-    "PPP"
+    "SS",
+    "PP"
   ],
   "key": {
     "P": [
       {
         "item": "bloomingnature:ebony_planks"
+      }
+    ],
+    "S": [
+      {
+        "item": "bloomingnature:ebony_slab"
       }
     ]
   },

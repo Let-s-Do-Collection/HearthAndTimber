@@ -1,13 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PPP",
-    "PPP"
+    "SS",
+    "PP"
   ],
   "key": {
     "P": [
       {
         "item": "bloomingnature:swamp_oak_planks"
+      }
+    ],
+    "S": [
+      {
+        "item": "bloomingnature:swamp_oak_slab"
       }
     ]
   },
