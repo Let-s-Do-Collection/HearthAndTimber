@@ -1,16 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PPP",
-    "PPP"
+    "SS",
+    "PP"
   ],
   "key": {
     "P": [
       {
         "item": "vinery:dark_cherry_planks"
       }
+    ],
+    "S": [
+      {
+        "item": "vinery:dark_cherry_slab"
+      }
     ]
-  },
   "result": {
     "id": "hearth_and_timber:dark_cherry_shingles",
     "count": 4
