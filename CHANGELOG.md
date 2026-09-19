@@ -1,3 +1,21 @@
+[1.0.4]
+
+**Added**
+* AlpineWhispers compat
+* Russian translation (thanks to Tefnya)
+* Italian translation (thanks to Serenautilus)
+
+**Fixed**
+* Arolla Pine Support recipe (thanks to Amakazor)
+* Shingles and Trapdoors sharing a recipe (thanks to LettucePie)
+* Window Casing flower pots not attaching to the window, instead being placed in the adjacent block
+* Dark Cherry Shingles recipe being invalid JSON and failing to load
+
+**Changed**
+* Added meaning to the S slab tag (thanks to LettucePie)
+
+***
+
 [1.0.3]
 
 **Fixed** 

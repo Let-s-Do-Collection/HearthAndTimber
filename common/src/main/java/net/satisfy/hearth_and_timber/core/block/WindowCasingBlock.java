@@ -7,21 +7,25 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -34,11 +38,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.satisfy.hearth_and_timber.core.block.entity.WindowCasingBlockEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
+public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty TOP = BooleanProperty.create("top");
@@ -46,6 +52,12 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty LEFT = BooleanProperty.create("left");
     public static final BooleanProperty RIGHT = BooleanProperty.create("right");
     public static final BooleanProperty BOTTOM_TOGGLE = BooleanProperty.create("bottom_toggle");
+    public static final BooleanProperty FLOWER_POT = BooleanProperty.create("flower_pot");
+
+    private static final VoxelShape POT_N = Block.box(5, 0, 9, 11, 6, 15);
+    private static final VoxelShape POT_S = Block.box(5, 0, 1, 11, 6, 7);
+    private static final VoxelShape POT_E = Block.box(1, 0, 5, 7, 6, 11);
+    private static final VoxelShape POT_W = Block.box(9, 0, 5, 15, 6, 11);
 
     private static final VoxelShape NORTH_PLANE = Block.box(0, 0, 14, 16, 16, 16);
     private static final VoxelShape SOUTH_PLANE = Block.box(0, 0, 0, 16, 16, 2);
@@ -81,7 +93,8 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(BOTTOM, true)
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
-                .setValue(BOTTOM_TOGGLE, false));
+                .setValue(BOTTOM_TOGGLE, false)
+                .setValue(FLOWER_POT, false));
     }
 
     @Override
@@ -93,7 +106,8 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(BOTTOM, true)
                 .setValue(LEFT, true)
                 .setValue(RIGHT, true)
-                .setValue(BOTTOM_TOGGLE, false);
+                .setValue(BOTTOM_TOGGLE, false)
+                .setValue(FLOWER_POT, false);
         return updateConnections(state, context.getLevel(), context.getClickedPos());
     }
 
@@ -160,6 +174,33 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public @NotNull ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (stack.is(Items.FLOWER_POT)) {
+            if (state.getValue(FLOWER_POT)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (!state.getValue(BOTTOM)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (hit.getDirection() != state.getValue(FACING)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+            double hitY = hit.getLocation().y - pos.getY();
+            if (hitY >= 0.5) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
+            if (!level.isClientSide) {
+                level.setBlock(pos, state.setValue(FLOWER_POT, true), Block.UPDATE_CLIENTS);
+                if (!player.getAbilities().instabuild) stack.shrink(1);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
+        if (state.getValue(FLOWER_POT) && stack.is(ItemTags.SMALL_FLOWERS)) {
+            if (!level.isClientSide) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof WindowCasingBlockEntity windowCasingBlockEntity && windowCasingBlockEntity.getFlower().isEmpty()) {
+                    windowCasingBlockEntity.setFlower(stack.copyWithCount(1));
+                    level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
+                    if (!player.getAbilities().instabuild) stack.shrink(1);
+                }
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         if (!(stack.getItem() instanceof AxeItem)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
@@ -179,6 +220,13 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(BOTTOM, newBottom)
                 .setValue(BOTTOM_TOGGLE, true);
 
+        if (!newBottom && state.getValue(FLOWER_POT)) {
+            newState = newState.setValue(FLOWER_POT, false);
+            if (!level.isClientSide) {
+                dropPotContents(level, pos, player);
+            }
+        }
+
         if (!level.isClientSide) {
             level.setBlock(pos, newState, Block.UPDATE_CLIENTS);
             if (level instanceof ServerLevel serverLevel) {
@@ -187,6 +235,31 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
         }
 
         return ItemInteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    private void dropPotContents(Level level, BlockPos pos, @Nullable Player player) {
+        if (player != null && player.getAbilities().instabuild) return;
+        if (level.getBlockEntity(pos) instanceof WindowCasingBlockEntity windowCasingBlockEntity) {
+            ItemStack flower = windowCasingBlockEntity.getFlower();
+            if (!flower.isEmpty()) {
+                Block.popResource(level, pos, flower);
+                windowCasingBlockEntity.setFlower(ItemStack.EMPTY);
+            }
+        }
+        Block.popResource(level, pos, new ItemStack(Items.FLOWER_POT));
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (state.getValue(FLOWER_POT) && !level.isClientSide) {
+            dropPotContents(level, pos, player);
+        }
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WindowCasingBlockEntity(pos, state);
     }
 
     @Override
@@ -199,24 +272,28 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, NORTH_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, NORTH_TOP);
             if (state.getValue(BOTTOM)) shape = Shapes.or(shape, NORTH_BOTTOM);
+            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_N);
             if (shape.isEmpty()) shape = NORTH_PLANE;
         } else if (facing == Direction.SOUTH) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, SOUTH_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, SOUTH_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, SOUTH_TOP);
             if (state.getValue(BOTTOM)) shape = Shapes.or(shape, SOUTH_BOTTOM);
+            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_S);
             if (shape.isEmpty()) shape = SOUTH_PLANE;
         } else if (facing == Direction.EAST) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, EAST_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, EAST_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, EAST_TOP);
             if (state.getValue(BOTTOM)) shape = Shapes.or(shape, EAST_BOTTOM);
+            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_E);
             if (shape.isEmpty()) shape = EAST_PLANE;
         } else if (facing == Direction.WEST) {
             if (state.getValue(LEFT)) shape = Shapes.or(shape, WEST_LEFT);
             if (state.getValue(RIGHT)) shape = Shapes.or(shape, WEST_RIGHT);
             if (state.getValue(TOP)) shape = Shapes.or(shape, WEST_TOP);
             if (state.getValue(BOTTOM)) shape = Shapes.or(shape, WEST_BOTTOM);
+            if (state.getValue(FLOWER_POT)) shape = Shapes.or(shape, POT_W);
             if (shape.isEmpty()) shape = WEST_PLANE;
         }
 
@@ -245,7 +322,7 @@ public class WindowCasingBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, BOTTOM_TOGGLE);
+        builder.add(FACING, WATERLOGGED, TOP, BOTTOM, LEFT, RIGHT, BOTTOM_TOGGLE, FLOWER_POT);
     }
 
     @Override
